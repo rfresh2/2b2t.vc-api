@@ -43,7 +43,7 @@ public class InitialConfiguration {
         loggingFilter.setIncludeClientInfo(true);
         loggingFilter.setIncludeQueryString(true);
         loggingFilter.setIncludePayload(true);
-        loggingFilter.setIncludeHeaders(false);
+        loggingFilter.setIncludeHeaders(true);
         return loggingFilter;
     }
 }
