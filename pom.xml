@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>vc</groupId>
 	<artifactId>2b-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>2b-api</name>
 	<description>2b2t data and stats API</description>
 	<properties>
@@ -108,6 +108,14 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.0.5</version>
+				<executions>
+					<execution>
+						<configuration>
+							<mainClass>vc.Application</mainClass>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
