@@ -2,6 +2,7 @@ package vc;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.jooq.DSLContext;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ public class PlaytimeController {
 
     @GetMapping("/playtime")
     @RateLimiter(name = "main")
+    @Cacheable("playtime")
     public PlaytimeResponse playtime(@RequestParam(value = "uuid") UUID uuid) {
         Playtime playtime = new Playtime();
         playtime.setPUuid(uuid);

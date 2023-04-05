@@ -2,6 +2,7 @@ package vc;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.jooq.DSLContext;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ public class SeenController {
 
     @GetMapping("/seen")
     @RateLimiter(name = "main")
+    @Cacheable("seen")
     public SeenResponse seen(@RequestParam(value = "uuid") UUID uuid) {
         Connections c = Connections.CONNECTIONS;
         ConnectionsRecord connectionsRecord = dsl.selectFrom(c)
