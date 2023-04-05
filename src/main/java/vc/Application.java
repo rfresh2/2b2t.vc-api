@@ -1,5 +1,7 @@
 package vc;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.servers.Server;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @EnableCaching
 @RestController
+@OpenAPIDefinition(
+		servers = {
+				@Server(url = "https://api.2b2t.vc")
+		}
+)
 public class Application {
 
 	public static void main(String[] args) {
