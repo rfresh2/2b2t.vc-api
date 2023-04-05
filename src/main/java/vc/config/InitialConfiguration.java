@@ -1,4 +1,4 @@
-package vc;
+package vc.config;
 
 import org.jooq.SQLDialect;
 import org.jooq.impl.DataSourceConnectionProvider;
@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
+import vc.translators.ExceptionTranslator;
 
 import javax.sql.DataSource;
 

@@ -1,4 +1,4 @@
-package vc;
+package vc.translators;
 
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import jakarta.servlet.http.HttpServletRequest;

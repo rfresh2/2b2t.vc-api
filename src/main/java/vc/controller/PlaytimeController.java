@@ -1,4 +1,4 @@
-package vc;
+package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.jooq.DSLContext;

@@ -1,4 +1,4 @@
-package vc;
+package vc.translators;
 
 import org.jooq.ExecuteContext;
 import org.jooq.ExecuteListener;
