@@ -51,4 +51,21 @@ public class SeenController {
             return time;
         }
     }
+
+    @GetMapping("/firstSeen")
+    @RateLimiter(name = "main")
+    @Cacheable("firstSeen")
+    public SeenResponse firstSeen(@RequestParam(value = "uuid") UUID uuid) {
+        Connections c = Connections.CONNECTIONS;
+        ConnectionsRecord connectionsRecord = dsl.selectFrom(c)
+                .where(c.PLAYER_UUID.eq(uuid))
+                .orderBy(c.TIME.asc())
+                .limit(1)
+                .fetchOne();
+        if (connectionsRecord != null) {
+            return new SeenResponse(connectionsRecord.get(c.TIME));
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Player not found");
+        }
+    }
 }
