@@ -1,5 +1,6 @@
 package vc;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -16,7 +17,8 @@ public class Application {
 	}
 
 	@GetMapping("/")
-	public String hello() {
-		return "hi";
+	public void hello(final HttpServletResponse response) {
+		response.setHeader("Location", "/swagger-ui/index.html");
+		response.setStatus(302);
 	}
 }

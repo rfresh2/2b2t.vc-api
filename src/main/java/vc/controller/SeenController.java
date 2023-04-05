@@ -1,6 +1,8 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import vc.data.dto.tables.records.ConnectionsRecord;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+@Tags({@Tag(name = "Seen")})
 @RestController
 public class SeenController {
 

@@ -1,6 +1,8 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Tags({@Tag(name = "Playtime")})
 @RestController
 public class PlaytimeController {
 
@@ -79,16 +82,10 @@ public class PlaytimeController {
     public static class PlaytimeResponse {
         private final UUID uuid;
         private final int playtimeSeconds;
-        private final double playtimeHours;
-        private final double playtimeDays;
-        private final double playtimeMonths;
 
         public PlaytimeResponse(final UUID uuid, final int playtimeSeconds) {
             this.uuid = uuid;
             this.playtimeSeconds = playtimeSeconds;
-            this.playtimeHours = playtimeSeconds / 3600.0;
-            this.playtimeDays = playtimeHours / 24.0;
-            this.playtimeMonths = playtimeDays / 30.0;
         }
 
         public UUID getUuid() {
@@ -97,18 +94,6 @@ public class PlaytimeController {
 
         public int getPlaytimeSeconds() {
             return playtimeSeconds;
-        }
-
-        public double getPlaytimeHours() {
-            return playtimeHours;
-        }
-
-        public double getPlaytimeDays() {
-            return playtimeDays;
-        }
-
-        public double getPlaytimeMonths() {
-            return playtimeMonths;
         }
     }
 }
