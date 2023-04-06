@@ -51,6 +51,11 @@ public class Public extends SchemaImpl {
     public final Names NAMES = Names.NAMES;
 
     /**
+     * The table <code>public.online_players</code>.
+     */
+    public final OnlinePlayers ONLINE_PLAYERS = OnlinePlayers.ONLINE_PLAYERS;
+
+    /**
      * The table <code>public.playercount</code>.
      */
     public final Playercount PLAYERCOUNT = Playercount.PLAYERCOUNT;
@@ -186,6 +191,7 @@ public class Public extends SchemaImpl {
             Connections.CONNECTIONS,
             Deaths.DEATHS,
             Names.NAMES,
+            OnlinePlayers.ONLINE_PLAYERS,
             Playercount.PLAYERCOUNT,
             PlaytimeAll.PLAYTIME_ALL,
             PlaytimeAllMonth.PLAYTIME_ALL_MONTH,

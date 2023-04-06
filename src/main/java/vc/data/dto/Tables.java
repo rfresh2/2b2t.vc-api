@@ -43,6 +43,11 @@ public class Tables {
     public static final Names NAMES = Names.NAMES;
 
     /**
+     * The table <code>public.online_players</code>.
+     */
+    public static final OnlinePlayers ONLINE_PLAYERS = OnlinePlayers.ONLINE_PLAYERS;
+
+    /**
      * The table <code>public.playercount</code>.
      */
     public static final Playercount PLAYERCOUNT = Playercount.PLAYERCOUNT;
