@@ -37,7 +37,7 @@ public class PlaytimeController {
         playtime.setPUuid(uuid);
         playtime.execute(dsl.configuration());
         Integer playtimeReturnValue = playtime.getReturnValue();
-        if (playtimeReturnValue != null) {
+        if (playtimeReturnValue != null && playtimeReturnValue != 0) {
             return new ResponseEntity<>(new PlaytimeResponse(uuid, playtimeReturnValue), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
