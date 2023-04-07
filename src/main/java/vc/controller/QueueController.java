@@ -21,7 +21,7 @@ public class QueueController {
     }
 
     @GetMapping("/queue")
-    @RateLimiter(name = "main")
+    @RateLimiter(name = "queue")
     @Cacheable("queue")
     public ResponseEntity<vc.data.dto.tables.pojos.Queuelength> queue() {
         Queuelength q = Queuelength.QUEUELENGTH;
