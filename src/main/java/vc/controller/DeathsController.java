@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,26 +26,36 @@ public class DeathsController {
     @GetMapping("/deaths")
     @RateLimiter(name = "main")
     @Cacheable("deaths")
-    public List<vc.data.dto.tables.pojos.Deaths> deaths(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
-        return dsl.selectFrom(vc.data.dto.tables.Deaths.DEATHS)
+    public ResponseEntity<List<vc.data.dto.tables.pojos.Deaths>> deaths(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
+        List<vc.data.dto.tables.pojos.Deaths> deathsList = dsl.selectFrom(Deaths.DEATHS)
                 .where(Deaths.DEATHS.VICTIM_PLAYER_UUID.eq(uuid))
-                .orderBy(vc.data.dto.tables.Deaths.DEATHS.TIME.desc())
+                .orderBy(Deaths.DEATHS.TIME.desc())
                 .limit(100)
                 .offset(page == null ? 0 : page * 100)
                 .fetch()
                 .into(vc.data.dto.tables.pojos.Deaths.class);
+        if (deathsList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(deathsList);
+        }
     }
 
     @GetMapping("/kills")
     @RateLimiter(name = "main")
     @Cacheable("kills")
-    public List<vc.data.dto.tables.pojos.Deaths> kills(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
-        return dsl.selectFrom(vc.data.dto.tables.Deaths.DEATHS)
+    public ResponseEntity<List<vc.data.dto.tables.pojos.Deaths>> kills(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
+        List<vc.data.dto.tables.pojos.Deaths> deathsList = dsl.selectFrom(Deaths.DEATHS)
                 .where(Deaths.DEATHS.KILLER_PLAYER_UUID.eq(uuid))
-                .orderBy(vc.data.dto.tables.Deaths.DEATHS.TIME.desc())
+                .orderBy(Deaths.DEATHS.TIME.desc())
                 .limit(100)
                 .offset(page == null ? 0 : page * 100)
                 .fetch()
                 .into(vc.data.dto.tables.pojos.Deaths.class);
+        if (deathsList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(deathsList);
+        }
     }
 }

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,13 +27,18 @@ public class NamesController {
     @GetMapping("/names")
     @RateLimiter(name = "main")
     @Cacheable("names")
-    public List<Names> names(@RequestParam(value = "uuid") UUID uuid) {
+    public ResponseEntity<List<Names>> names(@RequestParam(value = "uuid") UUID uuid) {
         vc.data.dto.tables.Names n = vc.data.dto.tables.Names.NAMES;
-        return dsl.selectFrom(n)
+        List<Names> namesList = dsl.selectFrom(n)
                 .where(n.UUID.eq(uuid))
                 .orderBy(n.CHANGEDTOAT.desc().nullsLast())
                 .fetch()
                 .into(Names.class);
+        if (namesList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(namesList);
+        }
     }
 
 }

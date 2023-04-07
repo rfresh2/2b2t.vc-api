@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,13 +26,18 @@ public class ConnectionsController {
     @GetMapping("/connections")
     @RateLimiter(name = "main")
     @Cacheable("connections")
-    public List<Connections> connections(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
-        return dsl.selectFrom(vc.data.dto.tables.Connections.CONNECTIONS)
+    public ResponseEntity<List<Connections>> connections(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
+        List<Connections> connections = dsl.selectFrom(vc.data.dto.tables.Connections.CONNECTIONS)
                 .where(vc.data.dto.tables.Connections.CONNECTIONS.PLAYER_UUID.eq(uuid))
                 .orderBy(vc.data.dto.tables.Connections.CONNECTIONS.TIME.desc())
                 .limit(100)
                 .offset(page == null ? 0 : page * 100)
                 .fetch()
-                .into(vc.data.dto.tables.pojos.Connections.class);
+                .into(Connections.class);
+        if (connections.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(connections);
+        }
     }
 }

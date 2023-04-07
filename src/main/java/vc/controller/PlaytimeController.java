@@ -6,10 +6,10 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import vc.data.dto.routines.Playtime;
 import vc.data.dto.tables.PlaytimeMonthView;
 import vc.data.dto.tables.records.PlaytimeMonthViewRecord;
@@ -32,27 +32,32 @@ public class PlaytimeController {
     @GetMapping("/playtime")
     @RateLimiter(name = "main")
     @Cacheable("playtime")
-    public PlaytimeResponse playtime(@RequestParam(value = "uuid") UUID uuid) {
+    public ResponseEntity<PlaytimeResponse> playtime(@RequestParam(value = "uuid") UUID uuid) {
         Playtime playtime = new Playtime();
         playtime.setPUuid(uuid);
         playtime.execute(dsl.configuration());
         Integer playtimeReturnValue = playtime.getReturnValue();
         if (playtimeReturnValue != null) {
-            return new PlaytimeResponse(uuid, playtimeReturnValue);
+            return new ResponseEntity<>(new PlaytimeResponse(uuid, playtimeReturnValue), HttpStatus.OK);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Player not found");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
     @RateLimiter(name = "main")
     @GetMapping("/playtime/top/month")
-    public List<PlaytimeTopMonthResponse> playtimeTopMonth() {
+    public ResponseEntity<List<PlaytimeTopMonthResponse>> playtimeTopMonth() {
         PlaytimeMonthViewRecord[] playtimeMonthViewRecords = dsl.selectFrom(PlaytimeMonthView.PLAYTIME_MONTH_VIEW)
                 .fetchArray();
-        return Arrays.stream(playtimeMonthViewRecords).toList().stream()
+        List<PlaytimeTopMonthResponse> monthResponses = Arrays.stream(playtimeMonthViewRecords).toList().stream()
                 .map(playtimeAllMonthRecord -> new PlaytimeTopMonthResponse(playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.P_UUID), playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.P_NAME), playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.PT_DAYS).doubleValue()))
                 .sorted((a, b) -> Double.compare(b.getPlaytimeDays(), a.getPlaytimeDays()))
                 .collect(Collectors.toList());
+        if (monthResponses.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(monthResponses, HttpStatus.OK);
+        }
     }
 
     public static class PlaytimeTopMonthResponse {

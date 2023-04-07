@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +30,7 @@ public class SeenController {
     @GetMapping("/seen")
     @RateLimiter(name = "main")
     @Cacheable("seen")
-    public SeenResponse seen(@RequestParam(value = "uuid") UUID uuid) {
+    public ResponseEntity<SeenResponse> seen(@RequestParam(value = "uuid") UUID uuid) {
         Connections c = Connections.CONNECTIONS;
         ConnectionsRecord connectionsRecord = dsl.selectFrom(c)
                 .where(c.PLAYER_UUID.eq(uuid))
@@ -37,9 +38,9 @@ public class SeenController {
                 .limit(1)
                 .fetchOne();
         if (connectionsRecord != null) {
-            return new SeenResponse(connectionsRecord.get(c.TIME));
+            return new ResponseEntity<>(new SeenResponse(connectionsRecord.get(c.TIME)), HttpStatus.OK);
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Player not found");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
