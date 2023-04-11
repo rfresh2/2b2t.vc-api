@@ -35,7 +35,7 @@ public class TabList {
                 .limit(1)
                 .fetchOne()
                 .into(vc.data.dto.tables.pojos.Playercount.class);
-        if (playercountRecord.getTime().toInstant().isBefore(Instant.now().minus(Duration.ofMinutes(10)))) {
+        if (playercountRecord.getTime().toInstant().isBefore(Instant.now().minus(Duration.ofMinutes(30)))) {
             return ResponseEntity.noContent().build();
         }
         List<OnlinePlayers> onlinePlayers = dsl.selectFrom(ONLINE_PLAYERS)
