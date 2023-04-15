@@ -26,12 +26,19 @@ public class ConnectionsController {
     @GetMapping("/connections")
     @RateLimiter(name = "main")
     @Cacheable("connections")
-    public ResponseEntity<List<Connections>> connections(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
+    public ResponseEntity<List<Connections>> connections(
+            @RequestParam(value = "uuid") UUID uuid,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "page", required = false) Integer page) {
+        if (pageSize != null && pageSize > 100) {
+            return ResponseEntity.badRequest().build();
+        }
+        final int size = pageSize == null ? 25 : pageSize;
         List<Connections> connections = dsl.selectFrom(vc.data.dto.tables.Connections.CONNECTIONS)
                 .where(vc.data.dto.tables.Connections.CONNECTIONS.PLAYER_UUID.eq(uuid))
                 .orderBy(vc.data.dto.tables.Connections.CONNECTIONS.TIME.desc())
-                .limit(100)
-                .offset(page == null ? 0 : page * 100)
+                .limit(size)
+                .offset(page == null ? 0 : page * size)
                 .fetch()
                 .into(Connections.class);
         if (connections.isEmpty()) {

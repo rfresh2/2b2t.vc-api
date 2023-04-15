@@ -27,12 +27,19 @@ public class ChatsController {
     @GetMapping("/chats")
     @RateLimiter(name = "main")
     @Cacheable("chats")
-    public ResponseEntity<List<Chats>> chats(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
+    public ResponseEntity<List<Chats>> chats(
+            @RequestParam(value = "uuid") UUID uuid,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "page", required = false) Integer page) {
+        if (pageSize != null && pageSize > 100) {
+            return ResponseEntity.badRequest().build();
+        }
+        final int size = pageSize == null ? 25 : pageSize;
         List<Chats> chats = dsl.selectFrom(vc.data.dto.tables.Chats.CHATS)
                 .where(vc.data.dto.tables.Chats.CHATS.PLAYER_UUID.eq(uuid))
                 .orderBy(vc.data.dto.tables.Chats.CHATS.TIME.desc())
-                .limit(100)
-                .offset(page == null ? 0 : page * 100)
+                .limit(size)
+                .offset(page == null ? 0 : page * size)
                 .fetch()
                 .into(Chats.class);
         if (chats.isEmpty()) {

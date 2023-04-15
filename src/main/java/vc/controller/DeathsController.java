@@ -26,12 +26,19 @@ public class DeathsController {
     @GetMapping("/deaths")
     @RateLimiter(name = "main")
     @Cacheable("deaths")
-    public ResponseEntity<List<vc.data.dto.tables.pojos.Deaths>> deaths(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
+    public ResponseEntity<List<vc.data.dto.tables.pojos.Deaths>> deaths(
+            @RequestParam(value = "uuid") UUID uuid,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "page", required = false) Integer page) {
+        if (pageSize != null && pageSize > 100) {
+            return ResponseEntity.badRequest().build();
+        }
+        final int size = pageSize == null ? 25 : pageSize;
         List<vc.data.dto.tables.pojos.Deaths> deathsList = dsl.selectFrom(Deaths.DEATHS)
                 .where(Deaths.DEATHS.VICTIM_PLAYER_UUID.eq(uuid))
                 .orderBy(Deaths.DEATHS.TIME.desc())
-                .limit(100)
-                .offset(page == null ? 0 : page * 100)
+                .limit(size)
+                .offset(page == null ? 0 : page * size)
                 .fetch()
                 .into(vc.data.dto.tables.pojos.Deaths.class);
         if (deathsList.isEmpty()) {
@@ -44,12 +51,19 @@ public class DeathsController {
     @GetMapping("/kills")
     @RateLimiter(name = "main")
     @Cacheable("kills")
-    public ResponseEntity<List<vc.data.dto.tables.pojos.Deaths>> kills(@RequestParam(value = "uuid") UUID uuid, @RequestParam(value = "page", required = false) Integer page) {
+    public ResponseEntity<List<vc.data.dto.tables.pojos.Deaths>> kills(
+            @RequestParam(value = "uuid") UUID uuid,
+            @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @RequestParam(value = "page", required = false) Integer page) {
+        if (pageSize != null && pageSize > 100) {
+            return ResponseEntity.badRequest().build();
+        }
+        final int size = pageSize == null ? 25 : pageSize;
         List<vc.data.dto.tables.pojos.Deaths> deathsList = dsl.selectFrom(Deaths.DEATHS)
                 .where(Deaths.DEATHS.KILLER_PLAYER_UUID.eq(uuid))
                 .orderBy(Deaths.DEATHS.TIME.desc())
-                .limit(100)
-                .offset(page == null ? 0 : page * 100)
+                .limit(size)
+                .offset(page == null ? 0 : page * size)
                 .fetch()
                 .into(vc.data.dto.tables.pojos.Deaths.class);
         if (deathsList.isEmpty()) {
