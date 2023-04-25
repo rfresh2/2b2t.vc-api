@@ -12,6 +12,7 @@ import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
 import vc.data.dto.tables.records.OnlinePlayersRecord;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -46,6 +47,11 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
      * The column <code>public.online_players.player_uuid</code>.
      */
     public final TableField<OnlinePlayersRecord, UUID> PLAYER_UUID = createField(DSL.name("player_uuid"), SQLDataType.UUID, this, "");
+
+    /**
+     * The column <code>public.online_players.join_time</code>.
+     */
+    public final TableField<OnlinePlayersRecord, OffsetDateTime> JOIN_TIME = createField(DSL.name("join_time"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
 
     private OnlinePlayers(Name alias, Table<OnlinePlayersRecord> aliased) {
         this(alias, aliased, null);
@@ -125,18 +131,18 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row2 type methods
+    // Row3 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<String, UUID> fieldsRow() {
-        return (Row2) super.fieldsRow();
+    public Row3<String, UUID, OffsetDateTime> fieldsRow() {
+        return (Row3) super.fieldsRow();
     }
 
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function2<? super String, ? super UUID, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function3<? super String, ? super UUID, ? super OffsetDateTime, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -144,7 +150,7 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function2<? super String, ? super UUID, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super String, ? super UUID, ? super OffsetDateTime, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

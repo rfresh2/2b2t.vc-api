@@ -5,6 +5,7 @@ package vc.data.dto.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 
@@ -18,18 +19,22 @@ public class OnlinePlayers implements Serializable {
 
     private final String playerName;
     private final UUID playerUuid;
+    private final OffsetDateTime joinTime;
 
     public OnlinePlayers(OnlinePlayers value) {
         this.playerName = value.playerName;
         this.playerUuid = value.playerUuid;
+        this.joinTime = value.joinTime;
     }
 
     public OnlinePlayers(
-        String playerName,
-        UUID playerUuid
+            String playerName,
+            UUID playerUuid,
+            OffsetDateTime joinTime
     ) {
         this.playerName = playerName;
         this.playerUuid = playerUuid;
+        this.joinTime = joinTime;
     }
 
     /**
@@ -46,6 +51,13 @@ public class OnlinePlayers implements Serializable {
         return this.playerUuid;
     }
 
+    /**
+     * Getter for <code>public.online_players.join_time</code>.
+     */
+    public OffsetDateTime getJoinTime() {
+        return this.joinTime;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -58,14 +70,17 @@ public class OnlinePlayers implements Serializable {
         if (this.playerName == null) {
             if (other.playerName != null)
                 return false;
-        }
-        else if (!this.playerName.equals(other.playerName))
+        } else if (!this.playerName.equals(other.playerName))
             return false;
         if (this.playerUuid == null) {
             if (other.playerUuid != null)
                 return false;
-        }
-        else if (!this.playerUuid.equals(other.playerUuid))
+        } else if (!this.playerUuid.equals(other.playerUuid))
+            return false;
+        if (this.joinTime == null) {
+            if (other.joinTime != null)
+                return false;
+        } else if (!this.joinTime.equals(other.joinTime))
             return false;
         return true;
     }
@@ -76,6 +91,7 @@ public class OnlinePlayers implements Serializable {
         int result = 1;
         result = prime * result + ((this.playerName == null) ? 0 : this.playerName.hashCode());
         result = prime * result + ((this.playerUuid == null) ? 0 : this.playerUuid.hashCode());
+        result = prime * result + ((this.joinTime == null) ? 0 : this.joinTime.hashCode());
         return result;
     }
 
@@ -85,6 +101,7 @@ public class OnlinePlayers implements Serializable {
 
         sb.append(playerName);
         sb.append(", ").append(playerUuid);
+        sb.append(", ").append(joinTime);
 
         sb.append(")");
         return sb.toString();
