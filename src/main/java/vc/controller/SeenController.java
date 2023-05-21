@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import vc.data.dto.tables.Connections;
 import vc.data.dto.tables.records.ConnectionsRecord;
+import vc.util.PlayerLookup;
 
 import java.time.OffsetDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Tags({@Tag(name = "Seen")})
@@ -22,18 +24,30 @@ import java.util.UUID;
 public class SeenController {
 
     private final DSLContext dsl;
+    private final PlayerLookup playerLookup;
 
-    public SeenController(final DSLContext dsl) {
+    public SeenController(final DSLContext dsl, final PlayerLookup playerLookup) {
         this.dsl = dsl;
+        this.playerLookup = playerLookup;
     }
 
     @GetMapping("/seen")
     @RateLimiter(name = "main")
     @Cacheable("seen")
-    public ResponseEntity<SeenResponse> seen(@RequestParam(value = "uuid") UUID uuid) {
+    public ResponseEntity<SeenResponse> seen(
+            @RequestParam(value = "uuid", required = false) UUID uuid,
+            @RequestParam(value = "username", required = false) String username) {
+        if (uuid == null && username == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, username);
+        if (optionalPlayerUUID.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        final UUID resolvedUuid = optionalPlayerUUID.get();
         Connections c = Connections.CONNECTIONS;
         ConnectionsRecord connectionsRecord = dsl.selectFrom(c)
-                .where(c.PLAYER_UUID.eq(uuid))
+                .where(c.PLAYER_UUID.eq(resolvedUuid))
                 .orderBy(c.TIME.desc())
                 .limit(1)
                 .fetchOne();
@@ -59,15 +73,25 @@ public class SeenController {
     @GetMapping("/firstSeen")
     @RateLimiter(name = "main")
     @Cacheable("firstSeen")
-    public SeenResponse firstSeen(@RequestParam(value = "uuid") UUID uuid) {
+    public ResponseEntity<SeenResponse> firstSeen(
+            @RequestParam(value = "uuid", required = false) UUID uuid,
+            @RequestParam(value = "username", required = false) String username) {
+        if (uuid == null && username == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, username);
+        if (optionalPlayerUUID.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        final UUID resolvedUuid = optionalPlayerUUID.get();
         Connections c = Connections.CONNECTIONS;
         ConnectionsRecord connectionsRecord = dsl.selectFrom(c)
-                .where(c.PLAYER_UUID.eq(uuid))
+                .where(c.PLAYER_UUID.eq(resolvedUuid))
                 .orderBy(c.TIME.asc())
                 .limit(1)
                 .fetchOne();
         if (connectionsRecord != null) {
-            return new SeenResponse(connectionsRecord.get(c.TIME));
+            return new ResponseEntity<>(new SeenResponse(connectionsRecord.get(c.TIME)), HttpStatus.OK);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Player not found");
         }

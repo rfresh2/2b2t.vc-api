@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.routines.Playtime;
 import vc.data.dto.tables.PlaytimeMonthView;
 import vc.data.dto.tables.records.PlaytimeMonthViewRecord;
+import vc.util.PlayerLookup;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -24,21 +26,34 @@ import java.util.stream.Collectors;
 public class PlaytimeController {
 
     private final DSLContext dsl;
+    private final PlayerLookup playerLookup;
 
-    public PlaytimeController(final DSLContext dsl) {
+    public PlaytimeController(final DSLContext dsl, final PlayerLookup playerLookup) {
         this.dsl = dsl;
+        this.playerLookup = playerLookup;
     }
 
     @GetMapping("/playtime")
     @RateLimiter(name = "main")
     @Cacheable("playtime")
-    public ResponseEntity<PlaytimeResponse> playtime(@RequestParam(value = "uuid") UUID uuid) {
+    public ResponseEntity<PlaytimeResponse> playtime(
+            @RequestParam(value = "uuid", required = false) UUID uuid,
+            @RequestParam(value = "username", required = false) String username
+    ) {
+        if (uuid == null && username == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, username);
+        if (optionalPlayerUUID.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        final UUID resolvedUuid = optionalPlayerUUID.get();
         Playtime playtime = new Playtime();
-        playtime.setPUuid(uuid);
+        playtime.setPUuid(resolvedUuid);
         playtime.execute(dsl.configuration());
         Integer playtimeReturnValue = playtime.getReturnValue();
         if (playtimeReturnValue != null && playtimeReturnValue != 0) {
-            return new ResponseEntity<>(new PlaytimeResponse(uuid, playtimeReturnValue), HttpStatus.OK);
+            return new ResponseEntity<>(new PlaytimeResponse(resolvedUuid, playtimeReturnValue), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

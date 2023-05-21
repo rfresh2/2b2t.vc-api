@@ -11,6 +11,9 @@
 		<java.version>20</java.version>
 		<maven.compiler.source>20</maven.compiler.source>
 		<maven.compiler.target>20</maven.compiler.target>
+		<default.package>vc.swagger</default.package>
+		<jackson-version>2.9.10</jackson-version>
+		<jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -50,6 +53,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- Testing -->
 		<dependency>
@@ -100,6 +107,16 @@
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.joschi.jackson</groupId>
+			<artifactId>jackson-datatype-threetenbp</artifactId>
+			<version>${jackson-threetenbp-version}</version>
 		</dependency>
 	</dependencies>
 
@@ -167,15 +184,62 @@
 <!--								</database>-->
 <!--								<generate>-->
 <!--									<deprecated>false</deprecated>-->
-<!--									<records>true</records>-->
-<!--									<immutablePojos>true</immutablePojos>-->
-<!--									<fluentSetters>true</fluentSetters>-->
-<!--									<routines>true</routines>-->
-<!--								</generate>-->
-<!--							</generator>-->
-<!--						</configuration>-->
-<!--					</execution>-->
-<!--				</executions>-->
+				<!--									<records>true</records>-->
+				<!--									<immutablePojos>true</immutablePojos>-->
+				<!--									<fluentSetters>true</fluentSetters>-->
+				<!--									<routines>true</routines>-->
+				<!--								</generate>-->
+				<!--							</generator>-->
+				<!--						</configuration>-->
+				<!--					</execution>-->
+				<!--				</executions>-->
+			</plugin>
+			<plugin>
+				<groupId>io.swagger.codegen.v3</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>3.0.41</version>
+				<executions>
+					<execution>
+						<id>mojang-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>swagger/mojang-api.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources/swagger/mojang-api</output>
+							<language>java</language>
+							<library>resttemplate</library>
+							<apiPackage>${default.package}.mojang-api.handler</apiPackage>
+							<modelPackage>${default.package}.mojang-api.model</modelPackage>
+							<invokerPackage>${default.package}.mojang-api.handler</invokerPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<environmentVariables>
+								<models/>
+							</environmentVariables>
+						</configuration>
+					</execution>
+					<execution>
+						<id>mojang-sessionserver</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>swagger/mojang-sessionserver.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources/swagger/mojang-sessionserver</output>
+							<language>java</language>
+							<library>resttemplate</library>
+							<apiPackage>${default.package}.mojang-sessionserver.handler</apiPackage>
+							<modelPackage>${default.package}.mojang-sessionserver.model</modelPackage>
+							<invokerPackage>${default.package}.mojang-sessionserver.handler</invokerPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<environmentVariables>
+								<models/>
+							</environmentVariables>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
