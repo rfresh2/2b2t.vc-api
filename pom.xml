@@ -20,7 +20,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>3.0.5</version>
+				<version>3.1.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
-			<version>3.18.0</version>
+			<version>3.18.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -101,7 +101,7 @@
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
-			<version>3.1.5</version>
+			<version>3.1.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -125,7 +125,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.0.5</version>
+				<version>3.1.0</version>
 				<executions>
 					<execution>
 						<configuration>
@@ -160,7 +160,7 @@
 			<plugin>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen-maven</artifactId>
-				<version>3.18.0</version>
+				<version>3.18.4</version>
 <!--				<executions>-->
 <!--					<execution>-->
 <!--						<phase>generate-sources</phase>-->
@@ -197,7 +197,7 @@
 			<plugin>
 				<groupId>io.swagger.codegen.v3</groupId>
 				<artifactId>swagger-codegen-maven-plugin</artifactId>
-				<version>3.0.41</version>
+				<version>3.0.43</version>
 				<executions>
 					<execution>
 						<id>minetools-api</id>
