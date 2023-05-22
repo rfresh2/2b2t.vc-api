@@ -1,27 +1,28 @@
 package vc.util;
 
-import vc.swagger.mojang_api.handler.ProfilesApi;
-import vc.swagger.mojang_api.model.ProfileLookup;
+import vc.swagger.minetools_api.handler.UuidApi;
+import vc.swagger.minetools_api.model.UUIDAndUsername;
 
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public class PlayerLookup {
-    private final ProfilesApi profilesApi = new ProfilesApi();
+    private final UuidApi uuidApi = new UuidApi();
 
-    public Optional<ProfileLookup> getPlayerProfile(final String username) {
-        List<ProfileLookup> profileUuid = profilesApi.getProfileUuid(List.of(username));
-        return profileUuid.stream().findFirst();
+    public record PlayerIdentity(UUID uuid, String username) {
     }
 
-    public UUID getProfileUUID(final ProfileLookup profile) {
-        return UUID.fromString(profile
+    public Optional<PlayerIdentity> getPlayerProfile(final String username) {
+        final UUIDAndUsername uuidAndUsername = uuidApi.getUUIDAndUsername(username);
+        if (uuidAndUsername == null) return Optional.empty();
+        if (uuidAndUsername.getStatus() != UUIDAndUsername.StatusEnum.OK) return Optional.empty();
+        return Optional.of(new PlayerIdentity(UUID.fromString(uuidAndUsername
                 .getId()
-                .replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5"));
+                .replaceFirst("(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)", "$1-$2-$3-$4-$5")
+        ), uuidAndUsername.getName()));
     }
 
     public URL getAvatarURL(UUID uuid) {
@@ -38,6 +39,6 @@ public class PlayerLookup {
 
     public Optional<UUID> getOrResolveUuid(final UUID uuid, final String username) {
         if (uuid != null) return Optional.of(uuid);
-        return getPlayerProfile(username).map(this::getProfileUUID);
+        return getPlayerProfile(username).map(PlayerIdentity::uuid);
     }
 }

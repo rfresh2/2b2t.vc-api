@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: MineTools API
+  description: MineTools API
+  version: 1.0.0
+servers:
+  - url: 'https://api.minetools.eu'
+tags:
+  - name: 'UUID'
+    description: 'UUID'
+paths:
+  /uuid/{uuidOrUsername}:
+    get:
+      summary: Gets the UUID and name of a player
+      operationId: "getUUIDAndUsername"
+      tags:
+        - "UUID"
+      parameters:
+        - in: path
+          name: uuidOrUsername
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UUIDAndUsername'
+components:
+  securitySchemes:
+
+  schemas:
+    UUIDAndUsername:
+      type: object
+      properties:
+        cache:
+          type: object
+          properties:
+            HIT:
+              type: boolean
+            cache_time:
+              type: integer
+              format: int32
+            cache_time_left:
+              type: integer
+              format: int32
+            cached_at:
+              type: number
+              format: double
+            cached_until:
+              type: number
+              format: double
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - "OK"
+            - "ERR"
