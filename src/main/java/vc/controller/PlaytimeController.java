@@ -38,12 +38,12 @@ public class PlaytimeController {
     @Cacheable("playtime")
     public ResponseEntity<PlaytimeResponse> playtime(
             @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "username", required = false) String username
+            @RequestParam(value = "playerName", required = false) String playerName
     ) {
-        if (uuid == null && username == null) {
+        if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();
         }
-        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, username);
+        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, playerName);
         if (optionalPlayerUUID.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -77,12 +77,12 @@ public class PlaytimeController {
 
     public static class PlaytimeTopMonthResponse {
         private final UUID uuid;
-        private final String username;
+        private final String playerName;
         private final double playtimeDays;
 
-        public PlaytimeTopMonthResponse(final UUID uuid, final String username, final double playtimeDays) {
+        public PlaytimeTopMonthResponse(final UUID uuid, final String playerName, final double playtimeDays) {
             this.uuid = uuid;
-            this.username = username;
+            this.playerName = playerName;
             this.playtimeDays = playtimeDays;
         }
 
@@ -90,8 +90,8 @@ public class PlaytimeController {
             return uuid;
         }
 
-        public String getUsername() {
-            return username;
+        public String getPlayerName() {
+            return playerName;
         }
 
         public double getPlaytimeDays() {

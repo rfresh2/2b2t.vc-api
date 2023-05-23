@@ -9,15 +9,15 @@ tags:
   - name: 'UUID'
     description: 'UUID'
 paths:
-  /uuid/{uuidOrUsername}:
+  /uuid/{uuidOrPlayerName}:
     get:
       summary: Gets the UUID and name of a player
-      operationId: "getUUIDAndUsername"
+      operationId: "getUUIDAndPlayerName"
       tags:
         - "UUID"
       parameters:
         - in: path
-          name: uuidOrUsername
+          name: uuidOrPlayerName
           required: true
           schema:
             type: string
@@ -27,12 +27,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UUIDAndUsername'
+                $ref: '#/components/schemas/UUIDAndPlayerName'
 components:
   securitySchemes:
 
   schemas:
-    UUIDAndUsername:
+    UUIDAndPlayerName:
       type: object
       properties:
         cache:

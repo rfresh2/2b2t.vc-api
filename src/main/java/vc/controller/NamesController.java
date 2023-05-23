@@ -33,11 +33,11 @@ public class NamesController {
     @Cacheable("names")
     public ResponseEntity<List<Names>> names(
             @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "username", required = false) String username) {
-        if (uuid == null && username == null) {
+            @RequestParam(value = "playerName", required = false) String playerName) {
+        if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();
         }
-        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, username);
+        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, playerName);
         if (optionalPlayerUUID.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

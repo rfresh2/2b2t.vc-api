@@ -32,16 +32,16 @@ public class ConnectionsController {
     @Cacheable("connections")
     public ResponseEntity<List<Connections>> connections(
             @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "username", required = false) String username,
+            @RequestParam(value = "playerName", required = false) String playerName,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
         }
-        if (uuid == null && username == null) {
+        if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();
         }
-        Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, username);
+        Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, playerName);
         if (optionalResolvedUuid.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
