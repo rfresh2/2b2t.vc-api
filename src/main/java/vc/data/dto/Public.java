@@ -172,6 +172,11 @@ public class Public extends SchemaImpl {
     public final Restarts RESTARTS = Restarts.RESTARTS;
 
     /**
+     * The table <code>public.max_cons_month_view</code>.
+     */
+    public final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -190,6 +195,7 @@ public class Public extends SchemaImpl {
             Chats.CHATS,
             Connections.CONNECTIONS,
             Deaths.DEATHS,
+            MaxConsMonthView.MAX_CONS_MONTH_VIEW,
             Names.NAMES,
             OnlinePlayers.ONLINE_PLAYERS,
             Playercount.PLAYERCOUNT,

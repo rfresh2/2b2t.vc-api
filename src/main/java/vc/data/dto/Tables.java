@@ -38,6 +38,11 @@ public class Tables {
     public static final Deaths DEATHS = Deaths.DEATHS;
 
     /**
+     * The table <code>public.max_cons_month_view</code>.
+     */
+    public static final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
+
+    /**
      * The table <code>public.names</code>.
      */
     public static final Names NAMES = Names.NAMES;
