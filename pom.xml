@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
-			<version>3.18.4</version>
+			<version>3.18.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -84,7 +84,7 @@
 		<dependency>
 			<groupId>io.github.resilience4j</groupId>
 			<artifactId>resilience4j-spring-boot3</artifactId>
-			<version>2.0.2</version>
+			<version>2.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -101,7 +101,7 @@
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
-			<version>3.1.6</version>
+			<version>3.1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -160,7 +160,7 @@
 			<plugin>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen-maven</artifactId>
-				<version>3.18.4</version>
+				<version>3.18.5</version>
 <!--				<executions>-->
 <!--					<execution>-->
 <!--						<phase>generate-sources</phase>-->
