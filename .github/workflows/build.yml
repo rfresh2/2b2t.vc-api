@@ -22,5 +22,5 @@ jobs:
       - name: Elevate wrapper permissions
         run: chmod +x ./mvnw
 
-      - name: Build ZenithProxy
+      - name: Build 2b-api
         run: ./mvnw install
