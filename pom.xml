@@ -290,9 +290,6 @@
 							</execution>
 						</executions>
 						<configuration>
-							<agent>
-								<enabled>true</enabled>
-							</agent>
 						</configuration>
 					</plugin>
 				</plugins>

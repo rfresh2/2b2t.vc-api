@@ -1,0 +1,49 @@
+name: GraalVM Native Build And Release
+on:
+  push:
+    branches:
+      - "mainline"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Setup GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '20.0.2'
+          distribution: 'graalvm'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Echo Versions and Paths
+        run: |
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
+
+      - name: Elevate wrapper permissions
+        run: chmod +x ./mvnw
+
+      - name: Build Native Binary
+        run: ./mvnw -Pnative package
+
+      - name: Upload Binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-native
+          path: target/2b-api
+
+      - name: Release Artifact
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          automatic_release_tag: "latest"
+          title: "Latest Release"
+          files: |
+            target/2b-api
+            target/2b-api.jar

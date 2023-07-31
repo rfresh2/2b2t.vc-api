@@ -1,10 +1,7 @@
-name: 2b-api Build
+name: 2b-api PR Build
 
 on:
   pull_request:
-  push:
-    branches:
-      - "mainline"
 
 jobs:
   build:
