@@ -31,6 +31,12 @@ jobs:
       - name: Build Native Binary
         run: ./mvnw -Pnative package
 
+      - name: Compress Native Binary
+        uses: svenstaro/upx-action@v2
+        with:
+          files: |
+            target/2b-api
+
       - name: Upload Binary
         uses: actions/upload-artifact@v3
         with:
@@ -46,4 +52,3 @@ jobs:
           title: "Latest Release"
           files: |
             target/2b-api
-            target/2b-api.jar
