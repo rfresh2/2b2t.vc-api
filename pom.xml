@@ -290,6 +290,14 @@
 							</execution>
 						</executions>
 						<configuration>
+							<buildArgs>
+								<!-- doesn't seem like this is necessary for this app and balloons the binary size by 3x -->
+<!--								<arg>&#45;&#45;static</arg>-->
+<!--								<arg>&#45;&#45;libc=musl</arg>-->
+								<arg>-march=x86-64-v3</arg>
+								<arg>-R:MaxHeapSize=50m</arg>
+								<arg>--gc=G1</arg>
+							</buildArgs>
 						</configuration>
 					</plugin>
 				</plugins>

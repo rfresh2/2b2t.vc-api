@@ -40,7 +40,7 @@ jobs:
       - name: Upload Binary
         uses: actions/upload-artifact@v3
         with:
-          name: linux-native
+          name: 2b-api
           path: target/2b-api
 
       - name: Release Artifact
