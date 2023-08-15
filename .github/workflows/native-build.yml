@@ -32,16 +32,13 @@ jobs:
         run: ./mvnw -Pnative package
 
       - name: Compress Native Binary
-        uses: svenstaro/upx-action@v2
-        with:
-          files: |
-            target/2b-api
+        run: zip -j 2b-api.zip target/2b-api
 
       - name: Upload Binary
         uses: actions/upload-artifact@v3
         with:
           name: 2b-api
-          path: target/2b-api
+          path: 2b-api.zip
 
       - name: Release Artifact
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -51,4 +48,4 @@ jobs:
           automatic_release_tag: "latest"
           title: "Latest Release"
           files: |
-            target/2b-api
+            2b-api.zip
