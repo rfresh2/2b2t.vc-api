@@ -290,6 +290,9 @@
 							</execution>
 						</executions>
 						<configuration>
+							<metadataRepository>
+								<enabled>true</enabled>
+							</metadataRepository>
 							<buildArgs>
 								<!-- doesn't seem like this is necessary for this app and balloons the binary size by 3x -->
 <!--								<arg>&#45;&#45;static</arg>-->
