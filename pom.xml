@@ -19,7 +19,7 @@
 		<maven.compiler.target>20</maven.compiler.target>
 		<default.package>vc.swagger</default.package>
 		<jackson-version>2.9.10</jackson-version>
-		<jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
+		<jackson-threetenbp-version>2.15.2</jackson-threetenbp-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
