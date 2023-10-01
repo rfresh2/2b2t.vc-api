@@ -14,9 +14,9 @@
 	<name>2b-api</name>
 	<description>2b2t data and stats API</description>
 	<properties>
-		<java.version>20</java.version>
-		<maven.compiler.source>20</maven.compiler.source>
-		<maven.compiler.target>20</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<default.package>vc.swagger</default.package>
 		<jackson-version>2.9.10</jackson-version>
 		<jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
@@ -278,7 +278,7 @@
 					<plugin>
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
-						<version>0.9.24</version>
+						<version>0.9.27</version>
 						<extensions>true</extensions>
 						<executions>
 							<execution>
@@ -299,7 +299,6 @@
 <!--								<arg>&#45;&#45;libc=musl</arg>-->
 								<arg>-march=x86-64-v3</arg>
 								<arg>-R:MaxHeapSize=50m</arg>
-								<arg>--gc=G1</arg>
 							</buildArgs>
 						</configuration>
 					</plugin>

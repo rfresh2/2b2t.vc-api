@@ -3,6 +3,14 @@
   "includes":[{
     "pattern":"\\QMETA-INF/MANIFEST.MF\\E"
   }, {
+    "pattern":"\\QMETA-INF/build-info.properties\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/bots\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/index.html\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/playtime/month\\E"
+  }, {
     "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/index.css\\E"
   }, {
     "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/index.html\\E"
@@ -15,9 +23,63 @@
   }, {
     "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/swagger-ui.css\\E"
   }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/5.2.0/favicon-16x16.png\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/5.2.0/index.css\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/5.2.0/index.html\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/5.2.0/swagger-initializer.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/5.2.0/swagger-ui-bundle.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/5.2.0/swagger-ui-standalone-preset.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/5.2.0/swagger-ui.css\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/favicon-16x16.png\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/index.css\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/index.html\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/swagger-initializer.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/swagger-ui-bundle.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/swagger-ui-standalone-preset.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/swagger-ui.css\\E"
+  }, {
     "pattern":"\\QMETA-INF/services/ch.qos.logback.classic.spi.Configurator\\E"
   }, {
+    "pattern":"\\QMETA-INF/services/io.r2dbc.spi.ConnectionFactoryProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/io.swagger.v3.core.converter.ModelConverter\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/jakarta.validation.spi.ValidationProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.lang.System$LoggerFinder\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.net.spi.InetAddressResolverProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.net.spi.URLStreamHandlerProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.nio.channels.spi.SelectorProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.rmi.server.RMIClassLoaderSpi\\E"
+  }, {
     "pattern":"\\QMETA-INF/services/java.sql.Driver\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.time.zone.ZoneRulesProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/java.util.spi.ResourceBundleControlProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/javax.management.remote.JMXConnectorServerProvider\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/javax.xml.transform.TransformerFactory\\E"
+  }, {
+    "pattern":"\\QMETA-INF/services/org.apache.juli.logging.Log\\E"
   }, {
     "pattern":"\\QMETA-INF/services/org.apache.maven.surefire.spi.MasterProcessChannelProcessorFactory\\E"
   }, {
@@ -31,13 +93,33 @@
   }, {
     "pattern":"\\QMETA-INF/spring-devtools.properties\\E"
   }, {
+    "pattern":"\\QMETA-INF/spring.components\\E"
+  }, {
     "pattern":"\\QMETA-INF/spring.factories\\E"
+  }, {
+    "pattern":"\\QMETA-INF/spring.integration.properties\\E"
   }, {
     "pattern":"\\QMETA-INF/spring/org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration.imports\\E"
   }, {
     "pattern":"\\QMETA-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports\\E"
   }, {
+    "pattern":"\\Qapplication-dev.properties\\E"
+  }, {
+    "pattern":"\\Qapplication-dev.xml\\E"
+  }, {
+    "pattern":"\\Qapplication-dev.yaml\\E"
+  }, {
+    "pattern":"\\Qapplication-dev.yml\\E"
+  }, {
     "pattern":"\\Qapplication.properties\\E"
+  }, {
+    "pattern":"\\Qapplication.xml\\E"
+  }, {
+    "pattern":"\\Qapplication.yaml\\E"
+  }, {
+    "pattern":"\\Qapplication.yml\\E"
+  }, {
+    "pattern":"\\Qbanner.txt\\E"
   }, {
     "pattern":"\\Qcom/fasterxml/jackson/core/ObjectCodec.class\\E"
   }, {
@@ -68,6 +150,28 @@
     "pattern":"\\Qcom/zaxxer/hikari/HikariConfig.class\\E"
   }, {
     "pattern":"\\Qcom/zaxxer/hikari/HikariDataSource.class\\E"
+  }, {
+    "pattern":"\\Qconfig/application-dev.properties\\E"
+  }, {
+    "pattern":"\\Qconfig/application-dev.xml\\E"
+  }, {
+    "pattern":"\\Qconfig/application-dev.yaml\\E"
+  }, {
+    "pattern":"\\Qconfig/application-dev.yml\\E"
+  }, {
+    "pattern":"\\Qconfig/application.properties\\E"
+  }, {
+    "pattern":"\\Qconfig/application.xml\\E"
+  }, {
+    "pattern":"\\Qconfig/application.yaml\\E"
+  }, {
+    "pattern":"\\Qconfig/application.yml\\E"
+  }, {
+    "pattern":"\\Qdata-all.sql\\E"
+  }, {
+    "pattern":"\\Qdata.sql\\E"
+  }, {
+    "pattern":"\\Qgit.properties\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/bulkhead/BulkheadRegistry.class\\E"
   }, {
@@ -167,15 +271,25 @@
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/AbstractBulkheadConfigurationOnMissingBean.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadAutoConfiguration$BulkheadEndpointAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadAutoConfiguration$BulkheadEndpointAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadConfigurationOnMissingBean$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadConfigurationOnMissingBean.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadMetricsAutoConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadMetricsAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/BulkheadProperties.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/ThreadPoolBulkheadMetricsAutoConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/bulkhead/autoconfigure/ThreadPoolBulkheadMetricsAutoConfiguration.class\\E"
   }, {
@@ -183,41 +297,71 @@
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/AbstractCircuitBreakerConfigurationOnMissingBean.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerAutoConfiguration$CircuitBreakerEndpointAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerAutoConfiguration$CircuitBreakerEndpointAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerConfigurationOnMissingBean$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerConfigurationOnMissingBean.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerMetricsAutoConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerMetricsAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakerProperties.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakersHealthIndicatorAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/circuitbreaker/autoconfigure/CircuitBreakersHealthIndicatorAutoConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/fallback/autoconfigure/FallbackConfigurationOnMissingBean$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/fallback/autoconfigure/FallbackConfigurationOnMissingBean.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/AbstractRateLimiterConfigurationOnMissingBean.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterAutoConfiguration$RateLimiterEndpointAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterAutoConfiguration$RateLimiterEndpointAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterConfigurationOnMissingBean$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterConfigurationOnMissingBean.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterMetricsAutoConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterMetricsAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimiterProperties.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimitersHealthIndicatorAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/ratelimiter/autoconfigure/RateLimitersHealthIndicatorAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/AbstractRetryConfigurationOnMissingBean.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryAutoConfiguration$RetryAutoEndpointConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryAutoConfiguration$RetryAutoEndpointConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryConfigurationOnMissingBean$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryConfigurationOnMissingBean.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryMetricsAutoConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/retry/autoconfigure/RetryMetricsAutoConfiguration.class\\E"
   }, {
@@ -225,15 +369,25 @@
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/scheduled/threadpool/autoconfigure/ContextAwareScheduledThreadPoolAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/spelresolver/autoconfigure/SpelResolverConfigurationOnMissingBean$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/spelresolver/autoconfigure/SpelResolverConfigurationOnMissingBean.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/AbstractTimeLimiterConfigurationOnMissingBean.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterAutoConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterAutoConfiguration$TimeLimiterAutoEndpointConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterAutoConfiguration$TimeLimiterAutoEndpointConfiguration.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterConfigurationOnMissingBean$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterConfigurationOnMissingBean.class\\E"
+  }, {
+    "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterMetricsAutoConfiguration$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qio/github/resilience4j/springboot3/timelimiter/autoconfigure/TimeLimiterMetricsAutoConfiguration.class\\E"
   }, {
@@ -315,6 +469,28 @@
   }, {
     "pattern":"\\Qjavax/sql/DataSource.class\\E"
   }, {
+    "pattern":"\\Qjndi.properties\\E"
+  }, {
+    "pattern":"\\Qjooq-settings.xml\\E"
+  }, {
+    "pattern":"\\Qlogback-spring.groovy\\E"
+  }, {
+    "pattern":"\\Qlogback-spring.xml\\E"
+  }, {
+    "pattern":"\\Qlogback-test-spring.groovy\\E"
+  }, {
+    "pattern":"\\Qlogback-test-spring.xml\\E"
+  }, {
+    "pattern":"\\Qlogback-test.groovy\\E"
+  }, {
+    "pattern":"\\Qlogback-test.xml\\E"
+  }, {
+    "pattern":"\\Qlogback.groovy\\E"
+  }, {
+    "pattern":"\\Qlogback.xml\\E"
+  }, {
+    "pattern":"\\Qmessages.properties\\E"
+  }, {
     "pattern":"\\Qorg/apache/catalina/core/RestrictedFilters.properties\\E"
   }, {
     "pattern":"\\Qorg/apache/catalina/core/RestrictedListeners.properties\\E"
@@ -362,6 +538,8 @@
     "pattern":"\\Qorg/jooq/impl/UpdatableRecordImpl.class\\E"
   }, {
     "pattern":"\\Qorg/json/JSONObject.class\\E"
+  }, {
+    "pattern":"\\Qorg/postgresql/driverconfig.properties\\E"
   }, {
     "pattern":"\\Qorg/springdoc/api/AbstractOpenApiResource.class\\E"
   }, {
@@ -559,6 +737,8 @@
   }, {
     "pattern":"\\Qorg/springframework/beans/factory/support/NullBean.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000001d48f62c8a0.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/audit/AuditAutoConfiguration.class\\E"
@@ -584,6 +764,8 @@
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/EndpointAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/expose/IncludeExcludeEndpointFilter.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x000001d48f5ae8d0.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration.class\\E"
   }, {
@@ -812,6 +994,8 @@
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/server/ManagementServerProperties.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementChildContextConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x000001d48f61f060.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$ApplicationContextFilterConfiguration.class\\E"
   }, {
@@ -1045,6 +1229,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$CommonsDbcp2PoolDataSourceMetadataProviderConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x000001d48f61ee48.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$OracleUcpPoolDataSourceMetadataProviderConfiguration.class\\E"
@@ -1275,6 +1461,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$LiveReloadServerEventListener.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x000001d48f63b438.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener.class\\E"
@@ -1312,6 +1500,8 @@
     "pattern":"\\Qorg/springframework/boot/task/TaskExecutorBuilder.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/task/TaskSchedulerBuilder.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x000001d48f58a490.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter.class\\E"
   }, {
@@ -1607,15 +1797,47 @@
   }, {
     "pattern":"\\Qorg/springframework/web/util/pattern/PathPatternParser.class\\E"
   }, {
+    "pattern":"\\Qpublic/bots\\E"
+  }, {
+    "pattern":"\\Qpublic/index.html\\E"
+  }, {
+    "pattern":"\\Qpublic/playtime/month\\E"
+  }, {
+    "pattern":"\\Qresources/bots\\E"
+  }, {
+    "pattern":"\\Qresources/index.html\\E"
+  }, {
+    "pattern":"\\Qresources/playtime/month\\E"
+  }, {
+    "pattern":"\\Qschema-all.sql\\E"
+  }, {
+    "pattern":"\\Qschema.sql\\E"
+  }, {
+    "pattern":"\\Qspring.properties\\E"
+  }, {
     "pattern":"\\Qspringdoc.config.properties\\E"
+  }, {
+    "pattern":"\\Qstatic/bots\\E"
+  }, {
+    "pattern":"\\Qstatic/index.html\\E"
+  }, {
+    "pattern":"\\Qstatic/playtime/month\\E"
+  }, {
+    "pattern":"\\Qvc/Application$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qvc/Application.class\\E"
   }, {
     "pattern":"\\Qvc/\\E"
   }, {
+    "pattern":"\\Qvc/config/CacheConfig$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qvc/config/CacheConfig.class\\E"
   }, {
+    "pattern":"\\Qvc/config/InitialConfiguration$$SpringCGLIB$$0.class\\E"
+  }, {
     "pattern":"\\Qvc/config/InitialConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qvc/config/WebConfig$$SpringCGLIB$$0.class\\E"
   }, {
     "pattern":"\\Qvc/config/WebConfig.class\\E"
   }, {
@@ -1678,6 +1900,8 @@
     "pattern":"java.sql:\\Qjavax/sql/CommonDataSource.class\\E"
   }, {
     "pattern":"java.sql:\\Qjavax/sql/DataSource.class\\E"
+  }, {
+    "pattern":"jdk.jfr:\\Qjdk/jfr/internal/query/view.ini\\E"
   }]},
   "bundles":[{
     "name":"jakarta.servlet.LocalStrings",
