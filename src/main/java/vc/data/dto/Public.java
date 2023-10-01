@@ -172,6 +172,11 @@ public class Public extends SchemaImpl {
     public final Restarts RESTARTS = Restarts.RESTARTS;
 
     /**
+     * The table <code>public.tablist</code>.
+     */
+    public final Tablist TABLIST = Tablist.TABLIST;
+
+    /**
      * The table <code>public.max_cons_month_view</code>.
      */
     public final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
@@ -205,7 +210,8 @@ public class Public extends SchemaImpl {
             PlaytimeMonthView.PLAYTIME_MONTH_VIEW,
             Queuelength.QUEUELENGTH,
             Queuewait.QUEUEWAIT,
-            Restarts.RESTARTS
-        );
+            Restarts.RESTARTS,
+            Tablist.TABLIST
+            );
     }
 }

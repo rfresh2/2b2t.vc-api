@@ -8,14 +8,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.pojos.OnlinePlayers;
+import vc.data.dto.tables.Tablist;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
-
-import static vc.data.dto.tables.OnlinePlayers.ONLINE_PLAYERS;
-import static vc.data.dto.tables.Playercount.PLAYERCOUNT;
+import java.util.UUID;
 
 @Tags({@Tag(name = "TabList")})
 @RestController
@@ -28,23 +24,19 @@ public class TabList {
 
     @GetMapping("/tablist")
     @RateLimiter(name = "main")
-    @Cacheable("onlinePlayers")
-    public ResponseEntity<List<OnlinePlayers>> onlinePlayers() {
-        vc.data.dto.tables.pojos.Playercount playercountRecord = dsl.selectFrom(PLAYERCOUNT)
-                .orderBy(PLAYERCOUNT.TIME.desc())
-                .limit(1)
-                .fetchOne()
-                .into(vc.data.dto.tables.pojos.Playercount.class);
-        if (playercountRecord.getTime().toInstant().isBefore(Instant.now().minus(Duration.ofMinutes(30)))) {
+    @Cacheable("tablist")
+    public ResponseEntity<List<TablistEntry>> onlinePlayers() {
+        List<TablistEntry> into = dsl.selectFrom(Tablist.TABLIST)
+            .fetch()
+            .into(vc.data.dto.tables.pojos.Tablist.class)
+            .stream()
+            .map(t -> new TablistEntry(t.getPlayerName(), t.getPlayerUuid()))
+            .toList();
+        if (into.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        List<OnlinePlayers> onlinePlayers = dsl.selectFrom(ONLINE_PLAYERS)
-                .fetch()
-                .into(OnlinePlayers.class);
-        if (onlinePlayers.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(onlinePlayers);
-        }
+        return ResponseEntity.ok(into);
     }
+
+    public record TablistEntry(String playerName, UUID playerUuid) { }
 }

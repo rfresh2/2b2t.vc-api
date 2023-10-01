@@ -291,6 +291,8 @@
   }, {
     "pattern":"\\Qio/micrometer/observation/SimpleObservationRegistry.class\\E"
   }, {
+    "pattern":"\\Qio/swagger/v3/core/converter/ModelConverter.class\\E"
+  }, {
     "pattern":"\\Qio/swagger/v3/core/filter/SpecFilter.class\\E"
   }, {
     "pattern":"\\Qio/swagger/v3/core/util/ObjectMapperFactory.class\\E"
@@ -384,6 +386,8 @@
     "pattern":"\\Qorg/springdoc/core/configuration/SpringDocConfiguration$1.class\\E"
   }, {
     "pattern":"\\Qorg/springdoc/core/configuration/SpringDocConfiguration$OpenApiResourceAdvice.class\\E"
+  }, {
+    "pattern":"\\Qorg/springdoc/core/configuration/SpringDocConfiguration$QuerydslProvider.class\\E"
   }, {
     "pattern":"\\Qorg/springdoc/core/configuration/SpringDocConfiguration$SpringDocActuatorConfiguration.class\\E"
   }, {
@@ -1677,7 +1681,7 @@
   }]},
   "bundles":[{
     "name":"jakarta.servlet.LocalStrings",
-    "locales":["und"]
+    "locales":["", "und"]
   }, {
     "name":"jakarta.servlet.http.LocalStrings",
     "locales":["", "und"]
@@ -1686,7 +1690,7 @@
     "locales":["", "und"]
   }, {
     "name":"org.apache.catalina.authenticator.jaspic.LocalStrings",
-    "locales":["und"]
+    "locales":["", "und"]
   }, {
     "name":"org.apache.catalina.connector.LocalStrings",
     "locales":["", "und"]
@@ -1734,7 +1738,7 @@
     "locales":["", "und"]
   }, {
     "name":"org.apache.coyote.http11.filters.LocalStrings",
-    "locales":["und"]
+    "locales":["", "und"]
   }, {
     "name":"org.apache.naming.LocalStrings",
     "locales":["", "und"]
@@ -1755,7 +1759,7 @@
     "locales":["", "und"]
   }, {
     "name":"org.apache.tomcat.util.http.parser.LocalStrings",
-    "locales":["und"]
+    "locales":["", "und"]
   }, {
     "name":"org.apache.tomcat.util.modeler.LocalStrings",
     "locales":["", "und"]
