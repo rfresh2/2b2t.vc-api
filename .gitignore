@@ -33,3 +33,6 @@ build/
 .vscode/
 
 logs/
+
+# env
+.env
