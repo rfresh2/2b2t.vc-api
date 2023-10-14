@@ -131,7 +131,15 @@
   "name":"brave.Tracer"
 },
 {
+  "name":"ch.qos.logback.classic.BasicConfigurator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"ch.qos.logback.classic.LoggerContext"
+},
+{
+  "name":"ch.qos.logback.classic.joran.SerializedModelConfigurator",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"ch.qos.logback.classic.pattern.DateConverter",
@@ -155,6 +163,10 @@
 },
 {
   "name":"ch.qos.logback.classic.pattern.ThreadConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"ch.qos.logback.classic.util.DefaultJoranConfigurator",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -3165,6 +3177,9 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"java.io.Console"
+},
+{
   "name":"java.io.DataInput"
 },
 {
@@ -3420,6 +3435,10 @@
   "name":"java.lang.constant.Constable",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.foreign.MemorySegment",
+  "methods":[{"name":"getString","parameterTypes":["long"] }]
 },
 {
   "name":"java.lang.invoke.LambdaMetafactory"

@@ -11,6 +11,18 @@
   }, {
     "pattern":"\\QMETA-INF/resources/playtime/month\\E"
   }, {
+    "pattern":"\\QMETA-INF/resources/playtime/top/index.css\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/playtime/top/monthff\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/playtime/top/swagger-initializer.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/playtime/top/swagger-ui-bundle.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/playtime/top/swagger-ui-standalone-preset.js\\E"
+  }, {
+    "pattern":"\\QMETA-INF/resources/playtime/top/swagger-ui.css\\E"
+  }, {
     "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/index.css\\E"
   }, {
     "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/index.html\\E"
@@ -483,9 +495,13 @@
   }, {
     "pattern":"\\Qlogback-test.groovy\\E"
   }, {
+    "pattern":"\\Qlogback-test.scmo\\E"
+  }, {
     "pattern":"\\Qlogback-test.xml\\E"
   }, {
     "pattern":"\\Qlogback.groovy\\E"
+  }, {
+    "pattern":"\\Qlogback.scmo\\E"
   }, {
     "pattern":"\\Qlogback.xml\\E"
   }, {
@@ -737,7 +753,11 @@
   }, {
     "pattern":"\\Qorg/springframework/beans/factory/support/NullBean.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x0000018e09637630.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000001d48f62c8a0.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000002232363abe8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter.class\\E"
   }, {
@@ -765,7 +785,11 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/expose/IncludeExcludeEndpointFilter.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x0000018e095b8ac0.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x000001d48f5ae8d0.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x00000223235aaf08.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration.class\\E"
   }, {
@@ -995,7 +1019,11 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementChildContextConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x0000018e09627cf0.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x000001d48f61f060.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x0000022323634218.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$ApplicationContextFilterConfiguration.class\\E"
   }, {
@@ -1229,7 +1257,11 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$CommonsDbcp2PoolDataSourceMetadataProviderConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x0000018e09627ad8.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x000001d48f61ee48.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x0000022323634000.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration.class\\E"
   }, {
@@ -1461,7 +1493,11 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$LiveReloadServerEventListener.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x0000018e0964e118.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x000001d48f63b438.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x00000223236521b8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration.class\\E"
   }, {
@@ -1501,7 +1537,11 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/task/TaskSchedulerBuilder.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x0000018e09593428.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x000001d48f58a490.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x0000022323586d20.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter.class\\E"
   }, {
@@ -1803,11 +1843,35 @@
   }, {
     "pattern":"\\Qpublic/playtime/month\\E"
   }, {
+    "pattern":"\\Qpublic/playtime/top/index.css\\E"
+  }, {
+    "pattern":"\\Qpublic/playtime/top/monthff\\E"
+  }, {
+    "pattern":"\\Qpublic/playtime/top/swagger-initializer.js\\E"
+  }, {
+    "pattern":"\\Qpublic/playtime/top/swagger-ui-bundle.js\\E"
+  }, {
+    "pattern":"\\Qpublic/playtime/top/swagger-ui-standalone-preset.js\\E"
+  }, {
+    "pattern":"\\Qpublic/playtime/top/swagger-ui.css\\E"
+  }, {
     "pattern":"\\Qresources/bots\\E"
   }, {
     "pattern":"\\Qresources/index.html\\E"
   }, {
     "pattern":"\\Qresources/playtime/month\\E"
+  }, {
+    "pattern":"\\Qresources/playtime/top/index.css\\E"
+  }, {
+    "pattern":"\\Qresources/playtime/top/monthff\\E"
+  }, {
+    "pattern":"\\Qresources/playtime/top/swagger-initializer.js\\E"
+  }, {
+    "pattern":"\\Qresources/playtime/top/swagger-ui-bundle.js\\E"
+  }, {
+    "pattern":"\\Qresources/playtime/top/swagger-ui-standalone-preset.js\\E"
+  }, {
+    "pattern":"\\Qresources/playtime/top/swagger-ui.css\\E"
   }, {
     "pattern":"\\Qschema-all.sql\\E"
   }, {
@@ -1822,6 +1886,18 @@
     "pattern":"\\Qstatic/index.html\\E"
   }, {
     "pattern":"\\Qstatic/playtime/month\\E"
+  }, {
+    "pattern":"\\Qstatic/playtime/top/index.css\\E"
+  }, {
+    "pattern":"\\Qstatic/playtime/top/monthff\\E"
+  }, {
+    "pattern":"\\Qstatic/playtime/top/swagger-initializer.js\\E"
+  }, {
+    "pattern":"\\Qstatic/playtime/top/swagger-ui-bundle.js\\E"
+  }, {
+    "pattern":"\\Qstatic/playtime/top/swagger-ui-standalone-preset.js\\E"
+  }, {
+    "pattern":"\\Qstatic/playtime/top/swagger-ui.css\\E"
   }, {
     "pattern":"\\Qvc/Application$$SpringCGLIB$$0.class\\E"
   }, {
