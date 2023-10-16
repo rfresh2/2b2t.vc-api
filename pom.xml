@@ -171,7 +171,7 @@
 			<plugin>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen-maven</artifactId>
-				<version>3.18.6</version>
+				<version>3.18.7</version>
 <!--				<executions>-->
 <!--					<execution>-->
 <!--						<phase>generate-sources</phase>-->
