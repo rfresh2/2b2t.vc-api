@@ -1457,6 +1457,10 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.AbstractBulkheadConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadAutoConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1495,6 +1499,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadAutoConfiguration$BulkheadEndpointAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadAutoConfiguration$BulkheadEndpointAutoConfiguration$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadConfigurationOnMissingBean",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1518,6 +1530,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadMetricsAutoConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1538,6 +1558,14 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadMetricsAutoConfiguration$$SpringCGLIB$$2",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$1",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -1571,6 +1599,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.ThreadPoolBulkheadMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.ThreadPoolBulkheadMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.ThreadPoolBulkheadProperties",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1592,6 +1628,10 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.AbstractCircuitBreakerConfigurationOnMissingBean$$SpringCGLIB$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.AbstractCircuitBreakerConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -1633,6 +1673,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerAutoConfiguration$CircuitBreakerEndpointAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerAutoConfiguration$CircuitBreakerEndpointAutoConfiguration$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerConfigurationOnMissingBean",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1656,6 +1704,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerMetricsAutoConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1676,6 +1732,14 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerMetricsAutoConfiguration$$SpringCGLIB$$2",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$1",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -1706,6 +1770,14 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakersHealthIndicatorAutoConfiguration$$SpringCGLIB$$2",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakersHealthIndicatorAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakersHealthIndicatorAutoConfiguration$$SpringCGLIB$$FastClass$$1",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -1741,6 +1813,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.fallback.autoconfigure.FallbackConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.fallback.autoconfigure.FallbackConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.AbstractRateLimiterConfigurationOnMissingBean",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1749,6 +1829,10 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.AbstractRateLimiterConfigurationOnMissingBean$$SpringCGLIB$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.AbstractRateLimiterConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -1790,6 +1874,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterAutoConfiguration$RateLimiterEndpointAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterAutoConfiguration$RateLimiterEndpointAutoConfiguration$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterConfigurationOnMissingBean",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1813,6 +1905,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterMetricsAutoConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1833,6 +1933,14 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterMetricsAutoConfiguration$$SpringCGLIB$$2",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$1",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -1866,6 +1974,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimitersHealthIndicatorAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimitersHealthIndicatorAutoConfiguration$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.ratelimiter.monitoring.endpoint.RateLimiterEndpoint"
 },
 {
@@ -1883,6 +1999,10 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.retry.autoconfigure.AbstractRetryConfigurationOnMissingBean$$SpringCGLIB$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.retry.autoconfigure.AbstractRetryConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -1924,6 +2044,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryAutoConfiguration$RetryAutoEndpointConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryAutoConfiguration$RetryAutoEndpointConfiguration$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryConfigurationOnMissingBean",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1947,6 +2075,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryMetricsAutoConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1967,6 +2103,14 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryMetricsAutoConfiguration$$SpringCGLIB$$2",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$1",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -2006,6 +2150,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.spelresolver.autoconfigure.SpelResolverConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.spelresolver.autoconfigure.SpelResolverConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.AbstractTimeLimiterConfigurationOnMissingBean",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -2014,6 +2166,10 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.AbstractTimeLimiterConfigurationOnMissingBean$$SpringCGLIB$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.AbstractTimeLimiterConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -2055,6 +2211,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterAutoConfiguration$TimeLimiterAutoEndpointConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterAutoConfiguration$TimeLimiterAutoEndpointConfiguration$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterConfigurationOnMissingBean",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -2078,6 +2242,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterConfigurationOnMissingBean$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterMetricsAutoConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -2098,6 +2270,14 @@
 },
 {
   "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterMetricsAutoConfiguration$$SpringCGLIB$$2",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterMetricsAutoConfiguration$$SpringCGLIB$$FastClass$$1",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
@@ -6597,7 +6777,7 @@
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"bindTaskExecutorsToRegistry","parameterTypes":["java.util.Map","io.micrometer.core.instrument.MeterRegistry"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"bindTaskExecutorsToRegistry","parameterTypes":["java.util.Map","io.micrometer.core.instrument.MeterRegistry"] }, {"name":"eagerTaskExecutorMetrics","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.actuate.autoconfigure.metrics.web.tomcat.TomcatMetricsAutoConfiguration",
@@ -10999,6 +11179,9 @@
   "name":"org.springframework.transaction.annotation.TransactionRuntimeHints"
 },
 {
+  "name":"org.springframework.transaction.aspectj.AbstractTransactionAspect"
+},
+{
   "name":"org.springframework.transaction.event.TransactionalEventListenerFactory",
   "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
@@ -12149,6 +12332,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"vc.Application$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"vc.Application$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"vc.ApplicationTests",
   "allDeclaredFields":true,
   "allDeclaredClasses":true,
@@ -12187,6 +12378,14 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"vc.config.CacheConfig$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"vc.config.CacheConfig$$SpringCGLIB$$FastClass$$1",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
   "name":"vc.config.InitialConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -12207,6 +12406,14 @@
 },
 {
   "name":"vc.config.InitialConfiguration$$SpringCGLIB$$2",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"vc.config.InitialConfiguration$$SpringCGLIB$$FastClass$$0",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
+},
+{
+  "name":"vc.config.InitialConfiguration$$SpringCGLIB$$FastClass$$1",
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
