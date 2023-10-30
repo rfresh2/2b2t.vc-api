@@ -230,46 +230,46 @@
 							</environmentVariables>
 						</configuration>
 					</execution>
-					<!--					<execution>-->
-					<!--						<id>mojang-api</id>-->
-					<!--						<goals>-->
-					<!--							<goal>generate</goal>-->
-					<!--						</goals>-->
-					<!--						<configuration>-->
-					<!--							<inputSpec>swagger/mojang-api.yaml</inputSpec>-->
-					<!--							<output>${project.build.directory}/generated-sources/swagger/mojang-api</output>-->
-					<!--							<language>java</language>-->
-					<!--							<library>resttemplate</library>-->
-					<!--							<apiPackage>${default.package}.mojang-api.handler</apiPackage>-->
-					<!--							<modelPackage>${default.package}.mojang-api.model</modelPackage>-->
-					<!--							<invokerPackage>${default.package}.mojang-api.handler</invokerPackage>-->
-					<!--							<generateApiTests>false</generateApiTests>-->
-					<!--							<generateModelTests>false</generateModelTests>-->
-					<!--							<environmentVariables>-->
-					<!--								<models/>-->
-					<!--							</environmentVariables>-->
-					<!--						</configuration>-->
-					<!--					</execution>-->
-					<!--					<execution>-->
-					<!--						<id>mojang-sessionserver</id>-->
-					<!--						<goals>-->
-					<!--							<goal>generate</goal>-->
-					<!--						</goals>-->
-					<!--						<configuration>-->
-					<!--							<inputSpec>swagger/mojang-sessionserver.yaml</inputSpec>-->
-					<!--							<output>${project.build.directory}/generated-sources/swagger/mojang-sessionserver</output>-->
-					<!--							<language>java</language>-->
-					<!--							<library>resttemplate</library>-->
-					<!--							<apiPackage>${default.package}.mojang-sessionserver.handler</apiPackage>-->
-					<!--							<modelPackage>${default.package}.mojang-sessionserver.model</modelPackage>-->
-					<!--							<invokerPackage>${default.package}.mojang-sessionserver.handler</invokerPackage>-->
-					<!--							<generateApiTests>false</generateApiTests>-->
-					<!--							<generateModelTests>false</generateModelTests>-->
-					<!--							<environmentVariables>-->
-					<!--								<models/>-->
-					<!--							</environmentVariables>-->
-					<!--						</configuration>-->
-					<!--					</execution>-->
+					<execution>
+						<id>mojang-api</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>swagger/mojang-api.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources/swagger/mojang-api</output>
+							<language>java</language>
+							<library>resttemplate</library>
+							<apiPackage>${default.package}.mojang-api.handler</apiPackage>
+							<modelPackage>${default.package}.mojang-api.model</modelPackage>
+							<invokerPackage>${default.package}.mojang-api.handler</invokerPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<environmentVariables>
+								<models/>
+							</environmentVariables>
+						</configuration>
+					</execution>
+					<execution>
+						<id>mojang-sessionserver</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>swagger/mojang-sessionserver.yaml</inputSpec>
+							<output>${project.build.directory}/generated-sources/swagger/mojang-sessionserver</output>
+							<language>java</language>
+							<library>resttemplate</library>
+							<apiPackage>${default.package}.mojang-sessionserver.handler</apiPackage>
+							<modelPackage>${default.package}.mojang-sessionserver.model</modelPackage>
+							<invokerPackage>${default.package}.mojang-sessionserver.handler</invokerPackage>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<environmentVariables>
+								<models/>
+							</environmentVariables>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>

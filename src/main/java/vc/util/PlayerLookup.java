@@ -4,8 +4,8 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vc.swagger.minetools_api.handler.UuidApi;
-import vc.swagger.minetools_api.model.UUIDAndPlayerName;
+import vc.swagger.mojang_api.handler.ProfileApi;
+import vc.swagger.mojang_api.model.UUIDAndUser;
 
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class PlayerLookup {
     private static final Logger logger = LoggerFactory.getLogger(PlayerLookup.class);
-    private final UuidApi uuidApi = new UuidApi();
+    private final ProfileApi mojangApi = new ProfileApi();
     private final Cache<String, PlayerIdentity> uuidCache = Caffeine.newBuilder()
         .expireAfterWrite(Duration.ofMinutes(10))
         .maximumSize(250)
@@ -29,9 +29,8 @@ public class PlayerLookup {
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
         try {
-            final UUIDAndPlayerName uuidAndUsername = uuidApi.getUUIDAndPlayerName(playerName);
+            UUIDAndUser uuidAndUsername = mojangApi.getProfileFromUsername(playerName);
             if (uuidAndUsername == null) return Optional.empty();
-            if (uuidAndUsername.getStatus() != UUIDAndPlayerName.StatusEnum.OK) return Optional.empty();
             final PlayerIdentity playerIdentity = new PlayerIdentity(
                 UUID.fromString(uuidAndUsername
                                     .getId()
@@ -61,6 +60,6 @@ public class PlayerLookup {
 
     public Optional<UUID> getOrResolveUuid(final UUID uuid, final String username) {
         if (uuid != null) return Optional.of(uuid);
-        return getPlayerIdentity(username).map(PlayerIdentity::uuid);
+        return getPlayerIdentity(username.trim()).map(PlayerIdentity::uuid);
     }
 }

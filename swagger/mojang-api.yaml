@@ -18,6 +18,8 @@ tags:
     description: "Security questions"
   - name: "credit"
     description: "Credit cards"
+  - name: "profile"
+    description: "Gets a profile by username"
 paths:
   /orders/statistics:
     post:
@@ -198,6 +200,56 @@ paths:
                   value:
                     error: Unsupported Media Type
                     errorMessage: The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method
+        "429":
+          description: Too many requests
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorApi"
+              examples:
+                TooManyRequests:
+                  summary: Too many requests
+                  value:
+                    error: TooManyRequestsException
+                    errorMessage: The client has sent too many requests within a certain amount of time
+  /users/profiles/minecraft/{username}:
+    get:
+      tags:
+        - "profile"
+      summary: Username to UUID
+      operationId: "getProfileFromUsername"
+      parameters:
+        - in: path
+          name: username
+          description: Player username
+          required: true
+          schema:
+            type: string
+          example: Notch
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UUIDAndUser"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorApi"
+        "204":
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  path:
+                    type: string
+                  errorMessage:
+                    type: string
         "429":
           description: Too many requests
           content:
@@ -850,6 +902,13 @@ components:
         demo:
           description: Is Present if the account is demo (unpaid)
           type: boolean
+    UUIDAndUser:
+      type: object
+      properties:
+        name:
+          type: string
+        id:
+          type: string
     SecurityQuestionEnum:
       type: integer
       enum: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 ]

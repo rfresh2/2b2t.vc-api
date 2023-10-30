@@ -15,6 +15,12 @@
     "interfaces":["java.sql.Connection"]
   },
   {
+    "interfaces":["org.springframework.boot.actuate.endpoint.annotation.Endpoint"]
+  },
+  {
+    "interfaces":["org.springframework.boot.actuate.endpoint.annotation.EndpointExtension"]
+  },
+  {
     "interfaces":["org.springframework.boot.context.properties.ConfigurationProperties"]
   },
   {
