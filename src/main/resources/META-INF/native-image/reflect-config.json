@@ -12900,7 +12900,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"configuration","parameterTypes":[] }, {"name":"connectionProvider","parameterTypes":[] }, {"name":"dsl","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["javax.sql.DataSource"] }, {"name":"configuration","parameterTypes":[] }, {"name":"connectionProvider","parameterTypes":[] }, {"name":"dsl","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
 },
 {
   "name":"vc.config.InitialConfiguration$$SpringCGLIB$$0",
@@ -12908,7 +12908,7 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "fields":[{"name":"CGLIB$FACTORY_DATA"}],
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"CGLIB$SET_STATIC_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }, {"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }, {"name":"connectionProvider","parameterTypes":[] }, {"name":"dsl","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["javax.sql.DataSource"] }, {"name":"CGLIB$SET_STATIC_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }, {"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }, {"name":"connectionProvider","parameterTypes":[] }, {"name":"dsl","parameterTypes":[] }]
 },
 {
   "name":"vc.config.InitialConfiguration$$SpringCGLIB$$1",
@@ -13016,13 +13016,6 @@
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
 },
 {
-  "name":"vc.controller.PlayerActivityController",
-  "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["org.jooq.DSLContext","vc.util.PlayerLookup"] }]
-},
-{
   "name":"vc.controller.PlaytimeController",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -13078,6 +13071,30 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"getTime","parameterTypes":[] }]
+},
+{
+  "name":"vc.controller.StatsController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.jooq.DSLContext","vc.util.PlayerLookup"] }, {"name":"playerStats","parameterTypes":["java.util.UUID","java.lang.String"] }]
+},
+{
+  "name":"vc.controller.StatsController$$SpringCGLIB$$0"
+},
+{
+  "name":"vc.controller.StatsController$PlayerActivity",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int"] }, {"name":"deathCount","parameterTypes":[] }, {"name":"firstSeen","parameterTypes":[] }, {"name":"joinCount","parameterTypes":[] }, {"name":"killCount","parameterTypes":[] }, {"name":"lastSeen","parameterTypes":[] }, {"name":"leaveCount","parameterTypes":[] }, {"name":"playtimeSeconds","parameterTypes":[] }, {"name":"playtimeSecondsMonth","parameterTypes":[] }]
+},
+{
+  "name":"vc.controller.StatsController$PlayerStats",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int"] }, {"name":"deathCount","parameterTypes":[] }, {"name":"firstSeen","parameterTypes":[] }, {"name":"joinCount","parameterTypes":[] }, {"name":"killCount","parameterTypes":[] }, {"name":"lastSeen","parameterTypes":[] }, {"name":"leaveCount","parameterTypes":[] }, {"name":"playtimeSeconds","parameterTypes":[] }, {"name":"playtimeSecondsMonth","parameterTypes":[] }]
 },
 {
   "name":"vc.controller.TabList",
@@ -13185,6 +13202,10 @@
 },
 {
   "name":"vc.data.dto.tables.records.OnlinePlayersRecord",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"vc.data.dto.tables.records.PlayerStatsRecord",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
