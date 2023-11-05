@@ -64,4 +64,9 @@ public class PlayerLookup {
         if (uuid != null) return Optional.of(uuid);
         return getPlayerIdentity(username.trim()).map(PlayerIdentity::uuid);
     }
+
+    public Optional<PlayerIdentity> getOrResolvePlayerIdentity(final UUID uuid, final String username) {
+        if (uuid != null) return Optional.of(new PlayerIdentity(uuid, username));
+        return getPlayerIdentity(username.trim());
+    }
 }

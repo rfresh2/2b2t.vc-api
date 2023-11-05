@@ -4,6 +4,7 @@ import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ public class StatsController {
 
     @RateLimiter(name = "main")
     @GetMapping("/stats/player")
+    @Cacheable("playerStats")
     public ResponseEntity<PlayerStats> playerStats(
         @RequestParam(value = "uuid", required = false) UUID uuid,
         @RequestParam(value = "playerName", required = false) String playerName

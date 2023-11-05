@@ -3636,6 +3636,9 @@
   "name":"java.lang.invoke.SerializedLambda"
 },
 {
+  "name":"java.lang.invoke.StringConcatFactory"
+},
+{
   "name":"java.lang.invoke.TypeDescriptor$OfField",
   "queryAllPublicMethods":true
 },
@@ -12978,6 +12981,16 @@
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
 },
 {
+  "name":"vc.controller.DataDumpController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.jooq.DSLContext","vc.util.PlayerLookup"] }, {"name":"getPlayerDataDump","parameterTypes":["java.util.UUID","java.lang.String"] }]
+},
+{
+  "name":"vc.controller.DataDumpController$$SpringCGLIB$$0"
+},
+{
   "name":"vc.controller.DeathsController",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -13190,6 +13203,10 @@
 },
 {
   "name":"vc.data.dto.tables.records.DeathsRecord",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"vc.data.dto.tables.records.GetUuidDataRecord",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {

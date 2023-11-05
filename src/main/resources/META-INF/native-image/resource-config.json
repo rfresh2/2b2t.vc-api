@@ -17,6 +17,8 @@
   }, {
     "pattern":"\\QMETA-INF/resources/index.html\\E"
   }, {
+    "pattern":"\\QMETA-INF/resources/playerDataDump\\E"
+  }, {
     "pattern":"\\QMETA-INF/resources/playtime/month\\E"
   }, {
     "pattern":"\\QMETA-INF/resources/playtime/top/index.css\\E"
@@ -763,6 +765,8 @@
   }, {
     "pattern":"\\Qorg/springframework/beans/factory/support/NullBean.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x0000017e2c6148a0.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x0000018e09637630.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000001a012616000.class\\E"
@@ -820,6 +824,8 @@
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/condition/ConditionalOnAvailableEndpoint.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/expose/IncludeExcludeEndpointFilter.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x0000017e2c596c00.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x0000018e095b8ac0.class\\E"
   }, {
@@ -1109,6 +1115,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementChildContextConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x0000017e2c606c70.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x0000018e09627cf0.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x000001a012607450.class\\E"
@@ -1370,6 +1378,8 @@
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/PropertiesJdbcConnectionDetails.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$CommonsDbcp2PoolDataSourceMetadataProviderConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x0000017e2c606a58.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x0000018e09627ad8.class\\E"
   }, {
@@ -1633,6 +1643,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$LiveReloadServerEventListener.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x0000017e2c629838.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x0000018e0964e118.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x000001a012628788.class\\E"
@@ -1700,6 +1712,8 @@
     "pattern":"\\Qorg/springframework/boot/task/TaskExecutorBuilder.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/task/TaskSchedulerBuilder.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x0000017e2c56ad20.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x0000018e09593428.class\\E"
   }, {
@@ -2035,6 +2049,8 @@
   }, {
     "pattern":"\\Qpublic/index.html\\E"
   }, {
+    "pattern":"\\Qpublic/playerDataDump\\E"
+  }, {
     "pattern":"\\Qpublic/playtime/month\\E"
   }, {
     "pattern":"\\Qpublic/playtime/top/index.css\\E"
@@ -2060,6 +2076,8 @@
     "pattern":"\\Qresources/bots\\E"
   }, {
     "pattern":"\\Qresources/index.html\\E"
+  }, {
+    "pattern":"\\Qresources/playerDataDump\\E"
   }, {
     "pattern":"\\Qresources/playtime/month\\E"
   }, {
@@ -2094,6 +2112,8 @@
     "pattern":"\\Qstatic/bots\\E"
   }, {
     "pattern":"\\Qstatic/index.html\\E"
+  }, {
+    "pattern":"\\Qstatic/playerDataDump\\E"
   }, {
     "pattern":"\\Qstatic/playtime/month\\E"
   }, {
