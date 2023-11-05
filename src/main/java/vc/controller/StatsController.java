@@ -56,6 +56,7 @@ public class StatsController {
         OffsetDateTime firstSeen,
         OffsetDateTime lastSeen,
         int playtimeSeconds,
-        int playtimeSecondsMonth
+        int playtimeSecondsMonth,
+        int chatsCount
     ) { }
 }

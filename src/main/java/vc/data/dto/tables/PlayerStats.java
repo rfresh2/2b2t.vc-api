@@ -77,6 +77,11 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
      */
     public final TableField<PlayerStatsRecord, Integer> PLAYTIME_30_DAYS = createField(DSL.name("playtime_30_days"), SQLDataType.INTEGER, this, "");
 
+    /**
+     * The column <code>public.player_stats.chats_count</code>.
+     */
+    public final TableField<PlayerStatsRecord, Long> CHATS_COUNT = createField(DSL.name("chats_count"), SQLDataType.BIGINT, this, "");
+
     private PlayerStats(Name alias, Table<PlayerStatsRecord> aliased) {
         this(alias, aliased, new Field[] {
             DSL.val(null, SQLDataType.UUID)
@@ -153,12 +158,12 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Long, Long, Long, Long, OffsetDateTime, OffsetDateTime, Integer, Integer> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row9<Long, Long, Long, Long, OffsetDateTime, OffsetDateTime, Integer, Integer, Long> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 
     /**
@@ -190,7 +195,7 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
     /**
      * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
      */
-    public <U> SelectField<U> mapping(Function8<? super Long, ? super Long, ? super Long, ? super Long, ? super OffsetDateTime, ? super OffsetDateTime, ? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Function9<? super Long, ? super Long, ? super Long, ? super Long, ? super OffsetDateTime, ? super OffsetDateTime, ? super Integer, ? super Integer, ? super Long, ? extends U> from) {
         return convertFrom(Records.mapping(from));
     }
 
@@ -198,7 +203,7 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
      * Convenience mapping calling {@link SelectField#convertFrom(Class,
      * Function)}.
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function8<? super Long, ? super Long, ? super Long, ? super Long, ? super OffsetDateTime, ? super OffsetDateTime, ? super Integer, ? super Integer, ? extends U> from) {
+    public <U> SelectField<U> mapping(Class<U> toType, Function9<? super Long, ? super Long, ? super Long, ? super Long, ? super OffsetDateTime, ? super OffsetDateTime, ? super Integer, ? super Integer, ? super Long, ? extends U> from) {
         return convertFrom(toType, Records.mapping(from));
     }
 }

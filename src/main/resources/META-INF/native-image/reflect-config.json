@@ -861,12 +861,18 @@
   "name":"com.zaxxer.hikari.metrics.MetricsTrackerFactory"
 },
 {
+  "name":"com.zaxxer.hikari.pool.HikariProxyPreparedStatement"
+},
+{
   "name":"com.zaxxer.hikari.pool.PoolBase",
   "fields":[{"name":"catalog"}]
 },
 {
   "name":"com.zaxxer.hikari.pool.PoolEntry",
   "fields":[{"name":"state"}]
+},
+{
+  "name":"com.zaxxer.hikari.pool.ProxyPreparedStatement"
 },
 {
   "name":"double",
@@ -1032,6 +1038,12 @@
   "name":"io.github.resilience4j.common.bulkhead.configuration.ThreadPoolBulkheadConfigCustomizer"
 },
 {
+  "name":"io.github.resilience4j.common.bulkhead.monitoring.endpoint.BulkheadEndpointResponse"
+},
+{
+  "name":"io.github.resilience4j.common.bulkhead.monitoring.endpoint.BulkheadEventsEndpointResponse"
+},
+{
   "name":"io.github.resilience4j.common.circuitbreaker.configuration.CircuitBreakerConfigCustomizer"
 },
 {
@@ -1042,6 +1054,21 @@
 },
 {
   "name":"io.github.resilience4j.common.circuitbreaker.configuration.CommonCircuitBreakerConfigurationProperties$InstanceProperties"
+},
+{
+  "name":"io.github.resilience4j.common.circuitbreaker.monitoring.endpoint.CircuitBreakerDetails"
+},
+{
+  "name":"io.github.resilience4j.common.circuitbreaker.monitoring.endpoint.CircuitBreakerEndpointResponse"
+},
+{
+  "name":"io.github.resilience4j.common.circuitbreaker.monitoring.endpoint.CircuitBreakerEventsEndpointResponse"
+},
+{
+  "name":"io.github.resilience4j.common.circuitbreaker.monitoring.endpoint.CircuitBreakerUpdateStateResponse"
+},
+{
+  "name":"io.github.resilience4j.common.circuitbreaker.monitoring.endpoint.UpdateState"
 },
 {
   "name":"io.github.resilience4j.common.ratelimiter.configuration.CommonRateLimiterConfigurationProperties",
@@ -1060,6 +1087,12 @@
   "name":"io.github.resilience4j.common.ratelimiter.configuration.RateLimiterConfigCustomizer"
 },
 {
+  "name":"io.github.resilience4j.common.ratelimiter.monitoring.endpoint.RateLimiterEndpointResponse"
+},
+{
+  "name":"io.github.resilience4j.common.ratelimiter.monitoring.endpoint.RateLimiterEventsEndpointResponse"
+},
+{
   "name":"io.github.resilience4j.common.retry.configuration.CommonRetryConfigurationProperties",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1072,6 +1105,12 @@
   "name":"io.github.resilience4j.common.retry.configuration.RetryConfigCustomizer"
 },
 {
+  "name":"io.github.resilience4j.common.retry.monitoring.endpoint.RetryEndpointResponse"
+},
+{
+  "name":"io.github.resilience4j.common.retry.monitoring.endpoint.RetryEventsEndpointResponse"
+},
+{
   "name":"io.github.resilience4j.common.timelimiter.configuration.CommonTimeLimiterConfigurationProperties",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -1082,6 +1121,12 @@
 },
 {
   "name":"io.github.resilience4j.common.timelimiter.configuration.TimeLimiterConfigCustomizer"
+},
+{
+  "name":"io.github.resilience4j.common.timelimiter.monitoring.endpoint.TimeLimiterEndpointResponse"
+},
+{
+  "name":"io.github.resilience4j.common.timelimiter.monitoring.endpoint.TimeLimiterEventsEndpointResponse"
 },
 {
   "name":"io.github.resilience4j.consumer.CircularEventConsumer"
@@ -1261,6 +1306,9 @@
 },
 {
   "name":"io.github.resilience4j.ratelimiter.event.RateLimiterEvent"
+},
+{
+  "name":"io.github.resilience4j.ratelimiter.event.RateLimiterEvent$Type"
 },
 {
   "name":"io.github.resilience4j.ratelimiter.internal.InMemoryRateLimiterRegistry",
@@ -1480,7 +1528,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"bulkheadEndpoint","parameterTypes":["io.github.resilience4j.bulkhead.BulkheadRegistry","io.github.resilience4j.bulkhead.ThreadPoolBulkheadRegistry"] }, {"name":"bulkheadEventsEndpoint","parameterTypes":["io.github.resilience4j.consumer.EventConsumerRegistry"] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.bulkhead.autoconfigure.BulkheadAutoConfiguration$BulkheadEndpointAutoConfiguration$$SpringCGLIB$$0",
@@ -1614,10 +1662,16 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.bulkhead.monitoring.endpoint.BulkheadEndpoint"
+  "name":"io.github.resilience4j.springboot3.bulkhead.monitoring.endpoint.BulkheadEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.bulkhead.monitoring.endpoint.BulkheadEventsEndpoint"
+  "name":"io.github.resilience4j.springboot3.bulkhead.monitoring.endpoint.BulkheadEventsEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.AbstractCircuitBreakerConfigurationOnMissingBean",
@@ -1654,7 +1708,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"circuitBreakerEndpoint","parameterTypes":["io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry"] }, {"name":"circuitBreakerEventsEndpoint","parameterTypes":["io.github.resilience4j.consumer.EventConsumerRegistry"] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.circuitbreaker.autoconfigure.CircuitBreakerAutoConfiguration$CircuitBreakerEndpointAutoConfiguration$$SpringCGLIB$$0",
@@ -1781,10 +1835,16 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.circuitbreaker.monitoring.endpoint.CircuitBreakerEndpoint"
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.monitoring.endpoint.CircuitBreakerEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.circuitbreaker.monitoring.endpoint.CircuitBreakerEventsEndpoint"
+  "name":"io.github.resilience4j.springboot3.circuitbreaker.monitoring.endpoint.CircuitBreakerEventsEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.circuitbreaker.monitoring.health.CircuitBreakersHealthIndicator"
@@ -1855,7 +1915,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"rateLimiterEndpoint","parameterTypes":["io.github.resilience4j.ratelimiter.RateLimiterRegistry"] }, {"name":"rateLimiterEventsEndpoint","parameterTypes":["io.github.resilience4j.consumer.EventConsumerRegistry"] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.ratelimiter.autoconfigure.RateLimiterAutoConfiguration$RateLimiterEndpointAutoConfiguration$$SpringCGLIB$$0",
@@ -1982,10 +2042,16 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.ratelimiter.monitoring.endpoint.RateLimiterEndpoint"
+  "name":"io.github.resilience4j.springboot3.ratelimiter.monitoring.endpoint.RateLimiterEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.ratelimiter.monitoring.endpoint.RateLimiterEventsEndpoint"
+  "name":"io.github.resilience4j.springboot3.ratelimiter.monitoring.endpoint.RateLimiterEventsEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.ratelimiter.monitoring.health.RateLimitersHealthIndicator"
@@ -2025,7 +2091,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"retryEndpoint","parameterTypes":["io.github.resilience4j.retry.RetryRegistry"] }, {"name":"retryEventsEndpoint","parameterTypes":["io.github.resilience4j.consumer.EventConsumerRegistry"] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.retry.autoconfigure.RetryAutoConfiguration$RetryAutoEndpointConfiguration$$SpringCGLIB$$0",
@@ -2121,10 +2187,16 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.retry.monitoring.endpoint.RetryEndpoint"
+  "name":"io.github.resilience4j.springboot3.retry.monitoring.endpoint.RetryEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.retry.monitoring.endpoint.RetryEventsEndpoint"
+  "name":"io.github.resilience4j.springboot3.retry.monitoring.endpoint.RetryEventsEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.spelresolver.autoconfigure.SpelResolverConfigurationOnMissingBean",
@@ -2192,7 +2264,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }, {"name":"timeLimiterEndpoint","parameterTypes":["io.github.resilience4j.timelimiter.TimeLimiterRegistry"] }, {"name":"timeLimiterEventsEndpoint","parameterTypes":["io.github.resilience4j.consumer.EventConsumerRegistry"] }]
 },
 {
   "name":"io.github.resilience4j.springboot3.timelimiter.autoconfigure.TimeLimiterAutoConfiguration$TimeLimiterAutoEndpointConfiguration$$SpringCGLIB$$0",
@@ -2288,10 +2360,16 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.timelimiter.monitoring.endpoint.TimeLimiterEndpoint"
+  "name":"io.github.resilience4j.springboot3.timelimiter.monitoring.endpoint.TimeLimiterEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
-  "name":"io.github.resilience4j.springboot3.timelimiter.monitoring.endpoint.TimeLimiterEventsEndpoint"
+  "name":"io.github.resilience4j.springboot3.timelimiter.monitoring.endpoint.TimeLimiterEventsEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"io.github.resilience4j.timelimiter.TimeLimiter"
@@ -2312,6 +2390,9 @@
 },
 {
   "name":"io.github.resilience4j.timelimiter.event.TimeLimiterEvent"
+},
+{
+  "name":"io.github.resilience4j.timelimiter.event.TimeLimiterEvent$Type"
 },
 {
   "name":"io.github.resilience4j.timelimiter.event.TimeLimiterOnErrorEvent"
@@ -3390,6 +3471,9 @@
   "name":"java.io.ObjectInputStream"
 },
 {
+  "name":"java.io.ObjectOutputStream"
+},
+{
   "name":"java.io.OutputStream"
 },
 {
@@ -3517,6 +3601,7 @@
   "allDeclaredFields":true,
   "allDeclaredClasses":true,
   "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"equals","parameterTypes":["java.lang.Object"] }, {"name":"getClass","parameterTypes":[] }, {"name":"hashCode","parameterTypes":[] }, {"name":"notify","parameterTypes":[] }, {"name":"notifyAll","parameterTypes":[] }, {"name":"toString","parameterTypes":[] }, {"name":"wait","parameterTypes":[] }, {"name":"wait","parameterTypes":["long"] }, {"name":"wait","parameterTypes":["long","int"] }]
 },
 {
@@ -3868,7 +3953,8 @@
   "name":"java.sql.ResultSet"
 },
 {
-  "name":"java.sql.SQLException"
+  "name":"java.sql.SQLException",
+  "fields":[{"name":"next"}]
 },
 {
   "name":"java.sql.SQLFeatureNotSupportedException"
@@ -3883,6 +3969,10 @@
   "name":"java.sql.Statement"
 },
 {
+  "name":"java.sql.Types",
+  "allPublicFields":true
+},
+{
   "name":"java.sql.Wrapper",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
@@ -3892,6 +3982,9 @@
 },
 {
   "name":"java.text.ParseException"
+},
+{
+  "name":"java.time.Clock"
 },
 {
   "name":"java.time.Duration"
@@ -4019,6 +4112,9 @@
 },
 {
   "name":"java.util.concurrent.CompletionStage"
+},
+{
+  "name":"java.util.concurrent.ConcurrentHashMap"
 },
 {
   "name":"java.util.concurrent.CountDownLatch"
@@ -4801,10 +4897,19 @@
   "name":"org.jooq.Block"
 },
 {
+  "name":"org.jooq.CacheProvider"
+},
+{
   "name":"org.jooq.Catalog"
 },
 {
+  "name":"org.jooq.CharsetProvider"
+},
+{
   "name":"org.jooq.CommentOnIsStep"
+},
+{
+  "name":"org.jooq.CommitProvider"
 },
 {
   "name":"org.jooq.CommonTableExpression"
@@ -4813,7 +4918,10 @@
   "name":"org.jooq.Condition"
 },
 {
-  "name":"org.jooq.Configuration"
+  "name":"org.jooq.Configuration",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
+  "methods":[{"name":"commercial","parameterTypes":[] }]
 },
 {
   "name":"org.jooq.ConnectionCallable"
@@ -4831,6 +4939,9 @@
 },
 {
   "name":"org.jooq.ContextTransactionalRunnable"
+},
+{
+  "name":"org.jooq.ConverterProvider"
 },
 {
   "name":"org.jooq.CreateDatabaseFinalStep"
@@ -4880,6 +4991,12 @@
   "name":"org.jooq.DeleteUsingStep"
 },
 {
+  "name":"org.jooq.DiagnosticsListener"
+},
+{
+  "name":"org.jooq.DiagnosticsListenerProvider"
+},
+{
   "name":"org.jooq.Domain"
 },
 {
@@ -4919,10 +5036,16 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"org.jooq.ExecutorProvider"
+},
+{
   "name":"org.jooq.Explain"
 },
 {
   "name":"org.jooq.Field"
+},
+{
+  "name":"org.jooq.FormattingProvider"
 },
 {
   "name":"org.jooq.GrantOnStep"
@@ -5084,6 +5207,15 @@
   "name":"org.jooq.Meta"
 },
 {
+  "name":"org.jooq.MetaProvider"
+},
+{
+  "name":"org.jooq.MigrationListener"
+},
+{
+  "name":"org.jooq.MigrationListenerProvider"
+},
+{
   "name":"org.jooq.Migrations"
 },
 {
@@ -5187,6 +5319,24 @@
   "name":"org.jooq.Record9"
 },
 {
+  "name":"org.jooq.RecordListener"
+},
+{
+  "name":"org.jooq.RecordListenerProvider"
+},
+{
+  "name":"org.jooq.RecordMapper"
+},
+{
+  "name":"org.jooq.RecordMapperProvider"
+},
+{
+  "name":"org.jooq.RecordUnmapper"
+},
+{
+  "name":"org.jooq.RecordUnmapperProvider"
+},
+{
   "name":"org.jooq.RenderContext"
 },
 {
@@ -5220,16 +5370,23 @@
   "name":"org.jooq.Row8"
 },
 {
+  "name":"org.jooq.Row9"
+},
+{
   "name":"org.jooq.RowCountQuery"
 },
 {
   "name":"org.jooq.SQL"
 },
 {
-  "name":"org.jooq.SQLDialect"
+  "name":"org.jooq.SQLDialect",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.jooq.Schema"
+},
+{
+  "name":"org.jooq.SchemaMapping"
 },
 {
   "name":"org.jooq.Scope",
@@ -5301,6 +5458,12 @@
   "name":"org.jooq.TransactionContext"
 },
 {
+  "name":"org.jooq.TransactionListener"
+},
+{
+  "name":"org.jooq.TransactionListenerProvider"
+},
+{
   "name":"org.jooq.TransactionProvider",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
@@ -5324,6 +5487,12 @@
   "name":"org.jooq.UDTRecord"
 },
 {
+  "name":"org.jooq.Unwrapper"
+},
+{
+  "name":"org.jooq.UnwrapperProvider"
+},
+{
   "name":"org.jooq.UpdatableRecord"
 },
 {
@@ -5331,6 +5500,12 @@
 },
 {
   "name":"org.jooq.UpdateSetFirstStep"
+},
+{
+  "name":"org.jooq.VisitListener"
+},
+{
+  "name":"org.jooq.VisitListenerProvider"
 },
 {
   "name":"org.jooq.WithAsStep"
@@ -5411,6 +5586,18 @@
   "name":"org.jooq.exception.DataAccessException"
 },
 {
+  "name":"org.jooq.impl.AbstractConfiguration",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"commercial","parameterTypes":["java.util.function.Supplier"] }, {"name":"derive","parameterTypes":["org.jooq.DiagnosticsListener[]"] }, {"name":"derive","parameterTypes":["org.jooq.ExecuteListener[]"] }, {"name":"derive","parameterTypes":["org.jooq.MigrationListener[]"] }, {"name":"derive","parameterTypes":["org.jooq.RecordListener[]"] }, {"name":"derive","parameterTypes":["org.jooq.TransactionListener[]"] }, {"name":"derive","parameterTypes":["org.jooq.VisitListener[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.DiagnosticsListener[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.DiagnosticsListenerProvider[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.ExecuteListener[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.ExecuteListenerProvider[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.MigrationListener[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.MigrationListenerProvider[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.RecordListener[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.RecordListenerProvider[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.TransactionListener[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.TransactionListenerProvider[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.VisitListener[]"] }, {"name":"deriveAppending","parameterTypes":["org.jooq.VisitListenerProvider[]"] }, {"name":"requireCommercial","parameterTypes":["java.util.function.Supplier"] }, {"name":"set","parameterTypes":["org.jooq.DiagnosticsListener[]"] }, {"name":"set","parameterTypes":["org.jooq.ExecuteListener[]"] }, {"name":"set","parameterTypes":["org.jooq.MigrationListener[]"] }, {"name":"set","parameterTypes":["org.jooq.RecordListener[]"] }, {"name":"set","parameterTypes":["org.jooq.TransactionListener[]"] }, {"name":"set","parameterTypes":["org.jooq.VisitListener[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.DiagnosticsListener[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.DiagnosticsListenerProvider[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.ExecuteListener[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.ExecuteListenerProvider[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.MigrationListener[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.MigrationListenerProvider[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.RecordListener[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.RecordListenerProvider[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.TransactionListener[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.TransactionListenerProvider[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.VisitListener[]"] }, {"name":"setAppending","parameterTypes":["org.jooq.VisitListenerProvider[]"] }]
+},
+{
+  "name":"org.jooq.impl.AbstractQuery"
+},
+{
+  "name":"org.jooq.impl.AbstractResultQuery"
+},
+{
   "name":"org.jooq.impl.AbstractRoutine"
 },
 {
@@ -5432,7 +5619,10 @@
   "methods":[{"name":"acquire","parameterTypes":[] }, {"name":"close","parameterTypes":[] }, {"name":"release","parameterTypes":["java.sql.Connection"] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
-  "name":"org.jooq.impl.DefaultConfiguration"
+  "name":"org.jooq.impl.DefaultConfiguration",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"cacheProvider","parameterTypes":[] }, {"name":"charsetProvider","parameterTypes":[] }, {"name":"clock","parameterTypes":[] }, {"name":"close","parameterTypes":[] }, {"name":"commitProvider","parameterTypes":[] }, {"name":"connectionFactory","parameterTypes":[] }, {"name":"connectionProvider","parameterTypes":[] }, {"name":"converterProvider","parameterTypes":[] }, {"name":"data","parameterTypes":[] }, {"name":"data","parameterTypes":["java.lang.Object"] }, {"name":"data","parameterTypes":["java.lang.Object","java.lang.Object"] }, {"name":"derive","parameterTypes":[] }, {"name":"derive","parameterTypes":["io.r2dbc.spi.ConnectionFactory"] }, {"name":"derive","parameterTypes":["java.sql.Connection"] }, {"name":"derive","parameterTypes":["java.time.Clock"] }, {"name":"derive","parameterTypes":["java.util.concurrent.Executor"] }, {"name":"derive","parameterTypes":["javax.sql.DataSource"] }, {"name":"derive","parameterTypes":["org.jooq.CacheProvider"] }, {"name":"derive","parameterTypes":["org.jooq.CharsetProvider"] }, {"name":"derive","parameterTypes":["org.jooq.CommitProvider"] }, {"name":"derive","parameterTypes":["org.jooq.ConnectionProvider"] }, {"name":"derive","parameterTypes":["org.jooq.ConverterProvider"] }, {"name":"derive","parameterTypes":["org.jooq.ExecutorProvider"] }, {"name":"derive","parameterTypes":["org.jooq.FormattingProvider"] }, {"name":"derive","parameterTypes":["org.jooq.MetaProvider"] }, {"name":"derive","parameterTypes":["org.jooq.RecordMapper"] }, {"name":"derive","parameterTypes":["org.jooq.RecordMapperProvider"] }, {"name":"derive","parameterTypes":["org.jooq.RecordUnmapper"] }, {"name":"derive","parameterTypes":["org.jooq.RecordUnmapperProvider"] }, {"name":"derive","parameterTypes":["org.jooq.SQLDialect"] }, {"name":"derive","parameterTypes":["org.jooq.TransactionProvider"] }, {"name":"derive","parameterTypes":["org.jooq.Unwrapper"] }, {"name":"derive","parameterTypes":["org.jooq.UnwrapperProvider"] }, {"name":"derive","parameterTypes":["org.jooq.conf.Settings"] }, {"name":"derive","parameterTypes":["org.jooq.DiagnosticsListenerProvider[]"] }, {"name":"derive","parameterTypes":["org.jooq.ExecuteListenerProvider[]"] }, {"name":"derive","parameterTypes":["org.jooq.MigrationListenerProvider[]"] }, {"name":"derive","parameterTypes":["org.jooq.RecordListenerProvider[]"] }, {"name":"derive","parameterTypes":["org.jooq.TransactionListenerProvider[]"] }, {"name":"derive","parameterTypes":["org.jooq.VisitListenerProvider[]"] }, {"name":"deriveSettings","parameterTypes":["java.util.function.Function"] }, {"name":"diagnosticsListenerProviders","parameterTypes":[] }, {"name":"dialect","parameterTypes":[] }, {"name":"dsl","parameterTypes":[] }, {"name":"executeListenerProviders","parameterTypes":[] }, {"name":"executorProvider","parameterTypes":[] }, {"name":"family","parameterTypes":[] }, {"name":"formattingProvider","parameterTypes":[] }, {"name":"interpreterConnectionProvider","parameterTypes":[] }, {"name":"metaProvider","parameterTypes":[] }, {"name":"migrationListenerProviders","parameterTypes":[] }, {"name":"recordListenerProviders","parameterTypes":[] }, {"name":"recordMapperProvider","parameterTypes":[] }, {"name":"recordUnmapperProvider","parameterTypes":[] }, {"name":"schemaMapping","parameterTypes":[] }, {"name":"set","parameterTypes":["io.r2dbc.spi.ConnectionFactory"] }, {"name":"set","parameterTypes":["java.sql.Connection"] }, {"name":"set","parameterTypes":["java.time.Clock"] }, {"name":"set","parameterTypes":["java.util.concurrent.Executor"] }, {"name":"set","parameterTypes":["javax.sql.DataSource"] }, {"name":"set","parameterTypes":["org.jooq.CacheProvider"] }, {"name":"set","parameterTypes":["org.jooq.CharsetProvider"] }, {"name":"set","parameterTypes":["org.jooq.CommitProvider"] }, {"name":"set","parameterTypes":["org.jooq.ConnectionProvider"] }, {"name":"set","parameterTypes":["org.jooq.ConverterProvider"] }, {"name":"set","parameterTypes":["org.jooq.ExecutorProvider"] }, {"name":"set","parameterTypes":["org.jooq.FormattingProvider"] }, {"name":"set","parameterTypes":["org.jooq.MetaProvider"] }, {"name":"set","parameterTypes":["org.jooq.RecordMapper"] }, {"name":"set","parameterTypes":["org.jooq.RecordMapperProvider"] }, {"name":"set","parameterTypes":["org.jooq.RecordUnmapper"] }, {"name":"set","parameterTypes":["org.jooq.RecordUnmapperProvider"] }, {"name":"set","parameterTypes":["org.jooq.SQLDialect"] }, {"name":"set","parameterTypes":["org.jooq.TransactionProvider"] }, {"name":"set","parameterTypes":["org.jooq.Unwrapper"] }, {"name":"set","parameterTypes":["org.jooq.UnwrapperProvider"] }, {"name":"set","parameterTypes":["org.jooq.conf.Settings"] }, {"name":"set","parameterTypes":["org.jooq.DiagnosticsListenerProvider[]"] }, {"name":"set","parameterTypes":["org.jooq.ExecuteListenerProvider[]"] }, {"name":"set","parameterTypes":["org.jooq.MigrationListenerProvider[]"] }, {"name":"set","parameterTypes":["org.jooq.RecordListenerProvider[]"] }, {"name":"set","parameterTypes":["org.jooq.TransactionListenerProvider[]"] }, {"name":"set","parameterTypes":["org.jooq.VisitListenerProvider[]"] }, {"name":"settings","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }, {"name":"systemConnectionProvider","parameterTypes":[] }, {"name":"toString","parameterTypes":[] }, {"name":"transactionListenerProviders","parameterTypes":[] }, {"name":"transactionProvider","parameterTypes":[] }, {"name":"unwrapperProvider","parameterTypes":[] }, {"name":"visitListenerProviders","parameterTypes":[] }]
 },
 {
   "name":"org.jooq.impl.DefaultDSLContext",
@@ -5459,10 +5649,19 @@
   "name":"org.jooq.impl.SchemaImpl"
 },
 {
+  "name":"org.jooq.impl.SelectImpl"
+},
+{
   "name":"org.jooq.impl.TableImpl"
 },
 {
   "name":"org.jooq.impl.TableRecordImpl"
+},
+{
+  "name":"org.jooq.impl.Tools"
+},
+{
+  "name":"org.jooq.tools.jdbc.DefaultPreparedStatement"
 },
 {
   "name":"org.jooq.tools.jdbc.MockCallable"
@@ -5551,6 +5750,12 @@
 {
   "name":"org.postgresql.core.QueryExecutorCloseAction",
   "fields":[{"name":"pgStream"}]
+},
+{
+  "name":"org.postgresql.core.v3.QueryExecutorImpl"
+},
+{
+  "name":"org.postgresql.jdbc.PgPreparedStatement"
 },
 {
   "name":"org.postgresql.jdbc.PgStatement",
@@ -6414,7 +6619,11 @@
   "name":"org.springframework.boot.actuate.autoconfigure.audit.AuditAutoConfiguration"
 },
 {
-  "name":"org.springframework.boot.actuate.autoconfigure.audit.AuditEventsEndpointAutoConfiguration"
+  "name":"org.springframework.boot.actuate.autoconfigure.audit.AuditEventsEndpointAutoConfiguration",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.actuate.autoconfigure.availability.AvailabilityHealthContributorAutoConfiguration",
@@ -6429,7 +6638,10 @@
 },
 {
   "name":"org.springframework.boot.actuate.autoconfigure.beans.BeansEndpointAutoConfiguration",
-  "queryAllDeclaredMethods":true
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"beansEndpoint","parameterTypes":["org.springframework.context.ConfigurableApplicationContext"] }]
 },
 {
   "name":"org.springframework.boot.actuate.autoconfigure.cache.CachesEndpointAutoConfiguration",
@@ -7253,7 +7465,13 @@
   "name":"org.springframework.boot.actuate.availability.ReadinessStateHealthIndicator"
 },
 {
-  "name":"org.springframework.boot.actuate.beans.BeansEndpoint"
+  "name":"org.springframework.boot.actuate.beans.BeansEndpoint",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.boot.actuate.beans.BeansEndpoint$BeansDescriptor"
 },
 {
   "name":"org.springframework.boot.actuate.cache.CachesEndpoint"
@@ -7327,6 +7545,14 @@
 },
 {
   "name":"org.springframework.boot.actuate.endpoint.annotation.FilteredEndpoint",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.springframework.boot.actuate.endpoint.annotation.ReadOperation",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.springframework.boot.actuate.endpoint.annotation.WriteOperation",
   "queryAllDeclaredMethods":true
 },
 {
@@ -7813,7 +8039,10 @@
 },
 {
   "name":"org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration",
-  "queryAllDeclaredMethods":true
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"cacheAutoConfigurationValidator","parameterTypes":["org.springframework.boot.autoconfigure.cache.CacheProperties","org.springframework.beans.factory.ObjectProvider"] }, {"name":"cacheManagerCustomizers","parameterTypes":["org.springframework.beans.factory.ObjectProvider"] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration$CacheConfigurationImportSelector",
@@ -7824,17 +8053,65 @@
   "name":"org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration$CacheManagerEntityManagerFactoryDependsOnPostProcessor"
 },
 {
+  "name":"org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration$CacheManagerValidator",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"afterPropertiesSet","parameterTypes":[] }, {"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
+},
+{
   "name":"org.springframework.boot.autoconfigure.cache.CacheCondition",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers"
+  "name":"org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer"
+},
+{
+  "name":"org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.cache.CacheProperties",
+  "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "fields":[{"name":"this$0"}]
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.boot.autoconfigure.cache.CacheProperties$Caffeine",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.boot.autoconfigure.cache.CacheProperties$Couchbase",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.boot.autoconfigure.cache.CacheProperties$Infinispan",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.boot.autoconfigure.cache.CacheProperties$JCache",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.boot.autoconfigure.cache.CacheProperties$Redis",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.cache.CacheType",
@@ -7842,7 +8119,10 @@
 },
 {
   "name":"org.springframework.boot.autoconfigure.cache.CaffeineCacheConfiguration",
-  "queryAllDeclaredMethods":true
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"cacheManager","parameterTypes":["org.springframework.boot.autoconfigure.cache.CacheProperties","org.springframework.boot.autoconfigure.cache.CacheManagerCustomizers","org.springframework.beans.factory.ObjectProvider","org.springframework.beans.factory.ObjectProvider","org.springframework.beans.factory.ObjectProvider"] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.condition.ConditionEvaluationReportAutoConfigurationImportListener",
@@ -8362,21 +8642,28 @@
   "methods":[{"name":"close","parameterTypes":[] }, {"name":"getObjectName","parameterTypes":["java.lang.Object","java.lang.String"] }, {"name":"setApplicationContext","parameterTypes":["org.springframework.context.ApplicationContext"] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
+  "name":"org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer"
+},
+{
   "name":"org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"jooqExceptionTranslatorExecuteListenerProvider","parameterTypes":[] }, {"name":"transactionProvider","parameterTypes":["org.springframework.transaction.PlatformTransactionManager"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"dataSourceConnectionProvider","parameterTypes":["javax.sql.DataSource"] }, {"name":"jooqExceptionTranslatorExecuteListenerProvider","parameterTypes":[] }, {"name":"transactionProvider","parameterTypes":["org.springframework.transaction.PlatformTransactionManager"] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration$DslContextConfiguration",
-  "queryAllDeclaredMethods":true
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"dslContext","parameterTypes":["org.jooq.Configuration"] }, {"name":"jooqConfiguration","parameterTypes":["org.springframework.boot.autoconfigure.jooq.JooqProperties","org.jooq.ConnectionProvider","javax.sql.DataSource","org.springframework.beans.factory.ObjectProvider","org.springframework.beans.factory.ObjectProvider","org.springframework.beans.factory.ObjectProvider"] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.jooq.JooqProperties",
+  "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "fields":[{"name":"this$0"}]
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.jooq.NoDslContextBeanFailureAnalyzer",
@@ -9126,7 +9413,15 @@
   "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
-  "name":"org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController"
+  "name":"org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.web.servlet.error.DefaultErrorViewResolver",
@@ -9139,7 +9434,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["org.springframework.boot.autoconfigure.web.ServerProperties"] }, {"name":"errorAttributes","parameterTypes":[] }, {"name":"errorPageCustomizer","parameterTypes":["org.springframework.boot.autoconfigure.web.servlet.DispatcherServletPath"] }, {"name":"preserveErrorControllerTargetClassPostProcessor","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":["org.springframework.boot.autoconfigure.web.ServerProperties"] }, {"name":"basicErrorController","parameterTypes":["org.springframework.boot.web.servlet.error.ErrorAttributes","org.springframework.beans.factory.ObjectProvider"] }, {"name":"errorAttributes","parameterTypes":[] }, {"name":"errorPageCustomizer","parameterTypes":["org.springframework.boot.autoconfigure.web.servlet.DispatcherServletPath"] }, {"name":"preserveErrorControllerTargetClassPostProcessor","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration$DefaultErrorViewResolverConfiguration",
@@ -13107,7 +13402,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int"] }, {"name":"deathCount","parameterTypes":[] }, {"name":"firstSeen","parameterTypes":[] }, {"name":"joinCount","parameterTypes":[] }, {"name":"killCount","parameterTypes":[] }, {"name":"lastSeen","parameterTypes":[] }, {"name":"leaveCount","parameterTypes":[] }, {"name":"playtimeSeconds","parameterTypes":[] }, {"name":"playtimeSecondsMonth","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int"] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int","int"] }, {"name":"chatsCount","parameterTypes":[] }, {"name":"deathCount","parameterTypes":[] }, {"name":"firstSeen","parameterTypes":[] }, {"name":"joinCount","parameterTypes":[] }, {"name":"killCount","parameterTypes":[] }, {"name":"lastSeen","parameterTypes":[] }, {"name":"leaveCount","parameterTypes":[] }, {"name":"playtimeSeconds","parameterTypes":[] }, {"name":"playtimeSecondsMonth","parameterTypes":[] }]
 },
 {
   "name":"vc.controller.TabList",
@@ -13127,6 +13422,9 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"playerName","parameterTypes":[] }, {"name":"playerUuid","parameterTypes":[] }]
+},
+{
+  "name":"vc.data.dto.Routines"
 },
 {
   "name":"vc.data.dto.enums.Connectiontype",
