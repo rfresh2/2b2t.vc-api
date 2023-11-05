@@ -13016,6 +13016,13 @@
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
 },
 {
+  "name":"vc.controller.PlayerActivityController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.jooq.DSLContext","vc.util.PlayerLookup"] }]
+},
+{
   "name":"vc.controller.PlaytimeController",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -13346,7 +13353,8 @@
   "name":"vc.util.PlayerLookup",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"zipkin2.reporter.Sender"

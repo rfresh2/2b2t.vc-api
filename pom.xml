@@ -225,6 +225,10 @@
 							<invokerPackage>${default.package}.minetools-api.handler</invokerPackage>
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<dateLibrary>java8-instant</dateLibrary>
+								<java11>true</java11>
+							</configOptions>
 							<environmentVariables>
 								<models/>
 							</environmentVariables>
@@ -245,6 +249,10 @@
 							<invokerPackage>${default.package}.mojang-api.handler</invokerPackage>
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<dateLibrary>java8-instant</dateLibrary>
+								<java11>true</java11>
+							</configOptions>
 							<environmentVariables>
 								<models/>
 							</environmentVariables>
@@ -265,6 +273,10 @@
 							<invokerPackage>${default.package}.mojang-sessionserver.handler</invokerPackage>
 							<generateApiTests>false</generateApiTests>
 							<generateModelTests>false</generateModelTests>
+							<configOptions>
+								<dateLibrary>java8-instant</dateLibrary>
+								<java11>true</java11>
+							</configOptions>
 							<environmentVariables>
 								<models/>
 							</environmentVariables>

@@ -4,6 +4,7 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import vc.swagger.mojang_api.handler.ProfileApi;
 import vc.swagger.mojang_api.model.UUIDAndUser;
 
@@ -14,6 +15,7 @@ import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
 
+@Component
 public class PlayerLookup {
     private static final Logger logger = LoggerFactory.getLogger(PlayerLookup.class);
     private final ProfileApi mojangApi = new ProfileApi();

@@ -8,14 +8,14 @@ import org.jooq.Configuration;
 import org.jooq.Field;
 import org.jooq.Result;
 import org.jooq.types.YearToSecond;
-import vc.data.dto.tables.PlaytimeAll;
-import vc.data.dto.tables.PlaytimeAllMonth;
-import vc.data.dto.tables.PlaytimeAllTimeInterval;
-import vc.data.dto.tables.records.PlaytimeAllMonthRecord;
-import vc.data.dto.tables.records.PlaytimeAllRecord;
-import vc.data.dto.tables.records.PlaytimeAllTimeIntervalRecord;
+import vc.data.dto.routines.Playtime;
+import vc.data.dto.routines.PlaytimeMonth;
+import vc.data.dto.routines.PlaytimeTimeInterval;
+import vc.data.dto.tables.*;
+import vc.data.dto.tables.records.*;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 
 /**
@@ -33,6 +33,201 @@ public class Routines {
     ) {
         return configuration.dsl().selectFrom(vc.data.dto.tables.PlaytimeAll.PLAYTIME_ALL.call(
         )).fetch();
+    }
+
+    /**
+     * Call <code>public.playtime_month</code>
+     */
+    public static Integer playtimeMonth(
+        Configuration configuration
+        , UUID pUuid
+    ) {
+        PlaytimeMonth f = new PlaytimeMonth();
+        f.setPUuid(pUuid);
+
+        f.execute(configuration);
+        return f.getReturnValue();
+    }
+
+    /**
+     * Get <code>public.playtime_month</code> as a field.
+     */
+    public static Field<Integer> playtimeMonth(
+        UUID pUuid
+    ) {
+        PlaytimeMonth f = new PlaytimeMonth();
+        f.setPUuid(pUuid);
+
+        return f.asField();
+    }
+
+    /**
+     * Get <code>public.playtime_month</code> as a field.
+     */
+    public static Field<Integer> playtimeMonth(
+        Field<UUID> pUuid
+    ) {
+        PlaytimeMonth f = new PlaytimeMonth();
+        f.setPUuid(pUuid);
+
+        return f.asField();
+    }
+
+    /**
+     * Call <code>public.playtime_time_interval</code>
+     */
+    public static Integer playtimeTimeInterval(
+        Configuration configuration
+        , UUID pUuid
+        , OffsetDateTime endTime
+        , YearToSecond backInterval
+    ) {
+        PlaytimeTimeInterval f = new PlaytimeTimeInterval();
+        f.setPUuid(pUuid);
+        f.setEndTime(endTime);
+        f.setBackInterval(backInterval);
+
+        f.execute(configuration);
+        return f.getReturnValue();
+    }
+
+    /**
+     * Get <code>public.playtime_time_interval</code> as a field.
+     */
+    public static Field<Integer> playtimeTimeInterval(
+        UUID pUuid
+        , OffsetDateTime endTime
+        , YearToSecond backInterval
+    ) {
+        PlaytimeTimeInterval f = new PlaytimeTimeInterval();
+        f.setPUuid(pUuid);
+        f.setEndTime(endTime);
+        f.setBackInterval(backInterval);
+
+        return f.asField();
+    }
+
+    /**
+     * Get <code>public.playtime_time_interval</code> as a field.
+     */
+    public static Field<Integer> playtimeTimeInterval(
+        Field<UUID> pUuid
+        , Field<OffsetDateTime> endTime
+        , Field<YearToSecond> backInterval
+    ) {
+        PlaytimeTimeInterval f = new PlaytimeTimeInterval();
+        f.setPUuid(pUuid);
+        f.setEndTime(endTime);
+        f.setBackInterval(backInterval);
+
+        return f.asField();
+    }
+
+    /**
+     * Call <code>public.playtime</code>
+     */
+    public static Integer playtime(
+        Configuration configuration
+        , UUID pUuid
+    ) {
+        Playtime f = new Playtime();
+        f.setPUuid(pUuid);
+
+        f.execute(configuration);
+        return f.getReturnValue();
+    }
+
+    /**
+     * Get <code>public.playtime</code> as a field.
+     */
+    public static Field<Integer> playtime(
+        UUID pUuid
+    ) {
+        Playtime f = new Playtime();
+        f.setPUuid(pUuid);
+
+        return f.asField();
+    }
+
+    /**
+     * Get <code>public.playtime</code> as a field.
+     */
+    public static Field<Integer> playtime(
+        Field<UUID> pUuid
+    ) {
+        Playtime f = new Playtime();
+        f.setPUuid(pUuid);
+
+        return f.asField();
+    }
+
+    /**
+     * Call <code>public.get_uuid_data</code>.
+     */
+    public static Result<GetUuidDataRecord> getUuidData(
+        Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.get_uuid_data</code> as a table.
+     */
+    public static GetUuidData getUuidData(
+        UUID pUuid
+    ) {
+        return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.get_uuid_data</code> as a table.
+     */
+    public static GetUuidData getUuidData(
+        Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        );
+    }
+
+
+    /**
+     * Call <code>public.player_stats</code>.
+     */
+    public static Result<PlayerStatsRecord> playerStats(
+        Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
+            pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.player_stats</code> as a table.
+     */
+    public static PlayerStats playerStats(
+        UUID pUuid
+    ) {
+        return vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.player_stats</code> as a table.
+     */
+    public static PlayerStats playerStats(
+        Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
+            pUuid
+        );
     }
 
     /**

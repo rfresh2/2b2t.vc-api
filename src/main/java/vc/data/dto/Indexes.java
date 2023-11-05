@@ -21,11 +21,12 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index CHATS_TIME_IDX = Internal.createIndex(DSL.name("chats_time_idx"), Chats.CHATS, new OrderField[] { Chats.CHATS.TIME }, false);
+    public static final Index CHATS_PLAYER_UUID_IDX = Internal.createIndex(DSL.name("chats_player_uuid_idx"), Chats.CHATS, new OrderField[] { Chats.CHATS.PLAYER_UUID }, false);
+    public static final Index CHATS_TIME_IDX = Internal.createIndex(DSL.name("chats_time_idx"), Chats.CHATS, new OrderField[] { Chats.CHATS.TIME.desc() }, false);
     public static final Index CONNECTIONS_PLAYER_UUID_IDX = Internal.createIndex(DSL.name("connections_player_uuid_idx"), Connections.CONNECTIONS, new OrderField[] { Connections.CONNECTIONS.PLAYER_UUID }, false);
-    public static final Index CONNECTIONS_TIME_IDX = Internal.createIndex(DSL.name("connections_time_idx"), Connections.CONNECTIONS, new OrderField[] { Connections.CONNECTIONS.TIME }, false);
-    public static final Index DEATHS_TIME_IDX = Internal.createIndex(DSL.name("deaths_time_idx"), Deaths.DEATHS, new OrderField[] { Deaths.DEATHS.TIME }, false);
-    public static final Index PLAYERCOUNT_TIME_IDX = Internal.createIndex(DSL.name("playercount_time_idx"), Playercount.PLAYERCOUNT, new OrderField[] { Playercount.PLAYERCOUNT.TIME }, false);
-    public static final Index QUEUELENGTH_TIME_IDX = Internal.createIndex(DSL.name("queuelength_time_idx"), Queuelength.QUEUELENGTH, new OrderField[] { Queuelength.QUEUELENGTH.TIME }, false);
-    public static final Index RESTARTS_TIME_IDX = Internal.createIndex(DSL.name("restarts_time_idx"), Restarts.RESTARTS, new OrderField[] { Restarts.RESTARTS.TIME }, false);
+    public static final Index CONNECTIONS_TIME_IDX = Internal.createIndex(DSL.name("connections_time_idx"), Connections.CONNECTIONS, new OrderField[] { Connections.CONNECTIONS.TIME.desc() }, false);
+    public static final Index DEATHS_TIME_IDX = Internal.createIndex(DSL.name("deaths_time_idx"), Deaths.DEATHS, new OrderField[] { Deaths.DEATHS.TIME.desc() }, false);
+    public static final Index PLAYERCOUNT_TIME_IDX = Internal.createIndex(DSL.name("playercount_time_idx"), Playercount.PLAYERCOUNT, new OrderField[] { Playercount.PLAYERCOUNT.TIME.desc() }, false);
+    public static final Index QUEUELENGTH_TIME_IDX = Internal.createIndex(DSL.name("queuelength_time_idx"), Queuelength.QUEUELENGTH, new OrderField[] { Queuelength.QUEUELENGTH.TIME.desc() }, false);
+    public static final Index RESTARTS_TIME_IDX = Internal.createIndex(DSL.name("restarts_time_idx"), Restarts.RESTARTS, new OrderField[] { Restarts.RESTARTS.TIME.desc() }, false);
 }

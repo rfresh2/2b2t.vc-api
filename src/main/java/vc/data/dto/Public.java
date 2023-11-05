@@ -8,13 +8,12 @@ import org.jooq.*;
 import org.jooq.impl.SchemaImpl;
 import org.jooq.types.YearToSecond;
 import vc.data.dto.tables.*;
-import vc.data.dto.tables.records.PlaytimeAllMonthRecord;
-import vc.data.dto.tables.records.PlaytimeAllRecord;
-import vc.data.dto.tables.records.PlaytimeAllTimeIntervalRecord;
+import vc.data.dto.tables.records.*;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -46,6 +45,50 @@ public class Public extends SchemaImpl {
     public final Deaths DEATHS = Deaths.DEATHS;
 
     /**
+     * The table <code>public.get_uuid_data</code>.
+     */
+    public final GetUuidData GET_UUID_DATA = GetUuidData.GET_UUID_DATA;
+
+    /**
+     * Call <code>public.get_uuid_data</code>.
+     */
+    public static Result<GetUuidDataRecord> GET_UUID_DATA(
+        Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.get_uuid_data</code> as a table.
+     */
+    public static GetUuidData GET_UUID_DATA(
+        UUID pUuid
+    ) {
+        return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.get_uuid_data</code> as a table.
+     */
+    public static GetUuidData GET_UUID_DATA(
+        Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        );
+    }
+
+    /**
+     * The table <code>public.max_cons_month_view</code>.
+     */
+    public final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
+
+    /**
      * The table <code>public.names</code>.
      */
     public final Names NAMES = Names.NAMES;
@@ -54,6 +97,45 @@ public class Public extends SchemaImpl {
      * The table <code>public.online_players</code>.
      */
     public final OnlinePlayers ONLINE_PLAYERS = OnlinePlayers.ONLINE_PLAYERS;
+
+    /**
+     * The table <code>public.player_stats</code>.
+     */
+    public final PlayerStats PLAYER_STATS = PlayerStats.PLAYER_STATS;
+
+    /**
+     * Call <code>public.player_stats</code>.
+     */
+    public static Result<PlayerStatsRecord> PLAYER_STATS(
+        Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
+            pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.player_stats</code> as a table.
+     */
+    public static PlayerStats PLAYER_STATS(
+        UUID pUuid
+    ) {
+        return vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.player_stats</code> as a table.
+     */
+    public static PlayerStats PLAYER_STATS(
+        Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
+            pUuid
+        );
+    }
 
     /**
      * The table <code>public.playercount</code>.
@@ -69,7 +151,7 @@ public class Public extends SchemaImpl {
      * Call <code>public.playtime_all</code>.
      */
     public static Result<PlaytimeAllRecord> PLAYTIME_ALL(
-          Configuration configuration
+        Configuration configuration
     ) {
         return configuration.dsl().selectFrom(vc.data.dto.tables.PlaytimeAll.PLAYTIME_ALL.call(
         )).fetch();
@@ -92,7 +174,7 @@ public class Public extends SchemaImpl {
      * Call <code>public.playtime_all_month</code>.
      */
     public static Result<PlaytimeAllMonthRecord> PLAYTIME_ALL_MONTH(
-          Configuration configuration
+        Configuration configuration
     ) {
         return configuration.dsl().selectFrom(vc.data.dto.tables.PlaytimeAllMonth.PLAYTIME_ALL_MONTH.call(
         )).fetch();
@@ -115,12 +197,12 @@ public class Public extends SchemaImpl {
      * Call <code>public.playtime_all_time_interval</code>.
      */
     public static Result<PlaytimeAllTimeIntervalRecord> PLAYTIME_ALL_TIME_INTERVAL(
-          Configuration configuration
+        Configuration configuration
         , OffsetDateTime endT
         , YearToSecond tInterval
     ) {
         return configuration.dsl().selectFrom(vc.data.dto.tables.PlaytimeAllTimeInterval.PLAYTIME_ALL_TIME_INTERVAL.call(
-              endT
+            endT
             , tInterval
         )).fetch();
     }
@@ -129,7 +211,7 @@ public class Public extends SchemaImpl {
      * Get <code>public.playtime_all_time_interval</code> as a table.
      */
     public static PlaytimeAllTimeInterval PLAYTIME_ALL_TIME_INTERVAL(
-          OffsetDateTime endT
+        OffsetDateTime endT
         , YearToSecond tInterval
     ) {
         return vc.data.dto.tables.PlaytimeAllTimeInterval.PLAYTIME_ALL_TIME_INTERVAL.call(
@@ -142,7 +224,7 @@ public class Public extends SchemaImpl {
      * Get <code>public.playtime_all_time_interval</code> as a table.
      */
     public static PlaytimeAllTimeInterval PLAYTIME_ALL_TIME_INTERVAL(
-          Field<OffsetDateTime> endT
+        Field<OffsetDateTime> endT
         , Field<YearToSecond> tInterval
     ) {
         return vc.data.dto.tables.PlaytimeAllTimeInterval.PLAYTIME_ALL_TIME_INTERVAL.call(
@@ -177,11 +259,6 @@ public class Public extends SchemaImpl {
     public final Tablist TABLIST = Tablist.TABLIST;
 
     /**
-     * The table <code>public.max_cons_month_view</code>.
-     */
-    public final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
-
-    /**
      * No further instances allowed
      */
     private Public() {
@@ -200,9 +277,11 @@ public class Public extends SchemaImpl {
             Chats.CHATS,
             Connections.CONNECTIONS,
             Deaths.DEATHS,
+            GetUuidData.GET_UUID_DATA,
             MaxConsMonthView.MAX_CONS_MONTH_VIEW,
             Names.NAMES,
             OnlinePlayers.ONLINE_PLAYERS,
+            PlayerStats.PLAYER_STATS,
             Playercount.PLAYERCOUNT,
             PlaytimeAll.PLAYTIME_ALL,
             PlaytimeAllMonth.PLAYTIME_ALL_MONTH,
@@ -212,6 +291,6 @@ public class Public extends SchemaImpl {
             Queuewait.QUEUEWAIT,
             Restarts.RESTARTS,
             Tablist.TABLIST
-            );
+        );
     }
 }
