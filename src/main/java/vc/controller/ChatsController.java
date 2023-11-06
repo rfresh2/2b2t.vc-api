@@ -16,10 +16,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static vc.data.dto.Tables.CHATS;
+
 @Tags({@Tag(name = "Chats")})
 @RestController
 public class ChatsController {
-
     private final DSLContext dsl;
     private final PlayerLookup playerLookup;
 
@@ -28,10 +29,12 @@ public class ChatsController {
         this.playerLookup = playerLookup;
     }
 
+    public record ChatsResponse(List<Chats> chats, int total, int pageCount) { }
+
     @GetMapping("/chats")
     @RateLimiter(name = "main")
     @Cacheable("chats")
-    public ResponseEntity<List<Chats>> chats(
+    public ResponseEntity<ChatsResponse> chats(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -48,9 +51,14 @@ public class ChatsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
-        List<Chats> chats = dsl.selectFrom(vc.data.dto.tables.Chats.CHATS)
-                .where(vc.data.dto.tables.Chats.CHATS.PLAYER_UUID.eq(resolvedUuid))
-                .orderBy(vc.data.dto.tables.Chats.CHATS.TIME.desc())
+        var baseQuery = dsl.selectFrom(CHATS)
+            .where(CHATS.PLAYER_UUID.eq(resolvedUuid));
+        Long rowCount = dsl.selectCount()
+                .from(baseQuery)
+                .fetchOneInto(Long.class);
+        if (rowCount == null) rowCount = 0L;
+        List<Chats> chats = baseQuery
+                .orderBy(CHATS.TIME.desc())
                 .limit(size)
                 .offset(page == null ? 0 : page * size)
                 .fetch()
@@ -58,7 +66,7 @@ public class ChatsController {
         if (chats.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(chats);
+            return ResponseEntity.ok(new ChatsResponse(chats, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
         }
     }
 }

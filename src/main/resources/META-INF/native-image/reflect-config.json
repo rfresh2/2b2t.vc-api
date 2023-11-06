@@ -3084,7 +3084,8 @@
   "name":"io.swagger.v3.oas.models.media.ArraySchema",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"io.swagger.v3.oas.models.media.ComposedSchema"
@@ -3134,7 +3135,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"get$dynamicAnchor","parameterTypes":[] }, {"name":"get$ref","parameterTypes":[] }, {"name":"get$vocabulary","parameterTypes":[] }, {"name":"getAdditionalProperties","parameterTypes":[] }, {"name":"getAllOf","parameterTypes":[] }, {"name":"getAnyOf","parameterTypes":[] }, {"name":"getDefault","parameterTypes":[] }, {"name":"getDeprecated","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getDiscriminator","parameterTypes":[] }, {"name":"getEnum","parameterTypes":[] }, {"name":"getExample","parameterTypes":[] }, {"name":"getExclusiveMaximum","parameterTypes":[] }, {"name":"getExclusiveMinimum","parameterTypes":[] }, {"name":"getExtensions","parameterTypes":[] }, {"name":"getExternalDocs","parameterTypes":[] }, {"name":"getFormat","parameterTypes":[] }, {"name":"getItems","parameterTypes":[] }, {"name":"getMaxItems","parameterTypes":[] }, {"name":"getMaxLength","parameterTypes":[] }, {"name":"getMaxProperties","parameterTypes":[] }, {"name":"getMaximum","parameterTypes":[] }, {"name":"getMinItems","parameterTypes":[] }, {"name":"getMinLength","parameterTypes":[] }, {"name":"getMinProperties","parameterTypes":[] }, {"name":"getMinimum","parameterTypes":[] }, {"name":"getMultipleOf","parameterTypes":[] }, {"name":"getNot","parameterTypes":[] }, {"name":"getNullable","parameterTypes":[] }, {"name":"getOneOf","parameterTypes":[] }, {"name":"getPattern","parameterTypes":[] }, {"name":"getProperties","parameterTypes":[] }, {"name":"getReadOnly","parameterTypes":[] }, {"name":"getRequired","parameterTypes":[] }, {"name":"getTitle","parameterTypes":[] }, {"name":"getType","parameterTypes":[] }, {"name":"getUniqueItems","parameterTypes":[] }, {"name":"getWriteOnly","parameterTypes":[] }, {"name":"getXml","parameterTypes":[] }, {"name":"setEnum","parameterTypes":["java.util.List"] }, {"name":"setFormat","parameterTypes":["java.lang.String"] }, {"name":"setType","parameterTypes":["java.lang.String"] }]
+  "methods":[{"name":"get$dynamicAnchor","parameterTypes":[] }, {"name":"get$ref","parameterTypes":[] }, {"name":"get$vocabulary","parameterTypes":[] }, {"name":"getAdditionalProperties","parameterTypes":[] }, {"name":"getAllOf","parameterTypes":[] }, {"name":"getAnyOf","parameterTypes":[] }, {"name":"getDefault","parameterTypes":[] }, {"name":"getDeprecated","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getDiscriminator","parameterTypes":[] }, {"name":"getEnum","parameterTypes":[] }, {"name":"getExample","parameterTypes":[] }, {"name":"getExclusiveMaximum","parameterTypes":[] }, {"name":"getExclusiveMinimum","parameterTypes":[] }, {"name":"getExtensions","parameterTypes":[] }, {"name":"getExternalDocs","parameterTypes":[] }, {"name":"getFormat","parameterTypes":[] }, {"name":"getItems","parameterTypes":[] }, {"name":"getMaxItems","parameterTypes":[] }, {"name":"getMaxLength","parameterTypes":[] }, {"name":"getMaxProperties","parameterTypes":[] }, {"name":"getMaximum","parameterTypes":[] }, {"name":"getMinItems","parameterTypes":[] }, {"name":"getMinLength","parameterTypes":[] }, {"name":"getMinProperties","parameterTypes":[] }, {"name":"getMinimum","parameterTypes":[] }, {"name":"getMultipleOf","parameterTypes":[] }, {"name":"getNot","parameterTypes":[] }, {"name":"getNullable","parameterTypes":[] }, {"name":"getOneOf","parameterTypes":[] }, {"name":"getPattern","parameterTypes":[] }, {"name":"getProperties","parameterTypes":[] }, {"name":"getReadOnly","parameterTypes":[] }, {"name":"getRequired","parameterTypes":[] }, {"name":"getTitle","parameterTypes":[] }, {"name":"getType","parameterTypes":[] }, {"name":"getUniqueItems","parameterTypes":[] }, {"name":"getWriteOnly","parameterTypes":[] }, {"name":"getXml","parameterTypes":[] }, {"name":"setEnum","parameterTypes":["java.util.List"] }, {"name":"setFormat","parameterTypes":["java.lang.String"] }, {"name":"setItems","parameterTypes":["io.swagger.v3.oas.models.media.Schema"] }, {"name":"setType","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"io.swagger.v3.oas.models.media.StringSchema",
@@ -3586,6 +3587,9 @@
 {
   "name":"java.lang.Long",
   "fields":[{"name":"TYPE"}]
+},
+{
+  "name":"java.lang.Math"
 },
 {
   "name":"java.lang.Module",
@@ -5407,6 +5411,9 @@
 },
 {
   "name":"org.jooq.SelectForUpdateStep"
+},
+{
+  "name":"org.jooq.SelectJoinStep"
 },
 {
   "name":"org.jooq.SelectLimitPercentStep"
@@ -13264,6 +13271,13 @@
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
 },
 {
+  "name":"vc.controller.ChatsController$ChatsResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"chats","parameterTypes":[] }, {"name":"pageCount","parameterTypes":[] }, {"name":"total","parameterTypes":[] }]
+},
+{
   "name":"vc.controller.ConnectionsController",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -13274,6 +13288,12 @@
   "name":"vc.controller.ConnectionsController$$SpringCGLIB$$0",
   "fields":[{"name":"CGLIB$CALLBACK_FILTER"}, {"name":"CGLIB$FACTORY_DATA"}],
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
+},
+{
+  "name":"vc.controller.ConnectionsController$ConnectionsResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
 },
 {
   "name":"vc.controller.DataDumpController",
@@ -13296,6 +13316,20 @@
   "name":"vc.controller.DeathsController$$SpringCGLIB$$0",
   "fields":[{"name":"CGLIB$CALLBACK_FILTER"}, {"name":"CGLIB$FACTORY_DATA"}],
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
+},
+{
+  "name":"vc.controller.DeathsController$DeathsResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"deaths","parameterTypes":[] }, {"name":"pageCount","parameterTypes":[] }, {"name":"total","parameterTypes":[] }]
+},
+{
+  "name":"vc.controller.DeathsController$KillsResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"kills","parameterTypes":[] }, {"name":"pageCount","parameterTypes":[] }, {"name":"total","parameterTypes":[] }]
 },
 {
   "name":"vc.controller.ErrorHandlerController",

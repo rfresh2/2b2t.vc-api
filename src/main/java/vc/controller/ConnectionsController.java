@@ -30,7 +30,7 @@ public class ConnectionsController {
     @GetMapping("/connections")
     @RateLimiter(name = "main")
     @Cacheable("connections")
-    public ResponseEntity<List<Connections>> connections(
+    public ResponseEntity<ConnectionsResponse> connections(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -47,8 +47,14 @@ public class ConnectionsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
-        List<Connections> connections = dsl.selectFrom(vc.data.dto.tables.Connections.CONNECTIONS)
-                .where(vc.data.dto.tables.Connections.CONNECTIONS.PLAYER_UUID.eq(resolvedUuid))
+        var baseQuery = dsl.selectFrom(vc.data.dto.tables.Connections.CONNECTIONS)
+            .where(vc.data.dto.tables.Connections.CONNECTIONS.PLAYER_UUID.eq(resolvedUuid));
+        Long rowCount = dsl
+            .selectCount()
+            .from(baseQuery)
+            .fetchOneInto(Long.class);
+        if (rowCount == null) rowCount = 0L;
+        List<Connections> connections = baseQuery
                 .orderBy(vc.data.dto.tables.Connections.CONNECTIONS.TIME.desc())
                 .limit(size)
                 .offset(page == null ? 0 : page * size)
@@ -57,7 +63,9 @@ public class ConnectionsController {
         if (connections.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(connections);
+            return ResponseEntity.ok(new ConnectionsResponse(connections, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
         }
     }
+
+    public record ConnectionsResponse(List<Connections> connections, int total, int pageCount) { }
 }

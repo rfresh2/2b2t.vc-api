@@ -11,6 +11,7 @@ import org.jooq.types.YearToSecond;
 import vc.data.dto.routines.Playtime;
 import vc.data.dto.routines.PlaytimeMonth;
 import vc.data.dto.routines.PlaytimeTimeInterval;
+import vc.data.dto.routines.RowEstimator;
 import vc.data.dto.tables.*;
 import vc.data.dto.tables.records.*;
 
@@ -294,5 +295,43 @@ public class Routines {
             endT,
             tInterval
         );
+    }
+
+    /**
+     * Call <code>public.row_estimator</code>
+     */
+    public static Long rowEstimator(
+        Configuration configuration
+        , String query
+    ) {
+        RowEstimator f = new RowEstimator();
+        f.setQuery(query);
+
+        f.execute(configuration);
+        return f.getReturnValue();
+    }
+
+    /**
+     * Get <code>public.row_estimator</code> as a field.
+     */
+    public static Field<Long> rowEstimator(
+        String query
+    ) {
+        RowEstimator f = new RowEstimator();
+        f.setQuery(query);
+
+        return f.asField();
+    }
+
+    /**
+     * Get <code>public.row_estimator</code> as a field.
+     */
+    public static Field<Long> rowEstimator(
+        Field<String> query
+    ) {
+        RowEstimator f = new RowEstimator();
+        f.setQuery(query);
+
+        return f.asField();
     }
 }
