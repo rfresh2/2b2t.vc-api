@@ -5,6 +5,8 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import vc.swagger.minetools_api.handler.UuidApi;
+import vc.swagger.minetools_api.model.UUIDAndPlayerName;
 import vc.swagger.mojang_api.handler.ProfileApi;
 import vc.swagger.mojang_api.model.UUIDAndUser;
 
@@ -18,11 +20,17 @@ import java.util.UUID;
 @Component
 public class PlayerLookup {
     private static final Logger logger = LoggerFactory.getLogger(PlayerLookup.class);
-    private final ProfileApi mojangApi = new ProfileApi();
+    private final ProfileApi mojangApi;
+    private final UuidApi mineToolsApi;
     private final Cache<String, PlayerIdentity> uuidCache = Caffeine.newBuilder()
         .expireAfterWrite(Duration.ofMinutes(10))
         .maximumSize(250)
         .build();
+
+    public PlayerLookup(final ProfileApi mojangApi, final UuidApi mineToolsApi) {
+        this.mojangApi = mojangApi;
+        this.mineToolsApi = mineToolsApi;
+    }
 
     public record PlayerIdentity(UUID uuid, String playerName) { }
 
@@ -30,8 +38,33 @@ public class PlayerLookup {
         final PlayerIdentity identityFromCache = uuidCache.getIfPresent(playerName);
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
+
+        Optional<PlayerIdentity> playerIdentity = lookupIdentityMojang(playerName).or(() -> lookupIdentityMinetools(playerName));
+        playerIdentity.ifPresent(identity -> uuidCache.put(playerName, identity));
+        return playerIdentity;
+    }
+
+    private Optional<PlayerIdentity> lookupIdentityMojang(final String playerName) {
         try {
             UUIDAndUser uuidAndUsername = mojangApi.getProfileFromUsername(playerName);
+            if (uuidAndUsername == null) return Optional.empty();
+            final PlayerIdentity playerIdentity = new PlayerIdentity(
+                UUID.fromString(uuidAndUsername
+                                    .getId()
+                                    .replaceFirst(
+                                        "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)",
+                                        "$1-$2-$3-$4-$5")
+                ), uuidAndUsername.getName());
+            return Optional.of(playerIdentity);
+        } catch (final Exception e) {
+            logger.error("Error while looking up player identity using Mojang API", e);
+            return Optional.empty();
+        }
+    }
+
+    private Optional<PlayerIdentity> lookupIdentityMinetools(final String playerName) {
+        try {
+            UUIDAndPlayerName uuidAndUsername = mineToolsApi.getUUIDAndPlayerName(playerName);
             if (uuidAndUsername == null) return Optional.empty();
             final PlayerIdentity playerIdentity = new PlayerIdentity(
                 UUID.fromString(uuidAndUsername
@@ -43,7 +76,7 @@ public class PlayerLookup {
             uuidCache.put(playerName, playerIdentity);
             return Optional.of(playerIdentity);
         } catch (final Exception e) {
-            logger.error("Error while looking up player identity", e);
+            logger.error("Error while looking up player identity using Minetools API", e);
             return Optional.empty();
         }
     }
