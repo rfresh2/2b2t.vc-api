@@ -35,12 +35,12 @@ public class PlayerLookup {
     public record PlayerIdentity(UUID uuid, String playerName) { }
 
     public Optional<PlayerIdentity> getPlayerIdentity(final String playerName) {
-        final PlayerIdentity identityFromCache = uuidCache.getIfPresent(playerName);
+        final PlayerIdentity identityFromCache = uuidCache.getIfPresent(playerName.toLowerCase().trim());
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
 
         Optional<PlayerIdentity> playerIdentity = lookupIdentityMojang(playerName).or(() -> lookupIdentityMinetools(playerName));
-        playerIdentity.ifPresent(identity -> uuidCache.put(playerName, identity));
+        playerIdentity.ifPresent(identity -> uuidCache.put(playerName.toLowerCase().trim(), identity));
         return playerIdentity;
     }
 
