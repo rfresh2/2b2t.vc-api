@@ -35,6 +35,8 @@
   }, {
     "pattern":"\\QMETA-INF/resources/restarts\\E"
   }, {
+    "pattern":"\\QMETA-INF/resources/stats\\E"
+  }, {
     "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/index.css\\E"
   }, {
     "pattern":"\\QMETA-INF/resources/webjars/swagger-ui/4.18.2/index.html\\E"
@@ -146,6 +148,8 @@
     "pattern":"\\Qbanner.txt\\E"
   }, {
     "pattern":"\\Qcom/fasterxml/jackson/core/ObjectCodec.class\\E"
+  }, {
+    "pattern":"\\Qcom/fasterxml/jackson/core/TreeCodec.class\\E"
   }, {
     "pattern":"\\Qcom/fasterxml/jackson/databind/JsonDeserializer.class\\E"
   }, {
@@ -443,6 +447,10 @@
   }, {
     "pattern":"\\Qio/github/resilience4j/timelimiter/internal/InMemoryTimeLimiterRegistry.class\\E"
   }, {
+    "pattern":"\\Qio/micrometer/core/annotation/Counted.class\\E"
+  }, {
+    "pattern":"\\Qio/micrometer/core/annotation/Timed.class\\E"
+  }, {
     "pattern":"\\Qio/micrometer/core/instrument/Clock$1.class\\E"
   }, {
     "pattern":"\\Qio/micrometer/core/instrument/MeterRegistry.class\\E"
@@ -489,6 +497,8 @@
   }, {
     "pattern":"\\Qio/micrometer/observation/SimpleObservationRegistry.class\\E"
   }, {
+    "pattern":"\\Qio/micrometer/observation/annotation/Observed.class\\E"
+  }, {
     "pattern":"\\Qio/swagger/v3/core/converter/ModelConverter.class\\E"
   }, {
     "pattern":"\\Qio/swagger/v3/core/filter/SpecFilter.class\\E"
@@ -508,6 +518,8 @@
     "pattern":"\\Qjava/lang/Iterable.class\\E"
   }, {
     "pattern":"\\Qjava/lang/Object.class\\E"
+  }, {
+    "pattern":"\\Qjava/util/function/BiPredicate.class\\E"
   }, {
     "pattern":"\\Qjavax/sql/CommonDataSource.class\\E"
   }, {
@@ -813,6 +825,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x00000209af671a40.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x00000219536518b0.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000002232363abe8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x0000022781614aa8.class\\E"
@@ -880,6 +894,8 @@
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x0000020701596c00.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x00000209af5fce30.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x00000219535d58e8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x00000223235aaf08.class\\E"
   }, {
@@ -1011,6 +1027,10 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/metrics/MeterRegistryPostProcessor.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/metrics/MetricsAspectsAutoConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/metrics/MetricsAutoConfiguration$MeterRegistryCloser.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/metrics/MetricsAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/metrics/MetricsEndpointAutoConfiguration.class\\E"
@@ -1075,6 +1095,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration$MetricsWithTracingConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration$ObservedAspectConfiguration.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration$OnlyMetricsConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/ObservationAutoConfiguration$OnlyTracingConfiguration.class\\E"
@@ -1087,9 +1109,13 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/ObservationRegistryPostProcessor.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/PropertiesObservationFilterPredicate.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/web/client/HttpClientObservationsAutoConfiguration$MeterFilterConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/web/client/HttpClientObservationsAutoConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/web/client/RestClientObservationConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/observation/web/client/RestTemplateObservationConfiguration.class\\E"
   }, {
@@ -1102,6 +1128,10 @@
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/r2dbc/ConnectionFactoryHealthContributorAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/scheduling/ScheduledTasksEndpointAutoConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/scheduling/ScheduledTasksObservabilityAutoConfiguration$ObservabilitySchedulingConfigurer.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/scheduling/ScheduledTasksObservabilityAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/security/servlet/ManagementWebSecurityAutoConfiguration.class\\E"
   }, {
@@ -1179,6 +1209,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x00000209af66e820.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x000002195364c000.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x0000022323634218.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x0000022781601e00.class\\E"
@@ -1252,6 +1284,8 @@
     "pattern":"\\Qorg/springframework/boot/actuate/metrics/startup/StartupTimeMetricsListener.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/metrics/system/DiskSpaceMetricsBinder.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/metrics/web/client/ObservationRestClientCustomizer.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/metrics/web/client/ObservationRestTemplateCustomizer.class\\E"
   }, {
@@ -1399,6 +1433,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/DataSourceAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/DataSourceCheckpointRestoreConfiguration.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Dbcp2.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/DataSourceConfiguration$Generic.class\\E"
@@ -1420,6 +1456,8 @@
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/DataSourceTransactionManagerAutoConfiguration$JdbcTransactionManagerConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/DataSourceTransactionManagerAutoConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/JdbcClientAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/JdbcProperties.class\\E"
   }, {
@@ -1456,6 +1494,8 @@
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x0000020701606830.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x00000209af66e608.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x0000021953643ae8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x0000022323634000.class\\E"
   }, {
@@ -1525,6 +1565,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/sql/init/SqlInitializationProperties.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/ssl/FileWatcher.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/ssl/SslAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/ssl/SslProperties.class\\E"
@@ -1535,9 +1577,27 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskExecutionProperties.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskExecutorConfigurations$SimpleAsyncTaskExecutorBuilderConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskExecutorConfigurations$TaskExecutorBuilderConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskExecutorConfigurations$TaskExecutorConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskExecutorConfigurations$ThreadPoolTaskExecutorBuilderConfiguration.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskSchedulingAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskSchedulingConfigurations$SimpleAsyncTaskSchedulerBuilderConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskSchedulingConfigurations$TaskSchedulerBuilderConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskSchedulingConfigurations$TaskSchedulerConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskSchedulingConfigurations$ThreadPoolTaskSchedulerBuilderConfiguration.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/task/TaskSchedulingProperties.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/ExecutionListenersTransactionManagerCustomizer.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionAutoConfiguration$AspectJTransactionManagementConfiguration.class\\E"
   }, {
@@ -1551,6 +1611,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionManagerCustomizationAutoConfiguration.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionManagerCustomizers.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/transaction/TransactionProperties.class\\E"
@@ -1562,6 +1624,18 @@
     "pattern":"\\Qorg/springframework/boot/autoconfigure/web/ServerProperties.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/web/WebProperties.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/AutoConfiguredRestClientSsl.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/HttpMessageConvertersRestClientCustomizer.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/NotReactiveWebApplicationCondition$ReactiveWebApplication.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/NotReactiveWebApplicationCondition.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/RestClientAutoConfiguration.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/RestClientBuilderConfigurer.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/web/client/RestTemplateAutoConfiguration$NotReactiveWebApplicationCondition$ReactiveWebApplication.class\\E"
   }, {
@@ -1735,6 +1809,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x00000209af68fc40.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x0000021953669520.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x00000223236521b8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x0000022781628438.class\\E"
@@ -1787,9 +1863,17 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/ssl/DefaultSslBundleRegistry.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/task/SimpleAsyncTaskExecutorBuilder.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/task/SimpleAsyncTaskSchedulerBuilder.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/task/TaskExecutorBuilder.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/task/TaskSchedulerBuilder.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/task/ThreadPoolTaskExecutorBuilder.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/task/ThreadPoolTaskSchedulerBuilder.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x0000017e2c56ad20.class\\E"
   }, {
@@ -1812,6 +1896,8 @@
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x000002070156ef18.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x00000209af5d1f38.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x00000219535a32a8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x0000022323586d20.class\\E"
   }, {
@@ -1883,6 +1969,8 @@
   }, {
     "pattern":"\\Qorg/springframework/context/ResourceLoaderAware.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/context/SmartLifecycle.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/context/annotation/AdviceModeImportSelector.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/context/annotation/AspectJAutoProxyRegistrar.class\\E"
@@ -1917,6 +2005,8 @@
   }, {
     "pattern":"\\Qorg/springframework/context/support/DefaultLifecycleProcessor.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/core/DefaultParameterNameDiscoverer.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/core/Ordered.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/core/ParameterizedTypeReference.class\\E"
@@ -1926,6 +2016,8 @@
     "pattern":"\\Qorg/springframework/core/StandardReflectionParameterNameDiscoverer.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/core/annotation/Order.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/core/convert/ConversionService.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/core/convert/support/GenericConversionService.class\\E"
   }, {
@@ -1961,6 +2053,10 @@
   }, {
     "pattern":"\\Qorg/springframework/jdbc/core/namedparam/NamedParameterJdbcTemplate.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/jdbc/core/simple/DefaultJdbcClient.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/jdbc/core/simple/JdbcClient.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/jdbc/datasource/DataSourceTransactionManager.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/jdbc/support/JdbcAccessor.class\\E"
@@ -1982,6 +2078,8 @@
     "pattern":"\\Qorg/springframework/scheduling/concurrent/ExecutorConfigurationSupport.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/transaction/ConfigurableTransactionManager.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/transaction/TransactionDefinition.class\\E"
   }, {
@@ -2010,6 +2108,8 @@
     "pattern":"\\Qorg/springframework/util/CustomizableThreadCreator.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/validation/SmartValidator.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/validation/Validator.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/web/accept/ContentNegotiationManager.class\\E"
   }, {
@@ -2153,6 +2253,8 @@
   }, {
     "pattern":"\\Qpublic/restarts\\E"
   }, {
+    "pattern":"\\Qpublic/stats\\E"
+  }, {
     "pattern":"\\Qresources/bot\\E"
   }, {
     "pattern":"\\Qresources/bots/chats\\E"
@@ -2180,6 +2282,8 @@
     "pattern":"\\Qresources/playtime/top/swagger-ui.css\\E"
   }, {
     "pattern":"\\Qresources/restarts\\E"
+  }, {
+    "pattern":"\\Qresources/stats\\E"
   }, {
     "pattern":"\\Qschema-all.sql\\E"
   }, {
@@ -2216,6 +2320,8 @@
     "pattern":"\\Qstatic/playtime/top/swagger-ui.css\\E"
   }, {
     "pattern":"\\Qstatic/restarts\\E"
+  }, {
+    "pattern":"\\Qstatic/stats\\E"
   }, {
     "pattern":"\\Qvc$Application.class\\E"
   }, {
@@ -2284,6 +2390,8 @@
     "pattern":"java.base:\\Qjava/lang/Iterable.class\\E"
   }, {
     "pattern":"java.base:\\Qjava/lang/Object.class\\E"
+  }, {
+    "pattern":"java.base:\\Qjava/util/function/BiPredicate.class\\E"
   }, {
     "pattern":"java.base:\\Qjdk/internal/icu/impl/data/icudt72b/nfkc.nrm\\E"
   }, {
