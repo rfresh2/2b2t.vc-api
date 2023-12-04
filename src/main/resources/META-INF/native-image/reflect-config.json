@@ -3720,6 +3720,10 @@
   "name":"java.lang.Thread$State"
 },
 {
+  "name":"java.lang.ThreadBuilders$VirtualThreadBuilder",
+  "methods":[{"name":"factory","parameterTypes":[] }]
+},
+{
   "name":"java.lang.ThreadGroup"
 },
 {
@@ -4179,6 +4183,10 @@
 },
 {
   "name":"java.util.concurrent.ExecutorService"
+},
+{
+  "name":"java.util.concurrent.Executors",
+  "methods":[{"name":"newVirtualThreadPerTaskExecutor","parameterTypes":[] }]
 },
 {
   "name":"java.util.concurrent.ForkJoinTask",

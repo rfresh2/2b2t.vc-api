@@ -321,7 +321,6 @@
 <!--								<arg>&#45;&#45;libc=musl</arg>-->
 								<arg>-march=x86-64-v3</arg>
 								<arg>-R:MaxHeapSize=50m</arg>
-								<arg>--diagnostics-mode</arg>
 							</buildArgs>
 						</configuration>
 					</plugin>
