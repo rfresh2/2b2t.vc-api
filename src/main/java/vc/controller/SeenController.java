@@ -4,15 +4,14 @@ import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
+import org.jooq.impl.DSL;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 import vc.data.dto.tables.Connections;
-import vc.data.dto.tables.records.ConnectionsRecord;
 import vc.util.PlayerLookup;
 
 import java.time.OffsetDateTime;
@@ -46,54 +45,18 @@ public class SeenController {
         }
         final UUID resolvedUuid = optionalPlayerUUID.get();
         Connections c = Connections.CONNECTIONS;
-        ConnectionsRecord connectionsRecord = dsl.selectFrom(c)
+        var connectionsRecord = dsl.select(
+                DSL.min(c.TIME).as("firstSeen"),
+                DSL.max(c.TIME).as("lastSeen"))
+                .from(c)
                 .where(c.PLAYER_UUID.eq(resolvedUuid))
-                .orderBy(c.TIME.desc())
-                .limit(1)
                 .fetchOne();
         if (connectionsRecord != null) {
-            return new ResponseEntity<>(new SeenResponse(connectionsRecord.get(c.TIME)), HttpStatus.OK);
+            return new ResponseEntity<>(new SeenResponse(connectionsRecord.value1(), connectionsRecord.value2()), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-    }
-
-    public static class SeenResponse {
-        private final OffsetDateTime time;
-
-        public SeenResponse(final OffsetDateTime time) {
-            this.time = time;
-        }
-
-        public OffsetDateTime getTime() {
-            return time;
-        }
-    }
-
-    @GetMapping("/firstSeen")
-    @RateLimiter(name = "main")
-    @Cacheable("firstSeen")
-    public ResponseEntity<SeenResponse> firstSeen(
-            @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "playerName", required = false) String playerName) {
-        if (uuid == null && playerName == null) {
-            return ResponseEntity.badRequest().build();
-        }
-        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, playerName);
-        if (optionalPlayerUUID.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        final UUID resolvedUuid = optionalPlayerUUID.get();
-        Connections c = Connections.CONNECTIONS;
-        ConnectionsRecord connectionsRecord = dsl.selectFrom(c)
-                .where(c.PLAYER_UUID.eq(resolvedUuid))
-                .orderBy(c.TIME.asc())
-                .limit(1)
-                .fetchOne();
-        if (connectionsRecord != null) {
-            return new ResponseEntity<>(new SeenResponse(connectionsRecord.get(c.TIME)), HttpStatus.OK);
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Player not found");
-        }
     }
+
+    public record SeenResponse(OffsetDateTime firstSeen, OffsetDateTime lastSeen) { }
 }
