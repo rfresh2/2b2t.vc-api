@@ -13724,6 +13724,13 @@
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
 },
 {
+  "name":"vc.controller.ChatsController$Chat",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.time.OffsetDateTime","java.lang.String"] }, {"name":"chat","parameterTypes":[] }, {"name":"time","parameterTypes":[] }]
+},
+{
   "name":"vc.controller.ChatsController$ChatsResponse",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -13741,6 +13748,13 @@
   "name":"vc.controller.ConnectionsController$$SpringCGLIB$$0",
   "fields":[{"name":"CGLIB$CALLBACK_FILTER"}, {"name":"CGLIB$FACTORY_DATA"}],
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
+},
+{
+  "name":"vc.controller.ConnectionsController$Connection",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.time.OffsetDateTime","vc.data.dto.enums.Connectiontype"] }, {"name":"connection","parameterTypes":[] }, {"name":"time","parameterTypes":[] }]
 },
 {
   "name":"vc.controller.ConnectionsController$ConnectionsResponse",
