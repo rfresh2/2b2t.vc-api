@@ -57,10 +57,11 @@ public class ChatsController {
                 .from(baseQuery)
                 .fetchOneInto(Long.class);
         if (rowCount == null) rowCount = 0L;
+        var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         List<Chats> chats = baseQuery
                 .orderBy(CHATS.TIME.desc())
                 .limit(size)
-                .offset(page == null ? 0 : page * size)
+                .offset(offset)
                 .fetch()
                 .into(Chats.class);
         if (chats.isEmpty()) {

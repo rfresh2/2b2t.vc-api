@@ -54,10 +54,11 @@ public class ConnectionsController {
             .from(baseQuery)
             .fetchOneInto(Long.class);
         if (rowCount == null) rowCount = 0L;
+        var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         List<Connections> connections = baseQuery
                 .orderBy(vc.data.dto.tables.Connections.CONNECTIONS.TIME.desc())
                 .limit(size)
-                .offset(page == null ? 0 : page * size)
+                .offset(offset)
                 .fetch()
                 .into(Connections.class);
         if (connections.isEmpty()) {
