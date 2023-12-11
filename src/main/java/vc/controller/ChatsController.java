@@ -9,9 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.pojos.Chats;
 import vc.util.PlayerLookup;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +29,8 @@ public class ChatsController {
         this.playerLookup = playerLookup;
     }
 
-    public record ChatsResponse(List<Chats> chats, int total, int pageCount) { }
+    public record ChatsResponse(List<Chat> chats, int total, int pageCount) { }
+    public record Chat(OffsetDateTime time, String chat) {}
 
     @GetMapping("/chats")
     @RateLimiter(name = "main")
@@ -51,19 +52,20 @@ public class ChatsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.selectFrom(CHATS)
+        var baseQuery = dsl.select(CHATS.TIME, CHATS.CHAT)
+            .from(CHATS)
             .where(CHATS.PLAYER_UUID.eq(resolvedUuid));
         Long rowCount = dsl.selectCount()
                 .from(baseQuery)
                 .fetchOneInto(Long.class);
         if (rowCount == null) rowCount = 0L;
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        List<Chats> chats = baseQuery
+        List<Chat> chats = baseQuery
                 .orderBy(CHATS.TIME.desc())
                 .limit(size)
                 .offset(offset)
                 .fetch()
-                .into(Chats.class);
+                .into(Chat.class);
         if (chats.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {

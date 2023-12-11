@@ -9,12 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.pojos.Connections;
+import vc.data.dto.enums.Connectiontype;
 import vc.util.PlayerLookup;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static vc.data.dto.tables.Connections.CONNECTIONS;
 
 @Tags({@Tag(name = "Connections")})
 @RestController
@@ -26,6 +29,9 @@ public class ConnectionsController {
         this.dsl = dsl;
         this.playerLookup = playerLookup;
     }
+
+    public record ConnectionsResponse(List<Connection> connections, int total, int pageCount) { }
+    public record Connection(OffsetDateTime time, Connectiontype connection) {}
 
     @GetMapping("/connections")
     @RateLimiter(name = "main")
@@ -47,26 +53,25 @@ public class ConnectionsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.selectFrom(vc.data.dto.tables.Connections.CONNECTIONS)
-            .where(vc.data.dto.tables.Connections.CONNECTIONS.PLAYER_UUID.eq(resolvedUuid));
+        var baseQuery = dsl.select(CONNECTIONS.TIME, CONNECTIONS.CONNECTION)
+            .from(CONNECTIONS)
+            .where(CONNECTIONS.PLAYER_UUID.eq(resolvedUuid));
         Long rowCount = dsl
             .selectCount()
             .from(baseQuery)
             .fetchOneInto(Long.class);
         if (rowCount == null) rowCount = 0L;
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        List<Connections> connections = baseQuery
-                .orderBy(vc.data.dto.tables.Connections.CONNECTIONS.TIME.desc())
+        List<Connection> connections = baseQuery
+                .orderBy(CONNECTIONS.TIME.desc())
                 .limit(size)
                 .offset(offset)
                 .fetch()
-                .into(Connections.class);
+                .into(Connection.class);
         if (connections.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new ConnectionsResponse(connections, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
         }
     }
-
-    public record ConnectionsResponse(List<Connections> connections, int total, int pageCount) { }
 }
