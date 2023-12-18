@@ -20,6 +20,7 @@
 		<default.package>vc.swagger</default.package>
 		<jackson-version>2.9.10</jackson-version>
 		<jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
+		<apiTests>false</apiTests>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -154,6 +155,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.3</version>
+				<configuration>
+					<systemProperties>
+						<apiTests>${apiTests}</apiTests>
+					</systemProperties>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -326,6 +332,12 @@
 					</plugin>
 				</plugins>
 			</build>
+		</profile>
+		<profile>
+			<id>apiTest</id>
+			<properties>
+				<apiTests>true</apiTests>
+			</properties>
 		</profile>
 	</profiles>
 </project>
