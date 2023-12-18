@@ -21,6 +21,7 @@
 		<jackson-version>2.9.10</jackson-version>
 		<jackson-threetenbp-version>2.6.4</jackson-threetenbp-version>
 		<apiTests>false</apiTests>
+		<agentArgs/>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -159,6 +160,7 @@
 					<systemProperties>
 						<apiTests>${apiTests}</apiTests>
 					</systemProperties>
+					<argLine>${agentArgs}</argLine>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -337,6 +339,12 @@
 			<id>apiTest</id>
 			<properties>
 				<apiTests>true</apiTests>
+			</properties>
+		</profile>
+		<profile>
+			<id>graalvm-agent</id>
+			<properties>
+				<agentArgs>-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image</agentArgs>
 			</properties>
 		</profile>
 	</profiles>
