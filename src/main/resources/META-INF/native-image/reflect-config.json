@@ -4336,6 +4336,9 @@
   "name":"java.util.Date"
 },
 {
+  "name":"java.util.EnumMap"
+},
+{
   "name":"java.util.EnumSet"
 },
 {
@@ -5187,7 +5190,7 @@
 },
 {
   "name":"org.apache.coyote.AbstractProtocol",
-  "methods":[{"name":"getAddress","parameterTypes":[] }, {"name":"getLocalPort","parameterTypes":[] }, {"name":"getNameIndex","parameterTypes":[] }, {"name":"setPort","parameterTypes":["int"] }, {"name":"setProperty","parameterTypes":["java.lang.String","java.lang.String"] }]
+  "methods":[{"name":"getAddress","parameterTypes":[] }, {"name":"getLocalPort","parameterTypes":[] }, {"name":"getNameIndex","parameterTypes":[] }, {"name":"getProperty","parameterTypes":["java.lang.String"] }, {"name":"setPort","parameterTypes":["int"] }, {"name":"setProperty","parameterTypes":["java.lang.String","java.lang.String"] }]
 },
 {
   "name":"org.apache.coyote.AbstractProtocol$ConnectionHandler"
@@ -6317,6 +6320,9 @@
   "name":"org.jooq.util.yugabytedb.YugabyteDBDataType"
 },
 {
+  "name":"org.junit.AssumptionViolatedException"
+},
+{
   "name":"org.junit.internal.AssumptionViolatedException"
 },
 {
@@ -6450,6 +6456,9 @@
 },
 {
   "name":"org.openqa.selenium.WebDriver"
+},
+{
+  "name":"org.opentest4j.TestAbortedException"
 },
 {
   "name":"org.postgresql.Driver",
@@ -8475,6 +8484,7 @@
 },
 {
   "name":"org.springframework.boot.actuate.endpoint.web.servlet.AbstractWebMvcEndpointHandlerMapping$LinksHandler",
+  "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
 },
 {
@@ -13970,6 +13980,9 @@
 },
 {
   "name":"org.springframework.ws.transport.http.MessageDispatcherServlet"
+},
+{
+  "name":"org.testng.SkipException"
 },
 {
   "name":"org.threeten.bp.DateTimeException"
