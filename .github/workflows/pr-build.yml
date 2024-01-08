@@ -1,4 +1,4 @@
-name: 2b-api PR Build
+name: 2b2t.vc-api PR Build
 
 on:
   pull_request:
@@ -19,5 +19,5 @@ jobs:
       - name: Elevate wrapper permissions
         run: chmod +x ./mvnw
 
-      - name: Build 2b-api
+      - name: Build 2b2t.vc-api
         run: ./mvnw install

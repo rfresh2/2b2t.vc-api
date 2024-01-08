@@ -1,4 +1,4 @@
-# 2b-api
+# 2b2t.vc-api
 A 2b2t data and statistics API.
 
 Try it out at: [api.2b2t.vc](https://api.2b2t.vc/)

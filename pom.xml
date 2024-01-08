@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>vc</groupId>
-	<artifactId>2b-api</artifactId>
+	<artifactId>2b2t.vc-api</artifactId>
 	<version>1.0</version>
-	<name>2b-api</name>
+	<name>2b2t.vc-api</name>
 	<description>2b2t data and stats API</description>
 	<properties>
 		<java.version>21</java.version>

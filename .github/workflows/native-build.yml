@@ -32,13 +32,13 @@ jobs:
         run: ./mvnw -Pnative package
 
       - name: Compress Native Binary
-        run: zip -j 2b-api.zip target/2b-api
+        run: zip -j 2b2t.vc-api.zip target/2b2t.vc-api
 
       - name: Upload Binary
         uses: actions/upload-artifact@v3
         with:
-          name: 2b-api
-          path: 2b-api.zip
+          name: 2b2t.vc-api
+          path: 2b2t.vc-api.zip
 
       - name: Release Artifact
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -48,4 +48,4 @@ jobs:
           automatic_release_tag: "latest"
           title: "Latest Release"
           files: |
-            2b-api.zip
+            2b2t.vc-api.zip
