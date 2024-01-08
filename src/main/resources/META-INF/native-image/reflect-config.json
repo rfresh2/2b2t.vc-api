@@ -219,6 +219,10 @@
   "queryAllDeclaredMethods":true
 },
 {
+  "name":"com.fasterxml.jackson.annotation.JsonInclude",
+  "queryAllDeclaredMethods":true
+},
+{
   "name":"com.fasterxml.jackson.annotation.JsonInclude$Include",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -226,13 +230,22 @@
   "name":"com.fasterxml.jackson.annotation.JsonInclude$Value"
 },
 {
-  "name":"com.fasterxml.jackson.annotation.JsonProperty"
+  "name":"com.fasterxml.jackson.annotation.JsonProperty",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"com.fasterxml.jackson.annotation.JsonPropertyOrder",
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"com.fasterxml.jackson.annotation.JsonSetter$Value"
 },
 {
   "name":"com.fasterxml.jackson.annotation.JsonTypeInfo$As"
+},
+{
+  "name":"com.fasterxml.jackson.annotation.JsonTypeName",
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"com.fasterxml.jackson.annotation.JsonValue",
@@ -754,6 +767,10 @@
 },
 {
   "name":"com.sun.crypto.provider.HmacCore$HmacSHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.crypto.provider.HmacCore$HmacSHA384",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
@@ -4310,6 +4327,9 @@
   "name":"java.time.OffsetDateTime"
 },
 {
+  "name":"java.time.format.DateTimeFormatter"
+},
+{
   "name":"java.time.temporal.TemporalAmount"
 },
 {
@@ -4546,6 +4566,14 @@
   "name":"javax.annotation.ManagedBean"
 },
 {
+  "name":"javax.annotation.Nonnull",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"javax.annotation.Nullable",
+  "queryAllDeclaredMethods":true
+},
+{
   "name":"javax.annotation.PostConstruct"
 },
 {
@@ -4553,6 +4581,14 @@
 },
 {
   "name":"javax.annotation.Resource"
+},
+{
+  "name":"javax.annotation.meta.TypeQualifier",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"javax.annotation.meta.TypeQualifierDefault",
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"javax.cache$Cache"
@@ -14733,137 +14769,173 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"vc.swagger.minetools_api.handler.ApiClient",
+  "name":"vc.openapi.minetools_api.handler.ApiClient",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.springframework.web.client.RestTemplate"] }]
 },
 {
-  "name":"vc.swagger.minetools_api.handler.ApiClient$CollectionFormat"
+  "name":"vc.openapi.minetools_api.handler.ApiClient$CollectionFormat"
 },
 {
-  "name":"vc.swagger.minetools_api.handler.UuidApi",
+  "name":"vc.openapi.minetools_api.handler.JavaTimeFormatter",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"formatOffsetDateTime","parameterTypes":["java.time.OffsetDateTime"] }, {"name":"getOffsetDateTimeFormatter","parameterTypes":[] }, {"name":"parseOffsetDateTime","parameterTypes":["java.lang.String"] }, {"name":"setOffsetDateTimeFormatter","parameterTypes":["java.time.format.DateTimeFormatter"] }]
+},
+{
+  "name":"vc.openapi.minetools_api.handler.UuidApi",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.swagger.minetools_api.handler.ApiClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.openapi.minetools_api.handler.ApiClient"] }]
 },
 {
-  "name":"vc.swagger.minetools_api.handler.auth.Authentication"
+  "name":"vc.openapi.minetools_api.handler.auth.Authentication"
 },
 {
-  "name":"vc.swagger.minetools_api.model.UUIDAndPlayerName",
+  "name":"vc.openapi.minetools_api.model.UUIDAndPlayerName",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setCache","parameterTypes":["vc.swagger.minetools_api.model.UUIDAndPlayerNameCache"] }, {"name":"setId","parameterTypes":["java.lang.String"] }, {"name":"setName","parameterTypes":["java.lang.String"] }, {"name":"setStatus","parameterTypes":["vc.swagger.minetools_api.model.UUIDAndPlayerName$StatusEnum"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setCache","parameterTypes":["vc.openapi.minetools_api.model.UUIDAndPlayerNameCache"] }, {"name":"setId","parameterTypes":["java.lang.String"] }, {"name":"setName","parameterTypes":["java.lang.String"] }, {"name":"setStatus","parameterTypes":["vc.openapi.minetools_api.model.UUIDAndPlayerName$StatusEnum"] }]
 },
 {
-  "name":"vc.swagger.minetools_api.model.UUIDAndPlayerName$StatusEnum",
+  "name":"vc.openapi.minetools_api.model.UUIDAndPlayerName$StatusEnum",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"fromValue","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"vc.swagger.minetools_api.model.UUIDAndPlayerNameCache",
+  "name":"vc.openapi.minetools_api.model.UUIDAndPlayerNameCache",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setCacheTime","parameterTypes":["java.lang.Integer"] }, {"name":"setCacheTimeLeft","parameterTypes":["java.lang.Integer"] }, {"name":"setCachedAt","parameterTypes":["java.lang.Double"] }, {"name":"setCachedUntil","parameterTypes":["java.lang.Double"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.handler.ApiClient",
+  "name":"vc.openapi.mojang_api.handler.ApiClient",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.springframework.web.client.RestTemplate"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.handler.ApiClient$CollectionFormat"
+  "name":"vc.openapi.mojang_api.handler.ApiClient$CollectionFormat"
 },
 {
-  "name":"vc.swagger.mojang_api.handler.CreditApi",
+  "name":"vc.openapi.mojang_api.handler.CreditApi",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.swagger.mojang_api.handler.ApiClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.openapi.mojang_api.handler.ApiClient"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.handler.OrdersApi",
+  "name":"vc.openapi.mojang_api.handler.JavaTimeFormatter",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"formatOffsetDateTime","parameterTypes":["java.time.OffsetDateTime"] }, {"name":"getOffsetDateTimeFormatter","parameterTypes":[] }, {"name":"parseOffsetDateTime","parameterTypes":["java.lang.String"] }, {"name":"setOffsetDateTimeFormatter","parameterTypes":["java.time.format.DateTimeFormatter"] }]
+},
+{
+  "name":"vc.openapi.mojang_api.handler.OrdersApi",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.swagger.mojang_api.handler.ApiClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.openapi.mojang_api.handler.ApiClient"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.handler.ProfileApi",
+  "name":"vc.openapi.mojang_api.handler.ProfileApi",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.swagger.mojang_api.handler.ApiClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.openapi.mojang_api.handler.ApiClient"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.handler.ProfilesApi",
+  "name":"vc.openapi.mojang_api.handler.ProfilesApi",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.swagger.mojang_api.handler.ApiClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.openapi.mojang_api.handler.ApiClient"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.handler.SecurityApi",
+  "name":"vc.openapi.mojang_api.handler.SecurityApi",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.swagger.mojang_api.handler.ApiClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.openapi.mojang_api.handler.ApiClient"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.handler.auth.Authentication"
+  "name":"vc.openapi.mojang_api.handler.auth.Authentication"
 },
 {
-  "name":"vc.swagger.mojang_api.model.InlineResponse200"
+  "name":"vc.openapi.mojang_api.model.GetProfileUsername200Response"
 },
 {
-  "name":"vc.swagger.mojang_api.model.InlineResponse2001"
+  "name":"vc.openapi.mojang_api.model.GetStatistics200Response"
 },
 {
-  "name":"vc.swagger.mojang_api.model.InlineResponse2004"
+  "name":"vc.openapi.mojang_api.model.GetStatisticsRequest"
 },
 {
-  "name":"vc.swagger.mojang_api.model.OrdersStatisticsBody"
+  "name":"vc.openapi.mojang_api.model.GetYourProfile200Response"
 },
 {
-  "name":"vc.swagger.mojang_api.model.UUIDAndUser",
+  "name":"vc.openapi.mojang_api.model.InlineResponse200"
+},
+{
+  "name":"vc.openapi.mojang_api.model.InlineResponse2001"
+},
+{
+  "name":"vc.openapi.mojang_api.model.InlineResponse2004"
+},
+{
+  "name":"vc.openapi.mojang_api.model.OrdersStatisticsBody"
+},
+{
+  "name":"vc.openapi.mojang_api.model.SetPasswordRequest"
+},
+{
+  "name":"vc.openapi.mojang_api.model.UUIDAndUser",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setId","parameterTypes":["java.lang.String"] }, {"name":"setName","parameterTypes":["java.lang.String"] }]
 },
 {
-  "name":"vc.swagger.mojang_api.model.UsersPasswordBody"
+  "name":"vc.openapi.mojang_api.model.UsersPasswordBody"
 },
 {
-  "name":"vc.swagger.mojang_sessionserver.handler.AllApi",
+  "name":"vc.openapi.mojang_sessionserver.handler.AllApi",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.swagger.mojang_sessionserver.handler.ApiClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.openapi.mojang_sessionserver.handler.ApiClient"] }]
 },
 {
-  "name":"vc.swagger.mojang_sessionserver.handler.ApiClient",
+  "name":"vc.openapi.mojang_sessionserver.handler.ApiClient",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.springframework.web.client.RestTemplate"] }]
 },
 {
-  "name":"vc.swagger.mojang_sessionserver.handler.ApiClient$CollectionFormat"
+  "name":"vc.openapi.mojang_sessionserver.handler.ApiClient$CollectionFormat"
 },
 {
-  "name":"vc.swagger.mojang_sessionserver.handler.auth.Authentication"
+  "name":"vc.openapi.mojang_sessionserver.handler.JavaTimeFormatter",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"formatOffsetDateTime","parameterTypes":["java.time.OffsetDateTime"] }, {"name":"getOffsetDateTimeFormatter","parameterTypes":[] }, {"name":"parseOffsetDateTime","parameterTypes":["java.lang.String"] }, {"name":"setOffsetDateTimeFormatter","parameterTypes":["java.time.format.DateTimeFormatter"] }]
 },
 {
-  "name":"vc.swagger.mojang_sessionserver.model.InlineResponse200"
+  "name":"vc.openapi.mojang_sessionserver.handler.auth.Authentication"
+},
+{
+  "name":"vc.openapi.mojang_sessionserver.model.GetProfileByUuid200Response"
+},
+{
+  "name":"vc.openapi.mojang_sessionserver.model.InlineResponse200"
 },
 {
   "name":"vc.translators.CustomExceptionHandler",
@@ -14877,7 +14949,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["vc.swagger.mojang_api.handler.ProfileApi","vc.swagger.minetools_api.handler.UuidApi"] }, {"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["vc.openapi.mojang_api.handler.ProfileApi","vc.openapi.minetools_api.handler.UuidApi"] }, {"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"vc.util.PlayerLookup$PlayerIdentity"

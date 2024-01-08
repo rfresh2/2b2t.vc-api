@@ -5,10 +5,10 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import vc.swagger.minetools_api.handler.UuidApi;
-import vc.swagger.minetools_api.model.UUIDAndPlayerName;
-import vc.swagger.mojang_api.handler.ProfileApi;
-import vc.swagger.mojang_api.model.UUIDAndUser;
+import vc.openapi.minetools_api.handler.UuidApi;
+import vc.openapi.minetools_api.model.UUIDAndPlayerName;
+import vc.openapi.mojang_api.handler.ProfileApi;
+import vc.openapi.mojang_api.model.UUIDAndUser;
 
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
