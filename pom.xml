@@ -36,7 +36,7 @@
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
-			<version>3.19.1</version>
+			<version>3.19.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -158,7 +158,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.3</version>
+				<version>3.2.5</version>
 				<configuration>
 					<systemProperties>
 						<apiTests>${apiTests}</apiTests>
@@ -187,7 +187,7 @@
 			<plugin>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen-maven</artifactId>
-				<version>3.19.1</version>
+				<version>3.19.2</version>
 <!--				<executions>-->
 <!--					<execution>-->
 <!--						<phase>generate-sources</phase>-->
