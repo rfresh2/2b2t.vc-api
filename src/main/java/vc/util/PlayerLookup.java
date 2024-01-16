@@ -65,7 +65,7 @@ public class PlayerLookup {
     private Optional<PlayerIdentity> lookupIdentityMinetools(final String playerName) {
         try {
             UUIDAndPlayerName uuidAndUsername = mineToolsApi.getUUIDAndPlayerName(playerName);
-            if (uuidAndUsername == null) return Optional.empty();
+            if (uuidAndUsername == null || uuidAndUsername.getId() == null) return Optional.empty();
             final PlayerIdentity playerIdentity = new PlayerIdentity(
                 UUID.fromString(uuidAndUsername
                                     .getId()

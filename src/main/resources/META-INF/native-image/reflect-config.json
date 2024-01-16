@@ -534,6 +534,9 @@
   "name":"com.fasterxml.jackson.databind.util.ISO8601DateFormat"
 },
 {
+  "name":"com.fasterxml.jackson.databind.util.StdDateFormat"
+},
+{
   "name":"com.fasterxml.jackson.dataformat.cbor$CBORFactory"
 },
 {
@@ -4188,6 +4191,9 @@
   "name":"java.net.URI"
 },
 {
+  "name":"java.net.URISyntaxException"
+},
+{
   "name":"java.net.URL"
 },
 {
@@ -4309,6 +4315,12 @@
   "name":"java.text.DateFormat"
 },
 {
+  "name":"java.text.DecimalFormat"
+},
+{
+  "name":"java.text.NumberFormat"
+},
+{
   "name":"java.text.ParseException"
 },
 {
@@ -4330,6 +4342,12 @@
   "name":"java.time.format.DateTimeFormatter"
 },
 {
+  "name":"java.time.format.DateTimeParseException"
+},
+{
+  "name":"java.time.temporal.TemporalAccessor"
+},
+{
   "name":"java.time.temporal.TemporalAmount"
 },
 {
@@ -4342,6 +4360,9 @@
 },
 {
   "name":"java.util.Arrays"
+},
+{
+  "name":"java.util.Calendar"
 },
 {
   "name":"java.util.Collection"
@@ -4368,6 +4389,9 @@
   "name":"java.util.EventListener",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
+},
+{
+  "name":"java.util.GregorianCalendar"
 },
 {
   "name":"java.util.HashMap",
@@ -13366,6 +13390,9 @@
   "name":"org.springframework.web.client.HttpClientErrorException"
 },
 {
+  "name":"org.springframework.web.client.HttpServerErrorException"
+},
+{
   "name":"org.springframework.web.client.RequestCallback"
 },
 {
@@ -14812,7 +14839,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setCacheTime","parameterTypes":["java.lang.Integer"] }, {"name":"setCacheTimeLeft","parameterTypes":["java.lang.Integer"] }, {"name":"setCachedAt","parameterTypes":["java.lang.Double"] }, {"name":"setCachedUntil","parameterTypes":["java.lang.Double"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setCacheTime","parameterTypes":["java.lang.Integer"] }, {"name":"setCacheTimeLeft","parameterTypes":["java.lang.Integer"] }, {"name":"setCachedAt","parameterTypes":["java.lang.Double"] }, {"name":"setCachedUntil","parameterTypes":["java.lang.Double"] }, {"name":"setHIT","parameterTypes":["java.lang.Boolean"] }]
 },
 {
   "name":"vc.openapi.mojang_api.handler.ApiClient",
