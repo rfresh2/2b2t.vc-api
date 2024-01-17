@@ -46,7 +46,7 @@ public class DataDumpController {
             return ResponseEntity.ok()
                 .header(
                     "Content-Disposition",
-                    "attachment; filename=\"" + resolvedIdentity.playerName() + ".csv\"")
+                    "attachment; filename=\"" + resolvedIdentity.name() + ".csv\"")
                 .contentType(MediaType.parseMediaType("application/csv"))
                 .body(uuidData.formatCSV());
         }

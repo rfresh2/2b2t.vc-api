@@ -17,7 +17,6 @@
 		<java.version>21</java.version>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
-		<default.package>vc.openapi</default.package>
 		<apiTests>false</apiTests>
 		<agentArgs/>
 	</properties>
@@ -125,11 +124,6 @@
 			<version>1.3.2</version>
 		</dependency>
 		<dependency>
-			<groupId>org.openapitools</groupId>
-			<artifactId>jackson-databind-nullable</artifactId>
-			<version>0.2.6</version>
-		</dependency>
-		<dependency>
 			<groupId>com.google.code.findbugs</groupId>
 			<artifactId>annotations</artifactId>
 			<version>3.0.1u2</version>
@@ -221,91 +215,6 @@
 				<!--					</execution>-->
 				<!--				</executions>-->
 			</plugin>
-			<plugin>
-				<groupId>org.openapitools</groupId>
-				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.2.0</version>
-				<executions>
-					<execution>
-						<id>minetools-api</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<inputSpec>openapi/minetools-api.yaml</inputSpec>
-							<output>${project.build.directory}/generated-sources/openapi/minetools-api</output>
-							<generatorName>java</generatorName>
-							<skipValidateSpec>true</skipValidateSpec>
-							<library>resttemplate</library>
-							<apiPackage>${default.package}.minetools-api.handler</apiPackage>
-							<modelPackage>${default.package}.minetools-api.model</modelPackage>
-							<invokerPackage>${default.package}.minetools-api.handler</invokerPackage>
-							<generateApiTests>false</generateApiTests>
-							<generateModelTests>false</generateModelTests>
-							<configOptions>
-								<dateLibrary>java8-instant</dateLibrary>
-								<java11>true</java11>
-								<generateClientAsBean>true</generateClientAsBean>
-							</configOptions>
-							<environmentVariables>
-								<models/>
-							</environmentVariables>
-						</configuration>
-					</execution>
-					<execution>
-						<id>mojang-api</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<inputSpec>openapi/mojang-api.yaml</inputSpec>
-							<output>${project.build.directory}/generated-sources/openapi/mojang-api</output>
-							<generatorName>java</generatorName>
-							<skipValidateSpec>true</skipValidateSpec>
-							<library>resttemplate</library>
-							<apiPackage>${default.package}.mojang-api.handler</apiPackage>
-							<modelPackage>${default.package}.mojang-api.model</modelPackage>
-							<invokerPackage>${default.package}.mojang-api.handler</invokerPackage>
-							<generateApiTests>false</generateApiTests>
-							<generateModelTests>false</generateModelTests>
-							<configOptions>
-								<dateLibrary>java8-instant</dateLibrary>
-								<java11>true</java11>
-								<generateClientAsBean>true</generateClientAsBean>
-							</configOptions>
-							<environmentVariables>
-								<models/>
-							</environmentVariables>
-						</configuration>
-					</execution>
-					<execution>
-						<id>mojang-sessionserver</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<inputSpec>openapi/mojang-sessionserver.yaml</inputSpec>
-							<output>${project.build.directory}/generated-sources/openapi/mojang-sessionserver</output>
-							<generatorName>java</generatorName>
-							<skipValidateSpec>true</skipValidateSpec>
-							<library>resttemplate</library>
-							<apiPackage>${default.package}.mojang-sessionserver.handler</apiPackage>
-							<modelPackage>${default.package}.mojang-sessionserver.model</modelPackage>
-							<invokerPackage>${default.package}.mojang-sessionserver.handler</invokerPackage>
-							<generateApiTests>false</generateApiTests>
-							<generateModelTests>false</generateModelTests>
-							<configOptions>
-								<dateLibrary>java8-instant</dateLibrary>
-								<java11>true</java11>
-								<generateClientAsBean>true</generateClientAsBean>
-							</configOptions>
-							<environmentVariables>
-								<models/>
-							</environmentVariables>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -319,15 +228,6 @@
 						<artifactId>native-maven-plugin</artifactId>
 						<version>0.9.28</version>
 						<extensions>true</extensions>
-						<executions>
-							<execution>
-								<id>build-native</id>
-								<goals>
-									<goal>compile-no-fork</goal>
-								</goals>
-								<phase>package</phase>
-							</execution>
-						</executions>
 						<configuration>
 							<metadataRepository>
 								<enabled>true</enabled>

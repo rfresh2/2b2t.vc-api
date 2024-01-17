@@ -15,67 +15,7 @@
     "interfaces":["java.sql.Connection"]
   },
   {
-    "interfaces":["net.bytebuddy.description.method.MethodDescription$InDefinedShape$AbstractBase$Executable"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.method.ParameterDescription$ForLoadedParameter$Parameter"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.method.ParameterList$ForLoadedExecutable$Executable"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.type.TypeDefinition$Sort$AnnotatedType"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.type.TypeDescription"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.type.TypeDescription$ForLoadedType$Dispatcher"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.type.TypeDescription$Generic"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedExecutableParameterType$Dispatcher"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedMethodReturnType$Dispatcher"]
-  },
-  {
-    "interfaces":["net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForComponentType$AnnotatedParameterizedType"]
-  },
-  {
-    "interfaces":["net.bytebuddy.utility.JavaConstant$Simple$Dispatcher"]
-  },
-  {
-    "interfaces":["net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfClassDesc"]
-  },
-  {
-    "interfaces":["net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDirectMethodHandleDesc"]
-  },
-  {
-    "interfaces":["net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDirectMethodHandleDesc$ForKind"]
-  },
-  {
-    "interfaces":["net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDynamicConstantDesc"]
-  },
-  {
-    "interfaces":["net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfMethodHandleDesc"]
-  },
-  {
-    "interfaces":["net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfMethodTypeDesc"]
-  },
-  {
-    "interfaces":["org.springframework.boot.actuate.endpoint.annotation.Endpoint"]
-  },
-  {
-    "interfaces":["org.springframework.boot.actuate.endpoint.annotation.EndpointExtension"]
-  },
-  {
     "interfaces":["org.springframework.boot.context.properties.ConfigurationProperties"]
-  },
-  {
-    "interfaces":["org.springframework.boot.test.context.SpringBootTest"]
   },
   {
     "interfaces":["org.springframework.cache.annotation.Cacheable"]
@@ -85,9 +25,6 @@
   },
   {
     "interfaces":["org.springframework.stereotype.Controller"]
-  },
-  {
-    "interfaces":["org.springframework.test.context.BootstrapWith"]
   },
   {
     "interfaces":["org.springframework.web.bind.annotation.ControllerAdvice"]

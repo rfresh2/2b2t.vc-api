@@ -5,10 +5,12 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import vc.openapi.minetools_api.handler.UuidApi;
-import vc.openapi.minetools_api.model.UUIDAndPlayerName;
-import vc.openapi.mojang_api.handler.ProfileApi;
-import vc.openapi.mojang_api.model.UUIDAndUser;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestClientResponseException;
+import vc.api.MinetoolsRestClient;
+import vc.api.MojangRestClient;
+import vc.api.model.ProfileData;
+import vc.api.model.ProfileDataImpl;
 
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
@@ -20,65 +22,51 @@ import java.util.UUID;
 @Component
 public class PlayerLookup {
     private static final Logger logger = LoggerFactory.getLogger(PlayerLookup.class);
-    private final ProfileApi mojangApi;
-    private final UuidApi mineToolsApi;
-    private final Cache<String, PlayerIdentity> uuidCache = Caffeine.newBuilder()
-        .expireAfterWrite(Duration.ofMinutes(10))
+    private final MojangRestClient mojangRestClient;
+    private final MinetoolsRestClient minetoolsRestClient;
+    private final Cache<String, ProfileData> uuidCache = Caffeine.newBuilder()
+        .expireAfterWrite(Duration.ofMinutes(30))
         .maximumSize(250)
         .build();
 
-    public PlayerLookup(final ProfileApi mojangApi, final UuidApi mineToolsApi) {
-        this.mojangApi = mojangApi;
-        this.mineToolsApi = mineToolsApi;
+    public PlayerLookup(MojangRestClient mojangRestClient, MinetoolsRestClient minetoolsRestClient) {
+        this.mojangRestClient = mojangRestClient;
+        this.minetoolsRestClient = minetoolsRestClient;
     }
 
-    public record PlayerIdentity(UUID uuid, String playerName) { }
-
-    public Optional<PlayerIdentity> getPlayerIdentity(final String playerName) {
-        final PlayerIdentity identityFromCache = uuidCache.getIfPresent(playerName.toLowerCase().trim());
+    public Optional<ProfileData> getPlayerIdentity(final String playerName) {
+        final ProfileData identityFromCache = uuidCache.getIfPresent(playerName.toLowerCase().trim());
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
-
-        Optional<PlayerIdentity> playerIdentity = lookupIdentityMojang(playerName).or(() -> lookupIdentityMinetools(playerName));
+        var playerIdentity = lookupIdentityMojang(playerName).or(() -> lookupIdentityMinetools(playerName));
         playerIdentity.ifPresent(identity -> uuidCache.put(playerName.toLowerCase().trim(), identity));
         return playerIdentity;
     }
 
-    private Optional<PlayerIdentity> lookupIdentityMojang(final String playerName) {
+    private Optional<ProfileData> lookupIdentityMojang(final String playerName) {
         try {
-            UUIDAndUser uuidAndUsername = mojangApi.getProfileFromUsername(playerName);
-            if (uuidAndUsername == null) return Optional.empty();
-            final PlayerIdentity playerIdentity = new PlayerIdentity(
-                UUID.fromString(uuidAndUsername
-                                    .getId()
-                                    .replaceFirst(
-                                        "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)",
-                                        "$1-$2-$3-$4-$5")
-                ), uuidAndUsername.getName());
-            return Optional.of(playerIdentity);
+            ProfileData profile = mojangRestClient.getProfileFromUsername(playerName);
+            return Optional.of(profile);
+        } catch (final RestClientResponseException e) {
+            logger.error("Received status code {} from mojang UUID lookup", e.getStatusCode().value());
         } catch (final Exception e) {
             logger.error("Error while looking up player identity using Mojang API", e);
-            return Optional.empty();
         }
+        return Optional.empty();
     }
 
-    private Optional<PlayerIdentity> lookupIdentityMinetools(final String playerName) {
+    private Optional<ProfileData> lookupIdentityMinetools(final String playerName) {
         try {
-            UUIDAndPlayerName uuidAndUsername = mineToolsApi.getUUIDAndPlayerName(playerName);
-            if (uuidAndUsername == null || uuidAndUsername.getId() == null) return Optional.empty();
-            final PlayerIdentity playerIdentity = new PlayerIdentity(
-                UUID.fromString(uuidAndUsername
-                                    .getId()
-                                    .replaceFirst(
-                                        "(\\p{XDigit}{8})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}{4})(\\p{XDigit}+)",
-                                        "$1-$2-$3-$4-$5")
-                ), uuidAndUsername.getName());
-            uuidCache.put(playerName, playerIdentity);
-            return Optional.of(playerIdentity);
+            ProfileData profile = minetoolsRestClient.getProfileFromUsername(playerName);
+            return Optional.of(profile);
+        } catch (final RestClientResponseException e) {
+            logger.error("Received status code {} from minetools UUID lookup", e.getStatusCode().value());
+        } catch (final RestClientException e) {
+            logger.error("Got bad status response from minetools");
         } catch (final Exception e) {
-            logger.error("Error while looking up player identity using Minetools API", e);
-            return Optional.empty();
+            logger.error("Error while looking up player identity using minetools", e);
         }
+        return Optional.empty();
     }
 
     public URL getAvatarURL(UUID uuid) {
@@ -95,11 +83,11 @@ public class PlayerLookup {
 
     public Optional<UUID> getOrResolveUuid(final UUID uuid, final String username) {
         if (uuid != null) return Optional.of(uuid);
-        return getPlayerIdentity(username.trim()).map(PlayerIdentity::uuid);
+        return getPlayerIdentity(username.trim()).map(ProfileData::uuid);
     }
 
-    public Optional<PlayerIdentity> getOrResolvePlayerIdentity(final UUID uuid, final String username) {
-        if (uuid != null) return Optional.of(new PlayerIdentity(uuid, username));
+    public Optional<ProfileData> getOrResolvePlayerIdentity(final UUID uuid, final String username) {
+        if (uuid != null) return Optional.of(new ProfileDataImpl(username, uuid));
         return getPlayerIdentity(username.trim());
     }
 }
