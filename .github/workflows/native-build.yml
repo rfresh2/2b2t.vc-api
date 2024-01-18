@@ -29,7 +29,7 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Build Native Binary
-        run: ./mvnw -Pnative package
+        run: ./mvnw -Pnative native:compile
 
       - name: Compress Native Binary
         run: zip -j 2b2t.vc-api.zip target/2b2t.vc-api
