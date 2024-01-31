@@ -48,9 +48,11 @@ public class PlayerLookup {
             ProfileData profile = mojangRestClient.getProfileFromUsername(playerName);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
-            logger.error("Received status code {} from mojang UUID lookup", e.getStatusCode().value());
+            logger.error("{} from Mojang: {}", e.getStatusCode().value(), playerName);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from Mojang: {}", playerName, e);
         } catch (final Exception e) {
-            logger.error("Error while looking up player identity using Mojang API", e);
+            logger.error("Mojang unexpected error: {}", playerName, e);
         }
         return Optional.empty();
     }
@@ -60,11 +62,11 @@ public class PlayerLookup {
             ProfileData profile = minetoolsRestClient.getProfileFromUsername(playerName);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
-            logger.error("Received status code {} from minetools UUID lookup", e.getStatusCode().value());
+            logger.error("{} from MineTools: {}", e.getStatusCode().value(), playerName);
         } catch (final RestClientException e) {
-            logger.error("Got bad status response from minetools");
+            logger.error("Bad status response from MineTools: {}", playerName, e);
         } catch (final Exception e) {
-            logger.error("Error while looking up player identity using minetools", e);
+            logger.error("MineTools unexpected error: {}", playerName, e);
         }
         return Optional.empty();
     }
