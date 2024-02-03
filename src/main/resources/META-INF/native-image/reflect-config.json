@@ -239,7 +239,7 @@
   "name":"com.fasterxml.jackson.core.ObjectCodec",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"getJsonFactory","parameterTypes":[] }, {"name":"readValues","parameterTypes":["com.fasterxml.jackson.core.JsonParser","com.fasterxml.jackson.core.type.TypeReference"] }, {"name":"readValues","parameterTypes":["com.fasterxml.jackson.core.JsonParser","java.lang.Class"] }]
+  "methods":[{"name":"getJsonFactory","parameterTypes":[] }, {"name":"readValues","parameterTypes":["com.fasterxml.jackson.core.JsonParser","com.fasterxml.jackson.core.type.ResolvedType"] }, {"name":"readValues","parameterTypes":["com.fasterxml.jackson.core.JsonParser","com.fasterxml.jackson.core.type.TypeReference"] }, {"name":"readValues","parameterTypes":["com.fasterxml.jackson.core.JsonParser","java.lang.Class"] }]
 },
 {
   "name":"com.fasterxml.jackson.core.PrettyPrinter"
@@ -3242,6 +3242,9 @@
   "name":"jakarta.xml.ws.WebServiceRef"
 },
 {
+  "name":"java.io.BufferedReader"
+},
+{
   "name":"java.io.ByteArrayOutputStream"
 },
 {
@@ -3270,6 +3273,9 @@
 },
 {
   "name":"java.io.InputStream"
+},
+{
+  "name":"java.io.InputStreamReader"
 },
 {
   "name":"java.io.ObjectInputStream"
@@ -3787,6 +3793,9 @@
 },
 {
   "name":"java.time.Instant"
+},
+{
+  "name":"java.time.OffsetDateTime"
 },
 {
   "name":"java.util.AbstractMap",
@@ -11464,6 +11473,9 @@
   "name":"org.springframework.web.servlet.config.annotation.PathMatchConfigurer"
 },
 {
+  "name":"org.springframework.web.servlet.config.annotation.ResourceChainRegistration"
+},
+{
   "name":"org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration"
 },
 {
@@ -11651,6 +11663,9 @@
   "name":"org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod"
 },
 {
+  "name":"org.springframework.web.servlet.resource.PathResourceResolver"
+},
+{
   "name":"org.springframework.web.servlet.resource.ResourceResolver",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
@@ -11671,6 +11686,9 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"close","parameterTypes":[] }, {"name":"onApplicationEvent","parameterTypes":["org.springframework.context.ApplicationEvent"] }, {"name":"setApplicationContext","parameterTypes":["org.springframework.context.ApplicationContext"] }, {"name":"shutdown","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.web.servlet.resource.TransformedResource"
 },
 {
   "name":"org.springframework.web.servlet.support.AbstractFlashMapManager",
@@ -12105,7 +12123,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["javax.sql.DataSource"] }, {"name":"connectionProvider","parameterTypes":[] }, {"name":"dsl","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":["javax.sql.DataSource"] }, {"name":"connectionProvider","parameterTypes":[] }, {"name":"dsl","parameterTypes":[] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }, {"name":"swaggerIndexTransformer","parameterTypes":["org.springdoc.core.properties.SwaggerUiConfigProperties","org.springdoc.core.properties.SwaggerUiOAuthProperties","org.springdoc.core.properties.SwaggerUiConfigParameters","org.springdoc.webmvc.ui.SwaggerWelcomeCommon","org.springdoc.core.providers.ObjectMapperProvider"] }]
 },
 {
   "name":"vc.config.InitialConfiguration$$SpringCGLIB$$0",
@@ -12124,11 +12142,17 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Class"] }]
 },
 {
+  "name":"vc.config.SwaggerCodeBlockTransformer",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }, {"name":"transform","parameterTypes":["jakarta.servlet.http.HttpServletRequest","org.springframework.core.io.Resource","org.springframework.web.servlet.resource.ResourceTransformerChain"] }]
+},
+{
   "name":"vc.config.WebConfig",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"configurePathMatch","parameterTypes":["org.springframework.web.servlet.config.annotation.PathMatchConfigurer"] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"addResourceHandlers","parameterTypes":["org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry"] }, {"name":"configurePathMatch","parameterTypes":["org.springframework.web.servlet.config.annotation.PathMatchConfigurer"] }, {"name":"setBeanFactory","parameterTypes":["org.springframework.beans.factory.BeanFactory"] }]
 },
 {
   "name":"vc.config.WebConfig$$SpringCGLIB$$0",

@@ -4,6 +4,12 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultDSLContext;
+import org.springdoc.core.properties.SwaggerUiConfigParameters;
+import org.springdoc.core.properties.SwaggerUiConfigProperties;
+import org.springdoc.core.properties.SwaggerUiOAuthProperties;
+import org.springdoc.core.providers.ObjectMapperProvider;
+import org.springdoc.webmvc.ui.SwaggerIndexTransformer;
+import org.springdoc.webmvc.ui.SwaggerWelcomeCommon;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
@@ -27,6 +33,16 @@ public class InitialConfiguration {
     @Bean
     public DefaultDSLContext dsl() {
         return new DefaultDSLContext(configuration());
+    }
+
+    @Bean
+    public SwaggerIndexTransformer swaggerIndexTransformer(
+        SwaggerUiConfigProperties configProperties,
+        SwaggerUiOAuthProperties oAuthProperties,
+        SwaggerUiConfigParameters configParameters,
+        SwaggerWelcomeCommon welcomeCommon,
+        ObjectMapperProvider objectMapperProvider) {
+        return new SwaggerCodeBlockTransformer(configProperties, oAuthProperties, configParameters, welcomeCommon, objectMapperProvider);
     }
 
     public DefaultConfiguration configuration() {
