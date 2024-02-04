@@ -145,6 +145,10 @@
 					<execution>
 						<configuration>
 							<mainClass>vc.Application</mainClass>
+							<jvmArguments>-Xmx50m ${agentArgs}</jvmArguments>
+							<systemPropertyVariables>
+								<springAot>true</springAot>
+							</systemPropertyVariables>
 						</configuration>
 					</execution>
 				</executions>
