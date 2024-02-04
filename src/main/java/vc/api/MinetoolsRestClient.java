@@ -25,8 +25,10 @@ public class MinetoolsRestClient {
             .uri("/uuid/{username}", username)
             .retrieve()
             .body(MinetoolsUuidResponse.class);
-        if (response == null || !Objects.equals(response.status(), "OK")) {
+        if (response == null) {
             throw new RestClientException("Received invalid response from minetools");
+        } else if (!Objects.equals(response.status(), "OK")) {
+            throw new RestClientException("Received error response from minetools: " + response.status());
         }
         return response;
     }
