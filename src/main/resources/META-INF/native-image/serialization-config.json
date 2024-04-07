@@ -68,6 +68,9 @@
     },
     {
       "name":"javax.management.remote.rmi.RMIServerImpl_Stub"
+    },
+    {
+      "name":"org.junit.platform.launcher.TestIdentifier$SerializedForm"
     }
   ],
   "lambdaCapturingTypes":[

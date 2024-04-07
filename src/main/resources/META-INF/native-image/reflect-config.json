@@ -3254,7 +3254,7 @@
 },
 {
   "name":"java.io.Console",
-  "methods":[{"name":"charset","parameterTypes":[] }]
+  "methods":[{"name":"charset","parameterTypes":[] }, {"name":"isTerminal","parameterTypes":[] }]
 },
 {
   "name":"java.io.DataInput"
@@ -4409,6 +4409,10 @@
   "name":"org.apache.logging.slf4j.SLF4JProvider"
 },
 {
+  "name":"org.apache.maven.surefire.junitplatform.JUnitPlatformProvider",
+  "methods":[{"name":"<init>","parameterTypes":["org.apache.maven.surefire.api.provider.ProviderParameters"] }]
+},
+{
   "name":"org.apache.pulsar.client.api.PulsarClient"
 },
 {
@@ -4431,6 +4435,10 @@
 },
 {
   "name":"org.apache.tomcat.websocket.server.WsSci"
+},
+{
+  "name":"org.apiguardian.api.API",
+  "queryAllPublicMethods":true
 },
 {
   "name":"org.aspectj.lang.ProceedingJoinPoint"
@@ -4554,6 +4562,9 @@
 },
 {
   "name":"org.jboss.logging.Logger"
+},
+{
+  "name":"org.jooq.AggregateFunction"
 },
 {
   "name":"org.jooq.AlterDatabaseStep"
@@ -5011,6 +5022,9 @@
   "name":"org.jooq.Row3"
 },
 {
+  "name":"org.jooq.Row4"
+},
+{
   "name":"org.jooq.RowCountQuery"
 },
 {
@@ -5031,10 +5045,16 @@
   "name":"org.jooq.Select"
 },
 {
+  "name":"org.jooq.SelectConditionStep"
+},
+{
   "name":"org.jooq.SelectField"
 },
 {
   "name":"org.jooq.SelectFieldOrAsterisk"
+},
+{
+  "name":"org.jooq.SelectJoinStep"
 },
 {
   "name":"org.jooq.SelectQuery"
@@ -5190,6 +5210,9 @@
   "name":"org.jooq.exception.DataAccessException"
 },
 {
+  "name":"org.jooq.impl.AbstractRoutine"
+},
+{
   "name":"org.jooq.impl.AbstractScope",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -5224,6 +5247,9 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"close","parameterTypes":[] }, {"name":"provide","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }, {"name":"toString","parameterTypes":[] }]
+},
+{
+  "name":"org.jooq.impl.Internal"
 },
 {
   "name":"org.jooq.impl.SQLDataType"
@@ -5289,6 +5315,37 @@
   "name":"org.jooq.util.yugabytedb.YugabyteDBDataType"
 },
 {
+  "name":"org.junit.internal.AssumptionViolatedException"
+},
+{
+  "name":"org.junit.jupiter.api.Test",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.junit.jupiter.api.condition.EnabledIf",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.junit.jupiter.api.condition.EnabledIfCondition",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.junit.jupiter.api.extension.ExtendWith",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.junit.platform.commons.annotation.Testable",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.junit.platform.launcher.LauncherSession",
+  "methods":[{"name":"getLauncher","parameterTypes":[] }]
+},
+{
+  "name":"org.junit.platform.launcher.core.LauncherFactory",
+  "methods":[{"name":"openSession","parameterTypes":[] }]
+},
+{
   "name":"org.neo4j.driver.Driver"
 },
 {
@@ -5352,11 +5409,15 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"org.springdoc.core.conditions.SpecPropertiesCondition",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"org.springdoc.core.configuration.SpringDocConfiguration",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"additionalModelsConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"fileSupportConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"genericReturnTypeParser","parameterTypes":[] }, {"name":"localSpringDocParameterNameDiscoverer","parameterTypes":[] }, {"name":"modelConverterRegistrar","parameterTypes":["java.util.Optional","org.springdoc.core.properties.SpringDocConfigProperties"] }, {"name":"openAPIBuilder","parameterTypes":["java.util.Optional","org.springdoc.core.service.SecurityService","org.springdoc.core.properties.SpringDocConfigProperties","org.springdoc.core.utils.PropertyResolverUtils","java.util.Optional","java.util.Optional","java.util.Optional"] }, {"name":"operationBuilder","parameterTypes":["org.springdoc.core.service.GenericParameterService","org.springdoc.core.service.RequestBodyService","org.springdoc.core.service.SecurityService","org.springdoc.core.utils.PropertyResolverUtils"] }, {"name":"parameterBuilder","parameterTypes":["org.springdoc.core.utils.PropertyResolverUtils","java.util.Optional","java.util.Optional","org.springdoc.core.providers.ObjectMapperProvider","java.util.Optional"] }, {"name":"polymorphicModelConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"propertyResolverUtils","parameterTypes":["org.springframework.beans.factory.config.ConfigurableBeanFactory","org.springframework.context.MessageSource","org.springdoc.core.properties.SpringDocConfigProperties"] }, {"name":"requestBodyBuilder","parameterTypes":["org.springdoc.core.service.GenericParameterService"] }, {"name":"responseSupportConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"schemaPropertyDeprecatingConverter","parameterTypes":[] }, {"name":"securityParser","parameterTypes":["org.springdoc.core.utils.PropertyResolverUtils"] }, {"name":"springDocCustomizers","parameterTypes":["java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional"] }, {"name":"springDocProviders","parameterTypes":["java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"springdocObjectMapperProvider","parameterTypes":["org.springdoc.core.properties.SpringDocConfigProperties"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"additionalModelsConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"fileSupportConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"genericReturnTypeParser","parameterTypes":[] }, {"name":"localSpringDocParameterNameDiscoverer","parameterTypes":[] }, {"name":"modelConverterRegistrar","parameterTypes":["java.util.Optional","org.springdoc.core.properties.SpringDocConfigProperties"] }, {"name":"openAPIBuilder","parameterTypes":["java.util.Optional","org.springdoc.core.service.SecurityService","org.springdoc.core.properties.SpringDocConfigProperties","org.springdoc.core.utils.PropertyResolverUtils","java.util.Optional","java.util.Optional","java.util.Optional"] }, {"name":"operationBuilder","parameterTypes":["org.springdoc.core.service.GenericParameterService","org.springdoc.core.service.RequestBodyService","org.springdoc.core.service.SecurityService","org.springdoc.core.utils.PropertyResolverUtils"] }, {"name":"parameterBuilder","parameterTypes":["org.springdoc.core.utils.PropertyResolverUtils","java.util.Optional","java.util.Optional","org.springdoc.core.providers.ObjectMapperProvider","java.util.Optional"] }, {"name":"polymorphicModelConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"propertyResolverUtils","parameterTypes":["org.springframework.beans.factory.config.ConfigurableBeanFactory","org.springframework.context.MessageSource","org.springdoc.core.properties.SpringDocConfigProperties"] }, {"name":"requestBodyBuilder","parameterTypes":["org.springdoc.core.service.GenericParameterService"] }, {"name":"requestBodyBuilder","parameterTypes":["org.springdoc.core.service.GenericParameterService","org.springdoc.core.utils.PropertyResolverUtils"] }, {"name":"responseSupportConverter","parameterTypes":["org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"schemaPropertyDeprecatingConverter","parameterTypes":[] }, {"name":"securityParser","parameterTypes":["org.springdoc.core.utils.PropertyResolverUtils"] }, {"name":"springDocCustomizers","parameterTypes":["java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional"] }, {"name":"springDocProviders","parameterTypes":["java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","java.util.Optional","org.springdoc.core.providers.ObjectMapperProvider"] }, {"name":"springdocObjectMapperProvider","parameterTypes":["org.springdoc.core.properties.SpringDocConfigProperties"] }]
 },
 {
   "name":"org.springdoc.core.configuration.SpringDocConfiguration$1",
@@ -6359,6 +6420,10 @@
 {
   "name":"org.springframework.boot.actuate.autoconfigure.metrics.MetricsAspectsAutoConfiguration",
   "queryAllDeclaredMethods":true
+},
+{
+  "name":"org.springframework.boot.actuate.autoconfigure.metrics.MetricsAspectsAutoConfiguration$ObservationAnnotationsEnabledCondition",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration",
@@ -9359,6 +9424,10 @@
   "name":"org.springframework.boot.logging.log4j2.Log4J2LoggingSystem.Factory"
 },
 {
+  "name":"org.springframework.boot.logging.logback.ApplicationNameConverter",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"org.springframework.boot.logging.logback.ColorConverter",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -9514,6 +9583,10 @@
 },
 {
   "name":"org.springframework.boot.task.ThreadPoolTaskSchedulerCustomizer"
+},
+{
+  "name":"org.springframework.boot.test.context.SpringBootTest",
+  "queryAllPublicMethods":true
 },
 {
   "name":"org.springframework.boot.test.context.filter.ExcludeFilterApplicationContextInitializer",
@@ -10501,6 +10574,9 @@
   "name":"org.springframework.http.ResponseEntity"
 },
 {
+  "name":"org.springframework.http.ResponseEntity$HeadersBuilder"
+},
+{
   "name":"org.springframework.http.client.ClientHttpRequest"
 },
 {
@@ -10907,6 +10983,14 @@
   "queryAllDeclaredMethods":true
 },
 {
+  "name":"org.springframework.test.context.BootstrapWith",
+  "queryAllPublicMethods":true
+},
+{
+  "name":"org.springframework.test.context.junit.jupiter.SpringExtension",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
   "name":"org.springframework.transaction.ConfigurableTransactionManager",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true,
@@ -11198,6 +11282,15 @@
 },
 {
   "name":"org.springframework.web.client.RestClient$Builder"
+},
+{
+  "name":"org.springframework.web.client.RestClient$RequestHeadersSpec"
+},
+{
+  "name":"org.springframework.web.client.RestClient$RequestHeadersUriSpec"
+},
+{
+  "name":"org.springframework.web.client.RestClient$ResponseSpec"
 },
 {
   "name":"org.springframework.web.client.RestClientException"
@@ -11521,7 +11614,7 @@
   "name":"org.springframework.web.servlet.function.support.RouterFunctionMapping",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
-  "methods":[{"name":"afterPropertiesSet","parameterTypes":[] }, {"name":"close","parameterTypes":[] }, {"name":"shutdown","parameterTypes":[] }]
+  "methods":[{"name":"afterPropertiesSet","parameterTypes":[] }, {"name":"close","parameterTypes":[] }, {"name":"match","parameterTypes":["jakarta.servlet.http.HttpServletRequest","java.lang.String"] }, {"name":"shutdown","parameterTypes":[] }]
 },
 {
   "name":"org.springframework.web.servlet.handler.AbstractDetectingUrlHandlerMapping",
@@ -11658,6 +11751,9 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"afterPropertiesSet","parameterTypes":[] }, {"name":"close","parameterTypes":[] }, {"name":"getBuilderConfiguration","parameterTypes":[] }, {"name":"getContentNegotiationManager","parameterTypes":[] }, {"name":"getFileExtensions","parameterTypes":[] }, {"name":"getPathPrefixes","parameterTypes":[] }, {"name":"initCorsConfiguration","parameterTypes":["java.lang.Object","java.lang.reflect.Method","java.lang.Object"] }, {"name":"match","parameterTypes":["jakarta.servlet.http.HttpServletRequest","java.lang.String"] }, {"name":"registerHandlerMethod","parameterTypes":["java.lang.Object","java.lang.reflect.Method","java.lang.Object"] }, {"name":"registerMapping","parameterTypes":["java.lang.Object","java.lang.Object","java.lang.reflect.Method"] }, {"name":"registerMapping","parameterTypes":["org.springframework.web.servlet.mvc.method.RequestMappingInfo","java.lang.Object","java.lang.reflect.Method"] }, {"name":"setContentNegotiationManager","parameterTypes":["org.springframework.web.accept.ContentNegotiationManager"] }, {"name":"setEmbeddedValueResolver","parameterTypes":["org.springframework.util.StringValueResolver"] }, {"name":"setPathPrefixes","parameterTypes":["java.util.Map"] }, {"name":"setPatternParser","parameterTypes":["org.springframework.web.util.pattern.PathPatternParser"] }, {"name":"setUseRegisteredSuffixPatternMatch","parameterTypes":["boolean"] }, {"name":"setUseSuffixPatternMatch","parameterTypes":["boolean"] }, {"name":"setUseTrailingSlashMatch","parameterTypes":["boolean"] }, {"name":"shutdown","parameterTypes":[] }, {"name":"useRegisteredSuffixPatternMatch","parameterTypes":[] }, {"name":"useSuffixPatternMatch","parameterTypes":[] }, {"name":"useTrailingSlashMatch","parameterTypes":[] }]
+},
+{
+  "name":"org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping$AnnotationDescriptor"
 },
 {
   "name":"org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod"
@@ -12036,6 +12132,15 @@
   "methods":[{"name":"<init>","parameterTypes":["java.lang.Boolean","java.lang.Object"] }]
 },
 {
+  "name":"vc.ApiTests",
+  "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"isTestEnabled","parameterTypes":[] }]
+},
+{
   "name":"vc.Application",
   "allDeclaredFields":true,
   "allDeclaredClasses":true,
@@ -12064,6 +12169,19 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"vc.RateLimiterTests",
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true
+},
+{
+  "name":"vc.api.CraftheadRestClient",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.springframework.http.client.ClientHttpRequestFactory"] }]
+},
+{
   "name":"vc.api.MinetoolsRestClient",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -12076,6 +12194,20 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["org.springframework.http.client.ClientHttpRequestFactory"] }]
+},
+{
+  "name":"vc.api.model.CraftheadProfileProperties",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String"] }]
+},
+{
+  "name":"vc.api.model.CraftheadProfileResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.String","java.util.List"] }]
 },
 {
   "name":"vc.api.model.MinetoolsUuidResponse",
@@ -12468,7 +12600,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["vc.api.MojangRestClient","vc.api.MinetoolsRestClient"] }]
+  "methods":[{"name":"<init>","parameterTypes":["vc.api.MojangRestClient","vc.api.CraftheadRestClient"] }, {"name":"<init>","parameterTypes":["vc.api.MojangRestClient","vc.api.MinetoolsRestClient"] }]
 },
 {
   "name":"zipkin2.reporter.Sender"

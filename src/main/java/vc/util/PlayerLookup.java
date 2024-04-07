@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
-import vc.api.MinetoolsRestClient;
+import vc.api.CraftheadRestClient;
 import vc.api.MojangRestClient;
 import vc.api.model.ProfileData;
 import vc.api.model.ProfileDataImpl;
@@ -23,22 +23,22 @@ import java.util.UUID;
 public class PlayerLookup {
     private static final Logger logger = LoggerFactory.getLogger(PlayerLookup.class);
     private final MojangRestClient mojangRestClient;
-    private final MinetoolsRestClient minetoolsRestClient;
+    private final CraftheadRestClient craftheadRestClient;
     private final Cache<String, ProfileData> uuidCache = Caffeine.newBuilder()
         .expireAfterWrite(Duration.ofMinutes(30))
         .maximumSize(250)
         .build();
 
-    public PlayerLookup(MojangRestClient mojangRestClient, MinetoolsRestClient minetoolsRestClient) {
+    public PlayerLookup(MojangRestClient mojangRestClient, CraftheadRestClient craftheadRestClient) {
         this.mojangRestClient = mojangRestClient;
-        this.minetoolsRestClient = minetoolsRestClient;
+        this.craftheadRestClient = craftheadRestClient;
     }
 
     public Optional<ProfileData> getPlayerIdentity(final String playerName) {
         final ProfileData identityFromCache = uuidCache.getIfPresent(playerName.toLowerCase().trim());
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
-        var playerIdentity = lookupIdentityMojang(playerName).or(() -> lookupIdentityMinetools(playerName));
+        var playerIdentity = lookupIdentityMojang(playerName).or(() -> lookupIdentityCrafthead(playerName));
         playerIdentity.ifPresent(identity -> uuidCache.put(playerName.toLowerCase().trim(), identity));
         return playerIdentity;
     }
@@ -57,16 +57,16 @@ public class PlayerLookup {
         return Optional.empty();
     }
 
-    private Optional<ProfileData> lookupIdentityMinetools(final String playerName) {
+    private Optional<ProfileData> lookupIdentityCrafthead(final String playerName) {
         try {
-            ProfileData profile = minetoolsRestClient.getProfileFromUsername(playerName);
+            ProfileData profile = craftheadRestClient.getProfile(playerName);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
-            logger.error("{} from MineTools: {}", e.getStatusCode().value(), playerName);
+            logger.error("{} from Crafthead: {}", e.getStatusCode().value(), playerName);
         } catch (final RestClientException e) {
-            logger.error("Bad status response from MineTools: {}", playerName);
+            logger.error("Bad status response from Crafthead: {}", playerName);
         } catch (final Exception e) {
-            logger.error("MineTools unexpected error: {}", playerName, e);
+            logger.error("Crafthead unexpected error: {}", playerName, e);
         }
         return Optional.empty();
     }
@@ -77,7 +77,7 @@ public class PlayerLookup {
 
     public URL getAvatarURL(String playerName) {
         try {
-            return new URL(String.format("https://minotar.net/helm/%s/64", playerName));
+            return new URL(String.format("https://crafthead.net/helm/%s/64", playerName));
         } catch (MalformedURLException e) {
             throw new UncheckedIOException(e);
         }
