@@ -4,7 +4,6 @@
 package vc.data.dto.tables;
 
 
-import org.jooq.Record;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
@@ -13,8 +12,8 @@ import vc.data.dto.Public;
 import vc.data.dto.tables.records.PlaytimeMonthViewRecord;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.UUID;
-import java.util.function.Function;
 
 
 /**
@@ -54,11 +53,11 @@ public class PlaytimeMonthView extends TableImpl<PlaytimeMonthViewRecord> {
     public final TableField<PlaytimeMonthViewRecord, String> P_NAME = createField(DSL.name("p_name"), SQLDataType.CLOB, this, "");
 
     private PlaytimeMonthView(Name alias, Table<PlaytimeMonthViewRecord> aliased) {
-        this(alias, aliased, null);
+        this(alias, aliased, (Field<?>[]) null, null);
     }
 
-    private PlaytimeMonthView(Name alias, Table<PlaytimeMonthViewRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.materializedView());
+    private PlaytimeMonthView(Name alias, Table<PlaytimeMonthViewRecord> aliased, Field<?>[] parameters, Condition where) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.materializedView(), where);
     }
 
     /**
@@ -80,10 +79,6 @@ public class PlaytimeMonthView extends TableImpl<PlaytimeMonthViewRecord> {
      */
     public PlaytimeMonthView() {
         this(DSL.name("playtime_month_view"), null);
-    }
-
-    public <O extends Record> PlaytimeMonthView(Table<O> child, ForeignKey<O, PlaytimeMonthViewRecord> key) {
-        super(child, key, PLAYTIME_MONTH_VIEW);
     }
 
     @Override
@@ -130,27 +125,87 @@ public class PlaytimeMonthView extends TableImpl<PlaytimeMonthViewRecord> {
         return new PlaytimeMonthView(name.getQualifiedName(), null);
     }
 
-    // -------------------------------------------------------------------------
-    // Row3 type methods
-    // -------------------------------------------------------------------------
-
+    /**
+     * Create an inline derived table from this table
+     */
     @Override
-    public Row3<UUID, BigDecimal, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public PlaytimeMonthView where(Condition condition) {
+        return new PlaytimeMonthView(getQualifiedName(), aliased() ? this : null, null, condition);
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Function3<? super UUID, ? super BigDecimal, ? super String, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
+    @Override
+    public PlaytimeMonthView where(Collection<? extends Condition> conditions) {
+        return where(DSL.and(conditions));
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super UUID, ? super BigDecimal, ? super String, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
+    @Override
+    public PlaytimeMonthView where(Condition... conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PlaytimeMonthView where(Field<Boolean> condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PlaytimeMonthView where(SQL condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PlaytimeMonthView where(@Stringly.SQL String condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PlaytimeMonthView where(@Stringly.SQL String condition, Object... binds) {
+        return where(DSL.condition(condition, binds));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public PlaytimeMonthView where(@Stringly.SQL String condition, QueryPart... parts) {
+        return where(DSL.condition(condition, parts));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PlaytimeMonthView whereExists(Select<?> select) {
+        return where(DSL.exists(select));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public PlaytimeMonthView whereNotExists(Select<?> select) {
+        return where(DSL.notExists(select));
     }
 }

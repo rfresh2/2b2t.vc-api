@@ -13,7 +13,6 @@ import vc.data.dto.tables.records.GetUuidDataRecord;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
-import java.util.function.Function;
 
 
 /**
@@ -59,7 +58,11 @@ public class GetUuidData extends TableImpl<GetUuidDataRecord> {
     }
 
     private GetUuidData(Name alias, Table<GetUuidDataRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.function());
+        this(alias, aliased, parameters, null);
+    }
+
+    private GetUuidData(Name alias, Table<GetUuidDataRecord> aliased, Field<?>[] parameters, Condition where) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.function(), where);
     }
 
     /**
@@ -127,15 +130,6 @@ public class GetUuidData extends TableImpl<GetUuidDataRecord> {
         return new GetUuidData(name.getQualifiedName(), null, parameters);
     }
 
-    // -------------------------------------------------------------------------
-    // Row3 type methods
-    // -------------------------------------------------------------------------
-
-    @Override
-    public Row3<OffsetDateTime, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
-    }
-
     /**
      * Call this table-valued function
      */
@@ -160,20 +154,5 @@ public class GetUuidData extends TableImpl<GetUuidDataRecord> {
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
-     */
-    public <U> SelectField<U> mapping(Function3<? super OffsetDateTime, ? super String, ? super String, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
-     */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super OffsetDateTime, ? super String, ? super String, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
     }
 }

@@ -13,7 +13,6 @@ import vc.data.dto.tables.records.PlayerStatsRecord;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
-import java.util.function.Function;
 
 
 /**
@@ -89,7 +88,11 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
     }
 
     private PlayerStats(Name alias, Table<PlayerStatsRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.function());
+        this(alias, aliased, parameters, null);
+    }
+
+    private PlayerStats(Name alias, Table<PlayerStatsRecord> aliased, Field<?>[] parameters, Condition where) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.function(), where);
     }
 
     /**
@@ -157,15 +160,6 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
         return new PlayerStats(name.getQualifiedName(), null, parameters);
     }
 
-    // -------------------------------------------------------------------------
-    // Row9 type methods
-    // -------------------------------------------------------------------------
-
-    @Override
-    public Row9<Long, Long, Long, Long, OffsetDateTime, OffsetDateTime, Integer, Integer, Long> fieldsRow() {
-        return (Row9) super.fieldsRow();
-    }
-
     /**
      * Call this table-valued function
      */
@@ -190,20 +184,5 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
         });
 
         return aliased() ? result.as(getUnqualifiedName()) : result;
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
-     */
-    public <U> SelectField<U> mapping(Function9<? super Long, ? super Long, ? super Long, ? super Long, ? super OffsetDateTime, ? super OffsetDateTime, ? super Integer, ? super Integer, ? super Long, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
-    }
-
-    /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
-     */
-    public <U> SelectField<U> mapping(Class<U> toType, Function9<? super Long, ? super Long, ? super Long, ? super Long, ? super OffsetDateTime, ? super OffsetDateTime, ? super Integer, ? super Integer, ? super Long, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
     }
 }

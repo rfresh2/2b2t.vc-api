@@ -4,7 +4,6 @@
 package vc.data.dto.tables;
 
 
-import org.jooq.Record;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
@@ -13,8 +12,8 @@ import vc.data.dto.Public;
 import vc.data.dto.tables.records.OnlinePlayersRecord;
 
 import java.time.OffsetDateTime;
+import java.util.Collection;
 import java.util.UUID;
-import java.util.function.Function;
 
 
 /**
@@ -54,11 +53,32 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
     public final TableField<OnlinePlayersRecord, OffsetDateTime> JOIN_TIME = createField(DSL.name("join_time"), SQLDataType.TIMESTAMPWITHTIMEZONE(6), this, "");
 
     private OnlinePlayers(Name alias, Table<OnlinePlayersRecord> aliased) {
-        this(alias, aliased, null);
+        this(alias, aliased, (Field<?>[]) null, null);
     }
 
-    private OnlinePlayers(Name alias, Table<OnlinePlayersRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view());
+    private OnlinePlayers(Name alias, Table<OnlinePlayersRecord> aliased, Field<?>[] parameters, Condition where) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("""
+        create view "online_players" as  SELECT player_name,
+          player_uuid,
+          join_time
+         FROM ( SELECT connections.player_name,
+                  connections.player_uuid,
+                  max(
+                      CASE
+                          WHEN (connections.connection = 'JOIN'::connectiontype) THEN connections."time"
+                          ELSE NULL::timestamp with time zone
+                      END) AS join_time,
+                  max(
+                      CASE
+                          WHEN (connections.connection = 'LEAVE'::connectiontype) THEN connections."time"
+                          ELSE NULL::timestamp with time zone
+                      END) AS leave_time
+                 FROM connections
+                WHERE (connections."time" > (now() - '06:00:00'::interval))
+                GROUP BY connections.player_name, connections.player_uuid) subquery
+        WHERE (join_time > COALESCE(leave_time, ('2000-01-01 00:00:00'::timestamp without time zone)::timestamp with time zone))
+        ORDER BY (player_name COLLATE "C");
+        """), where);
     }
 
     /**
@@ -80,10 +100,6 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
      */
     public OnlinePlayers() {
         this(DSL.name("online_players"), null);
-    }
-
-    public <O extends Record> OnlinePlayers(Table<O> child, ForeignKey<O, OnlinePlayersRecord> key) {
-        super(child, key, ONLINE_PLAYERS);
     }
 
     @Override
@@ -130,27 +146,87 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
         return new OnlinePlayers(name.getQualifiedName(), null);
     }
 
-    // -------------------------------------------------------------------------
-    // Row3 type methods
-    // -------------------------------------------------------------------------
-
+    /**
+     * Create an inline derived table from this table
+     */
     @Override
-    public Row3<String, UUID, OffsetDateTime> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public OnlinePlayers where(Condition condition) {
+        return new OnlinePlayers(getQualifiedName(), aliased() ? this : null, null, condition);
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Function3<? super String, ? super UUID, ? super OffsetDateTime, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
+    @Override
+    public OnlinePlayers where(Collection<? extends Condition> conditions) {
+        return where(DSL.and(conditions));
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super String, ? super UUID, ? super OffsetDateTime, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
+    @Override
+    public OnlinePlayers where(Condition... conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public OnlinePlayers where(Field<Boolean> condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public OnlinePlayers where(SQL condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public OnlinePlayers where(@Stringly.SQL String condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public OnlinePlayers where(@Stringly.SQL String condition, Object... binds) {
+        return where(DSL.condition(condition, binds));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public OnlinePlayers where(@Stringly.SQL String condition, QueryPart... parts) {
+        return where(DSL.condition(condition, parts));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public OnlinePlayers whereExists(Select<?> select) {
+        return where(DSL.exists(select));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public OnlinePlayers whereNotExists(Select<?> select) {
+        return where(DSL.notExists(select));
     }
 }

@@ -7,18 +7,17 @@ package vc.data.dto;
 import org.jooq.Configuration;
 import org.jooq.Field;
 import org.jooq.Result;
-import org.jooq.types.YearToSecond;
 import vc.data.dto.tables.*;
-import vc.data.dto.tables.records.*;
+import vc.data.dto.tables.records.GetUuidDataRecord;
+import vc.data.dto.tables.records.PlayerStatsRecord;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 
 /**
  * Convenience access to all tables in public.
  */
-@SuppressWarnings({ "all", "unchecked", "rawtypes" })
+@SuppressWarnings({ "all", "unchecked", "rawtypes", "this-escape" })
 public class Tables {
 
     /**
@@ -45,11 +44,11 @@ public class Tables {
      * Call <code>public.get_uuid_data</code>.
      */
     public static Result<GetUuidDataRecord> GET_UUID_DATA(
-        Configuration configuration
+          Configuration configuration
         , UUID pUuid
     ) {
         return configuration.dsl().selectFrom(vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
-            pUuid
+              pUuid
         )).fetch();
     }
 
@@ -57,7 +56,7 @@ public class Tables {
      * Get <code>public.get_uuid_data</code> as a table.
      */
     public static GetUuidData GET_UUID_DATA(
-        UUID pUuid
+          UUID pUuid
     ) {
         return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
             pUuid
@@ -68,7 +67,7 @@ public class Tables {
      * Get <code>public.get_uuid_data</code> as a table.
      */
     public static GetUuidData GET_UUID_DATA(
-        Field<UUID> pUuid
+          Field<UUID> pUuid
     ) {
         return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
             pUuid
@@ -99,11 +98,11 @@ public class Tables {
      * Call <code>public.player_stats</code>.
      */
     public static Result<PlayerStatsRecord> PLAYER_STATS(
-        Configuration configuration
+          Configuration configuration
         , UUID pUuid
     ) {
         return configuration.dsl().selectFrom(vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
-            pUuid
+              pUuid
         )).fetch();
     }
 
@@ -111,7 +110,7 @@ public class Tables {
      * Get <code>public.player_stats</code> as a table.
      */
     public static PlayerStats PLAYER_STATS(
-        UUID pUuid
+          UUID pUuid
     ) {
         return vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
             pUuid
@@ -122,7 +121,7 @@ public class Tables {
      * Get <code>public.player_stats</code> as a table.
      */
     public static PlayerStats PLAYER_STATS(
-        Field<UUID> pUuid
+          Field<UUID> pUuid
     ) {
         return vc.data.dto.tables.PlayerStats.PLAYER_STATS.call(
             pUuid
@@ -133,97 +132,6 @@ public class Tables {
      * The table <code>public.playercount</code>.
      */
     public static final Playercount PLAYERCOUNT = Playercount.PLAYERCOUNT;
-
-    /**
-     * The table <code>public.playtime_all</code>.
-     */
-    public static final PlaytimeAll PLAYTIME_ALL = PlaytimeAll.PLAYTIME_ALL;
-
-    /**
-     * Call <code>public.playtime_all</code>.
-     */
-    public static Result<PlaytimeAllRecord> PLAYTIME_ALL(
-        Configuration configuration
-    ) {
-        return configuration.dsl().selectFrom(vc.data.dto.tables.PlaytimeAll.PLAYTIME_ALL.call(
-        )).fetch();
-    }
-
-    /**
-     * Get <code>public.playtime_all</code> as a table.
-     */
-    public static PlaytimeAll PLAYTIME_ALL() {
-        return vc.data.dto.tables.PlaytimeAll.PLAYTIME_ALL.call(
-        );
-    }
-
-    /**
-     * The table <code>public.playtime_all_month</code>.
-     */
-    public static final PlaytimeAllMonth PLAYTIME_ALL_MONTH = PlaytimeAllMonth.PLAYTIME_ALL_MONTH;
-
-    /**
-     * Call <code>public.playtime_all_month</code>.
-     */
-    public static Result<PlaytimeAllMonthRecord> PLAYTIME_ALL_MONTH(
-        Configuration configuration
-    ) {
-        return configuration.dsl().selectFrom(vc.data.dto.tables.PlaytimeAllMonth.PLAYTIME_ALL_MONTH.call(
-        )).fetch();
-    }
-
-    /**
-     * Get <code>public.playtime_all_month</code> as a table.
-     */
-    public static PlaytimeAllMonth PLAYTIME_ALL_MONTH() {
-        return vc.data.dto.tables.PlaytimeAllMonth.PLAYTIME_ALL_MONTH.call(
-        );
-    }
-
-    /**
-     * The table <code>public.playtime_all_time_interval</code>.
-     */
-    public static final PlaytimeAllTimeInterval PLAYTIME_ALL_TIME_INTERVAL = PlaytimeAllTimeInterval.PLAYTIME_ALL_TIME_INTERVAL;
-
-    /**
-     * Call <code>public.playtime_all_time_interval</code>.
-     */
-    public static Result<PlaytimeAllTimeIntervalRecord> PLAYTIME_ALL_TIME_INTERVAL(
-        Configuration configuration
-        , OffsetDateTime endT
-        , YearToSecond tInterval
-    ) {
-        return configuration.dsl().selectFrom(vc.data.dto.tables.PlaytimeAllTimeInterval.PLAYTIME_ALL_TIME_INTERVAL.call(
-            endT
-            , tInterval
-        )).fetch();
-    }
-
-    /**
-     * Get <code>public.playtime_all_time_interval</code> as a table.
-     */
-    public static PlaytimeAllTimeInterval PLAYTIME_ALL_TIME_INTERVAL(
-        OffsetDateTime endT
-        , YearToSecond tInterval
-    ) {
-        return vc.data.dto.tables.PlaytimeAllTimeInterval.PLAYTIME_ALL_TIME_INTERVAL.call(
-            endT,
-            tInterval
-        );
-    }
-
-    /**
-     * Get <code>public.playtime_all_time_interval</code> as a table.
-     */
-    public static PlaytimeAllTimeInterval PLAYTIME_ALL_TIME_INTERVAL(
-        Field<OffsetDateTime> endT
-        , Field<YearToSecond> tInterval
-    ) {
-        return vc.data.dto.tables.PlaytimeAllTimeInterval.PLAYTIME_ALL_TIME_INTERVAL.call(
-            endT,
-            tInterval
-        );
-    }
 
     /**
      * The table <code>public.playtime_month_view</code>.

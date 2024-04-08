@@ -4,7 +4,6 @@
 package vc.data.dto.tables;
 
 
-import org.jooq.Record;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
@@ -12,8 +11,8 @@ import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
 import vc.data.dto.tables.records.MaxConsMonthViewRecord;
 
+import java.util.Collection;
 import java.util.UUID;
-import java.util.function.Function;
 
 
 /**
@@ -53,11 +52,11 @@ public class MaxConsMonthView extends TableImpl<MaxConsMonthViewRecord> {
     public final TableField<MaxConsMonthViewRecord, String> P_NAME = createField(DSL.name("p_name"), SQLDataType.CLOB, this, "");
 
     private MaxConsMonthView(Name alias, Table<MaxConsMonthViewRecord> aliased) {
-        this(alias, aliased, null);
+        this(alias, aliased, (Field<?>[]) null, null);
     }
 
-    private MaxConsMonthView(Name alias, Table<MaxConsMonthViewRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.materializedView());
+    private MaxConsMonthView(Name alias, Table<MaxConsMonthViewRecord> aliased, Field<?>[] parameters, Condition where) {
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.materializedView(), where);
     }
 
     /**
@@ -79,10 +78,6 @@ public class MaxConsMonthView extends TableImpl<MaxConsMonthViewRecord> {
      */
     public MaxConsMonthView() {
         this(DSL.name("max_cons_month_view"), null);
-    }
-
-    public <O extends Record> MaxConsMonthView(Table<O> child, ForeignKey<O, MaxConsMonthViewRecord> key) {
-        super(child, key, MAX_CONS_MONTH_VIEW);
     }
 
     @Override
@@ -129,27 +124,87 @@ public class MaxConsMonthView extends TableImpl<MaxConsMonthViewRecord> {
         return new MaxConsMonthView(name.getQualifiedName(), null);
     }
 
-    // -------------------------------------------------------------------------
-    // Row3 type methods
-    // -------------------------------------------------------------------------
-
+    /**
+     * Create an inline derived table from this table
+     */
     @Override
-    public Row3<UUID, Integer, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public MaxConsMonthView where(Condition condition) {
+        return new MaxConsMonthView(getQualifiedName(), aliased() ? this : null, null, condition);
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Function3<? super UUID, ? super Integer, ? super String, ? extends U> from) {
-        return convertFrom(Records.mapping(from));
+    @Override
+    public MaxConsMonthView where(Collection<? extends Condition> conditions) {
+        return where(DSL.and(conditions));
     }
 
     /**
-     * Convenience mapping calling {@link SelectField#convertFrom(Class,
-     * Function)}.
+     * Create an inline derived table from this table
      */
-    public <U> SelectField<U> mapping(Class<U> toType, Function3<? super UUID, ? super Integer, ? super String, ? extends U> from) {
-        return convertFrom(toType, Records.mapping(from));
+    @Override
+    public MaxConsMonthView where(Condition... conditions) {
+        return where(DSL.and(conditions));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public MaxConsMonthView where(Field<Boolean> condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public MaxConsMonthView where(SQL condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public MaxConsMonthView where(@Stringly.SQL String condition) {
+        return where(DSL.condition(condition));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public MaxConsMonthView where(@Stringly.SQL String condition, Object... binds) {
+        return where(DSL.condition(condition, binds));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    @PlainSQL
+    public MaxConsMonthView where(@Stringly.SQL String condition, QueryPart... parts) {
+        return where(DSL.condition(condition, parts));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public MaxConsMonthView whereExists(Select<?> select) {
+        return where(DSL.exists(select));
+    }
+
+    /**
+     * Create an inline derived table from this table
+     */
+    @Override
+    public MaxConsMonthView whereNotExists(Select<?> select) {
+        return where(DSL.notExists(select));
     }
 }

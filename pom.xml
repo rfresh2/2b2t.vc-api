@@ -206,18 +206,24 @@
 <!--								</target>-->
 <!--								<database>-->
 <!--									<inputSchema>public</inputSchema>-->
+<!--									<includes>-->
+<!--										chats | connections | connectiontype | deaths | playercount-->
+<!--										| queuelength | queuewait | restarts | tablist | names | playtime-->
+<!--										| playtime_month | max_cons_month_view | get_uuid_data | online_players-->
+<!--										| player_stats | playtime_month_view-->
+<!--									</includes>-->
 <!--								</database>-->
 <!--								<generate>-->
 <!--									<deprecated>false</deprecated>-->
-				<!--									<records>true</records>-->
-				<!--									<immutablePojos>true</immutablePojos>-->
-				<!--									<fluentSetters>true</fluentSetters>-->
-				<!--									<routines>true</routines>-->
-				<!--								</generate>-->
-				<!--							</generator>-->
-				<!--						</configuration>-->
-				<!--					</execution>-->
-				<!--				</executions>-->
+<!--									<records>true</records>-->
+<!--									<immutablePojos>true</immutablePojos>-->
+<!--									<fluentSetters>true</fluentSetters>-->
+<!--									<routines>true</routines>-->
+<!--								</generate>-->
+<!--							</generator>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
 			</plugin>
 		</plugins>
 	</build>
