@@ -167,6 +167,16 @@ public class Public extends SchemaImpl {
     public final Tablist TABLIST = Tablist.TABLIST;
 
     /**
+     * The table <code>public.top_deaths_month_view</code>.
+     */
+    public final TopDeathsMonthView TOP_DEATHS_MONTH_VIEW = TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW;
+
+    /**
+     * The table <code>public.top_kills_month_view</code>.
+     */
+    public final TopKillsMonthView TOP_KILLS_MONTH_VIEW = TopKillsMonthView.TOP_KILLS_MONTH_VIEW;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -195,7 +205,9 @@ public class Public extends SchemaImpl {
             Queuelength.QUEUELENGTH,
             Queuewait.QUEUEWAIT,
             Restarts.RESTARTS,
-            Tablist.TABLIST
+            Tablist.TABLIST,
+            TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW,
+            TopKillsMonthView.TOP_KILLS_MONTH_VIEW
         );
     }
 }

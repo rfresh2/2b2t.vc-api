@@ -157,4 +157,14 @@ public class Tables {
      * The table <code>public.tablist</code>.
      */
     public static final Tablist TABLIST = Tablist.TABLIST;
+
+    /**
+     * The table <code>public.top_deaths_month_view</code>.
+     */
+    public static final TopDeathsMonthView TOP_DEATHS_MONTH_VIEW = TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW;
+
+    /**
+     * The table <code>public.top_kills_month_view</code>.
+     */
+    public static final TopKillsMonthView TOP_KILLS_MONTH_VIEW = TopKillsMonthView.TOP_KILLS_MONTH_VIEW;
 }
