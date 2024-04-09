@@ -1,0 +1,5 @@
+db.driver=org.postgresql.Driver
+db.url=jdbc:postgresql://my.db:6969/postgres
+db.username=postgres
+db.password=abc123
+jooq.sql.dialect=postgresql
