@@ -29,6 +29,18 @@ public class ApiTests {
     private TestRestTemplate restTemplate;
 
     @Test
+    public void homepageTest() {
+        restTemplate.getForObject("http://localhost:" + port + "/", String.class);
+        // basically no-op
+    }
+
+    @Test
+    public void swaggerUiTest() {
+        restTemplate.getForObject("http://localhost:" + port + "/swagger-ui/index.html", String.class);
+        // basically no-op
+    }
+
+    @Test
     public void botsApiTest() {
         List botsResponse = restTemplate.getForObject("http://localhost:" + port + "/bots/month", List.class);
         assertNotNull(botsResponse);
