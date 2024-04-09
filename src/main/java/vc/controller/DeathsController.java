@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static vc.data.dto.Tables.DEATHS;
+import static vc.data.dto.Tables.*;
 
 @Tags({@Tag(name = "Deaths")})
 @RestController
@@ -114,6 +114,40 @@ public class DeathsController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new KillsResponse(deathsList, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
+        }
+    }
+
+    public record DeathOrKillTopMonthResponse(UUID uuid, String playerName, int count) {}
+
+    @GetMapping("/deaths/top/month")
+    @RateLimiter(name = "main")
+    @Cacheable("deathsTopMonth")
+    public ResponseEntity<List<DeathOrKillTopMonthResponse>> deathsTopMonth() {
+        List<DeathOrKillTopMonthResponse> responses = dsl.selectFrom(TOP_DEATHS_MONTH_VIEW)
+            .fetch()
+            .map(r -> new DeathOrKillTopMonthResponse(r.getVictimPlayerUuid(),
+                                                      r.getVictimPlayerName(),
+                                                      r.getDeathCount().intValue()));
+        if (responses.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(responses);
+        }
+    }
+
+    @GetMapping("/kills/top/month")
+    @RateLimiter(name = "main")
+    @Cacheable("killsTopMonth")
+    public ResponseEntity<List<DeathOrKillTopMonthResponse>> killsTopMonth() {
+        List<DeathOrKillTopMonthResponse> responses = dsl.selectFrom(TOP_KILLS_MONTH_VIEW)
+            .fetch()
+            .map(r -> new DeathOrKillTopMonthResponse(r.getKillerPlayerUuid(),
+                                                      r.getKillerPlayerName(),
+                                                      r.getKillCount().intValue()));
+        if (responses.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(responses);
         }
     }
 }

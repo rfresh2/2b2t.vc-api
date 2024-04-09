@@ -91,6 +91,22 @@ public class ApiTests {
     }
 
     @Test
+    public void deathsTopMonthTest() {
+        var deathsTopMonthResponse = restTemplate.getForObject("http://localhost:" + port + "/deaths/top/month",
+                                                            List.class);
+        assertNotNull(deathsTopMonthResponse);
+        assertFalse(deathsTopMonthResponse.isEmpty());
+    }
+
+    @Test
+    public void killsTopMonthTest() {
+        var killsTopMonthResponse = restTemplate.getForObject("http://localhost:" + port + "/kills/top/month",
+                                                            List.class);
+        assertNotNull(killsTopMonthResponse);
+        assertFalse(killsTopMonthResponse.isEmpty());
+    }
+
+    @Test
     public void namesApiTest() {
         var namesResponse = restTemplate.getForObject("http://localhost:" + port + "/names?playerName={playerName}",
                                                        List.class,
