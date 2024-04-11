@@ -157,6 +157,9 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
+  "name":"ch.qos.logback.classic.spi.LogbackServiceProvider"
+},
+{
   "name":"ch.qos.logback.classic.util.DefaultJoranConfigurator",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
@@ -3370,6 +3373,7 @@
 },
 {
   "name":"java.lang.ClassLoader",
+  "fields":[{"name":"classLoaderValueMap"}],
   "methods":[{"name":"defineClass","parameterTypes":["java.lang.String","byte[]","int","int","java.security.ProtectionDomain"] }, {"name":"getUnnamedModule","parameterTypes":[] }]
 },
 {
@@ -9890,6 +9894,9 @@
   "name":"org.springframework.boot.logging.logback.LogbackLoggingSystem.Factory"
 },
 {
+  "name":"org.springframework.boot.logging.logback.RootLogLevelConfigurator"
+},
+{
   "name":"org.springframework.boot.orm.jpa.JpaDatabaseInitializerDetector",
   "queryAllDeclaredConstructors":true,
   "queryAllPublicConstructors":true,
@@ -13183,6 +13190,25 @@
   "methods":[{"name":"getPlayerName","parameterTypes":[] }, {"name":"getPlaytimeDays","parameterTypes":[] }, {"name":"getUuid","parameterTypes":[] }]
 },
 {
+  "name":"vc.controller.PriorityPlayersController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["org.jooq.DSLContext","vc.util.PlayerLookup"] }, {"name":"priorityPlayers","parameterTypes":[] }]
+},
+{
+  "name":"vc.controller.PriorityPlayersController$$SpringCGLIB$$0",
+  "fields":[{"name":"CGLIB$CALLBACK_FILTER"}, {"name":"CGLIB$FACTORY_DATA"}],
+  "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
+},
+{
+  "name":"vc.controller.PriorityPlayersController$PriorityPlayersResponse",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"playerName","parameterTypes":[] }, {"name":"uuid","parameterTypes":[] }]
+},
+{
   "name":"vc.controller.QueueController",
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
@@ -13312,6 +13338,10 @@
 },
 {
   "name":"vc.data.dto.tables.records.PlaytimeMonthViewRecord",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"vc.data.dto.tables.records.PriorityPlayersViewRecord",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
