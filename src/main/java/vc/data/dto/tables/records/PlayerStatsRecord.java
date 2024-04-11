@@ -153,6 +153,21 @@ public class PlayerStatsRecord extends TableRecordImpl<PlayerStatsRecord> {
         return (Long) get(8);
     }
 
+    /**
+     * Setter for <code>public.player_stats.prio</code>.
+     */
+    public PlayerStatsRecord setPrio(Boolean value) {
+        set(9, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.player_stats.prio</code>.
+     */
+    public Boolean getPrio() {
+        return (Boolean) get(9);
+    }
+
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
@@ -167,7 +182,7 @@ public class PlayerStatsRecord extends TableRecordImpl<PlayerStatsRecord> {
     /**
      * Create a detached, initialised PlayerStatsRecord
      */
-    public PlayerStatsRecord(Long joinCount, Long leaveCount, Long deathCount, Long killCount, OffsetDateTime firstSeen, OffsetDateTime lastSeen, Integer playtime, Integer playtime_30Days, Long chatsCount) {
+    public PlayerStatsRecord(Long joinCount, Long leaveCount, Long deathCount, Long killCount, OffsetDateTime firstSeen, OffsetDateTime lastSeen, Integer playtime, Integer playtime_30Days, Long chatsCount, Boolean prio) {
         super(PlayerStats.PLAYER_STATS);
 
         setJoinCount(joinCount);
@@ -179,6 +194,7 @@ public class PlayerStatsRecord extends TableRecordImpl<PlayerStatsRecord> {
         setPlaytime(playtime);
         setPlaytime_30Days(playtime_30Days);
         setChatsCount(chatsCount);
+        setPrio(prio);
         resetChangedOnNotNull();
     }
 
@@ -198,6 +214,7 @@ public class PlayerStatsRecord extends TableRecordImpl<PlayerStatsRecord> {
             setPlaytime(value.getPlaytime());
             setPlaytime_30Days(value.getPlaytime_30Days());
             setChatsCount(value.getChatsCount());
+            setPrio(value.getPrio());
             resetChangedOnNotNull();
         }
     }

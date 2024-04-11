@@ -81,6 +81,11 @@ public class PlayerStats extends TableImpl<PlayerStatsRecord> {
      */
     public final TableField<PlayerStatsRecord, Long> CHATS_COUNT = createField(DSL.name("chats_count"), SQLDataType.BIGINT, this, "");
 
+    /**
+     * The column <code>public.player_stats.prio</code>.
+     */
+    public final TableField<PlayerStatsRecord, Boolean> PRIO = createField(DSL.name("prio"), SQLDataType.BOOLEAN, this, "");
+
     private PlayerStats(Name alias, Table<PlayerStatsRecord> aliased) {
         this(alias, aliased, new Field[] {
             DSL.val(null, SQLDataType.UUID)

@@ -25,6 +25,7 @@ public class PlayerStats implements Serializable {
     private final Integer playtime;
     private final Integer playtime_30Days;
     private final Long chatsCount;
+    private final Boolean prio;
 
     public PlayerStats(PlayerStats value) {
         this.joinCount = value.joinCount;
@@ -36,6 +37,7 @@ public class PlayerStats implements Serializable {
         this.playtime = value.playtime;
         this.playtime_30Days = value.playtime_30Days;
         this.chatsCount = value.chatsCount;
+        this.prio = value.prio;
     }
 
     public PlayerStats(
@@ -47,7 +49,8 @@ public class PlayerStats implements Serializable {
         OffsetDateTime lastSeen,
         Integer playtime,
         Integer playtime_30Days,
-        Long chatsCount
+        Long chatsCount,
+        Boolean prio
     ) {
         this.joinCount = joinCount;
         this.leaveCount = leaveCount;
@@ -58,6 +61,7 @@ public class PlayerStats implements Serializable {
         this.playtime = playtime;
         this.playtime_30Days = playtime_30Days;
         this.chatsCount = chatsCount;
+        this.prio = prio;
     }
 
     /**
@@ -123,6 +127,13 @@ public class PlayerStats implements Serializable {
         return this.chatsCount;
     }
 
+    /**
+     * Getter for <code>public.player_stats.prio</code>.
+     */
+    public Boolean getPrio() {
+        return this.prio;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -186,6 +197,12 @@ public class PlayerStats implements Serializable {
         }
         else if (!this.chatsCount.equals(other.chatsCount))
             return false;
+        if (this.prio == null) {
+            if (other.prio != null)
+                return false;
+        }
+        else if (!this.prio.equals(other.prio))
+            return false;
         return true;
     }
 
@@ -202,6 +219,7 @@ public class PlayerStats implements Serializable {
         result = prime * result + ((this.playtime == null) ? 0 : this.playtime.hashCode());
         result = prime * result + ((this.playtime_30Days == null) ? 0 : this.playtime_30Days.hashCode());
         result = prime * result + ((this.chatsCount == null) ? 0 : this.chatsCount.hashCode());
+        result = prime * result + ((this.prio == null) ? 0 : this.prio.hashCode());
         return result;
     }
 
@@ -218,6 +236,7 @@ public class PlayerStats implements Serializable {
         sb.append(", ").append(playtime);
         sb.append(", ").append(playtime_30Days);
         sb.append(", ").append(chatsCount);
+        sb.append(", ").append(prio);
 
         sb.append(")");
         return sb.toString();
