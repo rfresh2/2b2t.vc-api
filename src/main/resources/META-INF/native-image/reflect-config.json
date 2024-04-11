@@ -13256,7 +13256,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int","int"] }, {"name":"chatsCount","parameterTypes":[] }, {"name":"deathCount","parameterTypes":[] }, {"name":"firstSeen","parameterTypes":[] }, {"name":"joinCount","parameterTypes":[] }, {"name":"killCount","parameterTypes":[] }, {"name":"lastSeen","parameterTypes":[] }, {"name":"leaveCount","parameterTypes":[] }, {"name":"playtimeSeconds","parameterTypes":[] }, {"name":"playtimeSecondsMonth","parameterTypes":[] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int","int"] }, {"name":"<init>","parameterTypes":["int","int","int","int","java.time.OffsetDateTime","java.time.OffsetDateTime","int","int","int","boolean"] }, {"name":"chatsCount","parameterTypes":[] }, {"name":"deathCount","parameterTypes":[] }, {"name":"firstSeen","parameterTypes":[] }, {"name":"joinCount","parameterTypes":[] }, {"name":"killCount","parameterTypes":[] }, {"name":"lastSeen","parameterTypes":[] }, {"name":"leaveCount","parameterTypes":[] }, {"name":"playtimeSeconds","parameterTypes":[] }, {"name":"playtimeSecondsMonth","parameterTypes":[] }, {"name":"prio","parameterTypes":[] }]
 },
 {
   "name":"vc.controller.TabList",
