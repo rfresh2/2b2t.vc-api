@@ -139,6 +139,11 @@ public class Tables {
     public static final PlaytimeMonthView PLAYTIME_MONTH_VIEW = PlaytimeMonthView.PLAYTIME_MONTH_VIEW;
 
     /**
+     * The table <code>public.priority_players_view</code>.
+     */
+    public static final PriorityPlayersView PRIORITY_PLAYERS_VIEW = PriorityPlayersView.PRIORITY_PLAYERS_VIEW;
+
+    /**
      * The table <code>public.queuelength</code>.
      */
     public static final Queuelength QUEUELENGTH = Queuelength.QUEUELENGTH;
