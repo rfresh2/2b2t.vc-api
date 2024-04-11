@@ -19,6 +19,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 @Component
 public class PlayerLookup {
@@ -30,6 +31,7 @@ public class PlayerLookup {
         .expireAfterWrite(Duration.ofMinutes(30))
         .maximumSize(250)
         .build();
+    private final Pattern validUsernamePattern = Pattern.compile("[a-zA-Z0-9_]{1,16}");
 
     public PlayerLookup(
         MojangRestClient mojangRestClient,
@@ -108,11 +110,17 @@ public class PlayerLookup {
 
     public Optional<UUID> getOrResolveUuid(final UUID uuid, final String username) {
         if (uuid != null) return Optional.of(uuid);
+        if (username == null || invalidUsername(username)) return Optional.empty();
         return getPlayerIdentity(username.trim()).map(ProfileData::uuid);
     }
 
     public Optional<ProfileData> getOrResolvePlayerIdentity(final UUID uuid, final String username) {
         if (uuid != null) return Optional.of(new ProfileDataImpl(username, uuid));
+        if (username == null || invalidUsername(username)) return Optional.empty();
         return getPlayerIdentity(username.trim());
+    }
+
+    public boolean invalidUsername(final String username) {
+        return !validUsernamePattern.matcher(username).matches();
     }
 }
