@@ -1,6 +1,11 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
@@ -31,6 +36,28 @@ public class NamesController {
     @GetMapping("/names")
     @RateLimiter(name = "main")
     @Cacheable("names")
+    @ApiResponses(value = {
+            @ApiResponse(
+                responseCode = "200",
+                description = "Name history for given player",
+                content = {
+                    @Content(
+                        mediaType = "application/json",
+                        array = @ArraySchema(schema = @Schema(implementation = Names.class))
+                    )
+                }
+            ),
+            @ApiResponse(
+                responseCode = "204",
+                description = "No data for player",
+                content = @Content
+            ),
+            @ApiResponse(
+                responseCode = "400",
+                description = "Bad request. Either uuid or playerName must be provided.",
+                content = @Content
+            )
+    })
     public ResponseEntity<List<Names>> names(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName) {

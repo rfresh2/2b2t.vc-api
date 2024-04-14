@@ -1,11 +1,15 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +40,27 @@ public class PlaytimeController {
     @GetMapping("/playtime")
     @RateLimiter(name = "main")
     @Cacheable("playtime")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Playtime for given player",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = PlaytimeResponse.class)
+                )
+            }),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data for player",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. Either uuid or playerName must be provided.",
+            content = @Content
+        )
+    })
     public ResponseEntity<PlaytimeResponse> playtime(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName
@@ -53,67 +78,46 @@ public class PlaytimeController {
         playtime.execute(dsl.configuration());
         Integer playtimeReturnValue = playtime.getReturnValue();
         if (playtimeReturnValue != null && playtimeReturnValue != 0) {
-            return new ResponseEntity<>(new PlaytimeResponse(resolvedUuid, playtimeReturnValue), HttpStatus.OK);
+            return ResponseEntity.ok(new PlaytimeResponse(resolvedUuid, playtimeReturnValue));
         } else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return ResponseEntity.noContent().build();
         }
     }
 
     @RateLimiter(name = "main")
     @GetMapping("/playtime/top/month")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Top playtime for the month",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = PlaytimeTopMonthResponse.class))
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data for player",
+            content = @Content
+        )
+    })
     public ResponseEntity<List<PlaytimeTopMonthResponse>> playtimeTopMonth() {
         PlaytimeMonthViewRecord[] playtimeMonthViewRecords = dsl.selectFrom(PlaytimeMonthView.PLAYTIME_MONTH_VIEW)
                 .fetchArray();
         List<PlaytimeTopMonthResponse> monthResponses = Arrays.stream(playtimeMonthViewRecords).toList().stream()
                 .map(playtimeAllMonthRecord -> new PlaytimeTopMonthResponse(playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.P_UUID), playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.P_NAME), playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.PT_DAYS).doubleValue()))
-                .sorted((a, b) -> Double.compare(b.getPlaytimeDays(), a.getPlaytimeDays()))
+                .sorted((a, b) -> Double.compare(b.playtimeDays(), a.playtimeDays()))
                 .collect(Collectors.toList());
         if (monthResponses.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>(monthResponses, HttpStatus.OK);
+            return ResponseEntity.ok(monthResponses);
         }
     }
 
-    public static class PlaytimeTopMonthResponse {
-        private final UUID uuid;
-        private final String playerName;
-        private final double playtimeDays;
+    public record PlaytimeTopMonthResponse(UUID uuid, String playerName, double playtimeDays) { }
 
-        public PlaytimeTopMonthResponse(final UUID uuid, final String playerName, final double playtimeDays) {
-            this.uuid = uuid;
-            this.playerName = playerName;
-            this.playtimeDays = playtimeDays;
-        }
-
-        public UUID getUuid() {
-            return uuid;
-        }
-
-        public String getPlayerName() {
-            return playerName;
-        }
-
-        public double getPlaytimeDays() {
-            return playtimeDays;
-        }
-    }
-
-    public static class PlaytimeResponse {
-        private final UUID uuid;
-        private final int playtimeSeconds;
-
-        public PlaytimeResponse(final UUID uuid, final int playtimeSeconds) {
-            this.uuid = uuid;
-            this.playtimeSeconds = playtimeSeconds;
-        }
-
-        public UUID getUuid() {
-            return uuid;
-        }
-
-        public int getPlaytimeSeconds() {
-            return playtimeSeconds;
-        }
-    }
+    public record PlaytimeResponse(UUID uuid, int playtimeSeconds) { }
 }

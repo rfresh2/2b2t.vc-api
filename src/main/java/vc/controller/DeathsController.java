@@ -1,6 +1,11 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
@@ -34,6 +39,28 @@ public class DeathsController {
     @GetMapping("/deaths")
     @RateLimiter(name = "main")
     @Cacheable("deaths")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Death history for given player",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = DeathsResponse.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data for player",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. Either uuid or playerName must be provided.",
+            content = @Content
+        )
+    })
     public ResponseEntity<DeathsResponse> deaths(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
@@ -78,6 +105,28 @@ public class DeathsController {
     @GetMapping("/kills")
     @RateLimiter(name = "main")
     @Cacheable("kills")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Kill history for given player",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = KillsResponse.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data for player",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. Either uuid or playerName must be provided.",
+            content = @Content
+        )
+    })
     public ResponseEntity<KillsResponse> kills(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
@@ -122,6 +171,23 @@ public class DeathsController {
     @GetMapping("/deaths/top/month")
     @RateLimiter(name = "main")
     @Cacheable("deathsTopMonth")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Top deaths for the month",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = DeathOrKillTopMonthResponse.class))
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data for the month",
+            content = @Content
+        )
+    })
     public ResponseEntity<List<DeathOrKillTopMonthResponse>> deathsTopMonth() {
         List<DeathOrKillTopMonthResponse> responses = dsl.selectFrom(TOP_DEATHS_MONTH_VIEW)
             .fetch()
@@ -138,6 +204,23 @@ public class DeathsController {
     @GetMapping("/kills/top/month")
     @RateLimiter(name = "main")
     @Cacheable("killsTopMonth")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Top kills for the month",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = DeathOrKillTopMonthResponse.class))
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data for the month",
+            content = @Content
+        )
+    })
     public ResponseEntity<List<DeathOrKillTopMonthResponse>> killsTopMonth() {
         List<DeathOrKillTopMonthResponse> responses = dsl.selectFrom(TOP_KILLS_MONTH_VIEW)
             .fetch()

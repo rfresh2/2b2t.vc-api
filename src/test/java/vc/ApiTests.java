@@ -137,7 +137,7 @@ public class ApiTests {
                                                                 "playerName", "rfresh2"
                                                             ));
         assertNotNull(playtimeResponse);
-        assertTrue(playtimeResponse.getPlaytimeSeconds() > 0);
+        assertTrue(playtimeResponse.playtimeSeconds() > 0);
     }
 
     @Test

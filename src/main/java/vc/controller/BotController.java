@@ -1,25 +1,22 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
-import org.jooq.impl.QOM;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.tables.pojos.MaxConsMonthView;
-import vc.data.dto.tables.pojos.OnlinePlayers;
-import vc.data.dto.tables.records.MaxConsMonthViewRecord;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Arrays;
 import java.util.List;
 
-import static vc.data.dto.tables.OnlinePlayers.ONLINE_PLAYERS;
 import static vc.data.dto.tables.MaxConsMonthView.MAX_CONS_MONTH_VIEW;
 
 @Tags({@Tag(name = "Bots")})
@@ -34,13 +31,30 @@ public class BotController {
     @GetMapping("/bots/month")
     @RateLimiter(name = "main")
     @Cacheable("botsMonth")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "List of suspected bots",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    array = @ArraySchema(schema = @Schema(implementation = MaxConsMonthView.class)
+                ))
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data",
+            content = @Content
+        )
+    })
     public ResponseEntity<List<MaxConsMonthView>> onlinePlayers() {
         List<MaxConsMonthView> bots = dsl.selectFrom(MAX_CONS_MONTH_VIEW).fetch().into(MaxConsMonthView.class);
 
         if (bots.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return ResponseEntity.noContent().build();
         } else {
-            return new ResponseEntity<>(bots, HttpStatus.OK);
+            return ResponseEntity.ok(bots);
         }
     }
 }

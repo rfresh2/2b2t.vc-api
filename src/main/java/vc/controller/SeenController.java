@@ -1,12 +1,15 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +36,28 @@ public class SeenController {
     @GetMapping("/seen")
     @RateLimiter(name = "main")
     @Cacheable("seen")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "First and last time a player was seen on 2b2t",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = SeenResponse.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data for player",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. Either uuid or playerName must be provided.",
+            content = @Content
+        )
+    })
     public ResponseEntity<SeenResponse> seen(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName) {
@@ -52,7 +77,7 @@ public class SeenController {
                 .where(c.PLAYER_UUID.eq(resolvedUuid))
                 .fetchOne();
         if (connectionsRecord != null) {
-            return new ResponseEntity<>(new SeenResponse(connectionsRecord.value1(), connectionsRecord.value2()), HttpStatus.OK);
+            return ResponseEntity.ok(new SeenResponse(connectionsRecord.value1(), connectionsRecord.value2()));
         } else {
             return ResponseEntity.noContent().build();
         }
