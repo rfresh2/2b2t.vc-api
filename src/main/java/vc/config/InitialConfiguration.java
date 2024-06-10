@@ -50,6 +50,8 @@ public class InitialConfiguration {
 
         jooqConfiguration.set(connectionProvider());
         jooqConfiguration.setSQLDialect(SQLDialect.POSTGRES);
+        // could be decreased i think. some players with A LOT of data may take a long time to select though
+        jooqConfiguration.settings().setQueryTimeout(60);
 
         return jooqConfiguration;
     }
