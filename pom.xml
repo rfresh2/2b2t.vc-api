@@ -69,12 +69,6 @@
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -218,7 +212,7 @@
 												chats | connections | connectiontype | deaths | playercount
 												| queuelength | queuewait | restarts | tablist | names | playtime
 												| playtime_month | max_cons_month_view | get_uuid_data | online_players
-												| player_stats | playtime_month_view | top_deaths_month_view
+												| player_stats | top_deaths_month_view
 												| top_kills_month_view | priority_players_view
 											</includes>
 										</database>

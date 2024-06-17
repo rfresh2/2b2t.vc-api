@@ -134,9 +134,9 @@ public class Tables {
     public static final Playercount PLAYERCOUNT = Playercount.PLAYERCOUNT;
 
     /**
-     * The table <code>public.playtime_month_view</code>.
+     * The table <code>public.playtime_month</code>.
      */
-    public static final PlaytimeMonthView PLAYTIME_MONTH_VIEW = PlaytimeMonthView.PLAYTIME_MONTH_VIEW;
+    public static final PlaytimeMonth PLAYTIME_MONTH = PlaytimeMonth.PLAYTIME_MONTH;
 
     /**
      * The table <code>public.priority_players_view</code>.

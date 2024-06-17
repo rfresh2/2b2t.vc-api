@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.routines.Playtime;
-import vc.data.dto.tables.PlaytimeMonthView;
-import vc.data.dto.tables.records.PlaytimeMonthViewRecord;
+import vc.data.dto.tables.PlaytimeMonth;
+import vc.data.dto.tables.records.PlaytimeMonthRecord;
 import vc.util.PlayerLookup;
 
 import java.util.Arrays;
@@ -104,10 +104,13 @@ public class PlaytimeController {
         )
     })
     public ResponseEntity<List<PlaytimeTopMonthResponse>> playtimeTopMonth() {
-        PlaytimeMonthViewRecord[] playtimeMonthViewRecords = dsl.selectFrom(PlaytimeMonthView.PLAYTIME_MONTH_VIEW)
+        PlaytimeMonthRecord[] playtimeMonthViewRecords = dsl.selectFrom(PlaytimeMonth.PLAYTIME_MONTH)
                 .fetchArray();
         List<PlaytimeTopMonthResponse> monthResponses = Arrays.stream(playtimeMonthViewRecords).toList().stream()
-                .map(playtimeAllMonthRecord -> new PlaytimeTopMonthResponse(playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.P_UUID), playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.P_NAME), playtimeAllMonthRecord.get(PlaytimeMonthView.PLAYTIME_MONTH_VIEW.PT_DAYS).doubleValue()))
+                .map(playtimeAllMonthRecord -> new PlaytimeTopMonthResponse(
+                    playtimeAllMonthRecord.get(PlaytimeMonth.PLAYTIME_MONTH.PLAYER_UUID),
+                    playtimeAllMonthRecord.get(PlaytimeMonth.PLAYTIME_MONTH.PLAYER_NAME),
+                    playtimeAllMonthRecord.get(PlaytimeMonth.PLAYTIME_MONTH.PLAYTIME_DAYS).doubleValue()))
                 .sorted((a, b) -> Double.compare(b.playtimeDays(), a.playtimeDays()))
                 .collect(Collectors.toList());
         if (monthResponses.isEmpty()) {

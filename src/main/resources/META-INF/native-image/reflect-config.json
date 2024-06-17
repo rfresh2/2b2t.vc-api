@@ -105,7 +105,7 @@
   "name":"[Lsun.security.pkcs.SignerInfo;"
 },
 {
-  "name":"[Lvc.data.dto.tables.records.PlaytimeMonthViewRecord;"
+  "name":"[Lvc.data.dto.tables.records.PlaytimeMonthRecord;"
 },
 {
   "name":"[S"
@@ -13344,7 +13344,7 @@
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {
-  "name":"vc.data.dto.tables.records.PlaytimeMonthViewRecord",
+  "name":"vc.data.dto.tables.records.PlaytimeMonthRecord",
   "methods":[{"name":"<init>","parameterTypes":[] }]
 },
 {

@@ -142,9 +142,9 @@ public class Public extends SchemaImpl {
     public final Playercount PLAYERCOUNT = Playercount.PLAYERCOUNT;
 
     /**
-     * The table <code>public.playtime_month_view</code>.
+     * The table <code>public.playtime_month</code>.
      */
-    public final PlaytimeMonthView PLAYTIME_MONTH_VIEW = PlaytimeMonthView.PLAYTIME_MONTH_VIEW;
+    public final PlaytimeMonth PLAYTIME_MONTH = PlaytimeMonth.PLAYTIME_MONTH;
 
     /**
      * The table <code>public.priority_players_view</code>.
@@ -206,7 +206,7 @@ public class Public extends SchemaImpl {
             OnlinePlayers.ONLINE_PLAYERS,
             PlayerStats.PLAYER_STATS,
             Playercount.PLAYERCOUNT,
-            PlaytimeMonthView.PLAYTIME_MONTH_VIEW,
+            PlaytimeMonth.PLAYTIME_MONTH,
             PriorityPlayersView.PRIORITY_PLAYERS_VIEW,
             Queuelength.QUEUELENGTH,
             Queuewait.QUEUEWAIT,

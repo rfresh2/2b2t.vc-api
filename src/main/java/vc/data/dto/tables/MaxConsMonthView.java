@@ -8,10 +8,13 @@ import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
+import vc.data.dto.Indexes;
 import vc.data.dto.Public;
 import vc.data.dto.tables.records.MaxConsMonthViewRecord;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -83,6 +86,11 @@ public class MaxConsMonthView extends TableImpl<MaxConsMonthViewRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
+    }
+
+    @Override
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.MAX_CONS_MONTH_VIEW_P_UUID_IDX);
     }
 
     @Override
