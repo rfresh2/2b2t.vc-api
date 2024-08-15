@@ -96,7 +96,7 @@ public class Chats extends TableImpl<ChatsRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.CHATS_PLAYER_UUID_IDX, Indexes.CHATS_TIME_IDX);
+        return Arrays.asList(Indexes.CHATS_PLAYER_UUID_IDX, Indexes.CHATS_TIME_IDX, Indexes.CHATS_UUID_TIME_IDX);
     }
 
     @Override

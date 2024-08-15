@@ -116,7 +116,7 @@ public class Deaths extends TableImpl<DeathsRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.DEATHS_KILLER_UUID_IDX, Indexes.DEATHS_TIME_IDX, Indexes.DEATHS_VICTIM_UUID_IDX);
+        return Arrays.asList(Indexes.DEATHS_KILLER_UUID_IDX, Indexes.DEATHS_TIME_IDX, Indexes.DEATHS_VICTIM_UUID_IDX, Indexes.DEATHS_VICTIM_UUID_TIME_IDX);
     }
 
     @Override

@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import vc.data.dto.Routines;
 import vc.data.dto.tables.Connections;
 import vc.util.PlayerLookup;
 
@@ -71,16 +72,20 @@ public class SeenController {
         final UUID resolvedUuid = optionalPlayerUUID.get();
         Connections c = Connections.CONNECTIONS;
         var connectionsRecord = dsl.select(
-                DSL.min(c.TIME).as("firstSeen"),
-                DSL.max(c.TIME).as("lastSeen"))
+                DSL.min(c.TIME).as("firstSeen"))
                 .from(c)
                 .where(c.PLAYER_UUID.eq(resolvedUuid))
                 .fetchOne();
-        if (connectionsRecord != null) {
-            return ResponseEntity.ok(new SeenResponse(connectionsRecord.value1(), connectionsRecord.value2()));
-        } else {
+        if (connectionsRecord == null) {
             return ResponseEntity.noContent().build();
         }
+        var firstSeen = connectionsRecord.getValue("firstSeen", OffsetDateTime.class);
+        var lastSeen = firstSeen;
+        var lastSeenRecord = Routines.lastSeen(dsl.configuration(), resolvedUuid);
+        if (!lastSeenRecord.isEmpty()) {
+            lastSeen = lastSeenRecord.getFirst().getLastSeen();
+        }
+        return ResponseEntity.ok(new SeenResponse(firstSeen, lastSeen));
     }
 
     public record SeenResponse(OffsetDateTime firstSeen, OffsetDateTime lastSeen) { }

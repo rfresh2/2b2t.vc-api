@@ -8,6 +8,7 @@ import org.jooq.*;
 import org.jooq.impl.SchemaImpl;
 import vc.data.dto.tables.*;
 import vc.data.dto.tables.records.GetUuidDataRecord;
+import vc.data.dto.tables.records.LastSeenRecord;
 import vc.data.dto.tables.records.PlayerStatsRecord;
 
 import java.util.Arrays;
@@ -78,6 +79,45 @@ public class Public extends SchemaImpl {
           Field<UUID> pUuid
     ) {
         return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        );
+    }
+
+    /**
+     * The table <code>public.last_seen</code>.
+     */
+    public final LastSeen LAST_SEEN = LastSeen.LAST_SEEN;
+
+    /**
+     * Call <code>public.last_seen</code>.
+     */
+    public static Result<LastSeenRecord> LAST_SEEN(
+          Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.LastSeen.LAST_SEEN.call(
+              pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.last_seen</code> as a table.
+     */
+    public static LastSeen LAST_SEEN(
+          UUID pUuid
+    ) {
+        return vc.data.dto.tables.LastSeen.LAST_SEEN.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.last_seen</code> as a table.
+     */
+    public static LastSeen LAST_SEEN(
+          Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.LastSeen.LAST_SEEN.call(
             pUuid
         );
     }
@@ -201,6 +241,7 @@ public class Public extends SchemaImpl {
             Connections.CONNECTIONS,
             Deaths.DEATHS,
             GetUuidData.GET_UUID_DATA,
+            LastSeen.LAST_SEEN,
             MaxConsMonthView.MAX_CONS_MONTH_VIEW,
             Names.NAMES,
             OnlinePlayers.ONLINE_PLAYERS,

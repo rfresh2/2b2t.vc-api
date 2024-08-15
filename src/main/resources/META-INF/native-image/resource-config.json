@@ -643,6 +643,8 @@
   }, {
     "pattern":"\\Qorg/apache/tomcat/websocket/server/LocalStrings.properties\\E"
   }, {
+    "pattern":"\\Qorg/jooq/ExecuteListener.class\\E"
+  }, {
     "pattern":"\\Qorg/jooq/impl/AbstractFormattable.class\\E"
   }, {
     "pattern":"\\Qorg/jooq/impl/AbstractNamed.class\\E"
@@ -702,6 +704,8 @@
     "pattern":"\\Qorg/springdoc/core/conditions/MultipleOpenApiGroupsCondition$OnGroupConfigProperty.class\\E"
   }, {
     "pattern":"\\Qorg/springdoc/core/conditions/MultipleOpenApiGroupsCondition$OnGroupedOpenApiBean.class\\E"
+  }, {
+    "pattern":"\\Qorg/springdoc/core/conditions/MultipleOpenApiGroupsCondition$OnListGroupedOpenApiBean.class\\E"
   }, {
     "pattern":"\\Qorg/springdoc/core/conditions/MultipleOpenApiGroupsCondition.class\\E"
   }, {
@@ -895,6 +899,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000001a0ac6a6230.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000002059c6df8b0.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x00000207d864ea90.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/LazyInitializationExcludeFilter$$Lambda/0x000002265a6a1948.class\\E"
@@ -936,6 +942,8 @@
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x0000018dd8654478.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x000001a0ac61f320.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x000002059c65c000.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/endpoint/jackson/JacksonEndpointAutoConfiguration$$Lambda/0x00000207d85c6858.class\\E"
   }, {
@@ -1139,6 +1147,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/r2dbc/ConnectionFactoryHealthContributorAutoConfiguration.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/sbom/SbomEndpointAutoConfiguration.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/scheduling/ScheduledTasksEndpointAutoConfiguration.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/scheduling/ScheduledTasksObservabilityAutoConfiguration$ObservabilitySchedulingConfigurer.class\\E"
@@ -1198,6 +1208,8 @@
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x0000018dd86c60a8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x000001a0ac69c000.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x000002059c6d75f0.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/actuate/autoconfigure/web/servlet/ServletManagementContextAutoConfiguration$$Lambda/0x00000207d863f038.class\\E"
   }, {
@@ -1451,6 +1463,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x000001a0ac6963d8.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x000002059c6cf8b8.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x00000207d863d610.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jdbc/metadata/DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration$$Lambda/0x000002265a694000.class\\E"
@@ -1474,6 +1488,10 @@
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jmx/JmxProperties.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jmx/ParentAwareNamingStrategy.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jooq/DefaultExceptionTranslatorExecuteListener.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/autoconfigure/jooq/ExceptionTranslatorExecuteListener.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/autoconfigure/jooq/JooqAutoConfiguration$DslContextConfiguration.class\\E"
   }, {
@@ -1729,6 +1747,8 @@
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x0000018dd86e71f0.class\\E"
   }, {
+    "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x000002059c6f3270.class\\E"
+  }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration$$Lambda/0x000002b40d6e6410.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/devtools/autoconfigure/LocalDevToolsAutoConfiguration$RestartConfiguration.class\\E"
@@ -1786,6 +1806,8 @@
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x0000018dd864c1f8.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x000001a0ac616288.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x000002059c64f810.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/boot/validation/beanvalidation/MethodValidationExcludeFilter$$Lambda/0x00000207d85bd6c8.class\\E"
   }, {
@@ -1850,6 +1872,8 @@
     "pattern":"\\Qorg/springframework/context/ApplicationListener.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/context/ResourceLoaderAware.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/context/SmartLifecycle.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/context/annotation/AdviceModeImportSelector.class\\E"
   }, {
@@ -1948,6 +1972,14 @@
     "pattern":"\\Qorg/springframework/jmx/export/naming/MetadataNamingStrategy.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/jmx/support/MBeanRegistrationSupport.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/scheduling/SchedulingTaskExecutor.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/scheduling/concurrent/CustomizableThreadFactory.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/scheduling/concurrent/ExecutorConfigurationSupport.class\\E"
+  }, {
+    "pattern":"\\Qorg/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.class\\E"
   }, {
     "pattern":"\\Qorg/springframework/transaction/ConfigurableTransactionManager.class\\E"
   }, {

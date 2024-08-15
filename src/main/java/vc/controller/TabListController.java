@@ -20,10 +20,10 @@ import java.util.UUID;
 
 @Tags({@Tag(name = "TabList")})
 @RestController
-public class TabList {
+public class TabListController {
     private final DSLContext dsl;
 
-    public TabList(final DSLContext dsl) {
+    public TabListController(final DSLContext dsl) {
         this.dsl = dsl;
     }
 
@@ -50,7 +50,6 @@ public class TabList {
     public ResponseEntity<List<TablistEntry>> onlinePlayers() {
         List<TablistEntry> into = dsl.selectFrom(Tablist.TABLIST)
             .fetch()
-            .into(vc.data.dto.tables.pojos.Tablist.class)
             .stream()
             .map(t -> new TablistEntry(t.getPlayerName(), t.getPlayerUuid()))
             .toList();

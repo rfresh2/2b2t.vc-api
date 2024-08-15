@@ -10,8 +10,10 @@ import org.jooq.Result;
 import vc.data.dto.routines.Playtime;
 import vc.data.dto.routines.PlaytimeMonth;
 import vc.data.dto.tables.GetUuidData;
+import vc.data.dto.tables.LastSeen;
 import vc.data.dto.tables.PlayerStats;
 import vc.data.dto.tables.records.GetUuidDataRecord;
+import vc.data.dto.tables.records.LastSeenRecord;
 import vc.data.dto.tables.records.PlayerStatsRecord;
 
 import java.util.UUID;
@@ -129,6 +131,40 @@ public class Routines {
           Field<UUID> pUuid
     ) {
         return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Call <code>public.last_seen</code>.
+     */
+    public static Result<LastSeenRecord> lastSeen(
+          Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.LastSeen.LAST_SEEN.call(
+              pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.last_seen</code> as a table.
+     */
+    public static LastSeen lastSeen(
+          UUID pUuid
+    ) {
+        return vc.data.dto.tables.LastSeen.LAST_SEEN.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.last_seen</code> as a table.
+     */
+    public static LastSeen lastSeen(
+          Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.LastSeen.LAST_SEEN.call(
             pUuid
         );
     }

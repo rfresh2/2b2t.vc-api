@@ -97,7 +97,7 @@ public class Connections extends TableImpl<ConnectionsRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.CONNECTIONS_PLAYER_UUID_IDX, Indexes.CONNECTIONS_TIME_IDX);
+        return Arrays.asList(Indexes.CONNECTIONS_PLAYER_UUID_IDX, Indexes.CONNECTIONS_TIME_IDX, Indexes.CONNECTIONS_TYPE_UUID_IDX, Indexes.CONNECTIONS_UUID_CONNECTION_TIME_IDX);
     }
 
     @Override

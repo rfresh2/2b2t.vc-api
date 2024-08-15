@@ -9,6 +9,7 @@ import org.jooq.Field;
 import org.jooq.Result;
 import vc.data.dto.tables.*;
 import vc.data.dto.tables.records.GetUuidDataRecord;
+import vc.data.dto.tables.records.LastSeenRecord;
 import vc.data.dto.tables.records.PlayerStatsRecord;
 
 import java.util.UUID;
@@ -70,6 +71,45 @@ public class Tables {
           Field<UUID> pUuid
     ) {
         return vc.data.dto.tables.GetUuidData.GET_UUID_DATA.call(
+            pUuid
+        );
+    }
+
+    /**
+     * The table <code>public.last_seen</code>.
+     */
+    public static final LastSeen LAST_SEEN = LastSeen.LAST_SEEN;
+
+    /**
+     * Call <code>public.last_seen</code>.
+     */
+    public static Result<LastSeenRecord> LAST_SEEN(
+          Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.LastSeen.LAST_SEEN.call(
+              pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.last_seen</code> as a table.
+     */
+    public static LastSeen LAST_SEEN(
+          UUID pUuid
+    ) {
+        return vc.data.dto.tables.LastSeen.LAST_SEEN.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.last_seen</code> as a table.
+     */
+    public static LastSeen LAST_SEEN(
+          Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.LastSeen.LAST_SEEN.call(
             pUuid
         );
     }
