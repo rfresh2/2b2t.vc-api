@@ -35,6 +35,7 @@ public class ChatsController {
 
     public record ChatsResponse(List<Chat> chats, int total, int pageCount) { }
     public record Chat(OffsetDateTime time, String chat) {}
+    public record WordCount(int count) {}
 
     @GetMapping("/chats")
     @RateLimiter(name = "main")
@@ -97,5 +98,37 @@ public class ChatsController {
         } else {
             return ResponseEntity.ok(new ChatsResponse(chats, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
         }
+    }
+
+    @GetMapping("/chats/word-count")
+    @RateLimiter(name = "main")
+    @Cacheable("chats-word-count")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Counts the number of times a word has appeared in chat",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = WordCount.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. The word must be at least 4 characters long.",
+            content = @Content
+        )
+    })
+    public ResponseEntity<WordCount> wordCount(String word) {
+        if (word == null || word.length() < 3) {
+            return ResponseEntity.badRequest().build();
+        }
+        var count = dsl.selectCount()
+            .from(CHATS)
+            .where(CHATS.CHAT.likeIgnoreCase("%" + word + "%"))
+            .fetchOneInto(Integer.class);
+        if (count == null) count = 0;
+        return ResponseEntity.ok(new WordCount(count));
     }
 }

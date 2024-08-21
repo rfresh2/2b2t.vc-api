@@ -3665,6 +3665,9 @@
   "name":"java.lang.invoke.SerializedLambda"
 },
 {
+  "name":"java.lang.invoke.StringConcatFactory"
+},
+{
   "name":"java.lang.invoke.TypeDescriptor$OfField",
   "queryAllPublicMethods":true
 },
@@ -3694,7 +3697,8 @@
 },
 {
   "name":"java.lang.management.MemoryMXBean",
-  "queryAllPublicMethods":true
+  "queryAllPublicMethods":true,
+  "methods":[{"name":"getHeapMemoryUsage","parameterTypes":[] }]
 },
 {
   "name":"java.lang.management.MemoryManagerMXBean",
@@ -3707,7 +3711,7 @@
 {
   "name":"java.lang.management.MemoryUsage",
   "queryAllPublicMethods":true,
-  "methods":[{"name":"from","parameterTypes":["javax.management.openmbean.CompositeData"] }]
+  "methods":[{"name":"from","parameterTypes":["javax.management.openmbean.CompositeData"] }, {"name":"getCommitted","parameterTypes":[] }, {"name":"getInit","parameterTypes":[] }, {"name":"getMax","parameterTypes":[] }, {"name":"getUsed","parameterTypes":[] }]
 },
 {
   "name":"java.lang.management.MonitorInfo",
@@ -13208,7 +13212,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["org.jooq.DSLContext","vc.util.PlayerLookup"] }, {"name":"chats","parameterTypes":["java.util.UUID","java.lang.String","java.lang.Integer","java.lang.Integer"] }]
+  "methods":[{"name":"<init>","parameterTypes":["org.jooq.DSLContext","vc.util.PlayerLookup"] }, {"name":"chats","parameterTypes":["java.util.UUID","java.lang.String","java.lang.Integer","java.lang.Integer"] }, {"name":"wordCount","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"vc.controller.ChatsController$$SpringCGLIB$$0",
@@ -13228,6 +13232,12 @@
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
   "methods":[{"name":"<init>","parameterTypes":["java.util.List","int","int"] }, {"name":"chats","parameterTypes":[] }, {"name":"pageCount","parameterTypes":[] }, {"name":"total","parameterTypes":[] }]
+},
+{
+  "name":"vc.controller.ChatsController$WordCount",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"count","parameterTypes":[] }]
 },
 {
   "name":"vc.controller.ConnectionsController",
