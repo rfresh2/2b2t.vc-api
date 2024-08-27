@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup GraalVM
         uses: graalvm/setup-graalvm@v1
@@ -35,17 +35,17 @@ jobs:
         run: zip -j 2b2t.vc-api.zip target/2b2t.vc-api
 
       - name: Upload Binary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: 2b2t.vc-api
           path: 2b2t.vc-api.zip
 
       - name: Release Artifact
-        uses: "marvinpinto/action-automatic-releases@latest"
+        uses: "softprops/action-gh-release@v2"
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
-          automatic_release_tag: "latest"
-          title: "Latest Release"
+          tag_name: latest
+          name: "Latest Release"
+          make_latest: true
           files: |
             2b2t.vc-api.zip
