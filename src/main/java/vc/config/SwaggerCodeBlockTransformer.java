@@ -13,8 +13,8 @@ import org.springframework.web.servlet.resource.TransformedResource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,24 +35,24 @@ public class SwaggerCodeBlockTransformer extends SwaggerIndexPageTransformer {
     public Resource transform(HttpServletRequest request,
                               Resource resource,
                               ResourceTransformerChain transformer) throws IOException {
-        if (resource.toString().contains("index.html")) {
-            final InputStream is = resource.getInputStream();
-            final InputStreamReader isr = new InputStreamReader(is);
-            try (BufferedReader br = new BufferedReader(isr)) {
-                final List<String> lines = br.lines().collect(Collectors.toList());
-                int endHeadIndex = -1;
-                for (int i = 0; i < lines.size(); i++) {
-                    if (lines.get(i).contains("</head>")) {
-                        endHeadIndex = i;
-                        break;
-                    }
+        if (!resource.toString().contains("index.html")) return super.transform(request, resource, transformer);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+            final List<String> lines = br.lines().collect(Collectors.toCollection(ArrayList::new));
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                if (line.contains("</head>")) {
+                    lines.add(i, "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../swagger-theme/theme-material.css\" />");
+                    break;
                 }
-                if (endHeadIndex != -1) {
-                    lines.add(endHeadIndex, "    <link rel=\"stylesheet\" type=\"text/css\" href=\"../swagger-theme/theme-material.css\" />");
+            }
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                if (line.contains("<title>")) {
+                    lines.set(i, line.replace("Swagger UI", "2b2t.vc API Explorer"));
+                    break;
                 }
-                return new TransformedResource(resource, String.join("\n", lines).getBytes());
-            } // AutoCloseable br > isr > is
+            }
+            return new TransformedResource(resource, String.join("\n", lines).getBytes());
         }
-        return super.transform(request, resource, transformer);
     }
 }
