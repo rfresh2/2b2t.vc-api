@@ -13,7 +13,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '22'
+          java-version: '23'
           distribution: 'zulu'
 
       - name: Elevate wrapper permissions
