@@ -14962,6 +14962,10 @@
           "parameterTypes": []
         },
         {
+          "name": "queueEtaEquationApiTest",
+          "parameterTypes": []
+        },
+        {
           "name": "seenApiTest",
           "parameterTypes": []
         },
@@ -15770,6 +15774,10 @@
           ]
         },
         {
+          "name": "etaEquation",
+          "parameterTypes": []
+        },
+        {
           "name": "queue",
           "parameterTypes": []
         }
@@ -15783,6 +15791,32 @@
         },
         {
           "name": "CGLIB$FACTORY_DATA"
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.QueueController$QueueEtaEquation",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "double",
+            "double"
+          ]
+        },
+        {
+          "name": "constant",
+          "parameterTypes": []
+        },
+        {
+          "name": "info",
+          "parameterTypes": []
+        },
+        {
+          "name": "pow",
+          "parameterTypes": []
         }
       ]
     },

@@ -1,6 +1,7 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -55,5 +56,20 @@ public class QueueController {
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @GetMapping("/queue/eta-equation")
+    @RateLimiter(name = "queue-eta-equation")
+    @Cacheable("queue-eta-equation")
+    @Hidden
+    public ResponseEntity<QueueEtaEquation> etaEquation() {
+        return ResponseEntity.ok(QueueEtaEquation.INSTANCE);
+    }
+
+    public record QueueEtaEquation(String info, double constant, double pow) {
+        public static QueueEtaEquation INSTANCE = new QueueEtaEquation(
+            "ETA seconds = constant * (queuePosition ^ pow)",
+            343.0,
+            0.743);
     }
 }

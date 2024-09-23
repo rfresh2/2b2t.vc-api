@@ -169,6 +169,13 @@ public class ApiTests {
     }
 
     @Test
+    public void queueEtaEquationApiTest() {
+        var queueResponse = restTemplate.getForObject("http://localhost:" + port + "/queue/eta-equation",
+                                                      QueueController.QueueEtaEquation.class);
+        assertNotNull(queueResponse);
+    }
+
+    @Test
     public void seenApiTest() {
         var seenResponse = restTemplate.getForObject("http://localhost:" + port + "/seen?playerName={playerName}",
                                                             SeenController.SeenResponse.class,
