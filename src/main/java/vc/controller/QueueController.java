@@ -63,7 +63,7 @@ public class QueueController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "ETA seconds = constant * (queuePosition ^ pow)",
+            description = "ETA seconds = factor * (queuePosition ^ pow)",
             content = {
                 @Content(
                     mediaType = "application/json",
@@ -76,7 +76,7 @@ public class QueueController {
         return ResponseEntity.ok(QueueEtaEquation.INSTANCE);
     }
 
-    public record QueueEtaEquation(double constant, double pow) {
+    public record QueueEtaEquation(double factor, double pow) {
         public static QueueEtaEquation INSTANCE = new QueueEtaEquation(
             343.0,
             0.743);

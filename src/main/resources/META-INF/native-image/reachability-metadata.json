@@ -15828,19 +15828,7 @@
           ]
         },
         {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String",
-            "double",
-            "double"
-          ]
-        },
-        {
-          "name": "constant",
-          "parameterTypes": []
-        },
-        {
-          "name": "info",
+          "name": "factor",
           "parameterTypes": []
         },
         {
