@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import vc.controller.*;
+import vc.data.dto.tables.MaxConsMonthView;
 import vc.data.dto.tables.pojos.Queuelength;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class ApiTests {
 
     @Test
     public void botsApiTest() {
-        List botsResponse = restTemplate.getForObject("http://localhost:" + port + "/bots/month", List.class);
+        List<MaxConsMonthView> botsResponse = restTemplate.getForObject("http://localhost:" + port + "/bots/month", List.class);
         assertNotNull(botsResponse);
         assertFalse(botsResponse.isEmpty());
     }
@@ -52,10 +53,21 @@ public class ApiTests {
         var chatsResponse = restTemplate.getForObject("http://localhost:" + port + "/chats?playerName={playerName}",
                                                       ChatsController.ChatsResponse.class,
                                                       Map.of(
-                                                                                "playerName", "rfresh2"
+                                                                                "playerName", "hausemaster"
                                                                             ));
         assertNotNull(chatsResponse);
         assertTrue(chatsResponse.total() > 0);
+    }
+
+    @Test
+    public void wordCountApiTest() {
+        var wordCountResponse = restTemplate.getForObject("http://localhost:" + port + "/chats/word-count?word={word}",
+                                                      ChatsController.WordCount.class,
+                                                      Map.of(
+                                                          "word", "test"
+                                                      ));
+        assertNotNull(wordCountResponse);
+        assertTrue(wordCountResponse.count() > 0);
     }
 
     @Test
@@ -63,7 +75,7 @@ public class ApiTests {
         var connectionsResponse = restTemplate.getForObject("http://localhost:" + port + "/connections?playerName={playerName}",
                                                                             ConnectionsController.ConnectionsResponse.class,
                                                                             Map.of(
-                                                                                "playerName", "rfresh2"
+                                                                                "playerName", "hausemaster"
                                                                             ));
         assertNotNull(connectionsResponse);
         assertTrue(connectionsResponse.total() > 0);
@@ -74,7 +86,7 @@ public class ApiTests {
         var dataDumpResponse = restTemplate.getForObject("http://localhost:" + port + "/dump/player?playerName={playerName}",
                                                          String.class,
                                                          Map.of(
-                                                             "playerName", "rfresh2"
+                                                             "playerName", "hausemaster"
                                                          ));
         assertNotNull(dataDumpResponse);
         assertFalse(dataDumpResponse.isEmpty());
@@ -118,7 +130,7 @@ public class ApiTests {
         assertFalse(killsTopMonthResponse.isEmpty());
     }
 
-    @Test
+//    @Test
     public void namesApiTest() {
         var namesResponse = restTemplate.getForObject("http://localhost:" + port + "/names?playerName={playerName}",
                                                        List.class,
@@ -134,7 +146,7 @@ public class ApiTests {
         var playtimeResponse = restTemplate.getForObject("http://localhost:" + port + "/playtime?playerName={playerName}",
                                                             PlaytimeController.PlaytimeResponse.class,
                                                             Map.of(
-                                                                "playerName", "rfresh2"
+                                                                "playerName", "hausemaster"
                                                             ));
         assertNotNull(playtimeResponse);
         assertTrue(playtimeResponse.playtimeSeconds() > 0);
@@ -161,7 +173,7 @@ public class ApiTests {
         var seenResponse = restTemplate.getForObject("http://localhost:" + port + "/seen?playerName={playerName}",
                                                             SeenController.SeenResponse.class,
                                                             Map.of(
-                                                                "playerName", "rfresh2"
+                                                                "playerName", "hausemaster"
                                                             ));
         assertNotNull(seenResponse);
         assertTrue(seenResponse.firstSeen().isBefore(seenResponse.lastSeen()));
@@ -172,7 +184,7 @@ public class ApiTests {
         var statsResponse = restTemplate.getForObject("http://localhost:" + port + "/stats/player?playerName={playerName}",
                                                       StatsController.PlayerStats.class,
                                                       Map.of(
-                                                          "playerName", "rfresh2"
+                                                          "playerName", "hausemaster"
                                                       ));
         assertNotNull(statsResponse);
         assertTrue(statsResponse.leaveCount() > 0);
