@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.3</version>
+		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>vc</groupId>
@@ -25,7 +25,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>3.3.3</version>
+				<version>3.3.4</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
-			<version>3.19.11</version>
+			<version>3.19.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -134,7 +134,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>3.3.3</version>
+				<version>3.3.4</version>
 				<executions>
 					<execution>
 						<configuration>
@@ -187,7 +187,7 @@
 					<plugin>
 						<groupId>org.jooq</groupId>
 						<artifactId>jooq-codegen-maven</artifactId>
-						<version>3.19.11</version>
+						<version>3.19.12</version>
 						<executions>
 							<execution>
 								<phase>generate-sources</phase>
