@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {"excludeClasses": "org.junit.**"},
+    {"excludeClasses": "org.mockito.**"},
+    {"excludeClasses": "net.bytebuddy.**"}
+  ],
+  "regexRules": [
+  ]
+}

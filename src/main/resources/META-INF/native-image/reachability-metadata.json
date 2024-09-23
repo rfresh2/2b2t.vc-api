@@ -5365,328 +5365,6 @@
       ]
     },
     {
-      "type": "net.bytebuddy.agent.Installer",
-      "methods": [
-        {
-          "name": "agentmain",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.instrument.Instrumentation"
-          ]
-        },
-        {
-          "name": "getInstrumentation",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$AllArguments",
-      "methods": [
-        {
-          "name": "includeSelf",
-          "parameterTypes": []
-        },
-        {
-          "name": "nullIfEmpty",
-          "parameterTypes": []
-        },
-        {
-          "name": "readOnly",
-          "parameterTypes": []
-        },
-        {
-          "name": "typing",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$Argument",
-      "methods": [
-        {
-          "name": "optional",
-          "parameterTypes": []
-        },
-        {
-          "name": "readOnly",
-          "parameterTypes": []
-        },
-        {
-          "name": "typing",
-          "parameterTypes": []
-        },
-        {
-          "name": "value",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$Enter",
-      "methods": [
-        {
-          "name": "readOnly",
-          "parameterTypes": []
-        },
-        {
-          "name": "typing",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$Exit"
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$FieldGetterHandle"
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$FieldSetterHandle"
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$Local"
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$OnMethodEnter",
-      "methods": [
-        {
-          "name": "inline",
-          "parameterTypes": []
-        },
-        {
-          "name": "prependLineNumber",
-          "parameterTypes": []
-        },
-        {
-          "name": "skipOn",
-          "parameterTypes": []
-        },
-        {
-          "name": "skipOnIndex",
-          "parameterTypes": []
-        },
-        {
-          "name": "suppress",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$OnMethodExit",
-      "methods": [
-        {
-          "name": "backupArguments",
-          "parameterTypes": []
-        },
-        {
-          "name": "inline",
-          "parameterTypes": []
-        },
-        {
-          "name": "onThrowable",
-          "parameterTypes": []
-        },
-        {
-          "name": "repeatOn",
-          "parameterTypes": []
-        },
-        {
-          "name": "repeatOnIndex",
-          "parameterTypes": []
-        },
-        {
-          "name": "suppress",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$Origin"
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$Return",
-      "methods": [
-        {
-          "name": "readOnly",
-          "parameterTypes": []
-        },
-        {
-          "name": "typing",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$SelfCallHandle"
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$This",
-      "methods": [
-        {
-          "name": "optional",
-          "parameterTypes": []
-        },
-        {
-          "name": "readOnly",
-          "parameterTypes": []
-        },
-        {
-          "name": "typing",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.asm.Advice$Thrown"
-    },
-    {
-      "type": "net.bytebuddy.description.method.MethodDescription$InDefinedShape$AbstractBase$Executable"
-    },
-    {
-      "type": "net.bytebuddy.description.method.ParameterDescription$ForLoadedParameter$Parameter"
-    },
-    {
-      "type": "net.bytebuddy.description.method.ParameterList$ForLoadedExecutable$Executable"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDefinition$Sort$AnnotatedType"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$ForLoadedType$Dispatcher"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedExecutableExceptionType$Dispatcher"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedExecutableParameterType$Dispatcher"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedMethodReturnType$Dispatcher"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForComponentType$AnnotatedParameterizedType"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForTypeArgument$AnnotatedParameterizedType"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForTypeVariableBoundType$AnnotatedTypeVariable"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForTypeVariableBoundType$OfFormalTypeVariable$FormalTypeVariable"
-    },
-    {
-      "type": "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForWildcardUpperBoundType$AnnotatedWildcardType"
-    },
-    {
-      "type": "net.bytebuddy.dynamic.loading.ClassInjector$UsingReflection$System"
-    },
-    {
-      "type": "net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$System"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.AllArguments"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.Argument"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.BindingPriority"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.Default"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.DefaultCall"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.DefaultCallHandle"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.DefaultMethod"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.DefaultMethodHandle"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.FieldGetterHandle"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.FieldSetterHandle"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.FieldValue"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.Origin"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.Super"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.SuperCall"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.SuperCallHandle"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.SuperMethod"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.SuperMethodHandle"
-    },
-    {
-      "type": "net.bytebuddy.implementation.bind.annotation.This"
-    },
-    {
-      "type": "net.bytebuddy.mirror.AccessibleObject",
-      "fields": [
-        {
-          "name": "override"
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.utility.Invoker"
-    },
-    {
-      "type": "net.bytebuddy.utility.Invoker$Dispatcher",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfClassDesc"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDirectMethodHandleDesc"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDirectMethodHandleDesc$ForKind"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDynamicConstantDesc"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfMethodHandleDesc"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfMethodTypeDesc"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaModule$Module"
-    },
-    {
-      "type": "net.bytebuddy.utility.JavaModule$Resolver"
-    },
-    {
       "type": "okhttp3.OkHttpClient"
     },
     {
@@ -6740,165 +6418,6 @@
     },
     {
       "type": "org.jooq.util.yugabytedb.YugabyteDBDataType"
-    },
-    {
-      "type": "org.junit.AssumptionViolatedException"
-    },
-    {
-      "type": "org.junit.internal.AssumptionViolatedException"
-    },
-    {
-      "type": "org.junit.jupiter.api.Test"
-    },
-    {
-      "type": "org.junit.jupiter.api.extension.ExtendWith"
-    },
-    {
-      "type": "org.junit.jupiter.engine.JupiterTestEngine"
-    },
-    {
-      "type": "org.junit.platform.commons.annotation.Testable"
-    },
-    {
-      "type": "org.junit.platform.launcher.LauncherSession",
-      "methods": [
-        {
-          "name": "getLauncher",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.junit.platform.launcher.core.LauncherFactory",
-      "methods": [
-        {
-          "name": "openSession",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.junit.platform.launcher.listeners.UniqueIdTrackingListener"
-    },
-    {
-      "type": "org.mockito.MockSettings"
-    },
-    {
-      "type": "org.mockito.configuration.MockitoConfiguration"
-    },
-    {
-      "type": "org.mockito.internal.configuration.DefaultDoNotMockEnforcer",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.configuration.InjectingAnnotationEngine",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.configuration.plugins.DefaultPluginSwitch",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.InlineByteBuddyMockMaker",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodAdvice"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodAdvice$ForEquals"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodAdvice$ForHashCode"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodAdvice$ForReadObject"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodAdvice$ForStatic"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodInterceptor$DispatcherDefaultingToRealMethod"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodInterceptor$ForEquals"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodInterceptor$ForHashCode"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.MockMethodInterceptor$ForWriteReplace"
-    },
-    {
-      "type": "org.mockito.internal.creation.bytebuddy.inject.MockMethodDispatcher"
-    },
-    {
-      "type": "org.mockito.internal.creation.instance.DefaultInstantiatorProvider",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.exceptions.stacktrace.DefaultStackTraceCleanerProvider",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.util.ConsoleMockitoLogger",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.util.reflection.InstrumentationMemberAccessor$Dispatcher"
-    },
-    {
-      "type": "org.mockito.internal.util.reflection.InstrumentationMemberAccessor$Dispatcher$ByteBuddy$D3KvpWv0",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "org.mockito.internal.util.reflection.ModuleMemberAccessor",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
     },
     {
       "type": "org.neo4j.driver.Driver"
@@ -15419,6 +14938,10 @@
           "parameterTypes": []
         },
         {
+          "name": "isTestEnabled",
+          "parameterTypes": []
+        },
+        {
           "name": "killsApiTest",
           "parameterTypes": []
         },
@@ -16453,13 +15976,6 @@
       "allDeclaredFields": true
     },
     {
-      "name":"vc.data.dto.tables.pojos.Names",
-      "allDeclaredFields":true,
-      "queryAllDeclaredMethods":true,
-      "queryAllDeclaredConstructors":true,
-      "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"<init>","parameterTypes":["java.lang.String","java.util.UUID","java.time.OffsetDateTime","java.time.OffsetDateTime"] }, {"name":"getChangedfromat","parameterTypes":[] }, {"name":"getChangedtoat","parameterTypes":[] }, {"name":"getName","parameterTypes":[] }, {"name":"getUuid","parameterTypes":[] }]
-    },
-    {
       "type": "vc.data.dto.tables.pojos.Deaths",
       "allDeclaredFields": true,
       "methods": [
@@ -16728,188 +16244,6 @@
     {
       "type": {
         "proxy": [
-          "net.bytebuddy.description.method.MethodDescription$InDefinedShape$AbstractBase$Executable"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.method.ParameterDescription$ForLoadedParameter$Parameter"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.method.ParameterList$ForLoadedExecutable$Executable"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDefinition$Sort$AnnotatedType"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$ForLoadedType$Dispatcher"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedExecutableExceptionType$Dispatcher"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedExecutableParameterType$Dispatcher"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$Delegator$ForLoadedMethodReturnType$Dispatcher"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForComponentType$AnnotatedParameterizedType"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForTypeArgument$AnnotatedParameterizedType"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForTypeVariableBoundType$AnnotatedTypeVariable"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForTypeVariableBoundType$OfFormalTypeVariable$FormalTypeVariable"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.description.type.TypeDescription$Generic$AnnotationReader$ForWildcardUpperBoundType$AnnotatedWildcardType"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.dynamic.loading.ClassInjector$UsingReflection$System"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$System"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfClassDesc"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDirectMethodHandleDesc"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDirectMethodHandleDesc$ForKind"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfDynamicConstantDesc"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfMethodHandleDesc"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaConstant$Simple$Dispatcher$OfMethodTypeDesc"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaModule$Module"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
-          "net.bytebuddy.utility.JavaModule$Resolver"
-        ]
-      }
-    },
-    {
-      "type": {
-        "proxy": [
           "org.springframework.boot.context.properties.ConfigurationProperties"
         ]
       }
@@ -16966,6 +16300,75 @@
   ],
   "serialization": [
     {
+      "type": "byte[]"
+    },
+    {
+      "type": "java.lang.Boolean"
+    },
+    {
+      "type": "java.lang.Exception"
+    },
+    {
+      "type": "java.lang.StackTraceElement"
+    },
+    {
+      "type": "java.lang.StackTraceElement[]"
+    },
+    {
+      "type": "java.lang.String"
+    },
+    {
+      "type": "java.lang.Throwable"
+    },
+    {
+      "type": "java.rmi.MarshalledObject"
+    },
+    {
+      "type": "java.rmi.dgc.Lease"
+    },
+    {
+      "type": "java.rmi.dgc.VMID"
+    },
+    {
+      "type": "java.rmi.server.ObjID"
+    },
+    {
+      "type": "java.rmi.server.ObjID[]"
+    },
+    {
+      "type": "java.rmi.server.RemoteObject"
+    },
+    {
+      "type": "java.rmi.server.RemoteStub"
+    },
+    {
+      "type": "java.rmi.server.UID"
+    },
+    {
+      "type": "java.util.Collections$EmptyList"
+    },
+    {
+      "type": "java.util.HashSet"
+    },
+    {
+      "type": "javax.management.InstanceNotFoundException"
+    },
+    {
+      "type": "javax.management.JMException"
+    },
+    {
+      "type": "javax.management.ObjectName"
+    },
+    {
+      "type": "javax.management.OperationsException"
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIConnectionImpl_Stub"
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIServerImpl_Stub"
+    },
+    {
       "type": "org.junit.platform.launcher.TestIdentifier$SerializedForm"
     }
   ],
@@ -17017,6 +16420,17 @@
       "methods": [
         {
           "name": "getBoolean",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "java.lang.InternalError",
+      "methods": [
+        {
+          "name": "<init>",
           "parameterTypes": [
             "java.lang.String"
           ]
