@@ -100,6 +100,9 @@
       "type": "[Lorg.springframework.util.ConcurrentReferenceHashMap$Segment;"
     },
     {
+      "type": "[Lorg.springframework.web.bind.annotation.RequestMethod;"
+    },
+    {
       "type": "[Lvc.data.dto.tables.records.PlaytimeMonthRecord;"
     },
     {
@@ -14958,6 +14961,10 @@
           "parameterTypes": []
         },
         {
+          "name": "priorityPlayersApiTest",
+          "parameterTypes": []
+        },
+        {
           "name": "queueApiTest",
           "parameterTypes": []
         },
@@ -15746,6 +15753,10 @@
             "org.jooq.DSLContext",
             "vc.util.PlayerLookup"
           ]
+        },
+        {
+          "name": "priorityPlayers",
+          "parameterTypes": []
         }
       ]
     },
@@ -15761,7 +15772,18 @@
       ]
     },
     {
-      "type": "vc.controller.PriorityPlayersController$PriorityPlayersResponse"
+      "type": "vc.controller.PriorityPlayersController$PriorityPlayersResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "vc.controller.QueueController",
@@ -16174,7 +16196,13 @@
       ]
     },
     {
-      "type": "vc.data.dto.tables.records.PriorityPlayersViewRecord"
+      "type": "vc.data.dto.tables.records.PriorityPlayersViewRecord",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "vc.data.dto.tables.records.QueuelengthRecord",

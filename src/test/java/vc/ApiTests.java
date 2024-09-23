@@ -204,4 +204,12 @@ public class ApiTests {
         assertNotNull(tablistResponse);
         assertFalse(tablistResponse.isEmpty());
     }
+
+    @Test
+    public void priorityPlayersApiTest() {
+        var response = restTemplate.getForObject("http://localhost:" + port + "/players/priority",
+                                                        List.class);
+        assertNotNull(response);
+        assertFalse(response.isEmpty());
+    }
 }
