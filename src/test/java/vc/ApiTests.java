@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import vc.api.CraftheadRestClient;
+import vc.api.MinetoolsRestClient;
+import vc.api.MojangRestClient;
 import vc.controller.*;
 import vc.data.dto.tables.MaxConsMonthView;
 import vc.data.dto.tables.pojos.Queuelength;
@@ -28,6 +31,12 @@ public class ApiTests {
 
     @Autowired
     private TestRestTemplate restTemplate;
+    @Autowired
+    private MojangRestClient mojangRestClient;
+    @Autowired
+    private CraftheadRestClient craftheadRestClient;
+    @Autowired
+    private MinetoolsRestClient minetoolsRestClient;
 
     @Test
     public void homepageTest() {
@@ -211,5 +220,26 @@ public class ApiTests {
                                                         List.class);
         assertNotNull(response);
         assertFalse(response.isEmpty());
+    }
+
+    @Test
+    public void playerLookupMinetoolsTest() {
+        var response = minetoolsRestClient.getProfileFromUsername("rfresh2");
+        assertNotNull(response);
+        assertEquals("rfresh2", response.name());
+    }
+
+    @Test
+    public void playerLookupMojangTest() {
+        var response = mojangRestClient.getProfileFromUsername("rfresh2");
+        assertNotNull(response);
+        assertEquals("rfresh2", response.name());
+    }
+
+    @Test
+    public void playerLookupCraftheadTest() {
+        var response = craftheadRestClient.getProfile("rfresh2");
+        assertNotNull(response);
+        assertEquals("rfresh2", response.name());
     }
 }

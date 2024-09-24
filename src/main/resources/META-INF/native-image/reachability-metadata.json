@@ -872,7 +872,25 @@
       ]
     },
     {
+      "type": "com.sun.crypto.provider.TlsKeyMaterialGenerator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "com.sun.crypto.provider.TlsMasterSecretGenerator",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.sun.crypto.provider.TlsPrfGenerator$V12",
       "methods": [
         {
           "name": "<init>",
@@ -14953,6 +14971,18 @@
           "parameterTypes": []
         },
         {
+          "name": "playerLookupCraftheadTest",
+          "parameterTypes": []
+        },
+        {
+          "name": "playerLookupMinetoolsTest",
+          "parameterTypes": []
+        },
+        {
+          "name": "playerLookupMojangTest",
+          "parameterTypes": []
+        },
+        {
           "name": "playtimeApiTest",
           "parameterTypes": []
         },
@@ -15082,6 +15112,47 @@
           "name": "<init>",
           "parameterTypes": [
             "org.springframework.http.client.ClientHttpRequestFactory"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "vc.api.model.CraftheadProfileProperties",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "vc.api.model.CraftheadProfileResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.util.List"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "vc.api.model.MinetoolsUuidResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String"
           ]
         }
       ]
@@ -16437,6 +16508,17 @@
       "type": "[Lcom.sun.management.internal.DiagnosticCommandInfo;"
     },
     {
+      "type": "com.intellij.rt.junit.JUnitStarter",
+      "methods": [
+        {
+          "name": "main",
+          "parameterTypes": [
+            "java.lang.String[]"
+          ]
+        }
+      ]
+    },
+    {
       "type": "com.sun.management.internal.DiagnosticCommandArgumentInfo",
       "methods": [
         {
@@ -16568,8 +16650,23 @@
       ],
       "methods": [
         {
+          "name": "checkAndLoadMain",
+          "parameterTypes": [
+            "boolean",
+            "int",
+            "java.lang.String"
+          ]
+        },
+        {
           "name": "getApplicationClass",
           "parameterTypes": []
+        },
+        {
+          "name": "makePlatformString",
+          "parameterTypes": [
+            "boolean",
+            "byte[]"
+          ]
         }
       ]
     },
