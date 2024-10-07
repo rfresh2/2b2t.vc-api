@@ -78,7 +78,7 @@ public class QueueController {
 
     public record QueueEtaEquation(double factor, double pow) {
         public static QueueEtaEquation INSTANCE = new QueueEtaEquation(
-            343.0,
-            0.743);
+            199.0,
+            0.838);
     }
 }
