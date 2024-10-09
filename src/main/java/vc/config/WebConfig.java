@@ -2,6 +2,7 @@ package vc.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -22,5 +23,15 @@ public class WebConfig implements WebMvcConfigurer {
             .addResourceLocations("classpath:/static/swagger-theme/")
             .resourceChain(false)
             .addResolver(new PathResourceResolver());
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+            .allowedOrigins("*")
+            .allowedMethods("GET")
+            .allowedHeaders("*")
+            .allowCredentials(true)
+            .maxAge(300);
     }
 }
