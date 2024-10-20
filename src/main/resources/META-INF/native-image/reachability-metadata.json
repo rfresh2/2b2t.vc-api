@@ -16103,6 +16103,14 @@
         {
           "name": "<init>",
           "parameterTypes": [
+            "java.lang.String",
+            "java.util.UUID",
+            "int"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
             "java.util.UUID",
             "java.lang.String",
             "int"
@@ -16673,6 +16681,10 @@
         },
         {
           "name": "playerUuid",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
           "parameterTypes": []
         }
       ]
