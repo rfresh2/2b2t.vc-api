@@ -70,6 +70,8 @@ public class ChatsController {
     public ResponseEntity<ChatsResponse> chats(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
@@ -87,6 +89,12 @@ public class ChatsController {
         var baseQuery = dsl.select(CHATS.TIME, CHATS.CHAT)
             .from(CHATS)
             .where(CHATS.PLAYER_UUID.eq(resolvedUuid));
+        if (startDate != null) {
+            baseQuery = baseQuery.and(CHATS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
+        if (endDate != null) {
+            baseQuery = baseQuery.and(CHATS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
         Long rowCount = dsl.selectCount()
                 .from(baseQuery)
                 .fetchOneInto(Long.class);

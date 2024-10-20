@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.enums.Connectiontype;
 import vc.util.PlayerLookup;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -65,6 +68,8 @@ public class ConnectionsController {
     public ResponseEntity<ConnectionsResponse> connections(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
@@ -79,9 +84,16 @@ public class ConnectionsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.select(CONNECTIONS.TIME, CONNECTIONS.CONNECTION)
+        var baseQuery = dsl
+            .select(CONNECTIONS.TIME, CONNECTIONS.CONNECTION)
             .from(CONNECTIONS)
             .where(CONNECTIONS.PLAYER_UUID.eq(resolvedUuid));
+        if (startDate != null) {
+            baseQuery = baseQuery.and(CONNECTIONS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
+        if (endDate != null) {
+            baseQuery = baseQuery.and(CONNECTIONS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
         Long rowCount = dsl
             .selectCount()
             .from(baseQuery)

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.tables.pojos.Deaths;
 import vc.util.PlayerLookup;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -64,6 +67,8 @@ public class DeathsController {
     public ResponseEntity<DeathsResponse> deaths(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
@@ -78,8 +83,15 @@ public class DeathsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.selectFrom(DEATHS)
+        var baseQuery = dsl
+            .selectFrom(DEATHS)
             .where(DEATHS.VICTIM_PLAYER_UUID.eq(resolvedUuid));
+        if (startDate != null) {
+            baseQuery = baseQuery.and(DEATHS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
+        if (endDate != null) {
+            baseQuery = baseQuery.and(DEATHS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
         Long rowCount = dsl
             .selectCount()
             .from(baseQuery)
@@ -130,6 +142,8 @@ public class DeathsController {
     public ResponseEntity<KillsResponse> kills(
             @RequestParam(value = "uuid", required = false) UUID uuid,
             @RequestParam(value = "playerName", required = false) String playerName,
+            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
             @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
@@ -144,8 +158,15 @@ public class DeathsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.selectFrom(DEATHS)
+        var baseQuery = dsl
+            .selectFrom(DEATHS)
             .where(DEATHS.KILLER_PLAYER_UUID.eq(resolvedUuid));
+        if (startDate != null) {
+            baseQuery = baseQuery.and(DEATHS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
+        if (endDate != null) {
+            baseQuery = baseQuery.and(DEATHS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
+        }
         Long rowCount = dsl
             .selectCount()
             .from(baseQuery)

@@ -15576,6 +15576,17 @@
           ]
         },
         {
+          "name": "chats",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "java.time.LocalDate",
+            "java.time.LocalDate",
+            "java.lang.Integer",
+            "java.lang.Integer"
+          ]
+        },
+        {
           "name": "wordCount",
           "parameterTypes": [
             "java.lang.String"
@@ -15733,6 +15744,17 @@
             "java.lang.Integer",
             "java.lang.Integer"
           ]
+        },
+        {
+          "name": "connections",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "java.time.LocalDate",
+            "java.time.LocalDate",
+            "java.lang.Integer",
+            "java.lang.Integer"
+          ]
         }
       ]
     },
@@ -15846,6 +15868,17 @@
           ]
         },
         {
+          "name": "deaths",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "java.time.LocalDate",
+            "java.time.LocalDate",
+            "java.lang.Integer",
+            "java.lang.Integer"
+          ]
+        },
+        {
           "name": "deathsTopMonth",
           "parameterTypes": []
         },
@@ -15854,6 +15887,17 @@
           "parameterTypes": [
             "java.util.UUID",
             "java.lang.String",
+            "java.lang.Integer",
+            "java.lang.Integer"
+          ]
+        },
+        {
+          "name": "kills",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "java.time.LocalDate",
+            "java.time.LocalDate",
             "java.lang.Integer",
             "java.lang.Integer"
           ]
