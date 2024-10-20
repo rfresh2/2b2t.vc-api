@@ -107,7 +107,8 @@ public class PlaytimeController {
     public ResponseEntity<PlaytimeMonthResponse> playtimeTopMonth() {
         var players = dsl
             .selectFrom(PLAYTIME_MONTH)
-            .fetchStream()
+            .fetch()
+            .stream()
             .map(playtimeAllMonthRecord -> new PlayerPlaytimeData(
                 playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYER_UUID),
                 playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYER_NAME),
