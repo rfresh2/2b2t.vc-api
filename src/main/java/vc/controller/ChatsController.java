@@ -129,14 +129,14 @@ public class ChatsController {
         ),
         @ApiResponse(
             responseCode = "400",
-            description = "Bad request. The word must be at least 4 characters long.",
+            description = "Bad request. The word must be between 4 and 30 characters.",
             content = @Content
         )
     })
     public ResponseEntity<WordCount> wordCount(
         @RequestParam(value = "word", required = true) String word
     ) {
-        if (word == null || word.length() < 3) {
+        if (word == null || word.length() < 3 || word.length() > 50) {
             return ResponseEntity.badRequest().build();
         }
         var count = dsl.selectCount()
@@ -182,7 +182,7 @@ public class ChatsController {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
         }
-        if (word == null || word.length() < 4 || word.length() > 30) {
+        if (word == null || word.length() < 4 || word.length() > 50) {
             return ResponseEntity.badRequest().build();
         }
         final int size = pageSize == null ? 25 : pageSize;
