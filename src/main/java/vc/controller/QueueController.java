@@ -12,7 +12,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.Queuelength;
+
+import java.time.OffsetDateTime;
+import java.util.List;
+
+import static vc.data.dto.tables.Queuelength.QUEUELENGTH;
 
 @Tags({@Tag(name = "Queue")})
 @RestController
@@ -21,6 +25,14 @@ public class QueueController {
 
     public QueueController(final DSLContext dsl) {
         this.dsl = dsl;
+    }
+
+    public record QueueData(OffsetDateTime time, int prio, int regular) {}
+    public record QueueLengthHistory(List<QueueData> queueData) {}
+    public record QueueEtaEquation(double factor, double pow) {
+        public static final QueueEtaEquation INSTANCE = new QueueEtaEquation(
+            199.0, 0.838
+        );
     }
 
     @GetMapping("/queue")
@@ -33,7 +45,7 @@ public class QueueController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = vc.data.dto.tables.pojos.Queuelength.class)
+                    schema = @Schema(implementation = QueueData.class)
                 )
             }
         ),
@@ -43,18 +55,43 @@ public class QueueController {
             content = @Content
         )
     })
-    public ResponseEntity<vc.data.dto.tables.pojos.Queuelength> queue() {
-        Queuelength q = Queuelength.QUEUELENGTH;
-        vc.data.dto.tables.pojos.Queuelength queuelength = dsl.selectFrom(q)
-                .orderBy(q.TIME.desc().nullsLast())
-                .limit(1)
-                .fetchOne()
-                .into(vc.data.dto.tables.pojos.Queuelength.class);
-        if (queuelength != null) {
-            return ResponseEntity.ok(queuelength);
+    public ResponseEntity<QueueData> queue() {
+        var queueData = dsl
+            .selectFrom(QUEUELENGTH)
+            .orderBy(QUEUELENGTH.TIME.desc().nullsLast())
+            .limit(1)
+            .fetchOne()
+            .into(QueueData.class);
+        if (queueData != null) {
+            return ResponseEntity.ok(queueData);
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+
+    @GetMapping("/queue/month")
+    @RateLimiter(name = "main")
+    @Cacheable("queue-month")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Queue length history for the last month",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = QueueLengthHistory.class)
+                )
+            }
+        )
+    })
+    public ResponseEntity<QueueLengthHistory> queueHistory() {
+        var queueDataList = dsl
+            .selectFrom(QUEUELENGTH)
+            .where(QUEUELENGTH.TIME.greaterOrEqual(OffsetDateTime.now().minusMonths(1)))
+            .orderBy(QUEUELENGTH.TIME.desc().nullsLast())
+            .fetch()
+            .into(QueueData.class);
+        return ResponseEntity.ok(new QueueLengthHistory(queueDataList));
     }
 
     @GetMapping("/queue/eta-equation")
@@ -74,11 +111,5 @@ public class QueueController {
     })
     public ResponseEntity<QueueEtaEquation> etaEquation() {
         return ResponseEntity.ok(QueueEtaEquation.INSTANCE);
-    }
-
-    public record QueueEtaEquation(double factor, double pow) {
-        public static QueueEtaEquation INSTANCE = new QueueEtaEquation(
-            199.0,
-            0.838);
     }
 }

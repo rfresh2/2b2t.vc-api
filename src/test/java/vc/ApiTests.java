@@ -11,7 +11,6 @@ import vc.api.MinetoolsRestClient;
 import vc.api.MojangRestClient;
 import vc.controller.*;
 import vc.data.dto.tables.MaxConsMonthView;
-import vc.data.dto.tables.pojos.Queuelength;
 
 import java.util.List;
 import java.util.Map;
@@ -152,17 +151,6 @@ public class ApiTests {
         assertFalse(killsTopMonthResponse.isEmpty());
     }
 
-//    @Test
-    public void namesApiTest() {
-        var namesResponse = restTemplate.getForObject("http://localhost:" + port + "/names?playerName={playerName}",
-                                                       List.class,
-                                                       Map.of(
-                                                           "playerName", "rfresh2"
-                                                       ));
-        assertNotNull(namesResponse);
-        assertFalse(namesResponse.isEmpty());
-    }
-
     @Test
     public void playtimeApiTest() {
         var playtimeResponse = restTemplate.getForObject("http://localhost:" + port + "/playtime?playerName={playerName}",
@@ -185,9 +173,17 @@ public class ApiTests {
     @Test
     public void queueApiTest() {
         var queueResponse = restTemplate.getForObject("http://localhost:" + port + "/queue",
-                                                            Queuelength.class);
+                                                            QueueController.QueueData.class);
         assertNotNull(queueResponse);
-        assertTrue(queueResponse.getRegular() >= 0);
+        assertTrue(queueResponse.regular() >= 0);
+    }
+
+    @Test
+    public void queueMonthTest() {
+        var queueMonthResponse = restTemplate.getForObject("http://localhost:" + port + "/queue/month",
+                                                            QueueController.QueueLengthHistory.class);
+        assertNotNull(queueMonthResponse);
+        assertFalse(queueMonthResponse.queueData().isEmpty());
     }
 
     @Test
@@ -195,6 +191,7 @@ public class ApiTests {
         var queueResponse = restTemplate.getForObject("http://localhost:" + port + "/queue/eta-equation",
                                                       QueueController.QueueEtaEquation.class);
         assertNotNull(queueResponse);
+        assertEquals(QueueController.QueueEtaEquation.INSTANCE, queueResponse);
     }
 
     @Test

@@ -15187,6 +15187,10 @@
           "parameterTypes": []
         },
         {
+          "name": "queueMonthTest",
+          "parameterTypes": []
+        },
+        {
           "name": "seenApiTest",
           "parameterTypes": []
         },
@@ -16176,6 +16180,10 @@
         {
           "name": "queue",
           "parameterTypes": []
+        },
+        {
+          "name": "queueHistory",
+          "parameterTypes": []
         }
       ]
     },
@@ -16187,6 +16195,32 @@
         },
         {
           "name": "CGLIB$FACTORY_DATA"
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.QueueController$QueueData",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.time.OffsetDateTime",
+            "int",
+            "int"
+          ]
+        },
+        {
+          "name": "prio",
+          "parameterTypes": []
+        },
+        {
+          "name": "regular",
+          "parameterTypes": []
+        },
+        {
+          "name": "time",
+          "parameterTypes": []
         }
       ]
     },
@@ -16207,6 +16241,22 @@
         },
         {
           "name": "pow",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.QueueController$QueueLengthHistory",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "queueData",
           "parameterTypes": []
         }
       ]
