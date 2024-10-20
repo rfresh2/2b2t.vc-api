@@ -716,6 +716,27 @@
       "type": "com.ibm.lang.management.OperatingSystemMXBean"
     },
     {
+      "type": "com.intellij.junit5.JUnit5IdeaTestRunner",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "com.intellij.rt.execution.application.AppMainV2$Agent",
+      "methods": [
+        {
+          "name": "premain",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.instrument.Instrumentation"
+          ]
+        }
+      ]
+    },
+    {
       "type": "com.mongodb.MongoClientSettings"
     },
     {
@@ -968,6 +989,12 @@
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "setKeepaliveTime",
+          "parameterTypes": [
+            "long"
+          ]
+        },
+        {
           "name": "setMaximumPoolSize",
           "parameterTypes": [
             "int"
@@ -991,6 +1018,12 @@
         {
           "name": "<init>",
           "parameterTypes": []
+        },
+        {
+          "name": "setLoginTimeout",
+          "parameterTypes": [
+            "int"
+          ]
         }
       ]
     },
@@ -999,6 +1032,9 @@
     },
     {
       "type": "com.zaxxer.hikari.metrics.MetricsTrackerFactory"
+    },
+    {
+      "type": "com.zaxxer.hikari.pool.HikariProxyPreparedStatement"
     },
     {
       "type": "com.zaxxer.hikari.pool.PoolBase",
@@ -1015,6 +1051,9 @@
           "name": "state"
         }
       ]
+    },
+    {
+      "type": "com.zaxxer.hikari.pool.ProxyPreparedStatement"
     },
     {
       "type": "double"
@@ -4831,6 +4870,20 @@
       "type": "java.net.NetPermission"
     },
     {
+      "type": "java.net.Socket$SocketInputStream"
+    },
+    {
+      "type": "java.net.SocketException",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
       "type": "java.net.SocketPermission"
     },
     {
@@ -4944,7 +4997,12 @@
       "type": "java.sql.ResultSet"
     },
     {
-      "type": "java.sql.SQLException"
+      "type": "java.sql.SQLException",
+      "fields": [
+        {
+          "name": "next"
+        }
+      ]
     },
     {
       "type": "java.sql.SQLFeatureNotSupportedException"
@@ -4975,6 +5033,9 @@
     },
     {
       "type": "java.time.Instant"
+    },
+    {
+      "type": "java.time.LocalDate"
     },
     {
       "type": "java.util.ArrayList"
@@ -5323,6 +5384,9 @@
       ]
     },
     {
+      "type": "jdk.internal.reflect.DirectMethodHandleAccessor"
+    },
+    {
       "type": "jdk.internal.vm.annotation.IntrinsicCandidate"
     },
     {
@@ -5422,10 +5486,31 @@
       "type": "org.apache.catalina.Valve"
     },
     {
+      "type": "org.apache.catalina.authenticator.AuthenticatorBase"
+    },
+    {
       "type": "org.apache.catalina.connector.Connector"
     },
     {
+      "type": "org.apache.catalina.connector.CoyoteAdapter"
+    },
+    {
       "type": "org.apache.catalina.core.ApplicationContextFacade"
+    },
+    {
+      "type": "org.apache.catalina.core.ApplicationFilterChain"
+    },
+    {
+      "type": "org.apache.catalina.core.StandardContextValve"
+    },
+    {
+      "type": "org.apache.catalina.core.StandardEngineValve"
+    },
+    {
+      "type": "org.apache.catalina.core.StandardHostValve"
+    },
+    {
+      "type": "org.apache.catalina.core.StandardWrapperValve"
     },
     {
       "type": "org.apache.catalina.loader.JdbcLeakPrevention",
@@ -5453,10 +5538,16 @@
       ]
     },
     {
+      "type": "org.apache.catalina.valves.ErrorReportValve"
+    },
+    {
       "type": "org.apache.commons.dbcp2.BasicDataSource"
     },
     {
       "type": "org.apache.commons.logging.Log"
+    },
+    {
+      "type": "org.apache.coyote.AbstractProcessorLight"
     },
     {
       "type": "org.apache.coyote.AbstractProtocol",
@@ -5495,6 +5586,9 @@
       ]
     },
     {
+      "type": "org.apache.coyote.AbstractProtocol$ConnectionHandler"
+    },
+    {
       "type": "org.apache.coyote.ProtocolHandler"
     },
     {
@@ -5511,6 +5605,9 @@
     },
     {
       "type": "org.apache.coyote.http11.Http11NioProtocol"
+    },
+    {
+      "type": "org.apache.coyote.http11.Http11Processor"
     },
     {
       "type": "org.apache.derby.jdbc.EmbeddedDriver"
@@ -5578,6 +5675,21 @@
     },
     {
       "type": "org.apache.tomcat.util.net.NioEndpoint"
+    },
+    {
+      "type": "org.apache.tomcat.util.net.NioEndpoint$SocketProcessor"
+    },
+    {
+      "type": "org.apache.tomcat.util.net.SocketProcessorBase"
+    },
+    {
+      "type": "org.apache.tomcat.util.threads.TaskThread$WrappingRunnable"
+    },
+    {
+      "type": "org.apache.tomcat.util.threads.ThreadPoolExecutor"
+    },
+    {
+      "type": "org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker"
     },
     {
       "type": "org.apache.tomcat.websocket.server.WsFilter"
@@ -6362,6 +6474,12 @@
       "type": "org.jooq.exception.DataAccessException"
     },
     {
+      "type": "org.jooq.impl.AbstractQuery"
+    },
+    {
+      "type": "org.jooq.impl.AbstractResultQuery"
+    },
+    {
       "type": "org.jooq.impl.AbstractScope",
       "allDeclaredFields": true
     },
@@ -6387,6 +6505,9 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.jooq.impl.ResultQueryTrait"
+    },
+    {
       "type": "org.jooq.impl.SQLDataType"
     },
     {
@@ -6394,6 +6515,15 @@
     },
     {
       "type": "org.jooq.impl.SQLDataTypes$TrinoDataType"
+    },
+    {
+      "type": "org.jooq.impl.SelectImpl"
+    },
+    {
+      "type": "org.jooq.impl.Tools"
+    },
+    {
+      "type": "org.jooq.tools.jdbc.DefaultPreparedStatement"
     },
     {
       "type": "org.jooq.tools.jdbc.MockCallable"
@@ -6459,12 +6589,24 @@
       ]
     },
     {
+      "type": "org.postgresql.core.PGStream"
+    },
+    {
       "type": "org.postgresql.core.QueryExecutorCloseAction",
       "fields": [
         {
           "name": "pgStream"
         }
       ]
+    },
+    {
+      "type": "org.postgresql.core.VisibleBufferedInputStream"
+    },
+    {
+      "type": "org.postgresql.core.v3.QueryExecutorImpl"
+    },
+    {
+      "type": "org.postgresql.jdbc.PgPreparedStatement"
     },
     {
       "type": "org.postgresql.jdbc.PgStatement",
@@ -7210,6 +7352,15 @@
       "type": "org.springframework.aop.TargetClassAware"
     },
     {
+      "type": "org.springframework.aop.aspectj.AbstractAspectJAdvice"
+    },
+    {
+      "type": "org.springframework.aop.aspectj.AspectJAroundAdvice"
+    },
+    {
+      "type": "org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint"
+    },
+    {
       "type": "org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator",
       "allDeclaredFields": true,
       "methods": [
@@ -7232,6 +7383,12 @@
     },
     {
       "type": "org.springframework.aop.framework.AopInfrastructureBean"
+    },
+    {
+      "type": "org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation"
+    },
+    {
+      "type": "org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor"
     },
     {
       "type": "org.springframework.aop.framework.ProxyConfig",
@@ -7258,6 +7415,9 @@
       ]
     },
     {
+      "type": "org.springframework.aop.framework.ReflectiveMethodInvocation"
+    },
+    {
       "type": "org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator",
       "allDeclaredFields": true
     },
@@ -7270,6 +7430,9 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.springframework.aop.interceptor.ExposeInvocationInterceptor"
+    },
+    {
       "type": "org.springframework.aop.scope.ScopedObject"
     },
     {
@@ -7279,6 +7442,9 @@
     {
       "type": "org.springframework.aop.support.AbstractPointcutAdvisor",
       "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.aop.support.AopUtils"
     },
     {
       "type": "org.springframework.aot.hint.annotation.Reflective"
@@ -13087,6 +13253,9 @@
       "type": "org.springframework.format.Printer"
     },
     {
+      "type": "org.springframework.format.annotation.DateTimeFormat"
+    },
+    {
       "type": "org.springframework.format.support.DefaultFormattingConversionService",
       "allDeclaredFields": true
     },
@@ -14554,6 +14723,12 @@
       ]
     },
     {
+      "type": "sun.nio.ch.NioSocketImpl"
+    },
+    {
+      "type": "sun.nio.ch.NioSocketImpl$1"
+    },
+    {
       "type": "sun.reflect.ReflectionFactory",
       "methods": [
         {
@@ -14768,6 +14943,15 @@
           "parameterTypes": []
         }
       ]
+    },
+    {
+      "type": "sun.security.ssl.SSLSocketImpl"
+    },
+    {
+      "type": "sun.security.ssl.SSLSocketImpl$AppInputStream"
+    },
+    {
+      "type": "sun.security.ssl.SSLSocketInputRecord"
     },
     {
       "type": "sun.security.ssl.TrustManagerFactoryImpl$PKIXFactory",
@@ -15020,6 +15204,10 @@
         },
         {
           "name": "wordCountApiTest",
+          "parameterTypes": []
+        },
+        {
+          "name": "wordSearchApiTest",
           "parameterTypes": []
         }
       ]
@@ -15369,6 +15557,16 @@
           ]
         },
         {
+          "name": "chatSearch",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.time.LocalDate",
+            "java.time.LocalDate",
+            "java.lang.Integer",
+            "java.lang.Integer"
+          ]
+        },
+        {
           "name": "chats",
           "parameterTypes": [
             "java.util.UUID",
@@ -15418,6 +15616,32 @@
       ]
     },
     {
+      "type": "vc.controller.ChatsController$ChatSearchResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List",
+            "int",
+            "int"
+          ]
+        },
+        {
+          "name": "chats",
+          "parameterTypes": []
+        },
+        {
+          "name": "pageCount",
+          "parameterTypes": []
+        },
+        {
+          "name": "total",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.controller.ChatsController$ChatsResponse",
       "allDeclaredFields": true,
       "methods": [
@@ -15439,6 +15663,37 @@
         },
         {
           "name": "total",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.ChatsController$PlayerChat",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.util.UUID",
+            "java.time.OffsetDateTime",
+            "java.lang.String"
+          ]
+        },
+        {
+          "name": "chat",
+          "parameterTypes": []
+        },
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "time",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
           "parameterTypes": []
         }
       ]
@@ -15696,6 +15951,10 @@
       "methods": [
         {
           "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "handleError",
           "parameterTypes": []
         }
       ]

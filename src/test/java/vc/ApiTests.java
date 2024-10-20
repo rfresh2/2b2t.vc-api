@@ -80,6 +80,19 @@ public class ApiTests {
     }
 
     @Test
+    public void wordSearchApiTest() {
+        var wordSearchResponse = restTemplate.getForObject(
+            "http://localhost:" + port + "/chats/search?word={word}&endDate={endDate}",
+            ChatsController.ChatSearchResponse.class,
+            Map.of(
+                "word", "test",
+                "endDate", "2021-01-01"
+            ));
+        assertNotNull(wordSearchResponse);
+        assertTrue(wordSearchResponse.total() > 0);
+    }
+
+    @Test
     public void connectionsApiTest() {
         var connectionsResponse = restTemplate.getForObject("http://localhost:" + port + "/connections?playerName={playerName}",
                                                                             ConnectionsController.ConnectionsResponse.class,
