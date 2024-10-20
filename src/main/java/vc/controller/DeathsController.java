@@ -49,7 +49,7 @@ public class DeathsController {
     public record DeathsResponse(List<Death> deaths, int total, int pageCount) {}
     public record KillsResponse(List<Death> kills, int total, int pageCount) {}
     public record PlayerDeathOrKillCountResponse(List<PlayerDeathOrKillCount> players) {}
-    public record PlayerDeathOrKillCount(UUID uuid, String playerName, int count) {}
+    public record PlayerDeathOrKillCount(String playerName, UUID uuid, int count) {}
 
     @GetMapping("/deaths")
     @RateLimiter(name = "main")
@@ -224,8 +224,8 @@ public class DeathsController {
             .selectFrom(TOP_DEATHS_MONTH_VIEW)
             .fetch()
             .map(r -> new PlayerDeathOrKillCount(
-                r.getVictimPlayerUuid(),
                 r.getVictimPlayerName(),
+                r.getVictimPlayerUuid(),
                 r.getDeathCount().intValue()));
         if (players.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -259,8 +259,8 @@ public class DeathsController {
             .selectFrom(TOP_KILLS_MONTH_VIEW)
             .fetch()
             .map(r -> new PlayerDeathOrKillCount(
-                r.getKillerPlayerUuid(),
                 r.getKillerPlayerName(),
+                r.getKillerPlayerUuid(),
                 r.getKillCount().intValue()));
         if (players.isEmpty()) {
             return ResponseEntity.noContent().build();

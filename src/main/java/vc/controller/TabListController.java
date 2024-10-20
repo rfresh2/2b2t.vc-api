@@ -28,7 +28,7 @@ public class TabListController {
     }
 
     public record TablistResponse(List<TablistEntry> players) { }
-    public record TablistEntry(String playerName, UUID playerUuid) { }
+    public record TablistEntry(String playerName, UUID uuid) { }
 
     @GetMapping("/tablist")
     @RateLimiter(name = "main")
