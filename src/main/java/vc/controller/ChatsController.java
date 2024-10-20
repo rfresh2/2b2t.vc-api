@@ -157,7 +157,7 @@ public class ChatsController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = ChatsResponse.class)
+                    schema = @Schema(implementation = ChatSearchResponse.class)
                 )
             }
         ),
