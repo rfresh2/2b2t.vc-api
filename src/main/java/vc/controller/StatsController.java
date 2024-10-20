@@ -31,6 +31,19 @@ public class StatsController {
         this.playerLookup = playerLookup;
     }
 
+    public record PlayerStats(
+        int joinCount,
+        int leaveCount,
+        int deathCount,
+        int killCount,
+        OffsetDateTime firstSeen,
+        OffsetDateTime lastSeen,
+        int playtimeSeconds,
+        int playtimeSecondsMonth,
+        int chatsCount,
+        boolean prio
+    ) { }
+
     @RateLimiter(name = "main")
     @GetMapping("/stats/player")
     @Cacheable("playerStats")
@@ -73,17 +86,4 @@ public class StatsController {
             .into(PlayerStats.class);
         return ResponseEntity.ok(playerActivity);
     }
-
-    public record PlayerStats(
-        int joinCount,
-        int leaveCount,
-        int deathCount,
-        int killCount,
-        OffsetDateTime firstSeen,
-        OffsetDateTime lastSeen,
-        int playtimeSeconds,
-        int playtimeSecondsMonth,
-        int chatsCount,
-        boolean prio
-    ) { }
 }

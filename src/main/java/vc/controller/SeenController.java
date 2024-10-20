@@ -34,6 +34,8 @@ public class SeenController {
         this.playerLookup = playerLookup;
     }
 
+    public record SeenResponse(OffsetDateTime firstSeen, OffsetDateTime lastSeen) { }
+
     @GetMapping("/seen")
     @RateLimiter(name = "main")
     @Cacheable("seen")
@@ -87,6 +89,4 @@ public class SeenController {
         }
         return ResponseEntity.ok(new SeenResponse(firstSeen, lastSeen));
     }
-
-    public record SeenResponse(OffsetDateTime firstSeen, OffsetDateTime lastSeen) { }
 }

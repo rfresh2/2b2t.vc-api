@@ -1,7 +1,6 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,10 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.pojos.Deaths;
 import vc.util.PlayerLookup;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +36,20 @@ public class DeathsController {
         this.playerLookup = playerLookup;
     }
 
-    public record DeathsResponse(List<Deaths> deaths, int total, int pageCount) {}
+    public record Death(
+        OffsetDateTime time,
+        String deathMessage,
+        String victimPlayerName,
+        UUID victimPlayerUuid,
+        String killerPlayerName,
+        UUID killerPlayerUuid,
+        String weaponName,
+        String killerMob
+    ) {}
+    public record DeathsResponse(List<Death> deaths, int total, int pageCount) {}
+    public record KillsResponse(List<Death> kills, int total, int pageCount) {}
+    public record PlayerDeathOrKillCountResponse(List<PlayerDeathOrKillCount> players) {}
+    public record PlayerDeathOrKillCount(UUID uuid, String playerName, int count) {}
 
     @GetMapping("/deaths")
     @RateLimiter(name = "main")
@@ -98,21 +110,20 @@ public class DeathsController {
             .fetchOneInto(Long.class);
         if (rowCount == null) rowCount = 0L;
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        List<vc.data.dto.tables.pojos.Deaths> deathsList = dsl.selectFrom(DEATHS)
+        List<Death> deathsList = dsl
+            .selectFrom(DEATHS)
                 .where(DEATHS.VICTIM_PLAYER_UUID.eq(resolvedUuid))
                 .orderBy(DEATHS.TIME.desc())
                 .limit(size)
                 .offset(offset)
                 .fetch()
-                .into(Deaths.class);
+                .into(Death.class);
         if (deathsList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new DeathsResponse(deathsList, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
         }
     }
-
-    public record KillsResponse(List<Deaths> kills, int total, int pageCount) {}
 
     @GetMapping("/kills")
     @RateLimiter(name = "main")
@@ -173,21 +184,20 @@ public class DeathsController {
             .fetchOneInto(Long.class);
         if (rowCount == null) rowCount = 0L;
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        List<vc.data.dto.tables.pojos.Deaths> deathsList = dsl.selectFrom(DEATHS)
+        List<Death> deathsList = dsl
+            .selectFrom(DEATHS)
                 .where(DEATHS.KILLER_PLAYER_UUID.eq(resolvedUuid))
                 .orderBy(DEATHS.TIME.desc())
                 .limit(size)
                 .offset(offset)
                 .fetch()
-                .into(Deaths.class);
+                .into(Death.class);
         if (deathsList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new KillsResponse(deathsList, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
         }
     }
-
-    public record DeathOrKillTopMonthResponse(UUID uuid, String playerName, int count) {}
 
     @GetMapping("/deaths/top/month")
     @RateLimiter(name = "main")
@@ -199,7 +209,7 @@ public class DeathsController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(schema = @Schema(implementation = DeathOrKillTopMonthResponse.class))
+                    schema = @Schema(implementation = PlayerDeathOrKillCountResponse.class)
                 )
             }
         ),
@@ -209,16 +219,18 @@ public class DeathsController {
             content = @Content
         )
     })
-    public ResponseEntity<List<DeathOrKillTopMonthResponse>> deathsTopMonth() {
-        List<DeathOrKillTopMonthResponse> responses = dsl.selectFrom(TOP_DEATHS_MONTH_VIEW)
+    public ResponseEntity<PlayerDeathOrKillCountResponse> deathsTopMonth() {
+        List<PlayerDeathOrKillCount> players = dsl
+            .selectFrom(TOP_DEATHS_MONTH_VIEW)
             .fetch()
-            .map(r -> new DeathOrKillTopMonthResponse(r.getVictimPlayerUuid(),
-                                                      r.getVictimPlayerName(),
-                                                      r.getDeathCount().intValue()));
-        if (responses.isEmpty()) {
+            .map(r -> new PlayerDeathOrKillCount(
+                r.getVictimPlayerUuid(),
+                r.getVictimPlayerName(),
+                r.getDeathCount().intValue()));
+        if (players.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(responses);
+            return ResponseEntity.ok(new PlayerDeathOrKillCountResponse(players));
         }
     }
 
@@ -232,7 +244,7 @@ public class DeathsController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(schema = @Schema(implementation = DeathOrKillTopMonthResponse.class))
+                    schema = @Schema(implementation = PlayerDeathOrKillCountResponse.class)
                 )
             }
         ),
@@ -242,16 +254,18 @@ public class DeathsController {
             content = @Content
         )
     })
-    public ResponseEntity<List<DeathOrKillTopMonthResponse>> killsTopMonth() {
-        List<DeathOrKillTopMonthResponse> responses = dsl.selectFrom(TOP_KILLS_MONTH_VIEW)
+    public ResponseEntity<PlayerDeathOrKillCountResponse> killsTopMonth() {
+        List<PlayerDeathOrKillCount> players = dsl
+            .selectFrom(TOP_KILLS_MONTH_VIEW)
             .fetch()
-            .map(r -> new DeathOrKillTopMonthResponse(r.getKillerPlayerUuid(),
-                                                      r.getKillerPlayerName(),
-                                                      r.getKillCount().intValue()));
-        if (responses.isEmpty()) {
+            .map(r -> new PlayerDeathOrKillCount(
+                r.getKillerPlayerUuid(),
+                r.getKillerPlayerName(),
+                r.getKillCount().intValue()));
+        if (players.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(responses);
+            return ResponseEntity.ok(new PlayerDeathOrKillCountResponse(players));
         }
     }
 }

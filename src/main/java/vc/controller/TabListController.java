@@ -1,7 +1,6 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,10 +12,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.Tablist;
 
 import java.util.List;
 import java.util.UUID;
+
+import static vc.data.dto.tables.Tablist.TABLIST;
 
 @Tags({@Tag(name = "TabList")})
 @RestController
@@ -26,6 +26,9 @@ public class TabListController {
     public TabListController(final DSLContext dsl) {
         this.dsl = dsl;
     }
+
+    public record TablistResponse(List<TablistEntry> players) { }
+    public record TablistEntry(String playerName, UUID playerUuid) { }
 
     @GetMapping("/tablist")
     @RateLimiter(name = "main")
@@ -37,7 +40,7 @@ public class TabListController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(schema = @Schema(implementation = TablistEntry.class))
+                    schema = @Schema(implementation = TablistResponse.class)
                 )
             }
         ),
@@ -47,17 +50,15 @@ public class TabListController {
             content = @Content
         )
     })
-    public ResponseEntity<List<TablistEntry>> onlinePlayers() {
-        List<TablistEntry> into = dsl.selectFrom(Tablist.TABLIST)
+    public ResponseEntity<TablistResponse> onlinePlayers() {
+        List<TablistEntry> players = dsl.selectFrom(TABLIST)
             .fetch()
             .stream()
             .map(t -> new TablistEntry(t.getPlayerName(), t.getPlayerUuid()))
             .toList();
-        if (into.isEmpty()) {
+        if (players.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(into);
+        return ResponseEntity.ok(new TablistResponse(players));
     }
-
-    public record TablistEntry(String playerName, UUID playerUuid) { }
 }

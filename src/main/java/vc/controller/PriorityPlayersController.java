@@ -1,7 +1,6 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,25 +12,24 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.PriorityPlayersView;
-import vc.util.PlayerLookup;
 
 import java.util.List;
 import java.util.UUID;
+
+import static vc.data.dto.tables.PriorityPlayersView.PRIORITY_PLAYERS_VIEW;
 
 @Tags({@Tag(name = "PriorityPlayers")})
 @RestController
 public class PriorityPlayersController {
 
     private final DSLContext dsl;
-    private final PlayerLookup playerLookup;
 
-    public PriorityPlayersController(DSLContext dsl, PlayerLookup playerLookup) {
+    public PriorityPlayersController(DSLContext dsl) {
         this.dsl = dsl;
-        this.playerLookup = playerLookup;
     }
 
-    public record PriorityPlayersResponse(String playerName, UUID uuid) { }
+    public record PriorityPlayersResponse(List<PriorityPlayer> players) { }
+    public record PriorityPlayer(String playerName, UUID uuid) { }
 
     @GetMapping("/players/priority")
     @RateLimiter(name = "main")
@@ -43,7 +41,7 @@ public class PriorityPlayersController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(schema = @Schema(implementation = PriorityPlayersResponse.class))
+                    schema = @Schema(implementation = PriorityPlayersResponse.class)
                 )
             }
         ),
@@ -53,15 +51,16 @@ public class PriorityPlayersController {
             content = @Content
         )
     })
-    public ResponseEntity<List<PriorityPlayersResponse>> priorityPlayers() {
-        var response = dsl.selectFrom(PriorityPlayersView.PRIORITY_PLAYERS_VIEW)
+    public ResponseEntity<PriorityPlayersResponse> priorityPlayers() {
+        var response = dsl
+            .selectFrom(PRIORITY_PLAYERS_VIEW)
             .fetch()
-            .map(record -> new PriorityPlayersResponse(
-                record.get(PriorityPlayersView.PRIORITY_PLAYERS_VIEW.PLAYER_NAME),
-                record.get(PriorityPlayersView.PRIORITY_PLAYERS_VIEW.PLAYER_UUID)));
+            .map(record -> new PriorityPlayer(
+                record.get(PRIORITY_PLAYERS_VIEW.PLAYER_NAME),
+                record.get(PRIORITY_PLAYERS_VIEW.PLAYER_UUID)));
         if (response.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new PriorityPlayersResponse(response));
     }
 }

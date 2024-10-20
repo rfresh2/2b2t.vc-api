@@ -1,7 +1,6 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,9 +12,9 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.tables.pojos.MaxConsMonthView;
 
 import java.util.List;
+import java.util.UUID;
 
 import static vc.data.dto.tables.MaxConsMonthView.MAX_CONS_MONTH_VIEW;
 
@@ -28,6 +27,9 @@ public class BotController {
         this.dsl = dsl;
     }
 
+    public record BotData(String playerName, UUID uuid) {}
+    public record BotsMonthResponse(List<BotData> players) {}
+
     @GetMapping("/bots/month")
     @RateLimiter(name = "main")
     @Cacheable("botsMonth")
@@ -38,8 +40,8 @@ public class BotController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(schema = @Schema(implementation = MaxConsMonthView.class)
-                ))
+                    schema = @Schema(implementation = BotsMonthResponse.class)
+                )
             }
         ),
         @ApiResponse(
@@ -48,13 +50,15 @@ public class BotController {
             content = @Content
         )
     })
-    public ResponseEntity<List<MaxConsMonthView>> onlinePlayers() {
-        List<MaxConsMonthView> bots = dsl.selectFrom(MAX_CONS_MONTH_VIEW).fetch().into(MaxConsMonthView.class);
-
+    public ResponseEntity<BotsMonthResponse> onlinePlayers() {
+        List<BotData> bots = dsl
+            .selectFrom(MAX_CONS_MONTH_VIEW)
+            .fetch()
+            .map(r -> new BotData(r.getPName(), r.getPUuid()));
         if (bots.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(bots);
+            return ResponseEntity.ok(new BotsMonthResponse(bots));
         }
     }
 }

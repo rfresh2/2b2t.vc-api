@@ -1,7 +1,6 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,15 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.routines.Playtime;
-import vc.data.dto.tables.PlaytimeMonth;
-import vc.data.dto.tables.records.PlaytimeMonthRecord;
 import vc.util.PlayerLookup;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
+import static vc.data.dto.tables.PlaytimeMonth.PLAYTIME_MONTH;
 
 @Tags({@Tag(name = "Playtime")})
 @RestController
@@ -36,6 +33,10 @@ public class PlaytimeController {
         this.dsl = dsl;
         this.playerLookup = playerLookup;
     }
+
+    public record PlaytimeMonthResponse(List<PlayerPlaytimeData> players) { }
+    public record PlayerPlaytimeData(UUID uuid, String playerName, double playtimeDays) { }
+    public record PlaytimeResponse(UUID uuid, int playtimeSeconds) { }
 
     @GetMapping("/playtime")
     @RateLimiter(name = "main")
@@ -93,7 +94,7 @@ public class PlaytimeController {
             content = {
                 @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(schema = @Schema(implementation = PlaytimeTopMonthResponse.class))
+                    schema = @Schema(implementation = PlaytimeMonthResponse.class)
                 )
             }
         ),
@@ -103,24 +104,20 @@ public class PlaytimeController {
             content = @Content
         )
     })
-    public ResponseEntity<List<PlaytimeTopMonthResponse>> playtimeTopMonth() {
-        PlaytimeMonthRecord[] playtimeMonthViewRecords = dsl.selectFrom(PlaytimeMonth.PLAYTIME_MONTH)
-                .fetchArray();
-        List<PlaytimeTopMonthResponse> monthResponses = Arrays.stream(playtimeMonthViewRecords).toList().stream()
-                .map(playtimeAllMonthRecord -> new PlaytimeTopMonthResponse(
-                    playtimeAllMonthRecord.get(PlaytimeMonth.PLAYTIME_MONTH.PLAYER_UUID),
-                    playtimeAllMonthRecord.get(PlaytimeMonth.PLAYTIME_MONTH.PLAYER_NAME),
-                    playtimeAllMonthRecord.get(PlaytimeMonth.PLAYTIME_MONTH.PLAYTIME_DAYS).doubleValue()))
-                .sorted((a, b) -> Double.compare(b.playtimeDays(), a.playtimeDays()))
-                .collect(Collectors.toList());
-        if (monthResponses.isEmpty()) {
+    public ResponseEntity<PlaytimeMonthResponse> playtimeTopMonth() {
+        var players = dsl
+            .selectFrom(PLAYTIME_MONTH)
+            .fetchStream()
+            .map(playtimeAllMonthRecord -> new PlayerPlaytimeData(
+                playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYER_UUID),
+                playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYER_NAME),
+                playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYTIME_DAYS).doubleValue()))
+            .sorted((a, b) -> Double.compare(b.playtimeDays(), a.playtimeDays()))
+            .toList();
+        if (players.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(monthResponses);
+            return ResponseEntity.ok(new PlaytimeMonthResponse(players));
         }
     }
-
-    public record PlaytimeTopMonthResponse(UUID uuid, String playerName, double playtimeDays) { }
-
-    public record PlaytimeResponse(UUID uuid, int playtimeSeconds) { }
 }

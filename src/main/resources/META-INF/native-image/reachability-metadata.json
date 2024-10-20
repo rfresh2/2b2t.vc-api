@@ -6484,6 +6484,9 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.jooq.impl.Cache"
+    },
+    {
       "type": "org.jooq.impl.CallbackExecuteListener"
     },
     {
@@ -6503,6 +6506,18 @@
     {
       "type": "org.jooq.impl.DefaultExecuteListenerProvider",
       "allDeclaredFields": true
+    },
+    {
+      "type": "org.jooq.impl.DefaultRecordMapper"
+    },
+    {
+      "type": "org.jooq.impl.DefaultRecordMapperProvider"
+    },
+    {
+      "type": "org.jooq.impl.FieldsImpl"
+    },
+    {
+      "type": "org.jooq.impl.ResultImpl"
     },
     {
       "type": "org.jooq.impl.ResultQueryTrait"
@@ -15550,6 +15565,43 @@
       ]
     },
     {
+      "type": "vc.controller.BotController$BotData",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.util.UUID"
+          ]
+        },
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.BotController$BotsMonthResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "players",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.controller.ChatsController",
       "allDeclaredFields": true,
       "methods": [
@@ -15924,6 +15976,57 @@
       ]
     },
     {
+      "type": "vc.controller.DeathsController$Death",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.time.OffsetDateTime",
+            "java.lang.String",
+            "java.lang.String",
+            "java.util.UUID",
+            "java.lang.String",
+            "java.util.UUID",
+            "java.lang.String",
+            "java.lang.String"
+          ]
+        },
+        {
+          "name": "deathMessage",
+          "parameterTypes": []
+        },
+        {
+          "name": "killerMob",
+          "parameterTypes": []
+        },
+        {
+          "name": "killerPlayerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "killerPlayerUuid",
+          "parameterTypes": []
+        },
+        {
+          "name": "time",
+          "parameterTypes": []
+        },
+        {
+          "name": "victimPlayerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "victimPlayerUuid",
+          "parameterTypes": []
+        },
+        {
+          "name": "weaponName",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.controller.DeathsController$DeathOrKillTopMonthResponse",
       "allDeclaredFields": true,
       "methods": [
@@ -15989,6 +16092,48 @@
         },
         {
           "name": "total",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.DeathsController$PlayerDeathOrKillCount",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "int"
+          ]
+        },
+        {
+          "name": "count",
+          "parameterTypes": []
+        },
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.DeathsController$PlayerDeathOrKillCountResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "players",
           "parameterTypes": []
         }
       ]
@@ -16083,6 +16228,48 @@
       ]
     },
     {
+      "type": "vc.controller.PlaytimeController$PlayerPlaytimeData",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "double"
+          ]
+        },
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "playtimeDays",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.PlaytimeController$PlaytimeMonthResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "players",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.controller.PlaytimeController$PlaytimeResponse",
       "allDeclaredFields": true,
       "methods": [
@@ -16128,6 +16315,12 @@
         {
           "name": "<init>",
           "parameterTypes": [
+            "org.jooq.DSLContext"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
             "org.jooq.DSLContext",
             "vc.util.PlayerLookup"
           ]
@@ -16150,11 +16343,42 @@
       ]
     },
     {
+      "type": "vc.controller.PriorityPlayersController$PriorityPlayer",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.util.UUID"
+          ]
+        },
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.controller.PriorityPlayersController$PriorityPlayersResponse",
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
           "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "players",
           "parameterTypes": []
         },
         {
@@ -16437,11 +16661,34 @@
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.util.UUID"
+          ]
+        },
+        {
           "name": "playerName",
           "parameterTypes": []
         },
         {
           "name": "playerUuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.TabListController$TablistResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "players",
           "parameterTypes": []
         }
       ]
