@@ -8,14 +8,11 @@ import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import vc.data.dto.Indexes;
 import vc.data.dto.Public;
 import vc.data.dto.tables.records.QueuelengthRecord;
 
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 
 /**
@@ -86,11 +83,6 @@ public class Queuelength extends TableImpl<QueuelengthRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
-    }
-
-    @Override
-    public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.QUEUELENGTH_TIME_IDX);
     }
 
     @Override

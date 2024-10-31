@@ -8,19 +8,20 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
+import org.jooq.impl.DSL;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import vc.data.dto.routines.Playtime;
 import vc.util.PlayerLookup;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static vc.data.dto.tables.PlaytimeMonth.PLAYTIME_MONTH;
+import static vc.data.dto.tables.Playtime.PLAYTIME;
+import static vc.data.dto.tables.TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW;
 
 @Tags({@Tag(name = "Playtime")})
 @RestController
@@ -74,14 +75,15 @@ public class PlaytimeController {
             return ResponseEntity.noContent().build();
         }
         final UUID resolvedUuid = optionalPlayerUUID.get();
-        Playtime playtime = new Playtime();
-        playtime.setPUuid(resolvedUuid);
-        playtime.execute(dsl.configuration());
-        Integer playtimeReturnValue = playtime.getReturnValue();
-        if (playtimeReturnValue != null && playtimeReturnValue != 0) {
-            return ResponseEntity.ok(new PlaytimeResponse(resolvedUuid, playtimeReturnValue));
-        } else {
+        var playtimeSeconds = dsl
+            .select(DSL.sum(PLAYTIME.PLAYTIME_SECONDS))
+            .from(PLAYTIME)
+            .where(PLAYTIME.PLAYER_UUID.eq(resolvedUuid))
+            .fetchOneInto(Integer.class);
+        if (playtimeSeconds == null) {
             return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(new PlaytimeResponse(resolvedUuid, playtimeSeconds));
         }
     }
 
@@ -105,14 +107,13 @@ public class PlaytimeController {
         )
     })
     public ResponseEntity<PlaytimeMonthResponse> playtimeTopMonth() {
-        var players = dsl
-            .selectFrom(PLAYTIME_MONTH)
+        var players = dsl.selectFrom(TOP_PLAYTIME_MONTH_VIEW)
             .fetch()
             .stream()
-            .map(playtimeAllMonthRecord -> new PlayerPlaytimeData(
-                playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYER_UUID),
-                playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYER_NAME),
-                playtimeAllMonthRecord.get(PLAYTIME_MONTH.PLAYTIME_DAYS).doubleValue()))
+            .map(topPlaytimeMonthViewRecord -> new PlayerPlaytimeData(
+                topPlaytimeMonthViewRecord.getPlayerUuid(),
+                topPlaytimeMonthViewRecord.getPlayerName(),
+                secondsToDays(topPlaytimeMonthViewRecord.getPlaytimeSeconds())))
             .sorted((a, b) -> Double.compare(b.playtimeDays(), a.playtimeDays()))
             .toList();
         if (players.isEmpty()) {
@@ -120,5 +121,9 @@ public class PlaytimeController {
         } else {
             return ResponseEntity.ok(new PlaytimeMonthResponse(players));
         }
+    }
+
+    public static double secondsToDays(final long seconds) {
+        return seconds / 86400.0;
     }
 }

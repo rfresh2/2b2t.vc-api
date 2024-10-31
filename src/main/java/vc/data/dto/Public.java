@@ -182,6 +182,11 @@ public class Public extends SchemaImpl {
     public final Playercount PLAYERCOUNT = Playercount.PLAYERCOUNT;
 
     /**
+     * The table <code>public.playtime</code>.
+     */
+    public final Playtime PLAYTIME = Playtime.PLAYTIME;
+
+    /**
      * The table <code>public.playtime_month</code>.
      */
     public final PlaytimeMonth PLAYTIME_MONTH = PlaytimeMonth.PLAYTIME_MONTH;
@@ -222,6 +227,11 @@ public class Public extends SchemaImpl {
     public final TopKillsMonthView TOP_KILLS_MONTH_VIEW = TopKillsMonthView.TOP_KILLS_MONTH_VIEW;
 
     /**
+     * The table <code>public.top_playtime_month_view</code>.
+     */
+    public final TopPlaytimeMonthView TOP_PLAYTIME_MONTH_VIEW = TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -247,6 +257,7 @@ public class Public extends SchemaImpl {
             OnlinePlayers.ONLINE_PLAYERS,
             PlayerStats.PLAYER_STATS,
             Playercount.PLAYERCOUNT,
+            Playtime.PLAYTIME,
             PlaytimeMonth.PLAYTIME_MONTH,
             PriorityPlayersView.PRIORITY_PLAYERS_VIEW,
             Queuelength.QUEUELENGTH,
@@ -254,7 +265,8 @@ public class Public extends SchemaImpl {
             Restarts.RESTARTS,
             Tablist.TABLIST,
             TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW,
-            TopKillsMonthView.TOP_KILLS_MONTH_VIEW
+            TopKillsMonthView.TOP_KILLS_MONTH_VIEW,
+            TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW
         );
     }
 }

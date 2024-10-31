@@ -174,6 +174,11 @@ public class Tables {
     public static final Playercount PLAYERCOUNT = Playercount.PLAYERCOUNT;
 
     /**
+     * The table <code>public.playtime</code>.
+     */
+    public static final Playtime PLAYTIME = Playtime.PLAYTIME;
+
+    /**
      * The table <code>public.playtime_month</code>.
      */
     public static final PlaytimeMonth PLAYTIME_MONTH = PlaytimeMonth.PLAYTIME_MONTH;
@@ -212,4 +217,9 @@ public class Tables {
      * The table <code>public.top_kills_month_view</code>.
      */
     public static final TopKillsMonthView TOP_KILLS_MONTH_VIEW = TopKillsMonthView.TOP_KILLS_MONTH_VIEW;
+
+    /**
+     * The table <code>public.top_playtime_month_view</code>.
+     */
+    public static final TopPlaytimeMonthView TOP_PLAYTIME_MONTH_VIEW = TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW;
 }

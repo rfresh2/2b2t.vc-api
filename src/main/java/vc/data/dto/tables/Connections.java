@@ -8,15 +8,12 @@ import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import vc.data.dto.Indexes;
 import vc.data.dto.Public;
 import vc.data.dto.enums.Connectiontype;
 import vc.data.dto.tables.records.ConnectionsRecord;
 
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -93,11 +90,6 @@ public class Connections extends TableImpl<ConnectionsRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
-    }
-
-    @Override
-    public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.CONNECTIONS_PLAYER_UUID_IDX, Indexes.CONNECTIONS_TIME_IDX, Indexes.CONNECTIONS_TYPE_UUID_IDX, Indexes.CONNECTIONS_UUID_CONNECTION_TIME_IDX);
     }
 
     @Override

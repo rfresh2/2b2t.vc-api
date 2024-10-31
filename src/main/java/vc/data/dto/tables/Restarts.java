@@ -6,17 +6,14 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
-import vc.data.dto.Indexes;
-import vc.data.dto.Keys;
 import vc.data.dto.Public;
 import vc.data.dto.tables.records.RestartsRecord;
 
 import java.time.OffsetDateTime;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 
 /**
@@ -85,18 +82,13 @@ public class Restarts extends TableImpl<RestartsRecord> {
     }
 
     @Override
-    public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.RESTARTS_TIME_IDX);
-    }
-
-    @Override
     public Identity<RestartsRecord, Integer> getIdentity() {
         return (Identity<RestartsRecord, Integer>) super.getIdentity();
     }
 
     @Override
     public UniqueKey<RestartsRecord> getPrimaryKey() {
-        return Keys.RESTARTS_PKEY;
+        return Internal.createUniqueKey(Restarts.RESTARTS, DSL.name("restarts_pkey"), new TableField[] { Restarts.RESTARTS.ID }, true);
     }
 
     @Override
