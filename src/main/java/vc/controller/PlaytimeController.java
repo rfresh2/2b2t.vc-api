@@ -37,7 +37,7 @@ public class PlaytimeController {
 
     public record PlaytimeMonthResponse(List<PlayerPlaytimeDaysData> players) { }
     public record PlayerPlaytimeDaysData(UUID uuid, String playerName, double playtimeDays) { }
-    public record PlaytimeResponse(int playtimeSeconds) { }
+    public record PlaytimeResponse(UUID uuid, int playtimeSeconds) { }
     public record PlayerPlaytimeSecondsData(UUID uuid, String playerName, long playtimeSeconds) { }
     public record PlaytimeAllTimeResponse(List<PlayerPlaytimeSecondsData> players) { }
 
@@ -85,7 +85,7 @@ public class PlaytimeController {
         if (playtimeSeconds == null) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(new PlaytimeResponse(playtimeSeconds));
+            return ResponseEntity.ok(new PlaytimeResponse(resolvedUuid, playtimeSeconds));
         }
     }
 
