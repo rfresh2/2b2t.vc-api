@@ -227,6 +227,11 @@ public class Public extends SchemaImpl {
     public final TopKillsMonthView TOP_KILLS_MONTH_VIEW = TopKillsMonthView.TOP_KILLS_MONTH_VIEW;
 
     /**
+     * The table <code>public.top_playtime_all_time_view</code>.
+     */
+    public final TopPlaytimeAllTimeView TOP_PLAYTIME_ALL_TIME_VIEW = TopPlaytimeAllTimeView.TOP_PLAYTIME_ALL_TIME_VIEW;
+
+    /**
      * The table <code>public.top_playtime_month_view</code>.
      */
     public final TopPlaytimeMonthView TOP_PLAYTIME_MONTH_VIEW = TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW;
@@ -266,6 +271,7 @@ public class Public extends SchemaImpl {
             Tablist.TABLIST,
             TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW,
             TopKillsMonthView.TOP_KILLS_MONTH_VIEW,
+            TopPlaytimeAllTimeView.TOP_PLAYTIME_ALL_TIME_VIEW,
             TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW
         );
     }

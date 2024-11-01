@@ -16591,6 +16591,10 @@
           ]
         },
         {
+          "name": "playtimeTopAllTime",
+          "parameterTypes": []
+        },
+        {
           "name": "playtimeTopMonth",
           "parameterTypes": []
         }
@@ -16629,6 +16633,52 @@
         },
         {
           "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.PlaytimeController$PlayerPlaytimeDaysData",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "playtimeDays",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.PlaytimeController$PlayerPlaytimeSecondsData",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "playtimeSeconds",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.PlaytimeController$PlaytimeAllTimeResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "players",
           "parameterTypes": []
         }
       ]
@@ -17276,6 +17326,15 @@
     },
     {
       "type": "vc.data.dto.tables.records.TopKillsMonthViewRecord",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.data.dto.tables.records.TopPlaytimeAllTimeViewRecord",
       "methods": [
         {
           "name": "<init>",

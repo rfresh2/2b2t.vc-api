@@ -219,6 +219,11 @@ public class Tables {
     public static final TopKillsMonthView TOP_KILLS_MONTH_VIEW = TopKillsMonthView.TOP_KILLS_MONTH_VIEW;
 
     /**
+     * The table <code>public.top_playtime_all_time_view</code>.
+     */
+    public static final TopPlaytimeAllTimeView TOP_PLAYTIME_ALL_TIME_VIEW = TopPlaytimeAllTimeView.TOP_PLAYTIME_ALL_TIME_VIEW;
+
+    /**
      * The table <code>public.top_playtime_month_view</code>.
      */
     public static final TopPlaytimeMonthView TOP_PLAYTIME_MONTH_VIEW = TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW;

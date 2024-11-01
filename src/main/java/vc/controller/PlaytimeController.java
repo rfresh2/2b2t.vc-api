@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import vc.util.PlayerLookup;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static vc.data.dto.tables.Playtime.PLAYTIME;
+import static vc.data.dto.tables.TopPlaytimeAllTimeView.TOP_PLAYTIME_ALL_TIME_VIEW;
 import static vc.data.dto.tables.TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW;
 
 @Tags({@Tag(name = "Playtime")})
@@ -35,9 +35,11 @@ public class PlaytimeController {
         this.playerLookup = playerLookup;
     }
 
-    public record PlaytimeMonthResponse(List<PlayerPlaytimeData> players) { }
-    public record PlayerPlaytimeData(UUID uuid, String playerName, double playtimeDays) { }
-    public record PlaytimeResponse(UUID uuid, int playtimeSeconds) { }
+    public record PlaytimeMonthResponse(List<PlayerPlaytimeDaysData> players) { }
+    public record PlayerPlaytimeDaysData(UUID uuid, String playerName, double playtimeDays) { }
+    public record PlaytimeResponse(int playtimeSeconds) { }
+    public record PlayerPlaytimeSecondsData(UUID uuid, String playerName, long playtimeSeconds) { }
+    public record PlaytimeAllTimeResponse(List<PlayerPlaytimeSecondsData> players) { }
 
     @GetMapping("/playtime")
     @RateLimiter(name = "main")
@@ -70,11 +72,11 @@ public class PlaytimeController {
         if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();
         }
-        Optional<UUID> optionalPlayerUUID = playerLookup.getOrResolveUuid(uuid, playerName);
-        if (optionalPlayerUUID.isEmpty()) {
+        var optionalPlayerIdentity = playerLookup.getOrResolvePlayerIdentity(uuid, playerName);
+        if (optionalPlayerIdentity.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        final UUID resolvedUuid = optionalPlayerUUID.get();
+        final UUID resolvedUuid = optionalPlayerIdentity.get().uuid();
         var playtimeSeconds = dsl
             .select(DSL.sum(PLAYTIME.PLAYTIME_SECONDS))
             .from(PLAYTIME)
@@ -83,12 +85,13 @@ public class PlaytimeController {
         if (playtimeSeconds == null) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(new PlaytimeResponse(resolvedUuid, playtimeSeconds));
+            return ResponseEntity.ok(new PlaytimeResponse(playtimeSeconds));
         }
     }
 
     @RateLimiter(name = "main")
     @GetMapping("/playtime/top/month")
+    @Cacheable("playtimeTopMonth")
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
@@ -102,7 +105,7 @@ public class PlaytimeController {
         ),
         @ApiResponse(
             responseCode = "204",
-            description = "No data for player",
+            description = "No data",
             content = @Content
         )
     })
@@ -110,7 +113,7 @@ public class PlaytimeController {
         var players = dsl.selectFrom(TOP_PLAYTIME_MONTH_VIEW)
             .fetch()
             .stream()
-            .map(topPlaytimeMonthViewRecord -> new PlayerPlaytimeData(
+            .map(topPlaytimeMonthViewRecord -> new PlayerPlaytimeDaysData(
                 topPlaytimeMonthViewRecord.getPlayerUuid(),
                 topPlaytimeMonthViewRecord.getPlayerName(),
                 secondsToDays(topPlaytimeMonthViewRecord.getPlaytimeSeconds())))
@@ -120,6 +123,43 @@ public class PlaytimeController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new PlaytimeMonthResponse(players));
+        }
+    }
+
+    @RateLimiter(name = "main")
+    @GetMapping("/playtime/top")
+    @Cacheable("playtimeTopAllTime")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Top playtime all time",
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = PlaytimeAllTimeResponse.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No data",
+            content = @Content
+        )
+    })
+    public ResponseEntity<PlaytimeAllTimeResponse> playtimeTopAllTime() {
+        var players = dsl.selectFrom(TOP_PLAYTIME_ALL_TIME_VIEW)
+            .fetch()
+            .stream()
+            .map(topPlaytimeMonthViewRecord -> new PlayerPlaytimeSecondsData(
+                topPlaytimeMonthViewRecord.getPlayerUuid(),
+                topPlaytimeMonthViewRecord.getPlayerName(),
+                topPlaytimeMonthViewRecord.getPlaytimeSeconds()))
+            .sorted((a, b) -> Double.compare(b.playtimeSeconds(), a.playtimeSeconds()))
+            .toList();
+        if (players.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(new PlaytimeAllTimeResponse(players));
         }
     }
 
