@@ -1,6 +1,7 @@
 package vc;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,9 +15,14 @@ import java.time.Duration;
 @SpringBootApplication
 @EnableCaching
 @OpenAPIDefinition(
-		servers = {
-				@Server(url = "https://api.2b2t.vc")
-		}
+	servers = {
+		@Server(url = "https://api.2b2t.vc")
+	},
+	info = @Info(
+		title = "2b2t.vc API",
+		description = "2b2t Data And Statistics",
+		version = "1.0.0"
+	)
 )
 public class Application {
 
