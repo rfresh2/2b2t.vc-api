@@ -58,6 +58,7 @@ public class TabListController {
             .fetch()
             .stream()
             .map(t -> new TablistEntry(t.getPlayerName(), t.getPlayerUuid()))
+            .sorted((a, b) -> a.playerName().compareToIgnoreCase(b.playerName()))
             .toList();
         if (players.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -90,6 +91,7 @@ public class TabListController {
             .fetch()
             .stream()
             .map(t -> new TablistInfoEntry(t.getPlayerName(), t.getPlayerUuid(), t.getPrio(), t.getIsBot()))
+            .sorted((a, b) -> a.playerName().compareToIgnoreCase(b.playerName()))
             .toList();
         if (players.isEmpty()) {
             return ResponseEntity.noContent().build();

@@ -61,6 +61,7 @@ public class PriorityPlayersController {
         if (response.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
+        response.sort((a, b) -> a.playerName().compareToIgnoreCase(b.playerName()));
         return ResponseEntity.ok(new PriorityPlayersResponse(response));
     }
 }
