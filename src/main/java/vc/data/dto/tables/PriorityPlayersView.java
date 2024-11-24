@@ -37,14 +37,14 @@ public class PriorityPlayersView extends TableImpl<PriorityPlayersViewRecord> {
     }
 
     /**
-     * The column <code>public.priority_players_view.player_name</code>.
-     */
-    public final TableField<PriorityPlayersViewRecord, String> PLAYER_NAME = createField(DSL.name("player_name"), SQLDataType.CLOB, this, "");
-
-    /**
      * The column <code>public.priority_players_view.player_uuid</code>.
      */
     public final TableField<PriorityPlayersViewRecord, UUID> PLAYER_UUID = createField(DSL.name("player_uuid"), SQLDataType.UUID, this, "");
+
+    /**
+     * The column <code>public.priority_players_view.player_name</code>.
+     */
+    public final TableField<PriorityPlayersViewRecord, String> PLAYER_NAME = createField(DSL.name("player_name"), SQLDataType.CLOB, this, "");
 
     /**
      * The column <code>public.priority_players_view.priority_joins</code>.

@@ -55,6 +55,9 @@
       "type": "[Ljava.lang.constant.ConstantDesc;"
     },
     {
+      "type": "[Ljava.rmi.server.ObjID;"
+    },
+    {
       "type": "[Ljava.sql.Statement;"
     },
     {
@@ -940,7 +943,13 @@
       "type": "com.sun.management.HotSpotDiagnosticMXBean"
     },
     {
-      "type": "com.sun.management.OperatingSystemMXBean"
+      "type": "com.sun.management.OperatingSystemMXBean",
+      "methods": [
+        {
+          "name": "getProcessCpuLoad",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "com.sun.management.ThreadMXBean"
@@ -4654,7 +4663,13 @@
       ]
     },
     {
-      "type": "java.lang.management.MemoryMXBean"
+      "type": "java.lang.management.MemoryMXBean",
+      "methods": [
+        {
+          "name": "getHeapMemoryUsage",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "java.lang.management.MemoryManagerMXBean"
@@ -4670,6 +4685,22 @@
           "parameterTypes": [
             "javax.management.openmbean.CompositeData"
           ]
+        },
+        {
+          "name": "getCommitted",
+          "parameterTypes": []
+        },
+        {
+          "name": "getInit",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMax",
+          "parameterTypes": []
+        },
+        {
+          "name": "getUsed",
+          "parameterTypes": []
         }
       ]
     },
@@ -4921,6 +4952,18 @@
     },
     {
       "type": "java.nio.file.Path"
+    },
+    {
+      "type": "java.rmi.dgc.Lease"
+    },
+    {
+      "type": "java.rmi.dgc.VMID"
+    },
+    {
+      "type": "java.rmi.server.ObjID"
+    },
+    {
+      "type": "java.rmi.server.UID"
     },
     {
       "type": "java.security.AccessController",
@@ -5328,6 +5371,76 @@
     },
     {
       "type": "javax.management.openmbean.TabularData"
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIConnection",
+      "methods": [
+        {
+          "name": "getAttribute",
+          "parameterTypes": [
+            "javax.management.ObjectName",
+            "java.lang.String",
+            "javax.security.auth.Subject"
+          ]
+        },
+        {
+          "name": "getConnectionId",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDefaultDomain",
+          "parameterTypes": [
+            "javax.security.auth.Subject"
+          ]
+        },
+        {
+          "name": "isInstanceOf",
+          "parameterTypes": [
+            "javax.management.ObjectName",
+            "java.lang.String",
+            "javax.security.auth.Subject"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIConnectionImpl_Skel"
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIConnectionImpl_Stub",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.rmi.server.RemoteRef"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIServer",
+      "methods": [
+        {
+          "name": "newClient",
+          "parameterTypes": [
+            "java.lang.Object"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIServerImpl_Skel"
+    },
+    {
+      "type": "javax.management.remote.rmi.RMIServerImpl_Stub",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.rmi.server.RemoteRef"
+          ]
+        }
+      ]
     },
     {
       "type": "javax.money.MonetaryAmount"
@@ -15117,6 +15230,42 @@
       ]
     },
     {
+      "type": "sun.reflect.misc.Trampoline",
+      "methods": [
+        {
+          "name": "invoke",
+          "parameterTypes": [
+            "java.lang.reflect.Method",
+            "java.lang.Object",
+            "java.lang.Object[]"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "sun.rmi.registry.RegistryImpl_Stub"
+    },
+    {
+      "type": "sun.rmi.transport.DGCImpl_Skel",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "sun.rmi.transport.DGCImpl_Stub",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.rmi.server.RemoteRef"
+          ]
+        }
+      ]
+    },
+    {
       "type": "sun.security.pkcs12.PKCS12KeyStore",
       "methods": [
         {
@@ -17072,6 +17221,10 @@
         {
           "name": "onlinePlayers",
           "parameterTypes": []
+        },
+        {
+          "name": "onlinePlayersInfo",
+          "parameterTypes": []
         }
       ]
     },
@@ -17107,6 +17260,54 @@
         },
         {
           "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.TabListController$TablistInfoEntry",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "bot",
+          "parameterTypes": []
+        },
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "prio",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.TabListController$TablistInfoResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "botCount",
+          "parameterTypes": []
+        },
+        {
+          "name": "count",
+          "parameterTypes": []
+        },
+        {
+          "name": "nonPrioCount",
+          "parameterTypes": []
+        },
+        {
+          "name": "players",
+          "parameterTypes": []
+        },
+        {
+          "name": "prioCount",
           "parameterTypes": []
         }
       ]
@@ -17307,6 +17508,15 @@
       ]
     },
     {
+      "type": "vc.data.dto.tables.records.TablistInfoRecord",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.data.dto.tables.records.TablistRecord",
       "methods": [
         {
@@ -17486,7 +17696,16 @@
       "type": "java.lang.Boolean"
     },
     {
+      "type": "java.lang.Double"
+    },
+    {
       "type": "java.lang.Exception"
+    },
+    {
+      "type": "java.lang.Long"
+    },
+    {
+      "type": "java.lang.Number"
     },
     {
       "type": "java.lang.StackTraceElement"
@@ -17531,6 +17750,9 @@
       "type": "java.util.HashSet"
     },
     {
+      "type": "java.util.TreeMap"
+    },
+    {
       "type": "javax.management.InstanceNotFoundException"
     },
     {
@@ -17541,6 +17763,18 @@
     },
     {
       "type": "javax.management.OperationsException"
+    },
+    {
+      "type": "javax.management.openmbean.CompositeDataSupport"
+    },
+    {
+      "type": "javax.management.openmbean.CompositeType"
+    },
+    {
+      "type": "javax.management.openmbean.OpenType"
+    },
+    {
+      "type": "javax.management.openmbean.SimpleType"
     },
     {
       "type": "javax.management.remote.rmi.RMIConnectionImpl_Stub"

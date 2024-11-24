@@ -37,29 +37,26 @@ public class ApiTests {
 
     @Test
     public void homepageTest() {
-        restTemplate.getForObject("http://localhost:" + port + "/", String.class);
+        httpRequest("/", String.class);
         // basically no-op
     }
 
     @Test
     public void swaggerUiTest() {
-        restTemplate.getForObject("http://localhost:" + port + "/swagger-ui/index.html", String.class);
+        httpRequest("/swagger-ui/index.html", String.class);
         // basically no-op
     }
 
     @Test
     public void botsApiTest() {
-        BotController.BotsMonthResponse botsResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/bots/month",
-            BotController.BotsMonthResponse.class);
+        var botsResponse = httpRequest("/bots/month", BotController.BotsMonthResponse.class);
         assertNotNull(botsResponse);
         assertFalse(botsResponse.players().isEmpty());
     }
 
     @Test
     public void chatsApiTest() {
-        var chatsResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/chats?playerName={playerName}",
+        var chatsResponse = httpRequest("/chats?playerName={playerName}",
             ChatsController.ChatsResponse.class,
             Map.of(
                 "playerName", "hausemaster"
@@ -70,8 +67,7 @@ public class ApiTests {
 
     @Test
     public void wordCountApiTest() {
-        var wordCountResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/chats/word-count?word={word}",
+        var wordCountResponse = httpRequest("/chats/word-count?word={word}",
             ChatsController.WordCount.class,
             Map.of(
                 "word", "test"
@@ -82,8 +78,7 @@ public class ApiTests {
 
     @Test
     public void wordSearchApiTest() {
-        var wordSearchResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/chats/search?word={word}&endDate={endDate}",
+        var wordSearchResponse = httpRequest("/chats/search?word={word}&endDate={endDate}",
             ChatsController.ChatSearchResponse.class,
             Map.of(
                 "word", "test",
@@ -95,8 +90,7 @@ public class ApiTests {
 
     @Test
     public void connectionsApiTest() {
-        var connectionsResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/connections?playerName={playerName}",
+        var connectionsResponse = httpRequest("/connections?playerName={playerName}",
             ConnectionsController.ConnectionsResponse.class,
             Map.of(
                 "playerName", "hausemaster"
@@ -107,8 +101,7 @@ public class ApiTests {
 
     @Test
     public void dataDumpApiTest() {
-        var dataDumpResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/dump/player?playerName={playerName}",
+        var dataDumpResponse = httpRequest("/dump/player?playerName={playerName}",
             String.class,
             Map.of(
                 "playerName", "hausemaster"
@@ -119,8 +112,7 @@ public class ApiTests {
 
     @Test
     public void deathsApiTest() {
-        var deathsResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/deaths?playerName={playerName}",
+        var deathsResponse = httpRequest("/deaths?playerName={playerName}",
             DeathsController.DeathsResponse.class,
             Map.of(
                 "playerName", "rfresh2"
@@ -131,8 +123,7 @@ public class ApiTests {
 
     @Test
     public void killsApiTest() {
-        var killsResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/kills?playerName={playerName}",
+        var killsResponse = httpRequest("/kills?playerName={playerName}",
             DeathsController.KillsResponse.class,
             Map.of(
                 "playerName", "rfresh2"
@@ -143,8 +134,7 @@ public class ApiTests {
 
     @Test
     public void deathsTopMonthTest() {
-        var deathsTopMonthResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/deaths/top/month",
+        var deathsTopMonthResponse = httpRequest("/deaths/top/month",
             DeathsController.PlayerDeathOrKillCountResponse.class);
         assertNotNull(deathsTopMonthResponse);
         assertFalse(deathsTopMonthResponse.players().isEmpty());
@@ -152,8 +142,7 @@ public class ApiTests {
 
     @Test
     public void killsTopMonthTest() {
-        var killsTopMonthResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/kills/top/month",
+        var killsTopMonthResponse = httpRequest("/kills/top/month",
             DeathsController.PlayerDeathOrKillCountResponse.class);
         assertNotNull(killsTopMonthResponse);
         assertFalse(killsTopMonthResponse.players().isEmpty());
@@ -161,8 +150,7 @@ public class ApiTests {
 
     @Test
     public void playtimeApiTest() {
-        var playtimeResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/playtime?playerName={playerName}",
+        var playtimeResponse = httpRequest("/playtime?playerName={playerName}",
             PlaytimeController.PlaytimeResponse.class,
             Map.of(
                 "playerName", "hausemaster"
@@ -173,8 +161,7 @@ public class ApiTests {
 
     @Test
     public void playtimeTopMonthApiTest() {
-        var playtimeTopMonthResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/playtime/top/month",
+        var playtimeTopMonthResponse = httpRequest("/playtime/top/month",
             PlaytimeController.PlaytimeMonthResponse.class);
         assertNotNull(playtimeTopMonthResponse);
         assertFalse(playtimeTopMonthResponse.players().isEmpty());
@@ -182,8 +169,7 @@ public class ApiTests {
 
     @Test
     public void queueApiTest() {
-        var queueResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/queue",
+        var queueResponse = httpRequest("/queue",
             QueueController.QueueData.class);
         assertNotNull(queueResponse);
         assertTrue(queueResponse.regular() >= 0);
@@ -191,8 +177,7 @@ public class ApiTests {
 
     @Test
     public void queueMonthTest() {
-        var queueMonthResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/queue/month",
+        var queueMonthResponse = httpRequest("/queue/month",
             QueueController.QueueLengthHistory.class);
         assertNotNull(queueMonthResponse);
         assertFalse(queueMonthResponse.queueData().isEmpty());
@@ -200,8 +185,7 @@ public class ApiTests {
 
     @Test
     public void queueEtaEquationApiTest() {
-        var queueResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/queue/eta-equation",
+        var queueResponse = httpRequest("/queue/eta-equation",
             QueueController.QueueEtaEquation.class);
         assertNotNull(queueResponse);
         assertEquals(QueueController.QueueEtaEquation.INSTANCE, queueResponse);
@@ -209,8 +193,7 @@ public class ApiTests {
 
     @Test
     public void seenApiTest() {
-        var seenResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/seen?playerName={playerName}",
+        var seenResponse = httpRequest("/seen?playerName={playerName}",
             SeenController.SeenResponse.class,
             Map.of(
                 "playerName", "hausemaster"
@@ -221,8 +204,7 @@ public class ApiTests {
 
     @Test
     public void statsApiTest() {
-        var statsResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/stats/player?playerName={playerName}",
+        var statsResponse = httpRequest("/stats/player?playerName={playerName}",
             StatsController.PlayerStats.class,
             Map.of(
                 "playerName", "hausemaster"
@@ -233,17 +215,23 @@ public class ApiTests {
 
     @Test
     public void tablistApiTest() {
-        var tablistResponse = restTemplate.getForObject(
-            "http://localhost:" + port + "/tablist",
+        var tablistResponse = httpRequest("/tablist",
             TabListController.TablistResponse.class);
         assertNotNull(tablistResponse);
         assertFalse(tablistResponse.players().isEmpty());
     }
 
     @Test
+    public void tablistInfoApiTest() {
+        var tablistResponse = httpRequest("/tablist/info",
+            TabListController.TablistInfoResponse.class);
+        assertNotNull(tablistResponse);
+        assertFalse(tablistResponse.players().isEmpty());
+    }
+
+    @Test
     public void priorityPlayersApiTest() {
-        var response = restTemplate.getForObject(
-            "http://localhost:" + port + "/players/priority",
+        var response = httpRequest("/players/priority",
             PriorityPlayersController.PriorityPlayersResponse.class);
         assertNotNull(response);
         assertFalse(response.players().isEmpty());
@@ -268,5 +256,13 @@ public class ApiTests {
         var response = craftheadRestClient.getProfile("rfresh2");
         assertNotNull(response);
         assertEquals("rfresh2", response.name());
+    }
+
+    private <T> T httpRequest(String url, Class<T> responseType) {
+        return restTemplate.getForObject("http://localhost:" + port + url, responseType);
+    }
+
+    private <T> T httpRequest(String url, Class<T> responseType, Map<String, ?> uriVariables) {
+        return restTemplate.getForObject("http://localhost:" + port + url, responseType, uriVariables);
     }
 }

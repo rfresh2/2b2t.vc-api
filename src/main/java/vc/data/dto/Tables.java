@@ -209,6 +209,11 @@ public class Tables {
     public static final Tablist TABLIST = Tablist.TABLIST;
 
     /**
+     * The table <code>public.tablist_info</code>.
+     */
+    public static final TablistInfo TABLIST_INFO = TablistInfo.TABLIST_INFO;
+
+    /**
      * The table <code>public.top_deaths_month_view</code>.
      */
     public static final TopDeathsMonthView TOP_DEATHS_MONTH_VIEW = TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW;

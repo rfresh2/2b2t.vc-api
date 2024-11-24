@@ -56,28 +56,7 @@ public class TopPlaytimeMonthView extends TableImpl<TopPlaytimeMonthViewRecord> 
     }
 
     private TopPlaytimeMonthView(Name alias, Table<TopPlaytimeMonthViewRecord> aliased, Field<?>[] parameters, Condition where) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("""
-        create view "top_playtime_month_view" as  WITH playtime_summary AS (
-                SELECT playtime.player_uuid,
-                   sum(playtime.playtime_seconds) AS total_playtime
-                  FROM playtime
-                 WHERE ((playtime.start_time >= (now() - '30 days'::interval)) AND (playtime.end_time <= now()))
-                 GROUP BY playtime.player_uuid
-               ), latest_names AS (
-                SELECT playtime.player_uuid,
-                   playtime.player_name,
-                   row_number() OVER (PARTITION BY playtime.player_uuid ORDER BY playtime.end_time DESC) AS rn
-                  FROM playtime
-                 WHERE ((playtime.start_time >= (now() - '30 days'::interval)) AND (playtime.end_time <= now()))
-               )
-        SELECT ps.player_uuid,
-           ln.player_name,
-           ps.total_playtime AS playtime_seconds
-          FROM (playtime_summary ps
-            JOIN latest_names ln ON (((ps.player_uuid = ln.player_uuid) AND (ln.rn = 1))))
-         ORDER BY ps.total_playtime DESC
-        LIMIT 1000;
-        """), where);
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.materializedView(), where);
     }
 
     /**

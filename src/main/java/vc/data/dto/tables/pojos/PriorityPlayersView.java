@@ -16,35 +16,28 @@ public class PriorityPlayersView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final String playerName;
     private final UUID playerUuid;
+    private final String playerName;
     private final Long priorityJoins;
     private final Long prioritySessionLengthCount;
 
     public PriorityPlayersView(PriorityPlayersView value) {
-        this.playerName = value.playerName;
         this.playerUuid = value.playerUuid;
+        this.playerName = value.playerName;
         this.priorityJoins = value.priorityJoins;
         this.prioritySessionLengthCount = value.prioritySessionLengthCount;
     }
 
     public PriorityPlayersView(
-        String playerName,
         UUID playerUuid,
+        String playerName,
         Long priorityJoins,
         Long prioritySessionLengthCount
     ) {
-        this.playerName = playerName;
         this.playerUuid = playerUuid;
+        this.playerName = playerName;
         this.priorityJoins = priorityJoins;
         this.prioritySessionLengthCount = prioritySessionLengthCount;
-    }
-
-    /**
-     * Getter for <code>public.priority_players_view.player_name</code>.
-     */
-    public String getPlayerName() {
-        return this.playerName;
     }
 
     /**
@@ -52,6 +45,13 @@ public class PriorityPlayersView implements Serializable {
      */
     public UUID getPlayerUuid() {
         return this.playerUuid;
+    }
+
+    /**
+     * Getter for <code>public.priority_players_view.player_name</code>.
+     */
+    public String getPlayerName() {
+        return this.playerName;
     }
 
     /**
@@ -78,17 +78,17 @@ public class PriorityPlayersView implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         final PriorityPlayersView other = (PriorityPlayersView) obj;
-        if (this.playerName == null) {
-            if (other.playerName != null)
-                return false;
-        }
-        else if (!this.playerName.equals(other.playerName))
-            return false;
         if (this.playerUuid == null) {
             if (other.playerUuid != null)
                 return false;
         }
         else if (!this.playerUuid.equals(other.playerUuid))
+            return false;
+        if (this.playerName == null) {
+            if (other.playerName != null)
+                return false;
+        }
+        else if (!this.playerName.equals(other.playerName))
             return false;
         if (this.priorityJoins == null) {
             if (other.priorityJoins != null)
@@ -109,8 +109,8 @@ public class PriorityPlayersView implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((this.playerName == null) ? 0 : this.playerName.hashCode());
         result = prime * result + ((this.playerUuid == null) ? 0 : this.playerUuid.hashCode());
+        result = prime * result + ((this.playerName == null) ? 0 : this.playerName.hashCode());
         result = prime * result + ((this.priorityJoins == null) ? 0 : this.priorityJoins.hashCode());
         result = prime * result + ((this.prioritySessionLengthCount == null) ? 0 : this.prioritySessionLengthCount.hashCode());
         return result;
@@ -120,8 +120,8 @@ public class PriorityPlayersView implements Serializable {
     public String toString() {
         StringBuilder sb = new StringBuilder("PriorityPlayersView (");
 
-        sb.append(playerName);
-        sb.append(", ").append(playerUuid);
+        sb.append(playerUuid);
+        sb.append(", ").append(playerName);
         sb.append(", ").append(priorityJoins);
         sb.append(", ").append(prioritySessionLengthCount);
 

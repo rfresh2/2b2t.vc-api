@@ -19,25 +19,10 @@ public class PriorityPlayersViewRecord extends TableRecordImpl<PriorityPlayersVi
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.priority_players_view.player_name</code>.
-     */
-    public PriorityPlayersViewRecord setPlayerName(String value) {
-        set(0, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>public.priority_players_view.player_name</code>.
-     */
-    public String getPlayerName() {
-        return (String) get(0);
-    }
-
-    /**
      * Setter for <code>public.priority_players_view.player_uuid</code>.
      */
     public PriorityPlayersViewRecord setPlayerUuid(UUID value) {
-        set(1, value);
+        set(0, value);
         return this;
     }
 
@@ -45,7 +30,22 @@ public class PriorityPlayersViewRecord extends TableRecordImpl<PriorityPlayersVi
      * Getter for <code>public.priority_players_view.player_uuid</code>.
      */
     public UUID getPlayerUuid() {
-        return (UUID) get(1);
+        return (UUID) get(0);
+    }
+
+    /**
+     * Setter for <code>public.priority_players_view.player_name</code>.
+     */
+    public PriorityPlayersViewRecord setPlayerName(String value) {
+        set(1, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.priority_players_view.player_name</code>.
+     */
+    public String getPlayerName() {
+        return (String) get(1);
     }
 
     /**
@@ -94,11 +94,11 @@ public class PriorityPlayersViewRecord extends TableRecordImpl<PriorityPlayersVi
     /**
      * Create a detached, initialised PriorityPlayersViewRecord
      */
-    public PriorityPlayersViewRecord(String playerName, UUID playerUuid, Long priorityJoins, Long prioritySessionLengthCount) {
+    public PriorityPlayersViewRecord(UUID playerUuid, String playerName, Long priorityJoins, Long prioritySessionLengthCount) {
         super(PriorityPlayersView.PRIORITY_PLAYERS_VIEW);
 
-        setPlayerName(playerName);
         setPlayerUuid(playerUuid);
+        setPlayerName(playerName);
         setPriorityJoins(priorityJoins);
         setPrioritySessionLengthCount(prioritySessionLengthCount);
         resetChangedOnNotNull();
@@ -111,8 +111,8 @@ public class PriorityPlayersViewRecord extends TableRecordImpl<PriorityPlayersVi
         super(PriorityPlayersView.PRIORITY_PLAYERS_VIEW);
 
         if (value != null) {
-            setPlayerName(value.getPlayerName());
             setPlayerUuid(value.getPlayerUuid());
+            setPlayerName(value.getPlayerName());
             setPriorityJoins(value.getPriorityJoins());
             setPrioritySessionLengthCount(value.getPrioritySessionLengthCount());
             resetChangedOnNotNull();
