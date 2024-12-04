@@ -43,6 +43,9 @@
       "type": "[Ljava.lang.Class;"
     },
     {
+      "type": "[Ljava.lang.Object;"
+    },
+    {
       "type": "[Ljava.lang.String;"
     },
     {
@@ -104,6 +107,15 @@
     },
     {
       "type": "[Lorg.springframework.web.bind.annotation.RequestMethod;"
+    },
+    {
+      "type": "[Lvc.controller.PlaytimeController$PlayerPlaytimeDaysData;"
+    },
+    {
+      "type": "[Lvc.controller.TabListController$TablistEntry;"
+    },
+    {
+      "type": "[Lvc.controller.TabListController$TablistInfoEntry;"
     },
     {
       "type": "[Lvc.data.dto.tables.records.PlaytimeMonthRecord;"
@@ -3721,6 +3733,12 @@
       "type": "io.netty.util.NettyRuntime"
     },
     {
+      "type": "io.opentelemetry.api.OpenTelemetry"
+    },
+    {
+      "type": "io.opentelemetry.context.ContextStorage"
+    },
+    {
       "type": "io.opentelemetry.sdk.OpenTelemetrySdk"
     },
     {
@@ -3798,6 +3816,12 @@
     },
     {
       "type": "io.swagger.v3.oas.annotations.StringToClassMapItem"
+    },
+    {
+      "type": "io.swagger.v3.oas.annotations.Webhook"
+    },
+    {
+      "type": "io.swagger.v3.oas.annotations.Webhooks"
     },
     {
       "type": "io.swagger.v3.oas.annotations.extensions.Extension"
@@ -4174,6 +4198,9 @@
       "type": "java.io.ObjectInputStream"
     },
     {
+      "type": "java.io.ObjectOutputStream"
+    },
+    {
       "type": "java.io.OutputStream"
     },
     {
@@ -4303,6 +4330,9 @@
     },
     {
       "type": "java.lang.Enum"
+    },
+    {
+      "type": "java.lang.Error"
     },
     {
       "type": "java.lang.Exception"
@@ -4876,6 +4906,9 @@
       ]
     },
     {
+      "type": "java.lang.reflect.UndeclaredThrowableException"
+    },
+    {
       "type": "java.lang.reflect.WildcardType",
       "methods": [
         {
@@ -4940,6 +4973,9 @@
     },
     {
       "type": "java.net.http.HttpClient"
+    },
+    {
+      "type": "java.net.http.HttpClient$Redirect"
     },
     {
       "type": "java.nio.channels.ServerSocketChannel"
@@ -5072,6 +5108,9 @@
       "type": "java.text.ListFormat"
     },
     {
+      "type": "java.time.Clock"
+    },
+    {
       "type": "java.time.Duration"
     },
     {
@@ -5082,6 +5121,10 @@
     },
     {
       "type": "java.time.LocalDate"
+    },
+    {
+      "type": "java.util.AbstractCollection",
+      "allDeclaredFields": true
     },
     {
       "type": "java.util.ArrayList"
@@ -5109,6 +5152,18 @@
     },
     {
       "type": "java.util.HashSet"
+    },
+    {
+      "type": "java.util.ImmutableCollections$AbstractImmutableCollection",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "java.util.ImmutableCollections$AbstractImmutableList",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "java.util.ImmutableCollections$ListN",
+      "allDeclaredFields": true
     },
     {
       "type": "java.util.Iterator"
@@ -5147,6 +5202,9 @@
       ]
     },
     {
+      "type": "java.util.RandomAccess"
+    },
+    {
       "type": "java.util.ServiceLoader"
     },
     {
@@ -5176,6 +5234,9 @@
     },
     {
       "type": "java.util.concurrent.CompletionStage"
+    },
+    {
+      "type": "java.util.concurrent.ConcurrentHashMap"
     },
     {
       "type": "java.util.concurrent.CountDownLatch"
@@ -5298,6 +5359,9 @@
       "type": "java.util.stream.Stream"
     },
     {
+      "type": "javax.annotation.CheckForNull"
+    },
+    {
       "type": "javax.annotation.ManagedBean"
     },
     {
@@ -5335,6 +5399,9 @@
     },
     {
       "type": "javax.inject.Qualifier"
+    },
+    {
+      "type": "javax.management.MBeanNotificationInfo"
     },
     {
       "type": "javax.management.MBeanOperationInfo"
@@ -5450,6 +5517,9 @@
     },
     {
       "type": "javax.naming.ldap.LdapContext"
+    },
+    {
+      "type": "javax.net.ssl.SSLParameters"
     },
     {
       "type": "javax.persistence.Column"
@@ -6020,10 +6090,19 @@
       "type": "org.jooq.Block"
     },
     {
+      "type": "org.jooq.CacheProvider"
+    },
+    {
       "type": "org.jooq.Catalog"
     },
     {
+      "type": "org.jooq.CharsetProvider"
+    },
+    {
       "type": "org.jooq.CommentOnIsStep"
+    },
+    {
+      "type": "org.jooq.CommitProvider"
     },
     {
       "type": "org.jooq.CommonTableExpression"
@@ -6048,6 +6127,9 @@
     },
     {
       "type": "org.jooq.ContextTransactionalRunnable"
+    },
+    {
+      "type": "org.jooq.ConverterProvider"
     },
     {
       "type": "org.jooq.CreateDatabaseFinalStep"
@@ -6095,6 +6177,12 @@
       "type": "org.jooq.DeleteUsingStep"
     },
     {
+      "type": "org.jooq.DiagnosticsListener"
+    },
+    {
+      "type": "org.jooq.DiagnosticsListenerProvider"
+    },
+    {
       "type": "org.jooq.Domain"
     },
     {
@@ -6137,10 +6225,16 @@
       "type": "org.jooq.ExecuteListenerProvider"
     },
     {
+      "type": "org.jooq.ExecutorProvider"
+    },
+    {
       "type": "org.jooq.Explain"
     },
     {
       "type": "org.jooq.Field"
+    },
+    {
+      "type": "org.jooq.FormattingProvider"
     },
     {
       "type": "org.jooq.GrantOnStep"
@@ -6302,6 +6396,15 @@
       "type": "org.jooq.Meta"
     },
     {
+      "type": "org.jooq.MetaProvider"
+    },
+    {
+      "type": "org.jooq.MigrationListener"
+    },
+    {
+      "type": "org.jooq.MigrationListenerProvider"
+    },
+    {
       "type": "org.jooq.Migrations"
     },
     {
@@ -6401,6 +6504,24 @@
       "type": "org.jooq.Record9"
     },
     {
+      "type": "org.jooq.RecordListener"
+    },
+    {
+      "type": "org.jooq.RecordListenerProvider"
+    },
+    {
+      "type": "org.jooq.RecordMapper"
+    },
+    {
+      "type": "org.jooq.RecordMapperProvider"
+    },
+    {
+      "type": "org.jooq.RecordUnmapper"
+    },
+    {
+      "type": "org.jooq.RecordUnmapperProvider"
+    },
+    {
       "type": "org.jooq.RenderContext"
     },
     {
@@ -6429,6 +6550,9 @@
     },
     {
       "type": "org.jooq.Schema"
+    },
+    {
+      "type": "org.jooq.SchemaMapping"
     },
     {
       "type": "org.jooq.Scope"
@@ -6479,6 +6603,12 @@
       "type": "org.jooq.TransactionContext"
     },
     {
+      "type": "org.jooq.TransactionListener"
+    },
+    {
+      "type": "org.jooq.TransactionListenerProvider"
+    },
+    {
       "type": "org.jooq.TransactionProvider"
     },
     {
@@ -6503,6 +6633,12 @@
       "type": "org.jooq.UDTRecord"
     },
     {
+      "type": "org.jooq.Unwrapper"
+    },
+    {
+      "type": "org.jooq.UnwrapperProvider"
+    },
+    {
       "type": "org.jooq.UpdatableRecord"
     },
     {
@@ -6510,6 +6646,12 @@
     },
     {
       "type": "org.jooq.UpdateSetFirstStep"
+    },
+    {
+      "type": "org.jooq.VisitListener"
+    },
+    {
+      "type": "org.jooq.VisitListenerProvider"
     },
     {
       "type": "org.jooq.WithAsStep"
@@ -6590,6 +6732,10 @@
       "type": "org.jooq.exception.DataAccessException"
     },
     {
+      "type": "org.jooq.impl.AbstractConfiguration",
+      "allDeclaredFields": true
+    },
+    {
       "type": "org.jooq.impl.AbstractQuery"
     },
     {
@@ -6610,7 +6756,8 @@
       "allDeclaredFields": true
     },
     {
-      "type": "org.jooq.impl.DefaultConfiguration"
+      "type": "org.jooq.impl.DefaultConfiguration",
+      "allDeclaredFields": true
     },
     {
       "type": "org.jooq.impl.DefaultDSLContext",
@@ -6848,6 +6995,10 @@
           "parameterTypes": []
         },
         {
+          "name": "globalOpenApiCustomizer",
+          "parameterTypes": []
+        },
+        {
           "name": "localSpringDocParameterNameDiscoverer",
           "parameterTypes": []
         },
@@ -6888,6 +7039,10 @@
             "org.springdoc.core.providers.ObjectMapperProvider",
             "java.util.Optional"
           ]
+        },
+        {
+          "name": "parameterObjectNamingStrategyCustomizer",
+          "parameterTypes": []
         },
         {
           "name": "polymorphicModelConverter",
@@ -6943,6 +7098,18 @@
           "name": "springDocProviders",
           "parameterTypes": [
             "java.util.Optional",
+            "java.util.Optional",
+            "java.util.Optional",
+            "java.util.Optional",
+            "java.util.Optional",
+            "java.util.Optional",
+            "java.util.Optional",
+            "org.springdoc.core.providers.ObjectMapperProvider"
+          ]
+        },
+        {
+          "name": "springDocProviders",
+          "parameterTypes": [
             "java.util.Optional",
             "java.util.Optional",
             "java.util.Optional",
@@ -7046,6 +7213,9 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.springdoc.core.customizers.DelegatingMethodParameterCustomizer"
+    },
+    {
       "type": "org.springdoc.core.customizers.GlobalOpenApiCustomizer"
     },
     {
@@ -7056,6 +7226,14 @@
     },
     {
       "type": "org.springdoc.core.customizers.OpenApiLocaleCustomizer"
+    },
+    {
+      "type": "org.springdoc.core.customizers.OperationIdCustomizer",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springdoc.core.customizers.ParameterObjectNamingStrategyCustomizer",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springdoc.core.customizers.PropertyCustomizer"
@@ -7344,6 +7522,15 @@
           "parameterTypes": [
             "org.springdoc.core.service.GenericParameterService",
             "org.springdoc.core.service.RequestBodyService",
+            "java.util.Optional",
+            "org.springdoc.core.discoverer.SpringDocParameterNameDiscoverer"
+          ]
+        },
+        {
+          "name": "requestBuilder",
+          "parameterTypes": [
+            "org.springdoc.core.service.GenericParameterService",
+            "org.springdoc.core.service.RequestBodyService",
             "org.springdoc.core.service.OperationService",
             "java.util.Optional",
             "org.springdoc.core.discoverer.SpringDocParameterNameDiscoverer"
@@ -7354,6 +7541,14 @@
           "parameterTypes": [
             "org.springdoc.core.service.OperationService",
             "java.util.List",
+            "org.springdoc.core.properties.SpringDocConfigProperties",
+            "org.springdoc.core.utils.PropertyResolverUtils"
+          ]
+        },
+        {
+          "name": "responseBuilder",
+          "parameterTypes": [
+            "org.springdoc.core.service.OperationService",
             "org.springdoc.core.properties.SpringDocConfigProperties",
             "org.springdoc.core.utils.PropertyResolverUtils"
           ]
@@ -7430,11 +7625,28 @@
           ]
         },
         {
+          "name": "swaggerWebMvcConfigurer",
+          "parameterTypes": [
+            "org.springdoc.core.properties.SwaggerUiConfigProperties",
+            "org.springdoc.webmvc.ui.SwaggerIndexTransformer",
+            "java.util.Optional",
+            "org.springdoc.webmvc.ui.SwaggerResourceResolver"
+          ]
+        },
+        {
           "name": "swaggerWelcome",
           "parameterTypes": [
             "org.springdoc.core.properties.SwaggerUiConfigProperties",
             "org.springdoc.core.properties.SpringDocConfigProperties",
             "org.springdoc.core.properties.SwaggerUiConfigParameters",
+            "org.springdoc.core.providers.SpringWebProvider"
+          ]
+        },
+        {
+          "name": "swaggerWelcome",
+          "parameterTypes": [
+            "org.springdoc.core.properties.SwaggerUiConfigProperties",
+            "org.springdoc.core.properties.SpringDocConfigProperties",
             "org.springdoc.core.providers.SpringWebProvider"
           ]
         }
@@ -7511,6 +7723,9 @@
     },
     {
       "type": "org.springframework.aop.framework.Advised"
+    },
+    {
+      "type": "org.springframework.aop.framework.AopConfigException"
     },
     {
       "type": "org.springframework.aop.framework.AopInfrastructureBean"
@@ -7608,6 +7823,9 @@
       "type": "org.springframework.beans.factory.BeanFactoryAware"
     },
     {
+      "type": "org.springframework.beans.factory.BeanFactoryInitializer"
+    },
+    {
       "type": "org.springframework.beans.factory.BeanNameAware"
     },
     {
@@ -7690,6 +7908,13 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.springframework.boot.ApplicationProperties",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.Banner$Mode"
+    },
+    {
       "type": "org.springframework.boot.ClearCachesApplicationListener",
       "methods": [
         {
@@ -7758,8 +7983,18 @@
             "org.springframework.beans.factory.ObjectProvider",
             "org.springframework.beans.factory.ObjectProvider"
           ]
+        },
+        {
+          "name": "propertiesEndpointAccessResolver",
+          "parameterTypes": [
+            "org.springframework.core.env.Environment"
+          ]
         }
       ]
+    },
+    {
+      "type": "org.springframework.boot.actuate.autoconfigure.endpoint.PropertiesEndpointAccessResolver",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.boot.actuate.autoconfigure.endpoint.condition.ConditionalOnAvailableEndpoint"
@@ -7839,6 +8074,15 @@
             "org.springframework.boot.actuate.endpoint.web.annotation.ServletEndpointsSupplier",
             "org.springframework.boot.autoconfigure.web.servlet.DispatcherServletPath"
           ]
+        },
+        {
+          "name": "servletEndpointRegistrar",
+          "parameterTypes": [
+            "org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties",
+            "org.springframework.boot.actuate.endpoint.web.annotation.ServletEndpointsSupplier",
+            "org.springframework.boot.autoconfigure.web.servlet.DispatcherServletPath",
+            "org.springframework.boot.actuate.endpoint.EndpointAccessResolver"
+          ]
         }
       ]
     },
@@ -7875,10 +8119,28 @@
           ]
         },
         {
+          "name": "webAccessPropertiesOperationFilter",
+          "parameterTypes": [
+            "org.springframework.boot.actuate.endpoint.EndpointAccessResolver"
+          ]
+        },
+        {
           "name": "webEndpointDiscoverer",
           "parameterTypes": [
             "org.springframework.boot.actuate.endpoint.invoke.ParameterValueMapper",
             "org.springframework.boot.actuate.endpoint.web.EndpointMediaTypes",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
+        },
+        {
+          "name": "webEndpointDiscoverer",
+          "parameterTypes": [
+            "org.springframework.boot.actuate.endpoint.invoke.ParameterValueMapper",
+            "org.springframework.boot.actuate.endpoint.web.EndpointMediaTypes",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider",
             "org.springframework.beans.factory.ObjectProvider",
             "org.springframework.beans.factory.ObjectProvider",
             "org.springframework.beans.factory.ObjectProvider"
@@ -7944,6 +8206,15 @@
             "org.springframework.boot.actuate.endpoint.web.annotation.ControllerEndpointsSupplier",
             "org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties",
             "org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties"
+          ]
+        },
+        {
+          "name": "controllerEndpointHandlerMapping",
+          "parameterTypes": [
+            "org.springframework.boot.actuate.endpoint.web.annotation.ControllerEndpointsSupplier",
+            "org.springframework.boot.actuate.autoconfigure.endpoint.web.CorsEndpointProperties",
+            "org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties",
+            "org.springframework.boot.actuate.endpoint.EndpointAccessResolver"
           ]
         },
         {
@@ -8789,6 +9060,39 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.springframework.boot.actuate.autoconfigure.ssl.SslHealthContributorAutoConfiguration",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "sslHealthIndicator",
+          "parameterTypes": [
+            "org.springframework.boot.info.SslInfo"
+          ]
+        },
+        {
+          "name": "sslInfo",
+          "parameterTypes": [
+            "org.springframework.boot.ssl.SslBundles",
+            "org.springframework.boot.actuate.autoconfigure.ssl.SslHealthIndicatorProperties"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.actuate.autoconfigure.ssl.SslHealthIndicatorProperties",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "org.springframework.boot.actuate.autoconfigure.startup.StartupEndpointAutoConfiguration$ApplicationStartupCondition",
       "methods": [
         {
@@ -8838,6 +9142,18 @@
     },
     {
       "type": "org.springframework.boot.actuate.autoconfigure.tracing.MicrometerTracingAutoConfiguration"
+    },
+    {
+      "type": "org.springframework.boot.actuate.autoconfigure.tracing.OpenTelemetryEventPublisherBeansApplicationListener",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.actuate.autoconfigure.tracing.OpenTelemetryEventPublisherBeansTestExecutionListener"
     },
     {
       "type": "org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration"
@@ -8960,6 +9276,12 @@
       "type": "org.springframework.boot.actuate.context.properties.ConfigurationPropertiesReportEndpoint"
     },
     {
+      "type": "org.springframework.boot.actuate.endpoint.Access"
+    },
+    {
+      "type": "org.springframework.boot.actuate.endpoint.EndpointAccessResolver"
+    },
+    {
       "type": "org.springframework.boot.actuate.endpoint.EndpointFilter"
     },
     {
@@ -8973,6 +9295,9 @@
     },
     {
       "type": "org.springframework.boot.actuate.endpoint.Operation"
+    },
+    {
+      "type": "org.springframework.boot.actuate.endpoint.OperationFilter"
     },
     {
       "type": "org.springframework.boot.actuate.endpoint.OperationType"
@@ -9066,6 +9391,9 @@
     },
     {
       "type": "org.springframework.boot.actuate.endpoint.web.WebOperationRequestPredicate"
+    },
+    {
+      "type": "org.springframework.boot.actuate.endpoint.web.WebServerNamespace"
     },
     {
       "type": "org.springframework.boot.actuate.endpoint.web.annotation.ControllerEndpointDiscoverer",
@@ -9175,6 +9503,9 @@
       "type": "org.springframework.boot.actuate.info.ProcessInfoContributor"
     },
     {
+      "type": "org.springframework.boot.actuate.info.SslInfoContributor"
+    },
+    {
       "type": "org.springframework.boot.actuate.jdbc.DataSourceHealthIndicator",
       "allDeclaredFields": true
     },
@@ -9229,6 +9560,10 @@
     },
     {
       "type": "org.springframework.boot.actuate.scheduling.ScheduledTasksEndpoint"
+    },
+    {
+      "type": "org.springframework.boot.actuate.ssl.SslHealthIndicator",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.boot.actuate.system.DiskSpaceHealthIndicator",
@@ -9757,6 +10092,55 @@
       "type": "org.springframework.boot.autoconfigure.http.JsonbHttpMessageConvertersConfiguration"
     },
     {
+      "type": "org.springframework.boot.autoconfigure.http.client.HttpClientAutoConfiguration",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "clientHttpRequestFactoryBuilder",
+          "parameterTypes": [
+            "org.springframework.boot.autoconfigure.http.client.HttpClientProperties"
+          ]
+        },
+        {
+          "name": "clientHttpRequestFactorySettings",
+          "parameterTypes": [
+            "org.springframework.boot.autoconfigure.http.client.HttpClientProperties",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.http.client.HttpClientProperties",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.http.client.HttpClientProperties$Factory"
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.http.client.HttpClientProperties$Ssl",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.http.client.NotReactiveWebApplicationCondition",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration",
       "allDeclaredFields": true,
       "methods": [
@@ -10223,6 +10607,9 @@
       ]
     },
     {
+      "type": "org.springframework.boot.autoconfigure.jooq.DefaultConfigurationCustomizer"
+    },
+    {
       "type": "org.springframework.boot.autoconfigure.jooq.DefaultExceptionTranslatorExecuteListener",
       "allDeclaredFields": true
     },
@@ -10236,6 +10623,17 @@
         {
           "name": "<init>",
           "parameterTypes": []
+        },
+        {
+          "name": "jooqConfiguration",
+          "parameterTypes": [
+            "org.springframework.boot.autoconfigure.jooq.JooqProperties",
+            "org.jooq.ConnectionProvider",
+            "javax.sql.DataSource",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
         },
         {
           "name": "jooqExceptionTranslator",
@@ -10252,6 +10650,16 @@
           "parameterTypes": [
             "org.springframework.transaction.PlatformTransactionManager"
           ]
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.jooq.JooqProperties",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
         }
       ]
     },
@@ -10445,6 +10853,13 @@
           ]
         },
         {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.springframework.core.io.ResourceLoader",
+            "org.springframework.boot.autoconfigure.ssl.SslProperties"
+          ]
+        },
+        {
           "name": "fileWatcher",
           "parameterTypes": []
         },
@@ -10583,6 +10998,12 @@
             "org.springframework.boot.task.TaskExecutorBuilder",
             "org.springframework.beans.factory.ObjectProvider"
           ]
+        },
+        {
+          "name": "applicationTaskExecutor",
+          "parameterTypes": [
+            "org.springframework.boot.task.ThreadPoolTaskExecutorBuilder"
+          ]
         }
       ]
     },
@@ -10593,6 +11014,14 @@
         {
           "name": "<init>",
           "parameterTypes": []
+        },
+        {
+          "name": "threadPoolTaskExecutorBuilder",
+          "parameterTypes": [
+            "org.springframework.boot.autoconfigure.task.TaskExecutionProperties",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
         },
         {
           "name": "threadPoolTaskExecutorBuilder",
@@ -10659,6 +11088,13 @@
         {
           "name": "<init>",
           "parameterTypes": []
+        },
+        {
+          "name": "threadPoolTaskSchedulerBuilder",
+          "parameterTypes": [
+            "org.springframework.boot.autoconfigure.task.TaskSchedulingProperties",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
         },
         {
           "name": "threadPoolTaskSchedulerBuilder",
@@ -11082,6 +11518,21 @@
           ]
         },
         {
+          "name": "restClientBuilderConfigurer",
+          "parameterTypes": [
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
+        },
+        {
+          "name": "restClientSsl",
+          "parameterTypes": [
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.boot.ssl.SslBundles"
+          ]
+        },
+        {
           "name": "restClientSsl",
           "parameterTypes": [
             "org.springframework.boot.ssl.SslBundles"
@@ -11113,6 +11564,16 @@
         {
           "name": "restTemplateBuilderConfigurer",
           "parameterTypes": [
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
+        },
+        {
+          "name": "restTemplateBuilderConfigurer",
+          "parameterTypes": [
+            "org.springframework.beans.factory.ObjectProvider",
+            "org.springframework.beans.factory.ObjectProvider",
             "org.springframework.beans.factory.ObjectProvider",
             "org.springframework.beans.factory.ObjectProvider",
             "org.springframework.beans.factory.ObjectProvider"
@@ -11434,6 +11895,10 @@
           "parameterTypes": []
         },
         {
+          "name": "viewNameTranslator",
+          "parameterTypes": []
+        },
+        {
           "name": "welcomePageHandlerMapping",
           "parameterTypes": [
             "org.springframework.context.ApplicationContext",
@@ -11450,6 +11915,29 @@
           ]
         }
       ]
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration$ResourceChainCustomizerConfiguration",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "resourceHandlerRegistrationCustomizer",
+          "parameterTypes": [
+            "org.springframework.boot.autoconfigure.web.WebProperties"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration$ResourceChainResourceHandlerRegistrationCustomizer",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration$ResourceHandlerRegistrationCustomizer"
     },
     {
       "type": "org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration$WebMvcAutoConfigurationAdapter",
@@ -12284,13 +12772,65 @@
       ]
     },
     {
+      "type": "org.springframework.boot.http.client.AbstractClientHttpRequestFactoryBuilder",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.http.client.ClientHttpRequestFactoryBuilder"
+    },
+    {
+      "type": "org.springframework.boot.http.client.ClientHttpRequestFactorySettings",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.http.client.ClientHttpRequestFactorySettings$Redirects"
+    },
+    {
+      "type": "org.springframework.boot.http.client.HttpComponentsClientHttpRequestFactoryBuilder"
+    },
+    {
+      "type": "org.springframework.boot.http.client.JdkClientHttpRequestFactoryBuilder",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.http.client.JettyClientHttpRequestFactoryBuilder"
+    },
+    {
+      "type": "org.springframework.boot.http.client.ReactorClientHttpRequestFactoryBuilder"
+    },
+    {
+      "type": "org.springframework.boot.http.client.SimpleClientHttpRequestFactoryBuilder"
+    },
+    {
       "type": "org.springframework.boot.info.BuildProperties"
     },
     {
       "type": "org.springframework.boot.info.GitProperties"
     },
     {
+      "type": "org.springframework.boot.info.SslInfo",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.info.SslInfo$BundleInfo"
+    },
+    {
+      "type": "org.springframework.boot.info.SslInfo$CertificateChainInfo"
+    },
+    {
+      "type": "org.springframework.boot.info.SslInfo$CertificateInfo"
+    },
+    {
       "type": "org.springframework.boot.io.Base64ProtocolResolver",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.io.ProtocolResolverApplicationContextInitializer",
       "methods": [
         {
           "name": "<init>",
@@ -12412,6 +12952,15 @@
     },
     {
       "type": "org.springframework.boot.logging.logback.ColorConverter",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.logging.logback.EnclosedInSquareBracketsConverter",
       "methods": [
         {
           "name": "<init>",
@@ -12598,6 +13147,15 @@
     },
     {
       "type": "org.springframework.boot.test.autoconfigure.ConditionReportApplicationContextFailureProcessor",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.test.autoconfigure.OnFailureConditionReportContextCustomizerFactory",
       "methods": [
         {
           "name": "<init>",
@@ -12838,7 +13396,8 @@
       ]
     },
     {
-      "type": "org.springframework.boot.test.web.client.TestRestTemplate"
+      "type": "org.springframework.boot.test.web.client.TestRestTemplate",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.boot.test.web.client.TestRestTemplate$HttpClientOption"
@@ -13603,6 +14162,9 @@
       "type": "org.springframework.core.env.EnvironmentCapable"
     },
     {
+      "type": "org.springframework.core.env.PropertyResolver"
+    },
+    {
       "type": "org.springframework.core.io.Resource"
     },
     {
@@ -14128,6 +14690,42 @@
       "type": "org.springframework.test.context.BootstrapWith"
     },
     {
+      "type": "org.springframework.test.context.bean.override.BeanOverrideContextCustomizerFactory",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.test.context.bean.override.BeanOverrideTestExecutionListener",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.test.context.bean.override.mockito.MockitoResetTestExecutionListener",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.test.context.bean.override.mockito.SpringMockResolver",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate",
       "methods": [
         {
@@ -14177,6 +14775,15 @@
     },
     {
       "type": "org.springframework.test.context.observation.MicrometerObservationRegistryTestExecutionListener",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.test.context.support.CommonCachesTestExecutionListener",
       "methods": [
         {
           "name": "<init>",
@@ -14236,6 +14843,16 @@
     },
     {
       "type": "org.springframework.test.context.support.DynamicPropertiesContextCustomizerFactory",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.test.context.support.DynamicPropertyRegistrarBeanInitializer",
+      "allDeclaredFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -14305,6 +14922,10 @@
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "transactionAttributeSource",
+          "parameterTypes": []
+        },
+        {
           "name": "transactionalEventListenerFactory",
           "parameterTypes": []
         }
@@ -14372,6 +14993,9 @@
     {
       "type": "org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor",
       "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.transaction.interceptor.RollbackRuleAttribute"
     },
     {
       "type": "org.springframework.transaction.interceptor.TransactionAspectSupport",
@@ -14767,6 +15391,9 @@
       "type": "org.springframework.web.servlet.config.annotation.PathMatchConfigurer"
     },
     {
+      "type": "org.springframework.web.servlet.config.annotation.ResourceChainRegistration"
+    },
+    {
       "type": "org.springframework.web.servlet.config.annotation.ResourceHandlerRegistration"
     },
     {
@@ -15016,6 +15643,14 @@
       "type": "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod"
     },
     {
+      "type": "org.springframework.web.servlet.resource.AbstractResourceResolver",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.web.servlet.resource.LiteWebJarsResourceResolver",
+      "allDeclaredFields": true
+    },
+    {
       "type": "org.springframework.web.servlet.resource.ResourceResolver"
     },
     {
@@ -15062,10 +15697,12 @@
       "type": "org.springframework.web.servlet.view.AbstractCachingViewResolver$CacheFilter"
     },
     {
-      "type": "org.springframework.web.servlet.view.AbstractUrlBasedView"
+      "type": "org.springframework.web.servlet.view.AbstractUrlBasedView",
+      "allDeclaredFields": true
     },
     {
-      "type": "org.springframework.web.servlet.view.AbstractView"
+      "type": "org.springframework.web.servlet.view.AbstractView",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.web.servlet.view.BeanNameViewResolver",
@@ -15084,7 +15721,8 @@
       "allDeclaredFields": true
     },
     {
-      "type": "org.springframework.web.servlet.view.RedirectView"
+      "type": "org.springframework.web.servlet.view.RedirectView",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.web.servlet.view.UrlBasedViewResolver",
@@ -15133,6 +15771,9 @@
       "type": "org.webjars.WebJarAssetLocator"
     },
     {
+      "type": "org.webjars.WebJarVersionLocator"
+    },
+    {
       "type": "org.xnio.SslClientAuthMode"
     },
     {
@@ -15146,6 +15787,9 @@
     },
     {
       "type": "reactor.core.publisher.Mono"
+    },
+    {
+      "type": "reactor.netty.http.client.HttpClient"
     },
     {
       "type": "reactor.netty.http.server.HttpServer"
@@ -15728,6 +16372,10 @@
           "parameterTypes": []
         },
         {
+          "name": "tablistInfoApiTest",
+          "parameterTypes": []
+        },
+        {
           "name": "wordCountApiTest",
           "parameterTypes": []
         },
@@ -15978,6 +16626,15 @@
             "org.springdoc.core.properties.SwaggerUiConfigProperties",
             "org.springdoc.core.properties.SwaggerUiOAuthProperties",
             "org.springdoc.core.properties.SwaggerUiConfigParameters",
+            "org.springdoc.webmvc.ui.SwaggerWelcomeCommon",
+            "org.springdoc.core.providers.ObjectMapperProvider"
+          ]
+        },
+        {
+          "name": "swaggerIndexTransformer",
+          "parameterTypes": [
+            "org.springdoc.core.properties.SwaggerUiConfigProperties",
+            "org.springdoc.core.properties.SwaggerUiOAuthProperties",
             "org.springdoc.webmvc.ui.SwaggerWelcomeCommon",
             "org.springdoc.core.providers.ObjectMapperProvider"
           ]
@@ -16791,6 +17448,14 @@
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "double"
+          ]
+        },
+        {
           "name": "playerName",
           "parameterTypes": []
         },
@@ -17269,6 +17934,15 @@
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.util.UUID",
+            "boolean",
+            "boolean"
+          ]
+        },
+        {
           "name": "bot",
           "parameterTypes": []
         },
@@ -17290,6 +17964,16 @@
       "type": "vc.controller.TabListController$TablistInfoResponse",
       "allDeclaredFields": true,
       "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List",
+            "int",
+            "int",
+            "int",
+            "int"
+          ]
+        },
         {
           "name": "botCount",
           "parameterTypes": []
@@ -17670,6 +18354,13 @@
       "type": {
         "proxy": [
           "org.springframework.web.bind.annotation.ControllerAdvice"
+        ]
+      }
+    },
+    {
+      "type": {
+        "proxy": [
+          "org.springframework.web.bind.annotation.ExceptionHandler"
         ]
       }
     },

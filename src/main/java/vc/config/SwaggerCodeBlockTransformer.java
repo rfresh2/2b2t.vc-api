@@ -1,7 +1,6 @@
 package vc.config;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.springdoc.core.properties.SwaggerUiConfigParameters;
 import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springdoc.core.properties.SwaggerUiOAuthProperties;
 import org.springdoc.core.providers.ObjectMapperProvider;
@@ -19,16 +18,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SwaggerCodeBlockTransformer extends SwaggerIndexPageTransformer {
-    public SwaggerCodeBlockTransformer(final SwaggerUiConfigProperties swaggerUiConfig,
-                                       final SwaggerUiOAuthProperties swaggerUiOAuthProperties,
-                                       final SwaggerUiConfigParameters swaggerUiConfigParameters,
-                                       final SwaggerWelcomeCommon swaggerWelcomeCommon,
-                                       final ObjectMapperProvider objectMapperProvider) {
-        super(swaggerUiConfig,
-              swaggerUiOAuthProperties,
-              swaggerUiConfigParameters,
-              swaggerWelcomeCommon,
-              objectMapperProvider);
+    public SwaggerCodeBlockTransformer(
+        SwaggerUiConfigProperties swaggerUiConfig,
+        SwaggerUiOAuthProperties swaggerUiOAuthProperties,
+        SwaggerWelcomeCommon swaggerWelcomeCommon,
+        ObjectMapperProvider objectMapperProvider) {
+        super(
+            swaggerUiConfig,
+            swaggerUiOAuthProperties,
+            swaggerWelcomeCommon,
+            objectMapperProvider
+        );
     }
 
     @Override

@@ -4,7 +4,6 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultDSLContext;
-import org.springdoc.core.properties.SwaggerUiConfigParameters;
 import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springdoc.core.properties.SwaggerUiOAuthProperties;
 import org.springdoc.core.providers.ObjectMapperProvider;
@@ -39,10 +38,9 @@ public class InitialConfiguration {
     public SwaggerIndexTransformer swaggerIndexTransformer(
         SwaggerUiConfigProperties configProperties,
         SwaggerUiOAuthProperties oAuthProperties,
-        SwaggerUiConfigParameters configParameters,
         SwaggerWelcomeCommon welcomeCommon,
         ObjectMapperProvider objectMapperProvider) {
-        return new SwaggerCodeBlockTransformer(configProperties, oAuthProperties, configParameters, welcomeCommon, objectMapperProvider);
+        return new SwaggerCodeBlockTransformer(configProperties, oAuthProperties, welcomeCommon, objectMapperProvider);
     }
 
     public DefaultConfiguration configuration() {
