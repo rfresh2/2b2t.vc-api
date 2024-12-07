@@ -112,6 +112,9 @@
       "type": "[Lvc.controller.PlaytimeController$PlayerPlaytimeDaysData;"
     },
     {
+      "type": "[Lvc.controller.PlaytimeController$PlayerPlaytimeSecondsData;"
+    },
+    {
       "type": "[Lvc.controller.TabListController$TablistEntry;"
     },
     {
@@ -7791,6 +7794,9 @@
     },
     {
       "type": "org.springframework.aop.support.AopUtils"
+    },
+    {
+      "type": "org.springframework.aot.generate.Generated"
     },
     {
       "type": "org.springframework.aot.hint.annotation.Reflective"
@@ -16336,6 +16342,10 @@
           "parameterTypes": []
         },
         {
+          "name": "playtimeTopAllTimeApiTest",
+          "parameterTypes": []
+        },
+        {
           "name": "playtimeTopMonthApiTest",
           "parameterTypes": []
         },
@@ -17474,6 +17484,14 @@
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.UUID",
+            "java.lang.String",
+            "long"
+          ]
+        },
+        {
           "name": "playerName",
           "parameterTypes": []
         },
@@ -17491,6 +17509,12 @@
       "type": "vc.controller.PlaytimeController$PlaytimeAllTimeResponse",
       "allDeclaredFields": true,
       "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
         {
           "name": "players",
           "parameterTypes": []

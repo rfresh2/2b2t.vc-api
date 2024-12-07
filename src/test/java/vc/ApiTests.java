@@ -168,6 +168,14 @@ public class ApiTests {
     }
 
     @Test
+    public void playtimeTopAllTimeApiTest() {
+        var playtimeAllTimeResponse = httpRequest("/playtime/top",
+            PlaytimeController.PlaytimeAllTimeResponse.class);
+        assertNotNull(playtimeAllTimeResponse);
+        assertFalse(playtimeAllTimeResponse.players().isEmpty());
+    }
+
+    @Test
     public void queueApiTest() {
         var queueResponse = httpRequest("/queue",
             QueueController.QueueData.class);
