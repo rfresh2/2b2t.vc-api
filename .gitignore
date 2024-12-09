@@ -38,3 +38,4 @@ logs/
 .env
 
 jooq.properties
+images/

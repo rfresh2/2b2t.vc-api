@@ -8,11 +8,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.io.PathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vc.util.TablistRenderer;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,16 +29,46 @@ import static vc.data.dto.tables.Tablist.TABLIST;
 @Tags({@Tag(name = "TabList")})
 @RestController
 public class TabListController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TabListController.class);
     private final DSLContext dsl;
+    private final TablistRenderer renderer;
 
-    public TabListController(final DSLContext dsl) {
+    public TabListController(final DSLContext dsl, TablistRenderer renderer) {
         this.dsl = dsl;
+        this.renderer = renderer;
     }
 
     public record TablistResponse(List<TablistEntry> players) { }
     public record TablistEntry(String playerName, UUID uuid) { }
     public record TablistInfoResponse(List<TablistInfoEntry> players, int count, int prioCount, int nonPrioCount, int botCount) { }
     public record TablistInfoEntry(String playerName, UUID uuid, boolean prio, boolean bot) { }
+
+    @GetMapping("/tablist/render")
+//    @RateLimiter(name = "main")
+//    @Cacheable("tablistRender")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Renders tablist image",
+            content = {
+                @Content(
+                    mediaType = "image/png"
+                )
+            }
+        )
+    })
+    public ResponseEntity<Resource> tablistRender() {
+        try {
+            this.renderer.render();
+            return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=tab.png")
+                .header(HttpHeaders.CONTENT_TYPE, "image/png")
+                .body(new PathResource(Path.of("images/tab.png")));
+        } catch (Exception e) {
+            LOGGER.error("Tablist renderer failed", e);
+            return ResponseEntity.ok().build();
+        }
+    }
 
     @GetMapping("/tablist")
     @RateLimiter(name = "main")
