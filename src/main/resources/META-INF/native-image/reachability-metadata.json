@@ -64,6 +64,9 @@
       "type": "[Ljava.sql.Statement;"
     },
     {
+      "type": "[Ljava.util.HashMap$Node;"
+    },
+    {
       "type": "[Ljavax.management.openmbean.CompositeData;"
     },
     {
@@ -130,7 +133,8 @@
       "type": "[Z"
     },
     {
-      "type": "boolean"
+      "type": "boolean",
+      "allDeclaredFields": true
     },
     {
       "type": "brave.Tracer"
@@ -355,6 +359,15 @@
     },
     {
       "type": "com.fasterxml.jackson.databind.AnnotationIntrospector"
+    },
+    {
+      "type": "com.fasterxml.jackson.databind.BeanDescription",
+      "methods": [
+        {
+          "name": "findJsonValueAccessor",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "com.fasterxml.jackson.databind.DatabindException"
@@ -1080,7 +1093,8 @@
       "type": "com.zaxxer.hikari.pool.ProxyPreparedStatement"
     },
     {
-      "type": "double"
+      "type": "double",
+      "allDeclaredFields": true
     },
     {
       "type": "freemarker.template.Configuration"
@@ -1096,6 +1110,10 @@
     },
     {
       "type": "groovy.text.markup.MarkupTemplateEngine"
+    },
+    {
+      "type": "int",
+      "allDeclaredFields": true
     },
     {
       "type": "io.github.resilience4j.bulkhead.Bulkhead"
@@ -3826,6 +3844,65 @@
       "allDeclaredFields": true
     },
     {
+      "type": "io.swagger.v3.core.jackson.ApiResponsesSerializer",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.PathsSerializer",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.Components31Mixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.DateSchemaMixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.Discriminator31Mixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.ExtensionsMixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.MediaTypeMixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.OpenAPI31Mixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.OperationMixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.Schema31Mixin",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.core.jackson.mixin.Schema31Mixin$TypeSerializer",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "io.swagger.v3.core.util.ObjectMapperFactory",
       "allDeclaredFields": true
     },
@@ -3858,6 +3935,9 @@
     },
     {
       "type": "io.swagger.v3.oas.annotations.Webhooks"
+    },
+    {
+      "type": "io.swagger.v3.oas.annotations.callbacks.Callbacks"
     },
     {
       "type": "io.swagger.v3.oas.annotations.extensions.Extension"
@@ -3932,6 +4012,9 @@
       "type": "io.swagger.v3.oas.annotations.security.SecurityRequirement"
     },
     {
+      "type": "io.swagger.v3.oas.annotations.security.SecurityRequirements"
+    },
+    {
       "type": "io.swagger.v3.oas.annotations.security.SecurityScheme"
     },
     {
@@ -3948,7 +4031,53 @@
     },
     {
       "type": "io.swagger.v3.oas.models.Components",
-      "allDeclaredFields": true
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "getCallbacks",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExamples",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getHeaders",
+          "parameterTypes": []
+        },
+        {
+          "name": "getLinks",
+          "parameterTypes": []
+        },
+        {
+          "name": "getParameters",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPathItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getRequestBodies",
+          "parameterTypes": []
+        },
+        {
+          "name": "getResponses",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSchemas",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSecuritySchemes",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "io.swagger.v3.oas.models.ExternalDocumentation",
@@ -3956,16 +4085,177 @@
     },
     {
       "type": "io.swagger.v3.oas.models.OpenAPI",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "getComponents",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExternalDocs",
+          "parameterTypes": []
+        },
+        {
+          "name": "getInfo",
+          "parameterTypes": []
+        },
+        {
+          "name": "getJsonSchemaDialect",
+          "parameterTypes": []
+        },
+        {
+          "name": "getOpenapi",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPaths",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSecurity",
+          "parameterTypes": []
+        },
+        {
+          "name": "getServers",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTags",
+          "parameterTypes": []
+        },
+        {
+          "name": "getWebhooks",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.Operation",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "getCallbacks",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDeprecated",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDescription",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExternalDocs",
+          "parameterTypes": []
+        },
+        {
+          "name": "getOperationId",
+          "parameterTypes": []
+        },
+        {
+          "name": "getParameters",
+          "parameterTypes": []
+        },
+        {
+          "name": "getRequestBody",
+          "parameterTypes": []
+        },
+        {
+          "name": "getResponses",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSecurity",
+          "parameterTypes": []
+        },
+        {
+          "name": "getServers",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSummary",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTags",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.PathItem",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "get$ref",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDelete",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDescription",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getGet",
+          "parameterTypes": []
+        },
+        {
+          "name": "getHead",
+          "parameterTypes": []
+        },
+        {
+          "name": "getOptions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getParameters",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPatch",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPost",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPut",
+          "parameterTypes": []
+        },
+        {
+          "name": "getServers",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSummary",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTrace",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.Paths",
       "allDeclaredFields": true
-    },
-    {
-      "type": "io.swagger.v3.oas.models.Operation"
-    },
-    {
-      "type": "io.swagger.v3.oas.models.PathItem"
-    },
-    {
-      "type": "io.swagger.v3.oas.models.Paths"
     },
     {
       "type": "io.swagger.v3.oas.models.SpecVersion"
@@ -3985,35 +4275,509 @@
     },
     {
       "type": "io.swagger.v3.oas.models.info.Info",
-      "allDeclaredFields": true
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "getContact",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDescription",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getLicense",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSummary",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTermsOfService",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTitle",
+          "parameterTypes": []
+        },
+        {
+          "name": "getVersion",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "io.swagger.v3.oas.models.info.License",
       "allDeclaredFields": true
     },
     {
+      "type": "io.swagger.v3.oas.models.media.ArraySchema",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.BooleanSchema",
+      "allDeclaredFields": true
+    },
+    {
       "type": "io.swagger.v3.oas.models.media.ComposedSchema"
     },
     {
-      "type": "io.swagger.v3.oas.models.media.Content"
+      "type": "io.swagger.v3.oas.models.media.Content",
+      "allDeclaredFields": true
     },
     {
-      "type": "io.swagger.v3.oas.models.media.MediaType"
+      "type": "io.swagger.v3.oas.models.media.DateSchema",
+      "allDeclaredFields": true
     },
     {
-      "type": "io.swagger.v3.oas.models.media.Schema"
+      "type": "io.swagger.v3.oas.models.media.DateTimeSchema",
+      "allDeclaredFields": true
     },
     {
-      "type": "io.swagger.v3.oas.models.parameters.Parameter"
+      "type": "io.swagger.v3.oas.models.media.Discriminator",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.IntegerSchema",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.JsonSchema",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.MediaType",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "getEncoding",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExample",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExamples",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSchema",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.NumberSchema",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.Schema",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "get$anchor",
+          "parameterTypes": []
+        },
+        {
+          "name": "get$comment",
+          "parameterTypes": []
+        },
+        {
+          "name": "get$dynamicAnchor",
+          "parameterTypes": []
+        },
+        {
+          "name": "get$id",
+          "parameterTypes": []
+        },
+        {
+          "name": "get$ref",
+          "parameterTypes": []
+        },
+        {
+          "name": "get$schema",
+          "parameterTypes": []
+        },
+        {
+          "name": "get$vocabulary",
+          "parameterTypes": []
+        },
+        {
+          "name": "getAdditionalItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getAdditionalProperties",
+          "parameterTypes": []
+        },
+        {
+          "name": "getAllOf",
+          "parameterTypes": []
+        },
+        {
+          "name": "getAnyOf",
+          "parameterTypes": []
+        },
+        {
+          "name": "getConst",
+          "parameterTypes": []
+        },
+        {
+          "name": "getContains",
+          "parameterTypes": []
+        },
+        {
+          "name": "getContentEncoding",
+          "parameterTypes": []
+        },
+        {
+          "name": "getContentMediaType",
+          "parameterTypes": []
+        },
+        {
+          "name": "getContentSchema",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDefault",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDependentRequired",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDependentSchemas",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDeprecated",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDescription",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDiscriminator",
+          "parameterTypes": []
+        },
+        {
+          "name": "getElse",
+          "parameterTypes": []
+        },
+        {
+          "name": "getEnum",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExample",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExamples",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExclusiveMaximumValue",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExclusiveMinimumValue",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExternalDocs",
+          "parameterTypes": []
+        },
+        {
+          "name": "getFormat",
+          "parameterTypes": []
+        },
+        {
+          "name": "getIf",
+          "parameterTypes": []
+        },
+        {
+          "name": "getItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMaxContains",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMaxItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMaxLength",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMaxProperties",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMaximum",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMinContains",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMinItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMinLength",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMinProperties",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMinimum",
+          "parameterTypes": []
+        },
+        {
+          "name": "getMultipleOf",
+          "parameterTypes": []
+        },
+        {
+          "name": "getNot",
+          "parameterTypes": []
+        },
+        {
+          "name": "getOneOf",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPattern",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPatternProperties",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPrefixItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getProperties",
+          "parameterTypes": []
+        },
+        {
+          "name": "getPropertyNames",
+          "parameterTypes": []
+        },
+        {
+          "name": "getReadOnly",
+          "parameterTypes": []
+        },
+        {
+          "name": "getRequired",
+          "parameterTypes": []
+        },
+        {
+          "name": "getThen",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTitle",
+          "parameterTypes": []
+        },
+        {
+          "name": "getTypes",
+          "parameterTypes": []
+        },
+        {
+          "name": "getUnevaluatedItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getUnevaluatedProperties",
+          "parameterTypes": []
+        },
+        {
+          "name": "getUniqueItems",
+          "parameterTypes": []
+        },
+        {
+          "name": "getWriteOnly",
+          "parameterTypes": []
+        },
+        {
+          "name": "getXml",
+          "parameterTypes": []
+        },
+        {
+          "name": "set$ref",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        },
+        {
+          "name": "setEnum",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "setFormat",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        },
+        {
+          "name": "setItems",
+          "parameterTypes": [
+            "io.swagger.v3.oas.models.media.Schema"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.StringSchema",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.UUIDSchema",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.media.XML",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.parameters.Parameter",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "get$ref",
+          "parameterTypes": []
+        },
+        {
+          "name": "getAllowEmptyValue",
+          "parameterTypes": []
+        },
+        {
+          "name": "getAllowReserved",
+          "parameterTypes": []
+        },
+        {
+          "name": "getContent",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDeprecated",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDescription",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExample",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExamples",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExplode",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getIn",
+          "parameterTypes": []
+        },
+        {
+          "name": "getName",
+          "parameterTypes": []
+        },
+        {
+          "name": "getRequired",
+          "parameterTypes": []
+        },
+        {
+          "name": "getSchema",
+          "parameterTypes": []
+        },
+        {
+          "name": "getStyle",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.parameters.Parameter$StyleEnum",
+      "allDeclaredFields": true
     },
     {
       "type": "io.swagger.v3.oas.models.parameters.RequestBody"
     },
     {
-      "type": "io.swagger.v3.oas.models.responses.ApiResponse"
+      "type": "io.swagger.v3.oas.models.responses.ApiResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "get$ref",
+          "parameterTypes": []
+        },
+        {
+          "name": "getContent",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDescription",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getHeaders",
+          "parameterTypes": []
+        },
+        {
+          "name": "getLinks",
+          "parameterTypes": []
+        }
+      ]
     },
     {
-      "type": "io.swagger.v3.oas.models.responses.ApiResponses"
+      "type": "io.swagger.v3.oas.models.responses.ApiResponses",
+      "allDeclaredFields": true
     },
     {
       "type": "io.swagger.v3.oas.models.security.Scopes"
@@ -4035,6 +4799,42 @@
     },
     {
       "type": "io.swagger.v3.oas.models.servers.Server",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "getDescription",
+          "parameterTypes": []
+        },
+        {
+          "name": "getExtensions",
+          "parameterTypes": []
+        },
+        {
+          "name": "getUrl",
+          "parameterTypes": []
+        },
+        {
+          "name": "getVariables",
+          "parameterTypes": []
+        },
+        {
+          "name": "setUrl",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "io.swagger.v3.oas.models.servers.ServerVariable",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "io.swagger.v3.oas.models.servers.ServerVariables",
       "allDeclaredFields": true
     },
     {
@@ -4357,6 +5157,9 @@
       "type": "java.lang.CloneNotSupportedException"
     },
     {
+      "type": "java.lang.Cloneable"
+    },
+    {
       "type": "java.lang.Comparable"
     },
     {
@@ -4371,7 +5174,8 @@
       ]
     },
     {
-      "type": "java.lang.Enum"
+      "type": "java.lang.Enum",
+      "allDeclaredFields": true
     },
     {
       "type": "java.lang.Error"
@@ -4398,6 +5202,7 @@
     },
     {
       "type": "java.lang.Integer",
+      "allDeclaredFields": true,
       "fields": [
         {
           "name": "TYPE"
@@ -4539,6 +5344,7 @@
     },
     {
       "type": "java.lang.String",
+      "allDeclaredFields": true,
       "fields": [
         {
           "name": "TYPE"
@@ -5162,10 +5968,19 @@
       "type": "java.time.Instant"
     },
     {
-      "type": "java.time.LocalDate"
+      "type": "java.time.LocalDate",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "java.time.OffsetDateTime",
+      "allDeclaredFields": true
     },
     {
       "type": "java.util.AbstractCollection",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "java.util.AbstractMap",
       "allDeclaredFields": true
     },
     {
@@ -5173,6 +5988,14 @@
     },
     {
       "type": "java.util.Collection"
+    },
+    {
+      "type": "java.util.Collections$SynchronizedMap",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "java.util.Collections$SynchronizedSortedMap",
+      "allDeclaredFields": true
     },
     {
       "type": "java.util.Comparator"
@@ -5193,6 +6016,10 @@
       "type": "java.util.EventListener"
     },
     {
+      "type": "java.util.HashMap",
+      "allDeclaredFields": true
+    },
+    {
       "type": "java.util.HashSet"
     },
     {
@@ -5211,10 +6038,12 @@
       "type": "java.util.Iterator"
     },
     {
-      "type": "java.util.LinkedHashMap"
+      "type": "java.util.LinkedHashMap",
+      "allDeclaredFields": true
     },
     {
-      "type": "java.util.List"
+      "type": "java.util.List",
+      "allDeclaredFields": true
     },
     {
       "type": "java.util.Locale"
@@ -5247,10 +6076,16 @@
       "type": "java.util.RandomAccess"
     },
     {
+      "type": "java.util.SequencedMap"
+    },
+    {
       "type": "java.util.ServiceLoader"
     },
     {
       "type": "java.util.Set"
+    },
+    {
+      "type": "java.util.SortedMap"
     },
     {
       "type": "java.util.Spliterator"
@@ -5682,6 +6517,10 @@
     },
     {
       "type": "liquibase.integration.spring.SpringLiquibase"
+    },
+    {
+      "type": "long",
+      "allDeclaredFields": true
     },
     {
       "type": "me.paulschwarz.springdotenv.springboot.DotenvApplicationRunListener",
@@ -7571,7 +8410,17 @@
     },
     {
       "type": "org.springdoc.webmvc.api.OpenApiWebMvcResource",
-      "allDeclaredFields": true
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "openapiJson",
+          "parameterTypes": [
+            "jakarta.servlet.http.HttpServletRequest",
+            "java.lang.String",
+            "java.util.Locale"
+          ]
+        }
+      ]
     },
     {
       "type": "org.springdoc.webmvc.core.configuration.SpringDocWebMvcConfiguration",
@@ -7730,7 +8579,15 @@
     },
     {
       "type": "org.springdoc.webmvc.ui.SwaggerConfigResource",
-      "allDeclaredFields": true
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "openapiJson",
+          "parameterTypes": [
+            "jakarta.servlet.http.HttpServletRequest"
+          ]
+        }
+      ]
     },
     {
       "type": "org.springdoc.webmvc.ui.SwaggerIndexPageTransformer",
@@ -10498,10 +11355,12 @@
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Tomcat"
     },
     {
-      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceJmxConfiguration"
+      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceJmxConfiguration",
+      "allDeclaredFields": true
     },
     {
-      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceJmxConfiguration$Hikari"
+      "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceJmxConfiguration$Hikari",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
@@ -16543,6 +17402,9 @@
       ]
     },
     {
+      "type": "vc.Application__EnvironmentPostProcessor"
+    },
+    {
       "type": "vc.RateLimiterTests"
     },
     {
@@ -18117,7 +18979,15 @@
     },
     {
       "type": "vc.data.dto.enums.Connectiontype",
-      "allDeclaredFields": true
+      "allDeclaredFields": true,
+      "fields": [
+        {
+          "name": "JOIN"
+        },
+        {
+          "name": "LEAVE"
+        }
+      ]
     },
     {
       "type": "vc.data.dto.tables.pojos.Deaths",
@@ -18449,6 +19319,13 @@
     {
       "type": {
         "proxy": [
+          "org.springframework.stereotype.Controller"
+        ]
+      }
+    },
+    {
+      "type": {
+        "proxy": [
           "org.springframework.test.context.BootstrapWith"
         ]
       }
@@ -18470,6 +19347,13 @@
     {
       "type": {
         "proxy": [
+          "org.springframework.web.bind.annotation.GetMapping"
+        ]
+      }
+    },
+    {
+      "type": {
+        "proxy": [
           "org.springframework.web.bind.annotation.RequestMapping"
         ]
       }
@@ -18478,6 +19362,13 @@
       "type": {
         "proxy": [
           "org.springframework.web.bind.annotation.RequestParam"
+        ]
+      }
+    },
+    {
+      "type": {
+        "proxy": [
+          "org.springframework.web.bind.annotation.RestController"
         ]
       }
     }
