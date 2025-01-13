@@ -1310,6 +1310,9 @@
       "type": "io.github.resilience4j.core.ContextAwareScheduledThreadPoolExecutor"
     },
     {
+      "type": "io.github.resilience4j.core.IntervalFunction"
+    },
+    {
       "type": "io.github.resilience4j.core.Registry"
     },
     {
@@ -1504,6 +1507,9 @@
       "type": "io.github.resilience4j.spring6.bulkhead.configure.RxJava2BulkheadAspectExt"
     },
     {
+      "type": "io.github.resilience4j.spring6.bulkhead.configure.RxJava3BulkheadAspectExt"
+    },
+    {
       "type": "io.github.resilience4j.spring6.circuitbreaker.configure.CircuitBreakerAspect",
       "allDeclaredFields": true
     },
@@ -1516,6 +1522,9 @@
     },
     {
       "type": "io.github.resilience4j.spring6.circuitbreaker.configure.RxJava2CircuitBreakerAspectExt"
+    },
+    {
+      "type": "io.github.resilience4j.spring6.circuitbreaker.configure.RxJava3CircuitBreakerAspectExt"
     },
     {
       "type": "io.github.resilience4j.spring6.fallback.CompletionStageFallbackDecorator",
@@ -1542,10 +1551,16 @@
       "type": "io.github.resilience4j.spring6.fallback.RxJava2FallbackDecorator"
     },
     {
+      "type": "io.github.resilience4j.spring6.fallback.RxJava3FallbackDecorator"
+    },
+    {
       "type": "io.github.resilience4j.spring6.micrometer.configure.ReactorTimerAspectExt"
     },
     {
       "type": "io.github.resilience4j.spring6.micrometer.configure.RxJava2TimerAspectExt"
+    },
+    {
+      "type": "io.github.resilience4j.spring6.micrometer.configure.RxJava3TimerAspectExt"
     },
     {
       "type": "io.github.resilience4j.spring6.micrometer.configure.TimerAspect",
@@ -1579,6 +1594,9 @@
       "type": "io.github.resilience4j.spring6.ratelimiter.configure.RxJava2RateLimiterAspectExt"
     },
     {
+      "type": "io.github.resilience4j.spring6.ratelimiter.configure.RxJava3RateLimiterAspectExt"
+    },
+    {
       "type": "io.github.resilience4j.spring6.retry.configure.ReactorRetryAspectExt"
     },
     {
@@ -1593,6 +1611,9 @@
       "type": "io.github.resilience4j.spring6.retry.configure.RxJava2RetryAspectExt"
     },
     {
+      "type": "io.github.resilience4j.spring6.retry.configure.RxJava3RetryAspectExt"
+    },
+    {
       "type": "io.github.resilience4j.spring6.spelresolver.DefaultSpelResolver",
       "allDeclaredFields": true
     },
@@ -1604,6 +1625,9 @@
     },
     {
       "type": "io.github.resilience4j.spring6.timelimiter.configure.RxJava2TimeLimiterAspectExt"
+    },
+    {
+      "type": "io.github.resilience4j.spring6.timelimiter.configure.RxJava3TimeLimiterAspectExt"
     },
     {
       "type": "io.github.resilience4j.spring6.timelimiter.configure.TimeLimiterAspect",
@@ -1633,6 +1657,15 @@
     },
     {
       "type": "io.github.resilience4j.spring6.utils.RxJava2OnClasspathCondition",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "io.github.resilience4j.spring6.utils.RxJava3OnClasspathCondition",
       "methods": [
         {
           "name": "<init>",
@@ -3938,7 +3971,13 @@
       "type": "io.swagger.v3.oas.models.SpecVersion"
     },
     {
+      "type": "io.swagger.v3.oas.models.callbacks.Callback"
+    },
+    {
       "type": "io.swagger.v3.oas.models.examples.Example"
+    },
+    {
+      "type": "io.swagger.v3.oas.models.headers.Header"
     },
     {
       "type": "io.swagger.v3.oas.models.info.Contact",
@@ -5335,6 +5374,9 @@
       "type": "java.util.function.ToLongFunction"
     },
     {
+      "type": "java.util.function.UnaryOperator"
+    },
+    {
       "type": "java.util.logging.LogManager",
       "methods": [
         {
@@ -5600,10 +5642,25 @@
       "type": "kotlin.Metadata"
     },
     {
+      "type": "kotlin.annotation.MustBeDocumented"
+    },
+    {
+      "type": "kotlin.annotation.Retention"
+    },
+    {
+      "type": "kotlin.annotation.Target"
+    },
+    {
       "type": "kotlin.coroutines.Continuation"
     },
     {
       "type": "kotlin.jvm.JvmClassMappingKt"
+    },
+    {
+      "type": "kotlin.jvm.JvmInline"
+    },
+    {
+      "type": "kotlin.reflect.full.KClasses"
     },
     {
       "type": "kotlinx.coroutines.flow.Flow"
@@ -7013,6 +7070,12 @@
           ]
         },
         {
+          "name": "oas31ModelConverter",
+          "parameterTypes": [
+            "org.springdoc.core.properties.SpringDocConfigProperties"
+          ]
+        },
+        {
           "name": "openAPIBuilder",
           "parameterTypes": [
             "java.util.Optional",
@@ -7201,6 +7264,10 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.springdoc.core.converters.OAS31ModelConverter",
+      "allDeclaredFields": true
+    },
+    {
       "type": "org.springdoc.core.converters.PolymorphicModelConverter",
       "allDeclaredFields": true
     },
@@ -7320,6 +7387,12 @@
         {
           "name": "<init>",
           "parameterTypes": []
+        },
+        {
+          "name": "setEnableKotlin",
+          "parameterTypes": [
+            "boolean"
+          ]
         }
       ]
     },
@@ -13437,6 +13510,9 @@
       ]
     },
     {
+      "type": "org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer__TestContext001_BeanDefinitions"
+    },
+    {
       "type": "org.springframework.boot.test.web.reactive.server.WebTestClientContextCustomizerFactory",
       "methods": [
         {
@@ -15210,6 +15286,9 @@
     },
     {
       "type": "org.springframework.web.context.support.GenericWebApplicationContext"
+    },
+    {
+      "type": "org.springframework.web.context.support.ServletContextResource"
     },
     {
       "type": "org.springframework.web.context.support.WebApplicationObjectSupport",
