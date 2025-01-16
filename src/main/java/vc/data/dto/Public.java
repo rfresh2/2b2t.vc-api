@@ -187,11 +187,6 @@ public class Public extends SchemaImpl {
     public final Playtime PLAYTIME = Playtime.PLAYTIME;
 
     /**
-     * The table <code>public.playtime_month</code>.
-     */
-    public final PlaytimeMonth PLAYTIME_MONTH = PlaytimeMonth.PLAYTIME_MONTH;
-
-    /**
      * The table <code>public.priority_players_view</code>.
      */
     public final PriorityPlayersView PRIORITY_PLAYERS_VIEW = PriorityPlayersView.PRIORITY_PLAYERS_VIEW;
@@ -242,6 +237,11 @@ public class Public extends SchemaImpl {
     public final TopPlaytimeMonthView TOP_PLAYTIME_MONTH_VIEW = TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW;
 
     /**
+     * The table <code>public.worldtime</code>.
+     */
+    public final Worldtime WORLDTIME = Worldtime.WORLDTIME;
+
+    /**
      * No further instances allowed
      */
     private Public() {
@@ -268,7 +268,6 @@ public class Public extends SchemaImpl {
             PlayerStats.PLAYER_STATS,
             Playercount.PLAYERCOUNT,
             Playtime.PLAYTIME,
-            PlaytimeMonth.PLAYTIME_MONTH,
             PriorityPlayersView.PRIORITY_PLAYERS_VIEW,
             Queuelength.QUEUELENGTH,
             Queuewait.QUEUEWAIT,
@@ -278,7 +277,8 @@ public class Public extends SchemaImpl {
             TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW,
             TopKillsMonthView.TOP_KILLS_MONTH_VIEW,
             TopPlaytimeAllTimeView.TOP_PLAYTIME_ALL_TIME_VIEW,
-            TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW
+            TopPlaytimeMonthView.TOP_PLAYTIME_MONTH_VIEW,
+            Worldtime.WORLDTIME
         );
     }
 }
