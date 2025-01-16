@@ -66,6 +66,31 @@ public class ApiTests {
     }
 
     @Test
+    public void chatsWindowTest() {
+        var chatWindowResponse = httpRequest(
+            "/chats/window?startDate={startDate}&endDate={endDate}",
+            ChatsController.ChatWindowResponse.class,
+            Map.of(
+                "startDate", "2023-01-01T00:00:00",
+                "endDate", "2023-01-01T01:00:00"
+            ));
+        assertNotNull(chatWindowResponse);
+        assertFalse(chatWindowResponse.chats().isEmpty());
+    }
+
+    @Test
+    public void chatWindowMissingStartDateTest() {
+        var chatWindowResponse = httpRequest(
+            "/chats/window?endDate={endDate}",
+            String.class,
+            Map.of(
+                "endDate", "2023-01-01T01:00:00"
+            ));
+        assertNotNull(chatWindowResponse);
+        assertEquals("startDate is required", chatWindowResponse);
+    }
+
+    @Test
     public void wordCountApiTest() {
         var wordCountResponse = httpRequest("/chats/word-count?word={word}",
             ChatsController.WordCount.class,
@@ -100,6 +125,18 @@ public class ApiTests {
     }
 
     @Test
+    public void connectionsWindowTest() {
+        var connectionsWindowResponse = httpRequest("/connections/window?startDate={startDate}&endDate={endDate}",
+               ConnectionsController.ConnectionsWindowResponse.class,
+               Map.of(
+                   "startDate", "2023-01-01T00:00:00Z",
+                   "endDate", "2023-01-01T01:00:00Z"
+               ));
+        assertNotNull(connectionsWindowResponse);
+        assertFalse(connectionsWindowResponse.connections().isEmpty());
+    }
+
+    @Test
     public void dataDumpApiTest() {
         var dataDumpResponse = httpRequest("/dump/player?playerName={playerName}",
             String.class,
@@ -119,6 +156,18 @@ public class ApiTests {
             ));
         assertNotNull(deathsResponse);
         assertTrue(deathsResponse.total() > 0);
+    }
+
+    @Test
+    public void deathsWindowTest() {
+        var deathsWindowResponse = httpRequest("/deaths/window?startDate={startDate}&endDate={endDate}",
+               DeathsController.DeathsWindowResponse.class,
+               Map.of(
+                   "startDate", "2023-01-01T00:00:00",
+                   "endDate", "2023-01-01T01:00:00"
+               ));
+        assertNotNull(deathsWindowResponse);
+        assertFalse(deathsWindowResponse.deaths().isEmpty());
     }
 
     @Test

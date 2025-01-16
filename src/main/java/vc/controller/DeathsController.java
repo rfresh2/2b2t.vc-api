@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vc.util.PlayerLookup;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -50,6 +51,7 @@ public class DeathsController {
     public record KillsResponse(List<Death> kills, int total, int pageCount) {}
     public record PlayerDeathOrKillCountResponse(List<PlayerDeathOrKillCount> players) {}
     public record PlayerDeathOrKillCount(String playerName, UUID uuid, int count) {}
+    public record DeathsWindowResponse(List<Death> deaths) {}
 
     @GetMapping("/deaths")
     @RateLimiter(name = "main")
@@ -122,6 +124,67 @@ public class DeathsController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new DeathsResponse(deathsList, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
+        }
+    }
+
+    @GetMapping("/deaths/window")
+    @RateLimiter(name = "main")
+    @Cacheable("deathsWindow")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = """
+            All 2b2t deaths during a window of time, starting from startDate (required) until endDate or pageSize is met
+
+            startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+            
+            Example: "2022-10-31T01:30:00.000".
+            """,
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = DeathsWindowResponse.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No deaths found in this window.",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. startDate must be provided",
+            content = @Content
+        )
+    })
+    public ResponseEntity<DeathsWindowResponse> deathsWindow(
+        @RequestParam(value = "startDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+        @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+        @RequestParam(value = "pageSize", required = false) Integer pageSize
+    ) {
+        if (pageSize != null && pageSize > 100) {
+            return ResponseEntity.badRequest().build();
+        }
+        final int size = pageSize == null ? 25 : pageSize;
+        var baseQuery = dsl
+            .selectFrom(DEATHS)
+            .where(DEATHS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
+        if (endDate != null) {
+            if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+                return ResponseEntity.badRequest().build();
+            }
+            baseQuery = baseQuery.and(DEATHS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
+        }
+        List<Death> deathsList = baseQuery
+            .orderBy(DEATHS.TIME.asc())
+            .limit(size)
+            .fetch()
+            .into(Death.class);
+        if (deathsList.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(new DeathsWindowResponse(deathsList));
         }
     }
 

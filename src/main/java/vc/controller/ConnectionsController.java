@@ -18,6 +18,7 @@ import vc.data.dto.enums.Connectiontype;
 import vc.util.PlayerLookup;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -39,6 +40,8 @@ public class ConnectionsController {
 
     public record ConnectionsResponse(List<Connection> connections, int total, int pageCount) { }
     public record Connection(OffsetDateTime time, Connectiontype connection) {}
+    public record PlayerConnection(OffsetDateTime time, Connectiontype connection, String playerName, UUID uuid) {}
+    public record ConnectionsWindowResponse(List<PlayerConnection> connections) {}
 
     @GetMapping("/connections")
     @RateLimiter(name = "main")
@@ -110,6 +113,66 @@ public class ConnectionsController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new ConnectionsResponse(connections, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
+        }
+    }
+
+    @GetMapping("/connections/window")
+    @RateLimiter(name = "main")
+    @Cacheable("connectionsWindow")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = """
+            All 2b2t connections during a window of time, starting from startDate (required) until endDate or pageSize is met
+
+            startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+            
+            Example: "2022-10-31T01:30:00.000".
+            """,
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = ConnectionsWindowResponse.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No connections found in this window.",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. startDate must be provided",
+            content = @Content
+        )
+    })
+    public ResponseEntity<ConnectionsWindowResponse> connectionsWindow(
+        @RequestParam(value = "startDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+        @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+        @RequestParam(value = "pageSize", required = false) Integer pageSize
+    ) {
+        if (pageSize != null && pageSize > 100) {
+            return ResponseEntity.badRequest().build();
+        }
+        final int size = pageSize == null ? 25 : pageSize;
+        var baseQuery = dsl.selectFrom(CONNECTIONS)
+            .where(CONNECTIONS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
+        if (endDate != null) {
+            if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+                return ResponseEntity.badRequest().build();
+            }
+            baseQuery = baseQuery.and(CONNECTIONS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
+        }
+        List<PlayerConnection> connections = baseQuery
+            .orderBy(CONNECTIONS.TIME.asc())
+            .limit(size)
+            .fetch()
+            .into(PlayerConnection.class);
+        if (connections.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(new ConnectionsWindowResponse(connections));
         }
     }
 }

@@ -5972,6 +5972,9 @@
       "allDeclaredFields": true
     },
     {
+      "type": "java.time.LocalDateTime"
+    },
+    {
       "type": "java.time.OffsetDateTime",
       "allDeclaredFields": true
     },
@@ -16051,6 +16054,9 @@
       "type": "org.springframework.web.accept.MediaTypeFileExtensionResolver"
     },
     {
+      "type": "org.springframework.web.bind.MissingServletRequestParameterException"
+    },
+    {
       "type": "org.springframework.web.bind.annotation.ControllerAdvice"
     },
     {
@@ -17228,11 +17234,23 @@
           "parameterTypes": []
         },
         {
+          "name": "chatWindowMissingStartDateTest",
+          "parameterTypes": []
+        },
+        {
           "name": "chatsApiTest",
           "parameterTypes": []
         },
         {
+          "name": "chatsWindowTest",
+          "parameterTypes": []
+        },
+        {
           "name": "connectionsApiTest",
+          "parameterTypes": []
+        },
+        {
+          "name": "connectionsWindowTest",
           "parameterTypes": []
         },
         {
@@ -17245,6 +17263,10 @@
         },
         {
           "name": "deathsTopMonthTest",
+          "parameterTypes": []
+        },
+        {
+          "name": "deathsWindowTest",
           "parameterTypes": []
         },
         {
@@ -17756,6 +17778,14 @@
           ]
         },
         {
+          "name": "chatWindow",
+          "parameterTypes": [
+            "java.time.LocalDateTime",
+            "java.time.LocalDateTime",
+            "java.lang.Integer"
+          ]
+        },
+        {
           "name": "chats",
           "parameterTypes": [
             "java.util.UUID",
@@ -17837,6 +17867,22 @@
         },
         {
           "name": "total",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.ChatsController$ChatWindowResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "chats",
           "parameterTypes": []
         }
       ]
@@ -17944,6 +17990,14 @@
             "java.lang.Integer",
             "java.lang.Integer"
           ]
+        },
+        {
+          "name": "connectionsWindow",
+          "parameterTypes": [
+            "java.time.LocalDateTime",
+            "java.time.LocalDateTime",
+            "java.lang.Integer"
+          ]
         }
       ]
     },
@@ -18001,6 +18055,53 @@
         },
         {
           "name": "total",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.ConnectionsController$ConnectionsWindowResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "connections",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.ConnectionsController$PlayerConnection",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.time.OffsetDateTime",
+            "vc.data.dto.enums.Connectiontype",
+            "java.lang.String",
+            "java.util.UUID"
+          ]
+        },
+        {
+          "name": "connection",
+          "parameterTypes": []
+        },
+        {
+          "name": "playerName",
+          "parameterTypes": []
+        },
+        {
+          "name": "time",
+          "parameterTypes": []
+        },
+        {
+          "name": "uuid",
           "parameterTypes": []
         }
       ]
@@ -18070,6 +18171,14 @@
         {
           "name": "deathsTopMonth",
           "parameterTypes": []
+        },
+        {
+          "name": "deathsWindow",
+          "parameterTypes": [
+            "java.time.LocalDateTime",
+            "java.time.LocalDateTime",
+            "java.lang.Integer"
+          ]
         },
         {
           "name": "kills",
@@ -18204,6 +18313,22 @@
       ]
     },
     {
+      "type": "vc.controller.DeathsController$DeathsWindowResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "deaths",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.controller.DeathsController$KillsResponse",
       "allDeclaredFields": true,
       "methods": [
@@ -18290,6 +18415,22 @@
         {
           "name": "handleError",
           "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.GlobalExceptionHandler",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "handleMissingParams",
+          "parameterTypes": [
+            "org.springframework.web.bind.MissingServletRequestParameterException"
+          ]
         }
       ]
     },
@@ -19140,6 +19281,15 @@
         },
         {
           "name": "getTime",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.data.dto.tables.records.ConnectionsRecord",
+      "methods": [
+        {
+          "name": "<init>",
           "parameterTypes": []
         }
       ]

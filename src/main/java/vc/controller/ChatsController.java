@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vc.util.PlayerLookup;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -41,6 +42,7 @@ public class ChatsController {
     public record WordCount(int count) {}
     public record PlayerChat(String playerName, UUID uuid, OffsetDateTime time, String chat) {}
     public record ChatSearchResponse(List<PlayerChat> chats, int total, int pageCount) {}
+    public record ChatWindowResponse(List<PlayerChat> chats) {}
 
     @GetMapping("/chats")
     @RateLimiter(name = "main")
@@ -110,6 +112,67 @@ public class ChatsController {
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.ok(new ChatsResponse(chats, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
+        }
+    }
+
+    @GetMapping("/chats/window")
+    @RateLimiter(name = "main")
+    @Cacheable("chatsWindow")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = """
+            All 2b2t chats during a window of time, starting from startDate (required) until endDate or pageSize is met
+
+            startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
+            
+            Example: "2022-10-31T01:30:00.000".
+            """,
+            content = {
+                @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = ChatWindowResponse.class)
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "No chats found in this window.",
+            content = @Content
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Bad request. startDate must be provided",
+            content = @Content
+        )
+    })
+    public ResponseEntity<ChatWindowResponse> chatWindow(
+        @RequestParam(value = "startDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+        @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+        @RequestParam(value = "pageSize", required = false) Integer pageSize
+    ) {
+        if (pageSize != null && pageSize > 100) {
+            return ResponseEntity.badRequest().build();
+        }
+        final int size = pageSize == null ? 25 : pageSize;
+        var baseQuery = dsl.select(CHATS.PLAYER_NAME, CHATS.PLAYER_UUID, CHATS.TIME, CHATS.CHAT)
+            .from(CHATS)
+            .where(CHATS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
+        if (endDate != null) {
+            if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+                return ResponseEntity.badRequest().build();
+            }
+            baseQuery = baseQuery.and(CHATS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
+        }
+        var chats = baseQuery
+            .orderBy(CHATS.TIME.asc())
+            .limit(size)
+            .fetch()
+            .into(PlayerChat.class);
+        if (chats.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(new ChatWindowResponse(chats));
         }
     }
 
