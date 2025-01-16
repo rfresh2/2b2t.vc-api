@@ -266,6 +266,15 @@ public class ApiTests {
         assertEquals("rfresh2", response.name());
     }
 
+    @Test
+    public void timeTest() {
+        var response = httpRequest("/time",
+            TimeController.TimeResponse.class);
+        assertNotNull(response);
+        assertTrue(response.worldTime() > 0);
+        assertNotNull(response.lastUpdated());
+    }
+
     private <T> T httpRequest(String url, Class<T> responseType) {
         return restTemplate.getForObject("http://localhost:" + port + url, responseType);
     }

@@ -17324,6 +17324,10 @@
           "parameterTypes": []
         },
         {
+          "name": "timeTest",
+          "parameterTypes": []
+        },
+        {
           "name": "wordCountApiTest",
           "parameterTypes": []
         },
@@ -18978,6 +18982,54 @@
       ]
     },
     {
+      "type": "vc.controller.TimeController",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.jooq.DSLContext"
+          ]
+        },
+        {
+          "name": "getWorldTime",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.TimeController$$SpringCGLIB$$0",
+      "fields": [
+        {
+          "name": "CGLIB$CALLBACK_FILTER"
+        },
+        {
+          "name": "CGLIB$FACTORY_DATA"
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.TimeController$TimeResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.time.OffsetDateTime",
+            "int"
+          ]
+        },
+        {
+          "name": "lastUpdated",
+          "parameterTypes": []
+        },
+        {
+          "name": "worldTime",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "vc.data.dto.enums.Connectiontype",
       "allDeclaredFields": true,
       "fields": [
@@ -19211,6 +19263,15 @@
     },
     {
       "type": "vc.data.dto.tables.records.TopPlaytimeMonthViewRecord",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.data.dto.tables.records.WorldtimeRecord",
       "methods": [
         {
           "name": "<init>",
