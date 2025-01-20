@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>org.jooq</groupId>
 			<artifactId>jooq</artifactId>
-			<version>3.19.17</version>
+			<version>3.19.18</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -100,7 +100,7 @@
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
-			<version>3.1.8</version>
+			<version>3.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -192,7 +192,7 @@
 					<plugin>
 						<groupId>org.jooq</groupId>
 						<artifactId>jooq-codegen-maven</artifactId>
-						<version>3.19.17</version>
+						<version>3.19.18</version>
 						<executions>
 							<execution>
 								<phase>generate-sources</phase>
