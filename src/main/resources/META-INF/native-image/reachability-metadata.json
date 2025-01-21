@@ -7751,6 +7751,9 @@
       "type": "org.jooq.util.yugabytedb.YugabyteDBDataType"
     },
     {
+      "type": "org.jspecify.annotations.NullMarked"
+    },
+    {
       "type": "org.neo4j.driver.Driver"
     },
     {
@@ -17286,6 +17289,10 @@
           "parameterTypes": []
         },
         {
+          "name": "nonPrioTimeLimitsTest",
+          "parameterTypes": []
+        },
+        {
           "name": "playerLookupCraftheadTest",
           "parameterTypes": []
         },
@@ -18447,6 +18454,36 @@
           "parameterTypes": [
             "jakarta.servlet.http.HttpServletResponse"
           ]
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.LimitsController",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "getNonPrioKickTimeLimit",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "vc.controller.LimitsController$SessionTimeLimitResponse",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "int"
+          ]
+        },
+        {
+          "name": "hours",
+          "parameterTypes": []
         }
       ]
     },

@@ -198,6 +198,14 @@ public class ApiTests {
     }
 
     @Test
+    public void nonPrioTimeLimitsTest() {
+        var nonPrioTimeLimitsResponse = httpRequest("/limits/session-time-limit",
+            LimitsController.SessionTimeLimitResponse.class);
+        assertNotNull(nonPrioTimeLimitsResponse);
+        assertEquals(LimitsController.SessionTimeLimitResponse.INSTANCE, nonPrioTimeLimitsResponse);
+    }
+
+    @Test
     public void playtimeApiTest() {
         var playtimeResponse = httpRequest("/playtime?playerName={playerName}",
             PlaytimeController.PlaytimeResponse.class,

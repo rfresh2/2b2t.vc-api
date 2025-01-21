@@ -95,8 +95,6 @@ public class QueueController {
     }
 
     @GetMapping("/queue/eta-equation")
-    @RateLimiter(name = "queue-eta-equation")
-    @Cacheable("queue-eta-equation")
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
