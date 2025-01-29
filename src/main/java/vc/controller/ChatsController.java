@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vc.util.PlayerLookup;
+import vc.util.Sort;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -122,7 +124,11 @@ public class ChatsController {
         @ApiResponse(
             responseCode = "200",
             description = """
-            All 2b2t chats during a window of time, starting from startDate (required) until endDate or pageSize is met
+            All 2b2t chats during a window of time, starting from startDate until endDate or pageSize is met.
+            
+            Results are sorted in ascending order by default.
+            
+            startDate is required if sort is ASC, endDate is required if sort is DESC.
 
             startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
             
@@ -147,25 +153,45 @@ public class ChatsController {
         )
     })
     public ResponseEntity<ChatWindowResponse> chatWindow(
-        @RequestParam(value = "startDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+        @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
         @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+        @RequestParam(value = "sort", required = false) Sort sort,
         @RequestParam(value = "pageSize", required = false) Integer pageSize
     ) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
         }
+        if (sort == null) sort = Sort.ASC;
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.select(CHATS.PLAYER_NAME, CHATS.PLAYER_UUID, CHATS.TIME, CHATS.CHAT)
-            .from(CHATS)
-            .where(CHATS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
-        if (endDate != null) {
+        if (endDate != null && startDate != null) {
             if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
                 return ResponseEntity.badRequest().build();
             }
-            baseQuery = baseQuery.and(CHATS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
         }
-        var chats = baseQuery
-            .orderBy(CHATS.TIME.asc())
+        Condition c = null;
+        switch (sort) {
+            case ASC -> {
+                if (startDate == null) {
+                    return ResponseEntity.badRequest().build();
+                }
+                c = CHATS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC));
+                if (endDate != null)
+                    c = c.and(CHATS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
+            }
+            case DESC -> {
+                if (endDate == null) {
+                    return ResponseEntity.badRequest().build();
+                }
+                c = CHATS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC));
+                if (startDate != null)
+                    c = c.and(CHATS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + sort);
+        }
+        var chats = dsl.select(CHATS.PLAYER_NAME, CHATS.PLAYER_UUID, CHATS.TIME, CHATS.CHAT)
+            .from(CHATS)
+            .where(c)
+            .orderBy(CHATS.TIME.sort(sort.toJooq()))
             .limit(size)
             .fetch()
             .into(PlayerChat.class);

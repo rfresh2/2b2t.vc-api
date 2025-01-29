@@ -1,12 +1,14 @@
 package vc.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
+import vc.util.Sort;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -32,5 +34,10 @@ public class WebConfig implements WebMvcConfigurer {
             .allowedMethods("GET")
             .allowedHeaders("*")
             .maxAge(300);
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(String.class, Sort.class, Sort::fromValue);
     }
 }

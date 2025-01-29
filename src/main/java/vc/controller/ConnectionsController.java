@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
+import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.enums.Connectiontype;
 import vc.util.PlayerLookup;
+import vc.util.Sort;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -148,24 +150,44 @@ public class ConnectionsController {
         )
     })
     public ResponseEntity<ConnectionsWindowResponse> connectionsWindow(
-        @RequestParam(value = "startDate", required = true) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+        @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
         @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+        @RequestParam(value = "sort", required = false) Sort sort,
         @RequestParam(value = "pageSize", required = false) Integer pageSize
     ) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
         }
+        if (sort == null) sort = Sort.ASC;
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.selectFrom(CONNECTIONS)
-            .where(CONNECTIONS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
-        if (endDate != null) {
+        if (endDate != null && startDate != null) {
             if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
                 return ResponseEntity.badRequest().build();
             }
-            baseQuery = baseQuery.and(CONNECTIONS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
         }
-        List<PlayerConnection> connections = baseQuery
-            .orderBy(CONNECTIONS.TIME.asc())
+        Condition c = null;
+        switch (sort) {
+            case ASC -> {
+                if (startDate == null) {
+                    return ResponseEntity.badRequest().build();
+                }
+                c = CONNECTIONS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC));
+                if (endDate != null)
+                    c = c.and(CONNECTIONS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
+            }
+            case DESC -> {
+                if (endDate == null) {
+                    return ResponseEntity.badRequest().build();
+                }
+                c = CONNECTIONS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC));
+                if (startDate != null)
+                    c = c.and(CONNECTIONS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + sort);
+        }
+        List<PlayerConnection> connections = dsl.selectFrom(CONNECTIONS)
+            .where(c)
+            .orderBy(CONNECTIONS.TIME.sort(sort.toJooq()))
             .limit(size)
             .fetch()
             .into(PlayerConnection.class);

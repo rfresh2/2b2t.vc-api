@@ -260,10 +260,16 @@
       "type": "com.datastax.oss.driver.api.core.CqlSession"
     },
     {
+      "type": "com.fasterxml.jackson.annotation.JacksonAnnotation"
+    },
+    {
       "type": "com.fasterxml.jackson.annotation.JsonAutoDetect$Value"
     },
     {
       "type": "com.fasterxml.jackson.annotation.JsonAutoDetect$Visibility"
+    },
+    {
+      "type": "com.fasterxml.jackson.annotation.JsonCreator"
     },
     {
       "type": "com.fasterxml.jackson.annotation.JsonInclude$Include"
@@ -276,6 +282,9 @@
     },
     {
       "type": "com.fasterxml.jackson.annotation.JsonTypeInfo$As"
+    },
+    {
+      "type": "com.fasterxml.jackson.annotation.JsonValue"
     },
     {
       "type": "com.fasterxml.jackson.annotation.JsonView"
@@ -1026,7 +1035,29 @@
       "allDeclaredFields": true,
       "methods": [
         {
+          "name": "getDataSourceProperties",
+          "parameterTypes": []
+        },
+        {
+          "name": "setConnectionTimeout",
+          "parameterTypes": [
+            "long"
+          ]
+        },
+        {
+          "name": "setDataSourceProperties",
+          "parameterTypes": [
+            "java.util.Properties"
+          ]
+        },
+        {
           "name": "setKeepaliveTime",
+          "parameterTypes": [
+            "long"
+          ]
+        },
+        {
+          "name": "setMaxLifetime",
           "parameterTypes": [
             "long"
           ]
@@ -1041,6 +1072,12 @@
           "name": "setMinimumIdle",
           "parameterTypes": [
             "int"
+          ]
+        },
+        {
+          "name": "setReadOnly",
+          "parameterTypes": [
+            "boolean"
           ]
         }
       ]
@@ -6061,7 +6098,13 @@
       "type": "java.util.Optional"
     },
     {
-      "type": "java.util.Properties"
+      "type": "java.util.Properties",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "java.util.PropertyPermission",
@@ -17793,6 +17836,15 @@
           ]
         },
         {
+          "name": "chatWindow",
+          "parameterTypes": [
+            "java.time.LocalDateTime",
+            "java.time.LocalDateTime",
+            "vc.util.Sort",
+            "java.lang.Integer"
+          ]
+        },
+        {
           "name": "chats",
           "parameterTypes": [
             "java.util.UUID",
@@ -18005,6 +18057,15 @@
             "java.time.LocalDateTime",
             "java.lang.Integer"
           ]
+        },
+        {
+          "name": "connectionsWindow",
+          "parameterTypes": [
+            "java.time.LocalDateTime",
+            "java.time.LocalDateTime",
+            "vc.util.Sort",
+            "java.lang.Integer"
+          ]
         }
       ]
     },
@@ -18184,6 +18245,15 @@
           "parameterTypes": [
             "java.time.LocalDateTime",
             "java.time.LocalDateTime",
+            "java.lang.Integer"
+          ]
+        },
+        {
+          "name": "deathsWindow",
+          "parameterTypes": [
+            "java.time.LocalDateTime",
+            "java.time.LocalDateTime",
+            "vc.util.Sort",
             "java.lang.Integer"
           ]
         },
@@ -19489,6 +19559,9 @@
           ]
         }
       ]
+    },
+    {
+      "type": "vc.util.Sort"
     },
     {
       "type": "zipkin2.reporter.Encoding"

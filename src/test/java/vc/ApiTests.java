@@ -10,6 +10,7 @@ import vc.api.CraftheadRestClient;
 import vc.api.MinetoolsRestClient;
 import vc.api.MojangRestClient;
 import vc.controller.*;
+import vc.util.Sort;
 
 import java.util.Map;
 
@@ -72,7 +73,8 @@ public class ApiTests {
             ChatsController.ChatWindowResponse.class,
             Map.of(
                 "startDate", "2023-01-01T00:00:00",
-                "endDate", "2023-01-01T01:00:00"
+                "endDate", "2023-01-01T01:00:00",
+                "sort", Sort.DESC.toValue()
             ));
         assertNotNull(chatWindowResponse);
         assertFalse(chatWindowResponse.chats().isEmpty());
@@ -86,8 +88,7 @@ public class ApiTests {
             Map.of(
                 "endDate", "2023-01-01T01:00:00"
             ));
-        assertNotNull(chatWindowResponse);
-        assertEquals("startDate is required", chatWindowResponse);
+        assertNull(chatWindowResponse);
     }
 
 //    @Test
