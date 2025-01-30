@@ -19561,7 +19561,20 @@
       ]
     },
     {
-      "type": "vc.util.Sort"
+      "type": "vc.util.Sort",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "toValue",
+          "parameterTypes": []
+        },
+        {
+          "name": "fromValue",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        }
+      ]
     },
     {
       "type": "zipkin2.reporter.Encoding"
