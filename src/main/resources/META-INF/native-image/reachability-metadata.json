@@ -5085,6 +5085,9 @@
       "type": "java.io.InputStream"
     },
     {
+      "type": "java.io.InputStreamReader"
+    },
+    {
       "type": "java.io.ObjectInputStream"
     },
     {
@@ -5101,6 +5104,9 @@
     },
     {
       "type": "java.io.Serializable"
+    },
+    {
+      "type": "java.io.UncheckedIOException"
     },
     {
       "type": "java.io.UnsupportedEncodingException"
@@ -5429,6 +5435,9 @@
       "type": "java.lang.ThreadGroup"
     },
     {
+      "type": "java.lang.ThreadLocal"
+    },
+    {
       "type": "java.lang.Throwable"
     },
     {
@@ -5514,6 +5523,9 @@
           ]
         }
       ]
+    },
+    {
+      "type": "java.lang.invoke.LambdaMetafactory"
     },
     {
       "type": "java.lang.invoke.MethodHandle"
@@ -5738,6 +5750,9 @@
       "type": "java.lang.reflect.GenericDeclaration"
     },
     {
+      "type": "java.lang.reflect.InvocationTargetException"
+    },
+    {
       "type": "java.lang.reflect.Method",
       "methods": [
         {
@@ -5827,7 +5842,13 @@
       "type": "java.net.InetAddress"
     },
     {
+      "type": "java.net.MalformedURLException"
+    },
+    {
       "type": "java.net.NetPermission"
+    },
+    {
+      "type": "java.net.Socket"
     },
     {
       "type": "java.net.Socket$SocketInputStream"
@@ -6025,6 +6046,15 @@
     {
       "type": "java.time.OffsetDateTime",
       "allDeclaredFields": true
+    },
+    {
+      "type": "java.time.ZoneId"
+    },
+    {
+      "type": "java.time.ZoneOffset"
+    },
+    {
+      "type": "java.time.chrono.ChronoLocalDateTime"
     },
     {
       "type": "java.util.AbstractCollection",
@@ -6291,6 +6321,9 @@
           "parameterTypes": []
         }
       ]
+    },
+    {
+      "type": "java.util.regex.Pattern"
     },
     {
       "type": "java.util.stream.Stream"
@@ -6808,6 +6841,9 @@
       "type": "org.apache.tomcat.jdbc.pool.DataSource"
     },
     {
+      "type": "org.apache.tomcat.jdbc.pool.DataSourceProxy"
+    },
+    {
       "type": "org.apache.tomcat.util.net.AbstractEndpoint",
       "methods": [
         {
@@ -6990,6 +7026,9 @@
     },
     {
       "type": "org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator"
+    },
+    {
+      "type": "org.hotswap.agent.HotswapAgent"
     },
     {
       "type": "org.hsqldb.jdbc.JDBCDriver"
@@ -7374,6 +7413,9 @@
     },
     {
       "type": "org.jooq.Name"
+    },
+    {
+      "type": "org.jooq.OrderField"
     },
     {
       "type": "org.jooq.Param"
@@ -7770,6 +7812,9 @@
     },
     {
       "type": "org.jooq.impl.SelectImpl"
+    },
+    {
+      "type": "org.jooq.impl.TableRecordImpl"
     },
     {
       "type": "org.jooq.impl.Tools"
@@ -8823,6 +8868,20 @@
     },
     {
       "type": "org.springframework.beans.BeansException"
+    },
+    {
+      "type": "org.springframework.beans.CachedIntrospectionResults",
+      "fields": [
+        {
+          "name": "acceptedClassLoaders"
+        },
+        {
+          "name": "softClassCache"
+        },
+        {
+          "name": "strongClassCache"
+        }
+      ]
     },
     {
       "type": "org.springframework.beans.factory.Aware"
@@ -10625,6 +10684,9 @@
       "type": "org.springframework.boot.ansi.AnsiOutput$Enabled"
     },
     {
+      "type": "org.springframework.boot.ansi.AnsiOutput$EnabledEditor"
+    },
+    {
       "type": "org.springframework.boot.autoconfigure.AutoConfiguration"
     },
     {
@@ -11463,11 +11525,26 @@
     },
     {
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceJmxConfiguration",
-      "allDeclaredFields": true
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceJmxConfiguration$Hikari",
-      "allDeclaredFields": true
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "javax.sql.DataSource",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
+        }
+      ]
     },
     {
       "type": "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties",
@@ -13493,6 +13570,30 @@
       "type": "org.springframework.boot.convert.DurationUnit"
     },
     {
+      "type": "org.springframework.boot.devtools.autoconfigure.ConditionEvaluationDeltaLoggingListener",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.DevToolsDataSourceAutoConfiguration",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "inMemoryDatabaseShutdownExecutor",
+          "parameterTypes": [
+            "javax.sql.DataSource",
+            "org.springframework.boot.autoconfigure.jdbc.DataSourceProperties"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.DevToolsDataSourceAutoConfiguration$DatabaseShutdownExecutorEntityManagerFactoryDependsOnPostProcessor"
+    },
+    {
       "type": "org.springframework.boot.devtools.autoconfigure.DevToolsDataSourceAutoConfiguration$DevToolsDataSourceCondition",
       "methods": [
         {
@@ -13500,6 +13601,28 @@
           "parameterTypes": []
         }
       ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.DevToolsDataSourceAutoConfiguration$NonEmbeddedInMemoryDatabaseShutdownExecutor",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.DevToolsProperties",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.DevToolsProperties$Livereload",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.DevToolsProperties$Restart",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.boot.devtools.autoconfigure.DevToolsR2dbcAutoConfiguration$DevToolsConnectionFactoryCondition",
@@ -13511,6 +13634,89 @@
       ]
     },
     {
+      "type": "org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$LiveReloadConfiguration",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        },
+        {
+          "name": "liveReloadServer",
+          "parameterTypes": [
+            "org.springframework.boot.devtools.autoconfigure.DevToolsProperties"
+          ]
+        },
+        {
+          "name": "liveReloadServerEventListener",
+          "parameterTypes": [
+            "org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer"
+          ]
+        },
+        {
+          "name": "optionalLiveReloadServer",
+          "parameterTypes": [
+            "org.springframework.boot.devtools.livereload.LiveReloadServer"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$LiveReloadServerEventListener",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartConfiguration",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "org.springframework.boot.devtools.autoconfigure.DevToolsProperties"
+          ]
+        },
+        {
+          "name": "classPathFileSystemWatcher",
+          "parameterTypes": [
+            "org.springframework.boot.devtools.filewatch.FileSystemWatcherFactory",
+            "org.springframework.boot.devtools.classpath.ClassPathRestartStrategy"
+          ]
+        },
+        {
+          "name": "classPathRestartStrategy",
+          "parameterTypes": []
+        },
+        {
+          "name": "conditionEvaluationDeltaLoggingListener",
+          "parameterTypes": []
+        },
+        {
+          "name": "fileSystemWatcherFactory",
+          "parameterTypes": []
+        },
+        {
+          "name": "restartingClassPathChangedEventListener",
+          "parameterTypes": [
+            "org.springframework.boot.devtools.filewatch.FileSystemWatcherFactory"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener",
+      "allDeclaredFields": true
+    },
+    {
       "type": "org.springframework.boot.devtools.autoconfigure.OnEnabledDevToolsCondition",
       "methods": [
         {
@@ -13518,6 +13724,36 @@
           "parameterTypes": []
         }
       ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.RemoteDevToolsProperties",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.RemoteDevToolsProperties$Proxy",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.autoconfigure.RemoteDevToolsProperties$Restart",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.classpath.ClassPathChangedEvent"
+    },
+    {
+      "type": "org.springframework.boot.devtools.classpath.ClassPathFileSystemWatcher",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.devtools.classpath.ClassPathRestartStrategy"
+    },
+    {
+      "type": "org.springframework.boot.devtools.classpath.PatternClassPathRestartStrategy",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.boot.devtools.env.DevToolsHomePropertiesPostProcessor",
@@ -13536,6 +13772,22 @@
           "parameterTypes": []
         }
       ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.filewatch.ChangedFile"
+    },
+    {
+      "type": "org.springframework.boot.devtools.filewatch.FileSystemWatcher"
+    },
+    {
+      "type": "org.springframework.boot.devtools.filewatch.FileSystemWatcherFactory"
+    },
+    {
+      "type": "org.springframework.boot.devtools.livereload.Connection"
+    },
+    {
+      "type": "org.springframework.boot.devtools.livereload.LiveReloadServer",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.boot.devtools.logger.DevToolsLogFactory$Listener",
@@ -13571,6 +13823,9 @@
       ]
     },
     {
+      "type": "org.springframework.boot.devtools.restart.RestartScope"
+    },
+    {
       "type": "org.springframework.boot.devtools.restart.RestartScopeInitializer",
       "methods": [
         {
@@ -13578,6 +13833,9 @@
           "parameterTypes": []
         }
       ]
+    },
+    {
+      "type": "org.springframework.boot.devtools.restart.classloader.RestartClassLoader"
     },
     {
       "type": "org.springframework.boot.diagnostics.FailureAnalyzers",
@@ -14713,6 +14971,14 @@
       "type": "org.springframework.boot.web.servlet.WebListenerRegistry"
     },
     {
+      "type": "org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext",
+      "allDeclaredFields": true
+    },
+    {
+      "type": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext",
+      "allDeclaredFields": true
+    },
+    {
       "type": "org.springframework.boot.web.servlet.context.ServletWebServerApplicationContextFactory",
       "methods": [
         {
@@ -14912,13 +15178,31 @@
       ]
     },
     {
+      "type": "org.springframework.cglib.core.ReflectUtils"
+    },
+    {
+      "type": "org.springframework.cglib.core.Signature"
+    },
+    {
+      "type": "org.springframework.cglib.proxy.Callback"
+    },
+    {
       "type": "org.springframework.cglib.proxy.Dispatcher"
+    },
+    {
+      "type": "org.springframework.cglib.proxy.Factory"
     },
     {
       "type": "org.springframework.cglib.proxy.MethodInterceptor"
     },
     {
+      "type": "org.springframework.cglib.proxy.MethodProxy"
+    },
+    {
       "type": "org.springframework.cglib.proxy.NoOp"
+    },
+    {
+      "type": "org.springframework.cglib.reflect.FastClass"
     },
     {
       "type": "org.springframework.cloud.function.web.function.FunctionEndpointInitializer"
@@ -15108,6 +15392,9 @@
       ]
     },
     {
+      "type": "org.springframework.context.event.GenericApplicationListener"
+    },
+    {
       "type": "org.springframework.context.event.SmartApplicationListener"
     },
     {
@@ -15123,6 +15410,10 @@
     },
     {
       "type": "org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup"
+    },
+    {
+      "type": "org.springframework.context.support.GenericApplicationContext",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.context.support.MessageSourceAccessor"
@@ -15349,6 +15640,9 @@
     },
     {
       "type": "org.springframework.format.annotation.DateTimeFormat"
+    },
+    {
+      "type": "org.springframework.format.annotation.DateTimeFormat$ISO"
     },
     {
       "type": "org.springframework.format.support.DefaultFormattingConversionService",
@@ -15587,6 +15881,9 @@
     },
     {
       "type": "org.springframework.jdbc.datasource.DelegatingDataSource"
+    },
+    {
+      "type": "org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy"
     },
     {
       "type": "org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType"
@@ -16227,10 +16524,16 @@
       "type": "org.springframework.web.client.RestClientException"
     },
     {
+      "type": "org.springframework.web.client.RestClientResponseException"
+    },
+    {
       "type": "org.springframework.web.client.RestTemplate"
     },
     {
       "type": "org.springframework.web.context.ConfigurableWebApplicationContext"
+    },
+    {
+      "type": "org.springframework.web.context.ConfigurableWebEnvironment"
     },
     {
       "type": "org.springframework.web.context.ServletContextAware"
@@ -16257,7 +16560,8 @@
       "type": "org.springframework.web.context.request.async.WebAsyncManager"
     },
     {
-      "type": "org.springframework.web.context.support.GenericWebApplicationContext"
+      "type": "org.springframework.web.context.support.GenericWebApplicationContext",
+      "allDeclaredFields": true
     },
     {
       "type": "org.springframework.web.context.support.ServletContextResource"
@@ -16422,6 +16726,9 @@
     },
     {
       "type": "org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer"
+    },
+    {
+      "type": "org.springframework.web.servlet.config.annotation.CorsRegistration"
     },
     {
       "type": "org.springframework.web.servlet.config.annotation.CorsRegistry"
@@ -16711,6 +17018,9 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.springframework.web.servlet.resource.PathResourceResolver"
+    },
+    {
       "type": "org.springframework.web.servlet.resource.ResourceResolver"
     },
     {
@@ -16838,6 +17148,12 @@
     },
     {
       "type": "org.yaml.snakeyaml.Yaml"
+    },
+    {
+      "type": "org.zeroturnaround.javarebel.Integration"
+    },
+    {
+      "type": "org.zeroturnaround.javarebel.ReloaderFactory"
     },
     {
       "type": "reactor.core.publisher.Flux"
@@ -20083,6 +20399,17 @@
         },
         {
           "name": "threadContentionMonitoringSupport"
+        }
+      ]
+    },
+    {
+      "type": "vc.Application",
+      "methods": [
+        {
+          "name": "main",
+          "parameterTypes": [
+            "java.lang.String[]"
+          ]
         }
       ]
     }
