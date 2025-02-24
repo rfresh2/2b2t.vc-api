@@ -5041,6 +5041,9 @@
       "type": "jakarta.xml.ws.WebServiceRef"
     },
     {
+      "type": "java.beans.ConstructorProperties"
+    },
+    {
       "type": "java.io.ByteArrayOutputStream"
     },
     {
@@ -5066,6 +5069,14 @@
     },
     {
       "type": "java.io.FilePermission"
+    },
+    {
+      "type": "java.io.FileSystem",
+      "fields": [
+        {
+          "name": "useCanonCaches"
+        }
+      ]
     },
     {
       "type": "java.io.IOException"
@@ -6617,6 +6628,9 @@
       "type": "org.apache.catalina.Valve"
     },
     {
+      "type": "org.apache.catalina.WebResourceRoot"
+    },
+    {
       "type": "org.apache.catalina.authenticator.AuthenticatorBase"
     },
     {
@@ -7068,6 +7082,9 @@
       "type": "org.jooq.ConnectionRunnable"
     },
     {
+      "type": "org.jooq.ConstructorPropertiesProvider"
+    },
+    {
       "type": "org.jooq.ContextTransactionalCallable"
     },
     {
@@ -7087,6 +7104,9 @@
     },
     {
       "type": "org.jooq.CreateSchemaFinalStep"
+    },
+    {
+      "type": "org.jooq.CreateSequenceAsStep"
     },
     {
       "type": "org.jooq.CreateSequenceFlagsStep"
@@ -7530,6 +7550,9 @@
       "type": "org.jooq.Statement"
     },
     {
+      "type": "org.jooq.SubscriberProvider"
+    },
+    {
       "type": "org.jooq.Support"
     },
     {
@@ -7691,6 +7714,9 @@
       "allDeclaredFields": true
     },
     {
+      "type": "org.jooq.impl.AnnotatedPojoMemberProvider"
+    },
+    {
       "type": "org.jooq.impl.Cache"
     },
     {
@@ -7732,6 +7758,9 @@
     },
     {
       "type": "org.jooq.impl.SQLDataType"
+    },
+    {
+      "type": "org.jooq.impl.SQLDataTypes$ClickHouseDataType"
     },
     {
       "type": "org.jooq.impl.SQLDataTypes$DuckDBDataType"
@@ -9316,6 +9345,13 @@
             "java.util.Map",
             "org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties"
           ]
+        },
+        {
+          "name": "dbHealthContributor",
+          "parameterTypes": [
+            "org.springframework.beans.factory.config.ConfigurableListableBeanFactory",
+            "org.springframework.boot.actuate.autoconfigure.jdbc.DataSourceHealthIndicatorProperties"
+          ]
         }
       ]
     },
@@ -9608,6 +9644,14 @@
           ]
         },
         {
+          "name": "<init>",
+          "parameterTypes": [
+            "io.micrometer.core.instrument.MeterRegistry",
+            "java.util.Collection",
+            "org.springframework.beans.factory.config.ConfigurableListableBeanFactory"
+          ]
+        },
+        {
           "name": "cacheMetricsRegistrar",
           "parameterTypes": []
         }
@@ -9706,6 +9750,13 @@
             "java.util.Map",
             "org.springframework.beans.factory.ObjectProvider"
           ]
+        },
+        {
+          "name": "dataSourcePoolMetadataMeterBinder",
+          "parameterTypes": [
+            "org.springframework.beans.factory.config.ConfigurableListableBeanFactory",
+            "org.springframework.beans.factory.ObjectProvider"
+          ]
         }
       ]
     },
@@ -9761,6 +9812,13 @@
           "name": "bindTaskExecutorsToRegistry",
           "parameterTypes": [
             "java.util.Map",
+            "io.micrometer.core.instrument.MeterRegistry"
+          ]
+        },
+        {
+          "name": "bindTaskExecutorsToRegistry",
+          "parameterTypes": [
+            "org.springframework.beans.factory.config.ConfigurableListableBeanFactory",
             "io.micrometer.core.instrument.MeterRegistry"
           ]
         },
@@ -16166,6 +16224,9 @@
       "type": "org.springframework.web.client.RestClient$Builder"
     },
     {
+      "type": "org.springframework.web.client.RestClientException"
+    },
+    {
       "type": "org.springframework.web.client.RestTemplate"
     },
     {
@@ -16295,6 +16356,9 @@
     },
     {
       "type": "org.springframework.web.reactive.function.client.WebClient"
+    },
+    {
+      "type": "org.springframework.web.reactive.function.client.WebClientException"
     },
     {
       "type": "org.springframework.web.service.annotation.HttpExchange"
@@ -17886,6 +17950,7 @@
     {
       "type": "vc.controller.ChatsController$Chat",
       "allDeclaredFields": true,
+      "allPublicFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -17975,6 +18040,7 @@
     {
       "type": "vc.controller.ChatsController$PlayerChat",
       "allDeclaredFields": true,
+      "allPublicFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -18083,6 +18149,7 @@
     {
       "type": "vc.controller.ConnectionsController$Connection",
       "allDeclaredFields": true,
+      "allPublicFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -18146,6 +18213,7 @@
     {
       "type": "vc.controller.ConnectionsController$PlayerConnection",
       "allDeclaredFields": true,
+      "allPublicFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -18297,6 +18365,7 @@
     {
       "type": "vc.controller.DeathsController$Death",
       "allDeclaredFields": true,
+      "allPublicFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -18886,6 +18955,7 @@
     {
       "type": "vc.controller.QueueController$QueueData",
       "allDeclaredFields": true,
+      "allPublicFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -19032,6 +19102,7 @@
     {
       "type": "vc.controller.StatsController$PlayerStats",
       "allDeclaredFields": true,
+      "allPublicFields": true,
       "methods": [
         {
           "name": "<init>",
@@ -19565,14 +19636,14 @@
       "allDeclaredFields": true,
       "methods": [
         {
-          "name": "toValue",
-          "parameterTypes": []
-        },
-        {
           "name": "fromValue",
           "parameterTypes": [
             "java.lang.String"
           ]
+        },
+        {
+          "name": "toValue",
+          "parameterTypes": []
         }
       ]
     },
