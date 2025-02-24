@@ -85,7 +85,7 @@ public class TopPlaytimeAllTimeViewRecord extends TableRecordImpl<TopPlaytimeAll
         setPlayerUuid(playerUuid);
         setPlayerName(playerName);
         setPlaytimeSeconds(playtimeSeconds);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -98,7 +98,7 @@ public class TopPlaytimeAllTimeViewRecord extends TableRecordImpl<TopPlaytimeAll
             setPlayerUuid(value.getPlayerUuid());
             setPlayerName(value.getPlayerName());
             setPlaytimeSeconds(value.getPlaytimeSeconds());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

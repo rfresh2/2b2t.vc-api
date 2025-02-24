@@ -100,7 +100,7 @@ public class NamesRecord extends TableRecordImpl<NamesRecord> {
         setUuid(uuid);
         setChangedtoat(changedtoat);
         setChangedfromat(changedfromat);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -114,7 +114,7 @@ public class NamesRecord extends TableRecordImpl<NamesRecord> {
             setUuid(value.getUuid());
             setChangedtoat(value.getChangedtoat());
             setChangedfromat(value.getChangedfromat());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

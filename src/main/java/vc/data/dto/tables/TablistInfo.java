@@ -62,7 +62,7 @@ public class TablistInfo extends TableImpl<TablistInfoRecord> {
 
     private TablistInfo(Name alias, Table<TablistInfoRecord> aliased, Field<?>[] parameters, Condition where) {
         super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("""
-        create view "tablist_info" as  SELECT t.player_name,
+        CREATE VIEW "tablist_info" AS  SELECT t.player_name,
          t.player_uuid,
              CASE
                  WHEN (pv.player_uuid IS NOT NULL) THEN true

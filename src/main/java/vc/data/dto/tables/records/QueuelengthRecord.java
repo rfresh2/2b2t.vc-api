@@ -83,7 +83,7 @@ public class QueuelengthRecord extends TableRecordImpl<QueuelengthRecord> {
         setTime(time);
         setPrio(prio);
         setRegular(regular);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -96,7 +96,7 @@ public class QueuelengthRecord extends TableRecordImpl<QueuelengthRecord> {
             setTime(value.getTime());
             setPrio(value.getPrio());
             setRegular(value.getRegular());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

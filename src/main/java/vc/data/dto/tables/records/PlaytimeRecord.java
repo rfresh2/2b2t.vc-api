@@ -142,7 +142,7 @@ public class PlaytimeRecord extends UpdatableRecordImpl<PlaytimeRecord> {
         setPlaytimeSeconds(playtimeSeconds);
         setStartTime(startTime);
         setEndTime(endTime);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -158,7 +158,7 @@ public class PlaytimeRecord extends UpdatableRecordImpl<PlaytimeRecord> {
             setPlaytimeSeconds(value.getPlaytimeSeconds());
             setStartTime(value.getStartTime());
             setEndTime(value.getEndTime());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

@@ -100,7 +100,7 @@ public class ChatsRecord extends TableRecordImpl<ChatsRecord> {
         setChat(chat);
         setPlayerName(playerName);
         setPlayerUuid(playerUuid);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -114,7 +114,7 @@ public class ChatsRecord extends TableRecordImpl<ChatsRecord> {
             setChat(value.getChat());
             setPlayerName(value.getPlayerName());
             setPlayerUuid(value.getPlayerUuid());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

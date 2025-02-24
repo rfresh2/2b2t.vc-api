@@ -147,7 +147,7 @@ public class QueuewaitRecord extends TableRecordImpl<QueuewaitRecord> {
         setEndQueueTime(endQueueTime);
         setQueueTime(queueTime);
         setInitialQueueLen(initialQueueLen);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -164,7 +164,7 @@ public class QueuewaitRecord extends TableRecordImpl<QueuewaitRecord> {
             setEndQueueTime(value.getEndQueueTime());
             setQueueTime(value.getQueueTime());
             setInitialQueueLen(value.getInitialQueueLen());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

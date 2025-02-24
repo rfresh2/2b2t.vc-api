@@ -83,7 +83,7 @@ public class TopPlaytimeMonthViewRecord extends TableRecordImpl<TopPlaytimeMonth
         setPlayerUuid(playerUuid);
         setPlayerName(playerName);
         setPlaytimeSeconds(playtimeSeconds);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -96,7 +96,7 @@ public class TopPlaytimeMonthViewRecord extends TableRecordImpl<TopPlaytimeMonth
             setPlayerUuid(value.getPlayerUuid());
             setPlayerName(value.getPlayerName());
             setPlaytimeSeconds(value.getPlaytimeSeconds());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

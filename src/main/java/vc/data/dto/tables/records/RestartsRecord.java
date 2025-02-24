@@ -77,7 +77,7 @@ public class RestartsRecord extends UpdatableRecordImpl<RestartsRecord> {
 
         setTime(time);
         setId(id);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -89,7 +89,7 @@ public class RestartsRecord extends UpdatableRecordImpl<RestartsRecord> {
         if (value != null) {
             setTime(value.getTime());
             setId(value.getId());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

@@ -51,7 +51,7 @@ public class LastSeenRecord extends TableRecordImpl<LastSeenRecord> {
         super(LastSeen.LAST_SEEN);
 
         setLastSeen(lastSeen);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -62,7 +62,7 @@ public class LastSeenRecord extends TableRecordImpl<LastSeenRecord> {
 
         if (value != null) {
             setLastSeen(value.getLastSeen());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

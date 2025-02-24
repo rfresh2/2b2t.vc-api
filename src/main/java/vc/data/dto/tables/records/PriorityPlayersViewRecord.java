@@ -101,7 +101,7 @@ public class PriorityPlayersViewRecord extends TableRecordImpl<PriorityPlayersVi
         setPlayerName(playerName);
         setPriorityJoins(priorityJoins);
         setPrioritySessionLengthCount(prioritySessionLengthCount);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -115,7 +115,7 @@ public class PriorityPlayersViewRecord extends TableRecordImpl<PriorityPlayersVi
             setPlayerName(value.getPlayerName());
             setPriorityJoins(value.getPriorityJoins());
             setPrioritySessionLengthCount(value.getPrioritySessionLengthCount());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

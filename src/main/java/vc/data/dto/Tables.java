@@ -27,7 +27,7 @@ public class Tables {
     public static final Chats CHATS = Chats.CHATS;
 
     /**
-     * The table <code>public.connections</code>.
+     * schedule a pg_cron job
      */
     public static final Connections CONNECTIONS = Connections.CONNECTIONS;
 

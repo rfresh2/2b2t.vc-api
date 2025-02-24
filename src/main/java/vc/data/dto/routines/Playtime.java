@@ -7,6 +7,7 @@ package vc.data.dto.routines;
 import org.jooq.Field;
 import org.jooq.Parameter;
 import org.jooq.impl.AbstractRoutine;
+import org.jooq.impl.DSL;
 import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import vc.data.dto.Public;
@@ -36,7 +37,7 @@ public class Playtime extends AbstractRoutine<Integer> {
      * Create a new routine call instance
      */
     public Playtime() {
-        super("playtime", Public.PUBLIC, SQLDataType.INTEGER);
+        super("playtime", Public.PUBLIC, DSL.comment(""), SQLDataType.INTEGER);
 
         setReturnParameter(RETURN_VALUE);
         addInParameter(P_UUID);

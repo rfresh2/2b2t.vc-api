@@ -83,7 +83,7 @@ public class GetUuidDataRecord extends TableRecordImpl<GetUuidDataRecord> {
         setTime(time);
         setData(data);
         setTableName(tableName);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -96,7 +96,7 @@ public class GetUuidDataRecord extends TableRecordImpl<GetUuidDataRecord> {
             setTime(value.getTime());
             setData(value.getData());
             setTableName(value.getTableName());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

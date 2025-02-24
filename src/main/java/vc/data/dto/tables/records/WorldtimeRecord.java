@@ -83,7 +83,7 @@ public class WorldtimeRecord extends TableRecordImpl<WorldtimeRecord> {
         setTime(time);
         setWorldage(worldage);
         setWorldtime(worldtime);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -96,7 +96,7 @@ public class WorldtimeRecord extends TableRecordImpl<WorldtimeRecord> {
             setTime(value.getTime());
             setWorldage(value.getWorldage());
             setWorldtime(value.getWorldtime());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

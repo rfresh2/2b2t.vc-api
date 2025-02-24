@@ -83,7 +83,7 @@ public class TopKillsMonthViewRecord extends TableRecordImpl<TopKillsMonthViewRe
         setKillerPlayerName(killerPlayerName);
         setKillerPlayerUuid(killerPlayerUuid);
         setKillCount(killCount);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -96,7 +96,7 @@ public class TopKillsMonthViewRecord extends TableRecordImpl<TopKillsMonthViewRe
             setKillerPlayerName(value.getKillerPlayerName());
             setKillerPlayerUuid(value.getKillerPlayerUuid());
             setKillCount(value.getKillCount());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

@@ -84,7 +84,7 @@ public class OnlinePlayersRecord extends TableRecordImpl<OnlinePlayersRecord> {
         setPlayerName(playerName);
         setPlayerUuid(playerUuid);
         setJoinTime(joinTime);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -97,7 +97,7 @@ public class OnlinePlayersRecord extends TableRecordImpl<OnlinePlayersRecord> {
             setPlayerName(value.getPlayerName());
             setPlayerUuid(value.getPlayerUuid());
             setJoinTime(value.getJoinTime());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

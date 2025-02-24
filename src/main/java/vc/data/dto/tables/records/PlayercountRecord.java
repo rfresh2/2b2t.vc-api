@@ -67,7 +67,7 @@ public class PlayercountRecord extends TableRecordImpl<PlayercountRecord> {
 
         setTime(time);
         setCount(count);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -79,7 +79,7 @@ public class PlayercountRecord extends TableRecordImpl<PlayercountRecord> {
         if (value != null) {
             setTime(value.getTime());
             setCount(value.getCount());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

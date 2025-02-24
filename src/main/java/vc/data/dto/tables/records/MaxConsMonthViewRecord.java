@@ -83,7 +83,7 @@ public class MaxConsMonthViewRecord extends TableRecordImpl<MaxConsMonthViewReco
         setPUuid(pUuid);
         setMaxCons(maxCons);
         setPName(pName);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -96,7 +96,7 @@ public class MaxConsMonthViewRecord extends TableRecordImpl<MaxConsMonthViewReco
             setPUuid(value.getPUuid());
             setMaxCons(value.getMaxCons());
             setPName(value.getPName());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

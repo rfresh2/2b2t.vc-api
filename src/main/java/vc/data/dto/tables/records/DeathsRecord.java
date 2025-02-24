@@ -164,7 +164,7 @@ public class DeathsRecord extends TableRecordImpl<DeathsRecord> {
         setKillerPlayerUuid(killerPlayerUuid);
         setWeaponName(weaponName);
         setKillerMob(killerMob);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -182,7 +182,7 @@ public class DeathsRecord extends TableRecordImpl<DeathsRecord> {
             setKillerPlayerUuid(value.getKillerPlayerUuid());
             setWeaponName(value.getWeaponName());
             setKillerMob(value.getKillerMob());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

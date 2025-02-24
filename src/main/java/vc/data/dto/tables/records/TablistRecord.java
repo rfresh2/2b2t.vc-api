@@ -84,7 +84,7 @@ public class TablistRecord extends TableRecordImpl<TablistRecord> {
         setPlayerName(playerName);
         setPlayerUuid(playerUuid);
         setTime(time);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -97,7 +97,7 @@ public class TablistRecord extends TableRecordImpl<TablistRecord> {
             setPlayerName(value.getPlayerName());
             setPlayerUuid(value.getPlayerUuid());
             setTime(value.getTime());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

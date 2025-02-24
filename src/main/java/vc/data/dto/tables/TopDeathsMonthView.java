@@ -57,7 +57,7 @@ public class TopDeathsMonthView extends TableImpl<TopDeathsMonthViewRecord> {
 
     private TopDeathsMonthView(Name alias, Table<TopDeathsMonthViewRecord> aliased, Field<?>[] parameters, Condition where) {
         super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("""
-        create view "top_deaths_month_view" as  SELECT victim_player_name,
+        CREATE VIEW "top_deaths_month_view" AS  SELECT victim_player_name,
            victim_player_uuid,
            count(*) AS death_count
           FROM deaths

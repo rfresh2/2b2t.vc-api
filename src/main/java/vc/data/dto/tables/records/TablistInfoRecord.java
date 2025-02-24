@@ -99,7 +99,7 @@ public class TablistInfoRecord extends TableRecordImpl<TablistInfoRecord> {
         setPlayerUuid(playerUuid);
         setPrio(prio);
         setIsBot(isBot);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -113,7 +113,7 @@ public class TablistInfoRecord extends TableRecordImpl<TablistInfoRecord> {
             setPlayerUuid(value.getPlayerUuid());
             setPrio(value.getPrio());
             setIsBot(value.getIsBot());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }

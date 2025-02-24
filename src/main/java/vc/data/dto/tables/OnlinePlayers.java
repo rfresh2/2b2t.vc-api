@@ -58,7 +58,7 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
 
     private OnlinePlayers(Name alias, Table<OnlinePlayersRecord> aliased, Field<?>[] parameters, Condition where) {
         super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("""
-        create view "online_players" as  SELECT player_name,
+        CREATE VIEW "online_players" AS  SELECT player_name,
           player_uuid,
           join_time
          FROM ( SELECT connections.player_name,

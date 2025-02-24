@@ -195,7 +195,7 @@ public class PlayerStatsRecord extends TableRecordImpl<PlayerStatsRecord> {
         setPlaytime_30Days(playtime_30Days);
         setChatsCount(chatsCount);
         setPrio(prio);
-        resetChangedOnNotNull();
+        resetTouchedOnNotNull();
     }
 
     /**
@@ -215,7 +215,7 @@ public class PlayerStatsRecord extends TableRecordImpl<PlayerStatsRecord> {
             setPlaytime_30Days(value.getPlaytime_30Days());
             setChatsCount(value.getChatsCount());
             setPrio(value.getPrio());
-            resetChangedOnNotNull();
+            resetTouchedOnNotNull();
         }
     }
 }
