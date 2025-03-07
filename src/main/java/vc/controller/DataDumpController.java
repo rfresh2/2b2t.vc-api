@@ -70,7 +70,7 @@ public class DataDumpController {
             return ResponseEntity.ok()
                 .header(
                     "Content-Disposition",
-                    "attachment; filename=\"" + resolvedIdentity.name() + ".csv\"")
+                    "attachment; filename=\"" + (uuid != null ? uuid.toString() : resolvedIdentity.name()) + ".csv\"")
                 .contentType(MediaType.parseMediaType("application/csv"))
                 .body(uuidData.formatCSV());
         }
