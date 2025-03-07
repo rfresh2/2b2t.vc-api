@@ -11,7 +11,6 @@ import vc.api.CraftheadRestClient;
 import vc.api.MinetoolsRestClient;
 import vc.api.MojangRestClient;
 import vc.api.model.ProfileData;
-import vc.api.model.ProfileDataImpl;
 
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
@@ -54,6 +53,17 @@ public class PlayerLookup {
         return playerIdentity;
     }
 
+    public Optional<ProfileData> getPlayerIdentity(final UUID uuid) {
+        final ProfileData identityFromCache = uuidCache.getIfPresent(uuid.toString());
+        if (identityFromCache != null)
+            return Optional.of(identityFromCache);
+        var playerIdentity = lookupIdentityMojang(uuid)
+            .or(() -> lookupIdentityCrafthead(uuid)
+                .or(() -> lookupIdentityMinetools(uuid)));
+        playerIdentity.ifPresent(identity -> uuidCache.put(uuid.toString(), identity));
+        return playerIdentity;
+    }
+
     private Optional<ProfileData> lookupIdentityMojang(final String playerName) {
         try {
             ProfileData profile = mojangRestClient.getProfileFromUsername(playerName);
@@ -64,6 +74,20 @@ public class PlayerLookup {
             logger.error("Bad status response from Mojang: {}", playerName, e);
         } catch (final Exception e) {
             logger.error("Mojang unexpected error: {}", playerName, e);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<ProfileData> lookupIdentityMojang(final UUID uuid) {
+        try {
+            ProfileData profile = mojangRestClient.getProfileFromUuid(uuid);
+            return Optional.of(profile);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from Mojang: {}", e.getStatusCode().value(), uuid);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from Mojang: {}", uuid, e);
+        } catch (final Exception e) {
+            logger.error("Mojang unexpected error: {}", uuid, e);
         }
         return Optional.empty();
     }
@@ -82,6 +106,20 @@ public class PlayerLookup {
         return Optional.empty();
     }
 
+    private Optional<ProfileData> lookupIdentityCrafthead(final UUID uuid) {
+        try {
+            ProfileData profile = craftheadRestClient.getProfileFromUuid(uuid);
+            return Optional.of(profile);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from Crafthead: {}", e.getStatusCode().value(), uuid);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from Crafthead: {}", uuid);
+        } catch (final Exception e) {
+            logger.error("Crafthead unexpected error: {}", uuid, e);
+        }
+        return Optional.empty();
+    }
+
     private Optional<ProfileData> lookupIdentityMinetools(final String playerName) {
         try {
             ProfileData profile = minetoolsRestClient.getProfileFromUsername(playerName);
@@ -92,6 +130,20 @@ public class PlayerLookup {
             logger.error("Bad status response from MineTools: {}", playerName);
         } catch (final Exception e) {
             logger.error("MineTools unexpected error: {}", playerName, e);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<ProfileData> lookupIdentityMinetools(final UUID uuid) {
+        try {
+            ProfileData profile = minetoolsRestClient.getProfileFromUuid(uuid);
+            return Optional.of(profile);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from MineTools: {}", e.getStatusCode().value(), uuid);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from MineTools: {}", uuid);
+        } catch (final Exception e) {
+            logger.error("MineTools unexpected error: {}", uuid, e);
         }
         return Optional.empty();
     }
@@ -115,7 +167,7 @@ public class PlayerLookup {
     }
 
     public Optional<ProfileData> getOrResolvePlayerIdentity(final UUID uuid, final String username) {
-        if (uuid != null) return Optional.of(new ProfileDataImpl(username, uuid));
+        if (uuid != null) return getPlayerIdentity(uuid);
         if (username == null || invalidUsername(username)) return Optional.empty();
         return getPlayerIdentity(username.trim());
     }

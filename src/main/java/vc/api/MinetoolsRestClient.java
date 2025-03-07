@@ -8,6 +8,7 @@ import vc.api.model.MinetoolsUuidResponse;
 import vc.api.model.ProfileData;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Component
 public class MinetoolsRestClient {
@@ -23,6 +24,19 @@ public class MinetoolsRestClient {
     public ProfileData getProfileFromUsername(final String username) {
         var response = restClient.get()
             .uri("/uuid/{username}", username)
+            .retrieve()
+            .body(MinetoolsUuidResponse.class);
+        if (response == null) {
+            throw new RestClientException("Received invalid response from minetools");
+        } else if (!Objects.equals(response.status(), "OK")) {
+            throw new RestClientException("Received error response from minetools: " + response.status());
+        }
+        return response;
+    }
+
+    public ProfileData getProfileFromUuid(final UUID uuid) {
+        var response = restClient.get()
+            .uri("/profile/{uuid}", uuid)
             .retrieve()
             .body(MinetoolsUuidResponse.class);
         if (response == null) {
