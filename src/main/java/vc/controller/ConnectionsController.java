@@ -153,7 +153,8 @@ public class ConnectionsController {
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
         @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
         @RequestParam(value = "sort", required = false) Sort sort,
-        @RequestParam(value = "pageSize", required = false) Integer pageSize
+        @RequestParam(value = "pageSize", required = false) Integer pageSize,
+        @RequestParam(value = "page", required = false) Integer page
     ) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
@@ -185,10 +186,12 @@ public class ConnectionsController {
             }
             default -> throw new IllegalStateException("Unexpected value: " + sort);
         }
+        var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         List<PlayerConnection> connections = dsl.selectFrom(CONNECTIONS)
             .where(c)
             .orderBy(CONNECTIONS.TIME.sort(sort.toJooq()))
             .limit(size)
+            .offset(offset)
             .fetch()
             .into(PlayerConnection.class);
         if (connections.isEmpty()) {
