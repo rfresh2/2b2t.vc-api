@@ -219,7 +219,7 @@
 												| playtime_month | max_cons_month_view | get_uuid_data | online_players
 												| player_stats | top_deaths_month_view | last_seen
 												| top_kills_month_view | priority_players_view | top_playtime_month_view
-												| top_playtime_all_time_view | tablist_info | worldtime
+												| top_playtime_all_time_view | tablist_info | worldtime | tablist_text
 											</includes>
 										</database>
 										<generate>

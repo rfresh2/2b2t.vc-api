@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static vc.data.dto.Tables.TABLIST_INFO;
+import static vc.data.dto.Tables.TABLIST_TEXT;
 import static vc.data.dto.tables.Tablist.TABLIST;
 
 @Tags({@Tag(name = "TabList")})
@@ -28,9 +29,9 @@ public class TabListController {
         this.dsl = dsl;
     }
 
-    public record TablistResponse(List<TablistEntry> players) { }
+    public record TablistResponse(List<TablistEntry> players, String header) { }
     public record TablistEntry(String playerName, UUID uuid) { }
-    public record TablistInfoResponse(List<TablistInfoEntry> players, int count, int prioCount, int nonPrioCount, int botCount) { }
+    public record TablistInfoResponse(List<TablistInfoEntry> players, String header, int count, int prioCount, int nonPrioCount, int botCount) { }
     public record TablistInfoEntry(String playerName, UUID uuid, boolean prio, boolean bot) { }
 
     @GetMapping("/tablist")
@@ -63,7 +64,13 @@ public class TabListController {
         if (players.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(new TablistResponse(players));
+        String header = dsl.select(TABLIST_TEXT.HEADER_TEXT)
+            .from(TABLIST_TEXT)
+            .orderBy(TABLIST_TEXT.ID.desc())
+            .limit(1)
+            .fetch()
+            .getValue(0, TABLIST_TEXT.HEADER_TEXT);
+        return ResponseEntity.ok(new TablistResponse(players, header));
     }
 
     @GetMapping("/tablist/info")
@@ -109,6 +116,12 @@ public class TabListController {
                 botCount++;
             }
         }
-        return ResponseEntity.ok(new TablistInfoResponse(players, players.size(), prioCount, nonPrioCount, botCount));
+        String header = dsl.select(TABLIST_TEXT.HEADER_TEXT)
+            .from(TABLIST_TEXT)
+            .orderBy(TABLIST_TEXT.ID.desc())
+            .limit(1)
+            .fetch()
+            .getValue(0, TABLIST_TEXT.HEADER_TEXT);
+        return ResponseEntity.ok(new TablistInfoResponse(players, header, players.size(), prioCount, nonPrioCount, botCount));
     }
 }

@@ -218,6 +218,11 @@ public class Public extends SchemaImpl {
     public final TablistInfo TABLIST_INFO = TablistInfo.TABLIST_INFO;
 
     /**
+     * The table <code>public.tablist_text</code>.
+     */
+    public final TablistText TABLIST_TEXT = TablistText.TABLIST_TEXT;
+
+    /**
      * The table <code>public.top_deaths_month_view</code>.
      */
     public final TopDeathsMonthView TOP_DEATHS_MONTH_VIEW = TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW;
@@ -275,6 +280,7 @@ public class Public extends SchemaImpl {
             Restarts.RESTARTS,
             Tablist.TABLIST,
             TablistInfo.TABLIST_INFO,
+            TablistText.TABLIST_TEXT,
             TopDeathsMonthView.TOP_DEATHS_MONTH_VIEW,
             TopKillsMonthView.TOP_KILLS_MONTH_VIEW,
             TopPlaytimeAllTimeView.TOP_PLAYTIME_ALL_TIME_VIEW,
