@@ -20,7 +20,11 @@ import java.time.Duration;
 	},
 	info = @Info(
 		title = "2b2t.vc API",
-		description = "2b2t Data And Statistics",
+		description = """
+			2b2t Data And Statistics API
+			
+			Discord Bot Invite: https://bot.2b2t.vc
+			""",
 		version = "1.0.0"
 	)
 )
