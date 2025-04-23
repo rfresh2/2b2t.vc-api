@@ -8,6 +8,7 @@ import org.jooq.Configuration;
 import org.jooq.Field;
 import org.jooq.Result;
 import vc.data.dto.tables.*;
+import vc.data.dto.tables.records.FirstSeenRecord;
 import vc.data.dto.tables.records.GetUuidDataRecord;
 import vc.data.dto.tables.records.LastSeenRecord;
 import vc.data.dto.tables.records.PlayerStatsRecord;
@@ -35,6 +36,45 @@ public class Tables {
      * The table <code>public.deaths</code>.
      */
     public static final Deaths DEATHS = Deaths.DEATHS;
+
+    /**
+     * The table <code>public.first_seen</code>.
+     */
+    public static final FirstSeen FIRST_SEEN = FirstSeen.FIRST_SEEN;
+
+    /**
+     * Call <code>public.first_seen</code>.
+     */
+    public static Result<FirstSeenRecord> FIRST_SEEN(
+          Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.FirstSeen.FIRST_SEEN.call(
+              pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.first_seen</code> as a table.
+     */
+    public static FirstSeen FIRST_SEEN(
+          UUID pUuid
+    ) {
+        return vc.data.dto.tables.FirstSeen.FIRST_SEEN.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.first_seen</code> as a table.
+     */
+    public static FirstSeen FIRST_SEEN(
+          Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.FirstSeen.FIRST_SEEN.call(
+            pUuid
+        );
+    }
 
     /**
      * The table <code>public.get_uuid_data</code>.

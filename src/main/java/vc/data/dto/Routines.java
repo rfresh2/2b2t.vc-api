@@ -9,9 +9,11 @@ import org.jooq.Field;
 import org.jooq.Result;
 import vc.data.dto.routines.Playtime;
 import vc.data.dto.routines.PlaytimeMonth;
+import vc.data.dto.tables.FirstSeen;
 import vc.data.dto.tables.GetUuidData;
 import vc.data.dto.tables.LastSeen;
 import vc.data.dto.tables.PlayerStats;
+import vc.data.dto.tables.records.FirstSeenRecord;
 import vc.data.dto.tables.records.GetUuidDataRecord;
 import vc.data.dto.tables.records.LastSeenRecord;
 import vc.data.dto.tables.records.PlayerStatsRecord;
@@ -99,6 +101,40 @@ public class Routines {
         f.setPUuid(pUuid);
 
         return f.asField();
+    }
+
+    /**
+     * Call <code>public.first_seen</code>.
+     */
+    public static Result<FirstSeenRecord> firstSeen(
+          Configuration configuration
+        , UUID pUuid
+    ) {
+        return configuration.dsl().selectFrom(vc.data.dto.tables.FirstSeen.FIRST_SEEN.call(
+              pUuid
+        )).fetch();
+    }
+
+    /**
+     * Get <code>public.first_seen</code> as a table.
+     */
+    public static FirstSeen firstSeen(
+          UUID pUuid
+    ) {
+        return vc.data.dto.tables.FirstSeen.FIRST_SEEN.call(
+            pUuid
+        );
+    }
+
+    /**
+     * Get <code>public.first_seen</code> as a table.
+     */
+    public static FirstSeen firstSeen(
+          Field<UUID> pUuid
+    ) {
+        return vc.data.dto.tables.FirstSeen.FIRST_SEEN.call(
+            pUuid
+        );
     }
 
     /**

@@ -8,14 +8,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
-import org.jooq.impl.DSL;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vc.data.dto.Routines;
-import vc.data.dto.tables.Connections;
 import vc.util.PlayerLookup;
 
 import java.time.OffsetDateTime;
@@ -72,16 +70,11 @@ public class SeenController {
             return ResponseEntity.noContent().build();
         }
         final UUID resolvedUuid = optionalPlayerUUID.get();
-        Connections c = Connections.CONNECTIONS;
-        var connectionsRecord = dsl.select(
-                DSL.min(c.TIME).as("firstSeen"))
-                .from(c)
-                .where(c.PLAYER_UUID.eq(resolvedUuid))
-                .fetchOne();
-        if (connectionsRecord == null) {
+        var firstSeenRecord = Routines.firstSeen(dsl.configuration(), resolvedUuid);
+        if (firstSeenRecord.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        var firstSeen = connectionsRecord.getValue("firstSeen", OffsetDateTime.class);
+        var firstSeen = firstSeenRecord.getFirst().getFirstSeen();
         var lastSeen = firstSeen;
         var lastSeenRecord = Routines.lastSeen(dsl.configuration(), resolvedUuid);
         if (!lastSeenRecord.isEmpty()) {
