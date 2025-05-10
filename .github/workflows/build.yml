@@ -1,0 +1,41 @@
+name: 2b2t.vc-api Build
+
+on:
+  push:
+    branches:
+      - "mainline"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '23'
+          distribution: 'zulu'
+
+      - name: Elevate wrapper permissions
+        run: chmod +x ./mvnw
+
+      - name: Build 2b2t.vc-api
+        run: ./mvnw install
+
+      - name: Upload Jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: 2b2t.vc-api
+          path: target/2b2t.vc-api-1.0.jar
+
+      - name: Release Artifact
+        uses: "softprops/action-gh-release@v2"
+        with:
+          prerelease: false
+          tag_name: latest
+          name: "Latest Release"
+          make_latest: true
+          files: |
+            target/2b2t.vc-api-1.0.jar

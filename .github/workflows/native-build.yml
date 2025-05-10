@@ -1,8 +1,6 @@
 name: GraalVM Native Build And Release
 on:
-  push:
-    branches:
-      - "mainline"
+  workflow_dispatch:
 
 jobs:
   build:
