@@ -11,6 +11,8 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
 
 import java.time.Duration;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @SpringBootApplication
 @EnableCaching
@@ -39,5 +41,10 @@ public class Application {
 		var requestFactory = new JdkClientHttpRequestFactory();
 		requestFactory.setReadTimeout(Duration.ofSeconds(5));
 		return requestFactory;
+	}
+
+	@Bean(name = "virtualThreadExecutor")
+	public ExecutorService virtualThreadExecutor() {
+		return Executors.newVirtualThreadPerTaskExecutor();
 	}
 }
