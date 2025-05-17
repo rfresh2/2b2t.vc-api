@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -59,7 +60,8 @@ public class FeedController {
             }
         )
     })
-    public SseEmitter chatFeedSSE() {
+    public SseEmitter chatFeedSSE(HttpServletResponse response) {
+        response.addHeader("X-Accel-Buffering", "no");
         return chatFeed.addEmitter();
     }
 
@@ -79,7 +81,8 @@ public class FeedController {
             }
         )
     })
-    public SseEmitter deathsFeedSSE() {
+    public SseEmitter deathsFeedSSE(HttpServletResponse response) {
+        response.addHeader("X-Accel-Buffering", "no");
         return deathsFeed.addEmitter();
     }
 
@@ -99,7 +102,8 @@ public class FeedController {
             }
         )
     })
-    public SseEmitter connectionsFeedSSE() {
+    public SseEmitter connectionsFeedSSE(HttpServletResponse response) {
+        response.addHeader("X-Accel-Buffering", "no");
         return connectionsFeed.addEmitter();
     }
 
