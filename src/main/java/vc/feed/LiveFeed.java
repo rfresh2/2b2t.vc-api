@@ -60,19 +60,21 @@ public abstract class LiveFeed<MessageType> implements DisposableBean {
 
     private String initTopicListener() {
         return topic.addListener(String.class, (channel, message) -> {
-            executor.execute(() -> topicMessageListener(message));
-        });
-    }
-
-    private void topicMessageListener(final String json) {
-        try {
-            var msg = objectMapper.readValue(json, messageProcessor.deserializedType());
-            for (MessageConsumer<MessageType> consumer : messageConsumers) {
-                consumer.consume(msg);
+            try {
+                var msg = objectMapper.readValue(message, messageProcessor.deserializedType());
+                executor.execute(() -> {
+                    for (MessageConsumer<MessageType> consumer : messageConsumers) {
+                        try {
+                            consumer.consume(msg);
+                        } catch (Exception e) {
+                            LOGGER.error("Error broadcasting {} message: {}", feedName(), msg, e);
+                        }
+                    }
+                });
+            } catch (Exception e) {
+                LOGGER.error("Failed to deserialize message from {} topic {}", feedName(), e.getMessage());
             }
-        } catch (Exception e) {
-            LOGGER.error("Failed to deserialize message from {} topic {}", feedName(), e.getMessage());
-        }
+        });
     }
 
     public void registerMessageConsumer(MessageConsumer<MessageType> messageConsumer) {
