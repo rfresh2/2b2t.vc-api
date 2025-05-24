@@ -11,10 +11,12 @@ import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import vc.util.MigrateToLiveFeedResponse;
 import vc.util.PlayerLookup;
 import vc.util.Sort;
 
@@ -152,7 +154,7 @@ public class ChatsController {
             content = @Content
         )
     })
-    public ResponseEntity<ChatWindowResponse> chatWindow(
+    public ResponseEntity chatWindow(
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
         @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
         @RequestParam(value = "sort", required = false) Sort sort,
@@ -167,6 +169,25 @@ public class ChatsController {
         if (endDate != null && startDate != null) {
             if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
                 return ResponseEntity.badRequest().build();
+            }
+        }
+        var scraperTimeCutoff = LocalDateTime.now().minusHours(1);
+        switch (sort) {
+            case ASC -> {
+                if (startDate == null) {
+                    return ResponseEntity.badRequest().build();
+                }
+                if (startDate.isAfter(scraperTimeCutoff)) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/chats"));
+                }
+            }
+            case DESC -> {
+                if (endDate == null) {
+                    return ResponseEntity.badRequest().build();
+                }
+                if (endDate.isAfter(scraperTimeCutoff)) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/chats"));
+                }
             }
         }
         Condition c = null;
