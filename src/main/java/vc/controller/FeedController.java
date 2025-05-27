@@ -107,6 +107,13 @@ public class FeedController {
         return connectionsFeed.addEmitter();
     }
 
+    public void shutdownFeeds() {
+        LOGGER.info("Shutting down feed emitters...");
+        chatFeed.shutdown();
+        deathsFeed.shutdown();
+        connectionsFeed.shutdown();
+    }
+
     public record FeedHandler<MessageType>(
         String id,
         LiveFeed<MessageType> liveFeed,
@@ -151,6 +158,18 @@ public class FeedController {
             if (emitters.remove(emitterId) != null) {
                 LOGGER.info("Removed {} emitter: {}", id, emitters.size());
             }
+        }
+
+        public void shutdown() {
+            for (var emitter : emitters.values()) {
+                try {
+                    emitter.complete();
+                } catch (Exception e) {
+                    LOGGER.warn("Error completing emitter during shutdown", e);
+                }
+            }
+            emitters.clear();
+            LOGGER.info("Shutdown completed for {}", id);
         }
     }
 }
