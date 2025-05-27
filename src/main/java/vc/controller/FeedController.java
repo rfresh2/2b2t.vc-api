@@ -141,6 +141,7 @@ public class FeedController {
             var emitterId = UUID.randomUUID().toString();
             emitter.onCompletion(() -> removeEmitter(emitterId));
             emitter.onTimeout(() -> removeEmitter(emitterId));
+            emitter.onError(e -> removeEmitter(emitterId));
             emitters.put(emitterId, emitter);
             LOGGER.info("Added {} emitter: {}", id, emitters.size());
             return emitter;
