@@ -15,8 +15,8 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '23'
-          distribution: 'zulu'
+          java-version: '24'
+          distribution: 'temurin'
 
       - name: Elevate wrapper permissions
         run: chmod +x ./mvnw
