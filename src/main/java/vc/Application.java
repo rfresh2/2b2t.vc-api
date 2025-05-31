@@ -13,6 +13,7 @@ import org.springframework.http.client.JdkClientHttpRequestFactory;
 import java.time.Duration;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 @SpringBootApplication
 @EnableCaching
@@ -46,5 +47,10 @@ public class Application {
 	@Bean(name = "virtualThreadExecutor")
 	public ExecutorService virtualThreadExecutor() {
 		return Executors.newVirtualThreadPerTaskExecutor();
+	}
+
+	@Bean(name = "scheduledExecutor")
+	public ScheduledExecutorService scheduledExecutor() {
+		return Executors.newSingleThreadScheduledExecutor();
 	}
 }

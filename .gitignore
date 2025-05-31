@@ -38,3 +38,5 @@ logs/
 .env
 
 jooq.properties
+vc.db
+vc.db.wal
