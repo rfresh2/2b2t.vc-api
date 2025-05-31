@@ -29,6 +29,7 @@ public class DuckDbInstance implements DisposableBean {
         this.jdbi = Jdbi.create(connection);
         new PostgresPlugin().customizeJdbi(jdbi);
         try (var handle = jdbi.open()) {
+            handle.execute("SET memory_limit TO '1GB'");
             String connectionString = "'dbname=%s host=%s port=%s user=%s password=%s'".formatted(
                 postgresDb,
                 postgresHost,
