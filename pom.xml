@@ -111,7 +111,7 @@
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
-			<version>3.2.0</version>
+			<version>3.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
@@ -136,7 +136,7 @@
 		<dependency>
 			<groupId>org.redisson</groupId>
 			<artifactId>redisson</artifactId>
-			<version>3.48.0</version>
+			<version>3.49.0</version>
 		</dependency>
 	</dependencies>
 
