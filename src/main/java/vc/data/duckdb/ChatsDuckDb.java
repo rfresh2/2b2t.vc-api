@@ -41,7 +41,7 @@ public class ChatsDuckDb {
     private void syncChats() {
         LOGGER.info("Syncing Chats...");
         try (var handle = duckDbInstance.getJdbi().open()) {
-            var lastSyncTime = handle.select("SELECT coalesce(max(time), '2016-01-01 00:00:00') FROM d_chats;")
+            var lastSyncTime = handle.select("SELECT coalesce(max(time), '2016-06-01 00:00:00') FROM d_chats;")
                 .mapTo(OffsetDateTime.class)
                 .findOne()
                 .orElseThrow();
@@ -50,6 +50,8 @@ public class ChatsDuckDb {
                 .bind("syncTime", lastSyncTime)
                 .execute();
             LOGGER.info("{} chats synced", updateCount);
+        } catch (Exception e) {
+            LOGGER.error("Error syncing chats", e);
         }
     }
 
