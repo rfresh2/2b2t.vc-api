@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class ChatsDuckDb {
@@ -28,9 +29,19 @@ public class ChatsDuckDb {
         init();
         if (duckDbSyncEnabled)
             scheduledExecutor.scheduleAtFixedRate(this::syncChats, 0, 5, java.util.concurrent.TimeUnit.MINUTES);
+        scheduledExecutor.scheduleAtFixedRate(this::refreshConnection, 24L, 24L, TimeUnit.HOURS);
     }
 
-    private void init() {
+    private synchronized void refreshConnection() {
+        try {
+            duckDbInstance.connection.close();
+            duckDbInstance.initializeConnection();
+        } catch (Exception e) {
+            LOGGER.error("Error while refreshing connection", e);
+        }
+    }
+
+    private synchronized void init() {
         try (var handle = duckDbInstance.getJdbi().open()) {
             handle.createUpdate("CREATE TABLE IF NOT EXISTS d_chats (time timestamptz, chat text, player_name text, player_uuid uuid)")
                 .execute();
@@ -38,7 +49,7 @@ public class ChatsDuckDb {
         LOGGER.info("ChatsDuckDb initialized");
     }
 
-    private void syncChats() {
+    private synchronized void syncChats() {
         LOGGER.info("Syncing Chats...");
         try (var handle = duckDbInstance.getJdbi().open()) {
             var lastSyncTime = handle.select("SELECT coalesce(max(time), '2016-06-01 00:00:00') FROM d_chats;")
@@ -55,7 +66,7 @@ public class ChatsDuckDb {
         }
     }
 
-    public int totalChatsCount() {
+    public synchronized int totalChatsCount() {
         try (var handle = duckDbInstance.getJdbi().open()) {
             return handle.select("SELECT COUNT(*) FROM d_chats")
                 .mapTo(Integer.class)
@@ -64,7 +75,7 @@ public class ChatsDuckDb {
         }
     }
 
-    public int wordCount(String word) {
+    public synchronized int wordCount(String word) {
         try (var handle = duckDbInstance.getJdbi().open()) {
             return handle.select("SELECT COUNT(*) FROM d_chats WHERE chat ILIKE :word")
                 .bind("word", "%" + word + "%")
@@ -79,7 +90,7 @@ public class ChatsDuckDb {
         List<ChatsController.PlayerChat> searchResults
     ) {}
 
-    public ChatSearchResult chatSearch(
+    public synchronized ChatSearchResult chatSearch(
         String word,
         OffsetDateTime startDate,
         OffsetDateTime endDate,
