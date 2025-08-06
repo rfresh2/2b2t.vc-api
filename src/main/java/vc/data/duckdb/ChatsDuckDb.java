@@ -105,16 +105,14 @@ public class ChatsDuckDb {
             var countQuery = """
                    SELECT COUNT(*)
                    FROM d_chats
+                   WHERE time >= :startDate
+                   and time <= :endDate
                    """;
             if (word != null) {
                 countQuery += """
-                   WHERE chat ilike :word
+                   and chat ilike :word
                    """;
             }
-            countQuery += """
-                   and time >= :startDate
-                   and time <= :endDate
-                   """;
             if (uuid != null) {
                 countQuery += """
                     and player_uuid = :uuid
@@ -131,16 +129,14 @@ public class ChatsDuckDb {
             var resultQuery = """
                 SELECT player_name, player_uuid, time, chat
                 FROM d_chats
+                WHERE time >= :startDate
+                and time <= :endDate
                 """;
             if (word != null) {
                 resultQuery += """
-                where chat ilike :word
+                and chat ilike :word
                 """;
             }
-            resultQuery += """
-                and time >= :startDate
-                and time <= :endDate
-                """;
             if (uuid != null) {
                 resultQuery += """ 
                 AND player_uuid = :uuid
