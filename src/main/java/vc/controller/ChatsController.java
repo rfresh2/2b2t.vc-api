@@ -77,12 +77,12 @@ public class ChatsController {
         )
     })
     public ResponseEntity<ChatsResponse> chats(
-            @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "playerName", required = false) String playerName,
-            @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-            @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-            @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "page", required = false) Integer page) {
+        @RequestParam(value = "uuid", required = false) UUID uuid,
+        @RequestParam(value = "playerName", required = false) String playerName,
+        @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+        @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+        @RequestParam(value = "pageSize", required = false) Integer pageSize,
+        @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
         }
@@ -105,16 +105,16 @@ public class ChatsController {
             baseQuery = baseQuery.and(CHATS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
         }
         Long rowCount = dsl.selectCount()
-                .from(baseQuery)
-                .fetchOneInto(Long.class);
+            .from(baseQuery)
+            .fetchOneInto(Long.class);
         if (rowCount == null) rowCount = 0L;
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         List<Chat> chats = baseQuery
-                .orderBy(CHATS.TIME.desc())
-                .limit(size)
-                .offset(offset)
-                .fetch()
-                .into(Chat.class);
+            .orderBy(CHATS.TIME.desc())
+            .limit(size)
+            .offset(offset)
+            .fetch()
+            .into(Chat.class);
         if (chats.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
@@ -286,6 +286,8 @@ public class ChatsController {
     })
     public ResponseEntity<ChatSearchResponse> chatSearch(
         @RequestParam(value = "word", required = true) String word,
+        @RequestParam(value = "playerName", required = false) String playerName,
+        @RequestParam(value = "uuid", required = false) UUID uuid,
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
         @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
         @RequestParam(value = "sort", required = false) Sort sort,
@@ -298,12 +300,21 @@ public class ChatsController {
         if (word == null || word.length() < 3 || word.length() > 50) {
             return ResponseEntity.badRequest().build();
         }
+        UUID resolvedUuid = null;
+        if (uuid != null || playerName != null) {
+            Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, playerName);
+            if (optionalResolvedUuid.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            resolvedUuid = optionalResolvedUuid.get();
+        }
         if (sort == null) sort = Sort.DESC;
         final int size = pageSize == null ? 25 : pageSize;
 
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         ChatsDuckDb.ChatSearchResult chatSearchResult = chatsDb.chatSearch(
             word,
+            resolvedUuid,
             startDate != null ? startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime() : null,
             endDate != null ? endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime() : null,
             sort,

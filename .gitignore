@@ -40,3 +40,4 @@ logs/
 jooq.properties
 vc.db
 vc.db.wal
+*.jar

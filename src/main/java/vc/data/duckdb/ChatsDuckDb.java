@@ -1,5 +1,7 @@
 package vc.data.duckdb;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -91,24 +93,57 @@ public class ChatsDuckDb {
     ) {}
 
     public synchronized ChatSearchResult chatSearch(
-        String word,
-        OffsetDateTime startDate,
-        OffsetDateTime endDate,
-        final Sort sort, int pageSize,
+        @NonNull String word,
+        @Nullable UUID uuid,
+        @Nullable OffsetDateTime startDate,
+        @Nullable OffsetDateTime endDate,
+        @NonNull Sort sort,
+        int pageSize,
         int offset
     ) {
         try (var handle = duckDbInstance.getJdbi().open()) {
-            int totalCount = handle.select("SELECT COUNT(*) FROM d_chats WHERE chat ilike :word and time >= :startDate and time <= :endDate")
+            var countQuery = """
+                   SELECT COUNT(*)
+                   FROM d_chats
+                   WHERE chat ilike :word
+                   and time >= :startDate
+                   and time <= :endDate
+                   """;
+            if (uuid != null) {
+                countQuery += """
+                    and player_uuid = :uuid
+                    """;
+            }
+            int totalCount = handle.select(countQuery)
                 .bind("word", "%" + word + "%")
                 .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
                 .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
+                .bind("uuid", uuid == null ? "" : uuid.toString())
                 .mapTo(Integer.class)
                 .findOne()
                 .orElse(0);
-            var results = handle.select("SELECT player_name, player_uuid, time, chat FROM d_chats where chat ilike :word and time >= :startDate and time <= :endDate order by time " + sort.toValue() + " limit :pageSize offset :offset")
+            var resultQuery = """
+                SELECT player_name, player_uuid, time, chat
+                FROM d_chats
+                where chat ilike :word
+                and time >= :startDate
+                and time <= :endDate
+                """;
+            if (uuid != null) {
+                resultQuery += """ 
+                AND player_uuid = :uuid
+                """;
+            }
+            resultQuery += "order by time " + sort.toValue() + "\n";
+            resultQuery += """
+                limit :pageSize
+                offset :offset
+                """;
+            var results = handle.select(resultQuery)
                 .bind("word", "%" + word + "%")
                 .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
                 .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
+                .bind("uuid", uuid == null ? "" : uuid.toString())
                 .bind("pageSize", pageSize)
                 .bind("offset", offset)
                 .map((rs, ctx) -> new ChatsController.PlayerChat(
