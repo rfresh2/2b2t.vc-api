@@ -1,6 +1,7 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,6 +21,7 @@ import vc.data.duckdb.ChatsDuckDb;
 import vc.util.MigrateToLiveFeedResponse;
 import vc.util.PlayerLookup;
 import vc.util.Sort;
+import vc.util.Validator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,8 +46,6 @@ public class ChatsController {
         this.chatsDb = chatsDb;
     }
 
-    public record ChatsResponse(List<Chat> chats, int total, int pageCount) { }
-    public record Chat(OffsetDateTime time, String chat) {}
     public record WordCount(int count) {}
     public record PlayerChat(String playerName, UUID uuid, OffsetDateTime time, String chat) {}
     public record ChatSearchResponse(List<PlayerChat> chats, int total, int pageCount) {}
@@ -57,68 +57,76 @@ public class ChatsController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Chat history for given player",
+            description = "Search for chat messages with optional filters",
             content = {
                 @Content(
                     mediaType = "application/json",
-                    schema = @Schema(implementation = ChatsResponse.class)
+                    schema = @Schema(implementation = ChatSearchResponse.class)
                 )
             }
         ),
         @ApiResponse(
             responseCode = "204",
-            description = "No data for player",
+            description = "No data",
             content = @Content
         ),
         @ApiResponse(
             responseCode = "400",
-            description = "Bad request. Either uuid or playerName must be provided.",
+            description = """
+              Bad request.
+              
+              If word is provided, it must be between 3 and 50 valid chat characters.
+              
+              If uuid or playerName is provided, it must be for a valid and existing account.
+              
+              If pageSize is provided, it must be between 1 and 100.
+              
+              If startDate and endDate are provided, they must be valid dates in ISO 8601 format, example: "2022-10-31".
+              """,
             content = @Content
         )
     })
-    public ResponseEntity<ChatsResponse> chats(
-        @RequestParam(value = "uuid", required = false) UUID uuid,
+    public ResponseEntity<ChatSearchResponse> chats(
+        @RequestParam(value = "word", required = false) String word,
         @RequestParam(value = "playerName", required = false) String playerName,
+        @RequestParam(value = "uuid", required = false) UUID uuid,
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
         @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+        @RequestParam(value = "sort", required = false) Sort sort,
         @RequestParam(value = "pageSize", required = false) Integer pageSize,
-        @RequestParam(value = "page", required = false) Integer page) {
-        if (pageSize != null && pageSize > 100) {
+        @RequestParam(value = "page", required = false) Integer page
+    ) {
+        if (pageSize != null && (pageSize < 1 || pageSize > 100)) {
             return ResponseEntity.badRequest().build();
         }
-        if (uuid == null && playerName == null) {
+        if (word != null && (word.length() < 3 || word.length() > 50 || !Validator.isValidChat(word))) {
             return ResponseEntity.badRequest().build();
         }
-        Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, playerName);
-        if (optionalResolvedUuid.isEmpty()) {
-            return ResponseEntity.noContent().build();
+        UUID resolvedUuid = null;
+        if (uuid != null || playerName != null) {
+            Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, playerName);
+            if (optionalResolvedUuid.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            resolvedUuid = optionalResolvedUuid.get();
         }
-        final UUID resolvedUuid = optionalResolvedUuid.get();
+        if (sort == null) sort = Sort.DESC;
         final int size = pageSize == null ? 25 : pageSize;
-        var baseQuery = dsl.select(CHATS.TIME, CHATS.CHAT)
-            .from(CHATS)
-            .where(CHATS.PLAYER_UUID.eq(resolvedUuid));
-        if (startDate != null) {
-            baseQuery = baseQuery.and(CHATS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
-        if (endDate != null) {
-            baseQuery = baseQuery.and(CHATS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
-        Long rowCount = dsl.selectCount()
-            .from(baseQuery)
-            .fetchOneInto(Long.class);
-        if (rowCount == null) rowCount = 0L;
+
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        List<Chat> chats = baseQuery
-            .orderBy(CHATS.TIME.desc())
-            .limit(size)
-            .offset(offset)
-            .fetch()
-            .into(Chat.class);
-        if (chats.isEmpty()) {
+        ChatsDuckDb.ChatSearchResult chatSearchResult = chatsDb.chatSearch2(
+            word,
+            resolvedUuid,
+            startDate != null ? startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime() : null,
+            endDate != null ? endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime() : null,
+            sort,
+            size,
+            offset
+        );
+        if (chatSearchResult.searchResults().isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.ok(new ChatsResponse(chats, rowCount.intValue(), (int) Math.ceil(rowCount / (double) size)));
+            return ResponseEntity.ok(new ChatSearchResponse(chatSearchResult.searchResults(), chatSearchResult.totalCount(), (int) Math.ceil(chatSearchResult.totalCount() / (double) size)));
         }
     }
 
@@ -252,7 +260,7 @@ public class ChatsController {
     public ResponseEntity<WordCount> wordCount(
         @RequestParam(value = "word", required = true) String word
     ) {
-        if (word == null || word.length() < 3 || word.length() > 50) {
+        if (word == null || word.length() < 3 || word.length() > 50 || !Validator.isValidChat(word)) {
             return ResponseEntity.badRequest().build();
         }
         var count = chatsDb.wordCount(word);
@@ -284,6 +292,7 @@ public class ChatsController {
             content = @Content
         )
     })
+    @Hidden
     public ResponseEntity<ChatSearchResponse> chatSearch(
         @RequestParam(value = "word", required = true) String word,
         @RequestParam(value = "playerName", required = false) String playerName,
@@ -294,37 +303,6 @@ public class ChatsController {
         @RequestParam(value = "pageSize", required = false) Integer pageSize,
         @RequestParam(value = "page", required = false) Integer page
     ) {
-        if (pageSize != null && pageSize > 100) {
-            return ResponseEntity.badRequest().build();
-        }
-        if (word == null || word.length() < 3 || word.length() > 50) {
-            return ResponseEntity.badRequest().build();
-        }
-        UUID resolvedUuid = null;
-        if (uuid != null || playerName != null) {
-            Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, playerName);
-            if (optionalResolvedUuid.isEmpty()) {
-                return ResponseEntity.noContent().build();
-            }
-            resolvedUuid = optionalResolvedUuid.get();
-        }
-        if (sort == null) sort = Sort.DESC;
-        final int size = pageSize == null ? 25 : pageSize;
-
-        var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        ChatsDuckDb.ChatSearchResult chatSearchResult = chatsDb.chatSearch(
-            word,
-            resolvedUuid,
-            startDate != null ? startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime() : null,
-            endDate != null ? endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime() : null,
-            sort,
-            size,
-            offset
-        );
-        if (chatSearchResult.searchResults().isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(new ChatSearchResponse(chatSearchResult.searchResults(), chatSearchResult.totalCount(), (int) Math.ceil(chatSearchResult.totalCount() / (double) size)));
-        }
+        return chats(word, playerName, uuid, startDate, endDate, sort, pageSize, page);
     }
 }

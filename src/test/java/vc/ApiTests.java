@@ -58,7 +58,7 @@ public class ApiTests {
     @Test
     public void chatsApiTest() {
         var chatsResponse = httpRequest("/chats?playerName={playerName}",
-            ChatsController.ChatsResponse.class,
+            ChatsController.ChatSearchResponse.class,
             Map.of(
                 "playerName", "hausemaster"
             ));
@@ -91,28 +91,28 @@ public class ApiTests {
         assertNull(chatWindowResponse);
     }
 
-//    @Test
-//    public void wordCountApiTest() {
-//        var wordCountResponse = httpRequest("/chats/word-count?word={word}",
-//            ChatsController.WordCount.class,
-//            Map.of(
-//                "word", "test"
-//            ));
-//        assertNotNull(wordCountResponse);
-//        assertTrue(wordCountResponse.count() > 0);
-//    }
-//
-//    @Test
-//    public void wordSearchApiTest() {
-//        var wordSearchResponse = httpRequest("/chats/search?word={word}&endDate={endDate}",
-//            ChatsController.ChatSearchResponse.class,
-//            Map.of(
-//                "word", "test",
-//                "endDate", "2021-01-01"
-//            ));
-//        assertNotNull(wordSearchResponse);
-//        assertTrue(wordSearchResponse.total() > 0);
-//    }
+    @Test
+    public void wordCountApiTest() {
+        var wordCountResponse = httpRequest("/chats/word-count?word={word}",
+            ChatsController.WordCount.class,
+            Map.of(
+                "word", "test"
+            ));
+        assertNotNull(wordCountResponse);
+        assertTrue(wordCountResponse.count() > 0);
+    }
+
+    @Test
+    public void wordSearchApiTest() {
+        var wordSearchResponse = httpRequest("/chats/search?word={word}&endDate={endDate}",
+            ChatsController.ChatSearchResponse.class,
+            Map.of(
+                "word", "test",
+                "endDate", "2021-01-01"
+            ));
+        assertNotNull(wordSearchResponse);
+        assertTrue(wordSearchResponse.total() > 0);
+    }
 
     @Test
     public void connectionsApiTest() {

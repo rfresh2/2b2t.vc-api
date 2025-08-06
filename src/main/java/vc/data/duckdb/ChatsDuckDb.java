@@ -92,6 +92,85 @@ public class ChatsDuckDb {
         List<ChatsController.PlayerChat> searchResults
     ) {}
 
+    public synchronized ChatSearchResult chatSearch2(
+        @Nullable String word,
+        @Nullable UUID uuid,
+        @Nullable OffsetDateTime startDate,
+        @Nullable OffsetDateTime endDate,
+        @NonNull Sort sort,
+        int pageSize,
+        int offset
+    ) {
+        try (var handle = duckDbInstance.getJdbi().open()) {
+            var countQuery = """
+                   SELECT COUNT(*)
+                   FROM d_chats
+                   """;
+            if (word != null) {
+                countQuery += """
+                   WHERE chat ilike :word
+                   """;
+            }
+            countQuery += """
+                   and time >= :startDate
+                   and time <= :endDate
+                   """;
+            if (uuid != null) {
+                countQuery += """
+                    and player_uuid = :uuid
+                    """;
+            }
+            int totalCount = handle.select(countQuery)
+                .bind("word", "%" + (word == null ? "" : word) + "%")
+                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
+                .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
+                .bind("uuid", uuid == null ? "" : uuid.toString())
+                .mapTo(Integer.class)
+                .findOne()
+                .orElse(0);
+            var resultQuery = """
+                SELECT player_name, player_uuid, time, chat
+                FROM d_chats
+                """;
+            if (word != null) {
+                resultQuery += """
+                where chat ilike :word
+                """;
+            }
+            resultQuery += """
+                and time >= :startDate
+                and time <= :endDate
+                """;
+            if (uuid != null) {
+                resultQuery += """ 
+                AND player_uuid = :uuid
+                """;
+            }
+            resultQuery += "order by time " + sort.toValue() + "\n";
+            resultQuery += """
+                limit :pageSize
+                offset :offset
+                """;
+            var results = handle.select(resultQuery)
+                .bind("word", "%" + (word == null ? "" : word) + "%")
+                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
+                .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
+                .bind("uuid", uuid == null ? "" : uuid.toString())
+                .bind("pageSize", pageSize)
+                .bind("offset", offset)
+                .map((rs, ctx) -> new ChatsController.PlayerChat(
+                    rs.getString("player_name"),
+                    Optional.ofNullable(rs.getString("player_uuid"))
+                        .map(UUID::fromString)
+                        .orElse(null),
+                    rs.getObject("time", OffsetDateTime.class),
+                    rs.getString("chat")
+                ))
+                .list();
+            return new ChatSearchResult(totalCount, results);
+        }
+    }
+
     public synchronized ChatSearchResult chatSearch(
         @NonNull String word,
         @Nullable UUID uuid,
