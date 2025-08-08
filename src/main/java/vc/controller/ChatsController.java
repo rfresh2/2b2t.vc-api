@@ -114,7 +114,7 @@ public class ChatsController {
         final int size = pageSize == null ? 25 : pageSize;
 
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        ChatsDuckDb.ChatSearchResult chatSearchResult = chatsDb.chatSearch2(
+        ChatsDuckDb.ChatSearchResult chatSearchResult = chatsDb.chatSearch(
             word,
             resolvedUuid,
             startDate != null ? startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime() : null,

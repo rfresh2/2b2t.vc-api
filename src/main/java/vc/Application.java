@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.JdkClientHttpRequestFactory;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.Duration;
 import java.util.concurrent.ExecutorService;
@@ -17,6 +18,7 @@ import java.util.concurrent.ScheduledExecutorService;
 
 @SpringBootApplication
 @EnableCaching
+@EnableScheduling
 @OpenAPIDefinition(
 	servers = {
 		@Server(url = "https://api.2b2t.vc")

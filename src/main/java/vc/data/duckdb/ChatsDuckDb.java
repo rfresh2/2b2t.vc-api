@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import vc.controller.ChatsController;
 import vc.util.Sort;
@@ -16,43 +17,58 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Component
 public class ChatsDuckDb {
     private static final Logger LOGGER = LoggerFactory.getLogger(ChatsDuckDb.class);
     private final DuckDbInstance duckDbInstance;
+    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public ChatsDuckDb(
         final DuckDbInstance duckDbInstance,
         final @Qualifier("scheduledExecutor") ScheduledExecutorService scheduledExecutor,
-        final @Value("${DUCK_DB_SYNC}") boolean duckDbSyncEnabled
+        final @Value("${DUCK_DB_SYNC}") boolean duckDbSyncEnabled,
+        final @Value("${DUCK_DB_SYNC_INTERVAL:3}") int duckDbSyncInterval
     ) {
         this.duckDbInstance = duckDbInstance;
         init();
         if (duckDbSyncEnabled)
-            scheduledExecutor.scheduleAtFixedRate(this::syncChats, 0, 1, TimeUnit.MINUTES);
-        scheduledExecutor.scheduleAtFixedRate(this::refreshConnection, 24L, 24L, TimeUnit.HOURS);
+            scheduledExecutor.scheduleAtFixedRate(this::syncChats, 0, duckDbSyncInterval, TimeUnit.MINUTES);
     }
 
-    private synchronized void refreshConnection() {
+    @Scheduled(fixedRate = 24, initialDelay = 24, timeUnit = TimeUnit.HOURS)
+    private void refreshConnection() {
+        lock.writeLock().lock();
         try {
             duckDbInstance.connection.close();
             duckDbInstance.initializeConnection();
         } catch (Exception e) {
             LOGGER.error("Error while refreshing connection", e);
+        } finally {
+            if (lock.writeLock().isHeldByCurrentThread()) {
+                lock.writeLock().unlock();
+            }
         }
     }
 
-    private synchronized void init() {
+    private void init() {
+        lock.writeLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             handle.createUpdate("CREATE TABLE IF NOT EXISTS d_chats (time timestamptz, chat text, player_name text, player_uuid uuid)")
                 .execute();
+        } finally {
+            if (lock.writeLock().isHeldByCurrentThread()) {
+                lock.writeLock().unlock();
+            }
         }
         LOGGER.info("ChatsDuckDb initialized");
     }
 
-    private synchronized void syncChats() {
+//    @Scheduled(fixedRate = 1, initialDelay = 0, timeUnit = TimeUnit.MINUTES)
+    private void syncChats() {
         LOGGER.info("Syncing Chats...");
+        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             var lastSyncTime = handle.select("SELECT coalesce(max(time), '2016-06-01 00:00:00') FROM d_chats;")
                 .mapTo(OffsetDateTime.class)
@@ -65,25 +81,33 @@ public class ChatsDuckDb {
             LOGGER.info("{} chats synced", updateCount);
         } catch (Exception e) {
             LOGGER.error("Error syncing chats", e);
+        } finally {
+            lock.readLock().unlock();
         }
     }
 
-    public synchronized int totalChatsCount() {
+    public int totalChatsCount() {
+        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             return handle.select("SELECT COUNT(*) FROM d_chats")
                 .mapTo(Integer.class)
                 .findOne()
                 .orElse(0);
+        } finally {
+            lock.readLock().unlock();
         }
     }
 
-    public synchronized int wordCount(String word) {
+    public int wordCount(String word) {
+        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             return handle.select("SELECT COUNT(*) FROM d_chats WHERE chat ILIKE :word")
                 .bind("word", "%" + word + "%")
                 .mapTo(Integer.class)
                 .findOne()
                 .orElse(0);
+        } finally {
+            lock.readLock().unlock();
         }
     }
 
@@ -92,7 +116,7 @@ public class ChatsDuckDb {
         List<ChatsController.PlayerChat> searchResults
     ) {}
 
-    public synchronized ChatSearchResult chatSearch2(
+    public ChatSearchResult chatSearch(
         @Nullable String word,
         @Nullable UUID uuid,
         @Nullable OffsetDateTime startDate,
@@ -101,6 +125,7 @@ public class ChatsDuckDb {
         int pageSize,
         int offset
     ) {
+        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             var countQuery = """
                    SELECT COUNT(*)
@@ -164,73 +189,8 @@ public class ChatsDuckDb {
                 ))
                 .list();
             return new ChatSearchResult(totalCount, results);
-        }
-    }
-
-    public synchronized ChatSearchResult chatSearch(
-        @NonNull String word,
-        @Nullable UUID uuid,
-        @Nullable OffsetDateTime startDate,
-        @Nullable OffsetDateTime endDate,
-        @NonNull Sort sort,
-        int pageSize,
-        int offset
-    ) {
-        try (var handle = duckDbInstance.getJdbi().open()) {
-            var countQuery = """
-                   SELECT COUNT(*)
-                   FROM d_chats
-                   WHERE chat ilike :word
-                   and time >= :startDate
-                   and time <= :endDate
-                   """;
-            if (uuid != null) {
-                countQuery += """
-                    and player_uuid = :uuid
-                    """;
-            }
-            int totalCount = handle.select(countQuery)
-                .bind("word", "%" + word + "%")
-                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
-                .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
-                .bind("uuid", uuid == null ? "" : uuid.toString())
-                .mapTo(Integer.class)
-                .findOne()
-                .orElse(0);
-            var resultQuery = """
-                SELECT player_name, player_uuid, time, chat
-                FROM d_chats
-                where chat ilike :word
-                and time >= :startDate
-                and time <= :endDate
-                """;
-            if (uuid != null) {
-                resultQuery += """ 
-                AND player_uuid = :uuid
-                """;
-            }
-            resultQuery += "order by time " + sort.toValue() + "\n";
-            resultQuery += """
-                limit :pageSize
-                offset :offset
-                """;
-            var results = handle.select(resultQuery)
-                .bind("word", "%" + word + "%")
-                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
-                .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
-                .bind("uuid", uuid == null ? "" : uuid.toString())
-                .bind("pageSize", pageSize)
-                .bind("offset", offset)
-                .map((rs, ctx) -> new ChatsController.PlayerChat(
-                    rs.getString("player_name"),
-                    Optional.ofNullable(rs.getString("player_uuid"))
-                        .map(UUID::fromString)
-                        .orElse(null),
-                    rs.getObject("time", OffsetDateTime.class),
-                    rs.getString("chat")
-                ))
-                .list();
-            return new ChatSearchResult(totalCount, results);
+        } finally {
+            lock.readLock().unlock();
         }
     }
 }
