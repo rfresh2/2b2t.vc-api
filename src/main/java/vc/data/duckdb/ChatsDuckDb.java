@@ -30,7 +30,7 @@ public class ChatsDuckDb {
         this.duckDbInstance = duckDbInstance;
         init();
         if (duckDbSyncEnabled)
-            scheduledExecutor.scheduleAtFixedRate(this::syncChats, 0, 5, java.util.concurrent.TimeUnit.MINUTES);
+            scheduledExecutor.scheduleAtFixedRate(this::syncChats, 0, 1, TimeUnit.MINUTES);
         scheduledExecutor.scheduleAtFixedRate(this::refreshConnection, 24L, 24L, TimeUnit.HOURS);
     }
 
