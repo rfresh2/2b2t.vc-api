@@ -14,7 +14,7 @@
 	<name>2b2t.vc-api</name>
 	<description>2b2t data and stats API</description>
 	<properties>
-		<java.version>24</java.version>
+		<java.version>25</java.version>
 		<maven.compiler.release></maven.compiler.release>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>

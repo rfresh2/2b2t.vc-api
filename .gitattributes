@@ -14,3 +14,5 @@
 Jenkinsfile text=auto eol=lf
 gradlew test=auto eol=lf
 *.py text=auto eol=lf
+*.* text=auto eol=lf
+LICENSE text=auto eol=lf
