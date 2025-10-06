@@ -6,11 +6,13 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.redisson.api.RReliableTopic;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import static java.util.concurrent.TimeUnit.HOURS;
 import static org.slf4j.LoggerFactory.getLogger;
 
 public abstract class LiveFeed<MessageType> implements DisposableBean {
@@ -20,7 +22,7 @@ public abstract class LiveFeed<MessageType> implements DisposableBean {
     final MessageProcessor<MessageType> messageProcessor;
     final RReliableTopic topic;
     final List<MessageConsumer<MessageType>> messageConsumers;
-    final String topicListenerId;
+    String topicListenerId;
     private final ExecutorService executor;
 
     protected LiveFeed(
@@ -79,6 +81,17 @@ public abstract class LiveFeed<MessageType> implements DisposableBean {
 
     public void registerMessageConsumer(MessageConsumer<MessageType> messageConsumer) {
         this.messageConsumers.add(messageConsumer);
+    }
+
+    @Scheduled(initialDelay = 1, fixedRate = 1, timeUnit = HOURS)
+    private void refreshTopicListener() {
+        try {
+            topic.removeListener(topicListenerId);
+            topicListenerId = initTopicListener();
+            LOGGER.info("{} topic listener refreshed", feedName());
+        } catch (Exception e) {
+            LOGGER.error("Failed to refresh {} topic listener", feedName(), e);
+        }
     }
 
     @Override
