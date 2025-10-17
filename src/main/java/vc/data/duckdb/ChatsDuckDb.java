@@ -12,6 +12,7 @@ import vc.controller.ChatsController;
 import vc.util.Sort;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -75,10 +76,44 @@ public class ChatsDuckDb {
                 .findOne()
                 .orElseThrow();
             LOGGER.info("Last chat sync time: {}", lastSyncTime);
-            var updateCount = handle.createUpdate("INSERT INTO d_chats SELECT * FROM postgres_db.chats where postgres_db.chats.time > :syncTime;")
-                .bind("syncTime", lastSyncTime)
-                .execute();
-            LOGGER.info("{} chats synced", updateCount);
+            // can't copy results to ram if the query is too big
+            if (lastSyncTime.isBefore(OffsetDateTime.now().minusMinutes(15))) {
+                // seems to not use postgres table indexes to speed up queries or something
+                var updateCount = handle.createUpdate("INSERT INTO d_chats SELECT * FROM postgres_db.chats where postgres_db.chats.time > :syncTime;")
+                    .bind("syncTime", lastSyncTime)
+                    .execute();
+                LOGGER.info("{} chats ddb synced", updateCount);
+            } else {
+                // much faster to do a ddb 'postgres_query' style for small data sizes
+                // but need to do this awkward string concatenation to bind time param
+                var toSyncChats = handle.createQuery("SELECT * FROM postgres_query('postgres_db', 'SELECT * FROM chats where \"time\" > ''%s''')"
+                        .formatted(DateTimeFormatter.ISO_DATE_TIME.format(lastSyncTime)))
+                    .map((rs, ctx) -> {
+                        OffsetDateTime time = rs.getObject("time", OffsetDateTime.class);
+                        String chat = rs.getString("chat");
+                        String playerName = rs.getString("player_name");
+                        String playerUuidStr = rs.getString("player_uuid");
+                        UUID playerUuid = playerUuidStr != null ? UUID.fromString(playerUuidStr) : null;
+                        return new ChatsController.PlayerChat(playerName, playerUuid, time, chat);
+                    })
+                    .list();
+                LOGGER.info("Found {} chats to sync", toSyncChats.size());
+                var batch = handle.prepareBatch("INSERT INTO d_chats VALUES (:time, :chat, :player_name, :player_uuid)");
+                for (var toSyncChat : toSyncChats) {
+                    batch
+                        .bind("time", toSyncChat.time())
+                        .bind("chat", toSyncChat.chat())
+                        .bind("player_name", toSyncChat.playerName())
+                        .bind("player_uuid", toSyncChat.uuid() != null ? toSyncChat.uuid().toString() : null)
+                        .add();
+                }
+                int[] results = batch.execute();
+                int updateCount = 0;
+                for (int result : results) {
+                    updateCount += result;
+                }
+                LOGGER.info("{} chats batch synced", updateCount);
+            }
         } catch (Exception e) {
             LOGGER.error("Error syncing chats", e);
         } finally {
