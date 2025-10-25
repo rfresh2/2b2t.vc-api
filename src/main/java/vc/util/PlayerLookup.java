@@ -14,6 +14,7 @@ import vc.api.model.ProfileData;
 
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Optional;
@@ -154,7 +155,7 @@ public class PlayerLookup {
 
     public URL getAvatarURL(String playerName) {
         try {
-            return new URL(String.format("https://crafthead.net/helm/%s/64", playerName));
+            return URI.create(String.format("https://crafthead.net/helm/%s/64", playerName)).toURL();
         } catch (MalformedURLException e) {
             throw new UncheckedIOException(e);
         }

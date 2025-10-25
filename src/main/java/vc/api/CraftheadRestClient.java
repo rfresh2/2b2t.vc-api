@@ -1,15 +1,12 @@
 package vc.api;
 
-import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 import vc.api.model.CraftheadProfileResponse;
 import vc.api.model.ProfileData;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 @Component
@@ -21,15 +18,6 @@ public class CraftheadRestClient {
             .baseUrl("https://crafthead.net")
             .requestFactory(requestFactory)
             .defaultHeader("User-Agent", "2b2t.vc-discord");
-        builder.messageConverters(converters -> converters.stream()
-            .filter(c -> c instanceof MappingJackson2HttpMessageConverter)
-            .forEach(c -> {
-                var supportedMedia = c.getSupportedMediaTypes();
-                final ArrayList<MediaType> newMediaTypes = new ArrayList<>(supportedMedia);
-                newMediaTypes.add(new MediaType("text", "plain"));
-                ((MappingJackson2HttpMessageConverter) c).setSupportedMediaTypes(newMediaTypes);
-            })
-        );
         this.restClient = builder.build();
     }
 

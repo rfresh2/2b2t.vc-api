@@ -1,12 +1,11 @@
 package vc.feed;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import org.redisson.api.RReliableTopic;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.scheduling.annotation.Scheduled;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +30,7 @@ public abstract class LiveFeed<MessageType> implements DisposableBean {
     ) {
         this.executor = executor;
         this.redisClient = redisClient;
-        this.objectMapper = new ObjectMapper()
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            .registerModule(new JavaTimeModule());
+        this.objectMapper = new ObjectMapper();
         this.messageConsumers = new ArrayList<>();
         this.messageProcessor = messageProcessor();
         this.topic = getTopic(messageProcessor);
