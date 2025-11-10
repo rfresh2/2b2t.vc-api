@@ -25,13 +25,13 @@ jobs:
         run: ./mvnw install
 
       - name: Upload Jar
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: 2b2t.vc-api
           path: target/2b2t.vc-api-1.0.jar
 
       - name: Release Artifact
-        uses: "softprops/action-gh-release@v2"
+        uses: softprops/action-gh-release@v2
         with:
           prerelease: false
           tag_name: latest
