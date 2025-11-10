@@ -4,9 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.springframework.web.util.pattern.PathPatternParser;
 import vc.util.Sort;
 
@@ -17,14 +15,6 @@ public class WebConfig implements WebMvcConfigurer {
         var patternParser = new PathPatternParser();
         patternParser.setCaseSensitive(false);
         configurer.setPatternParser(patternParser);
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/swagger-theme/**")
-            .addResourceLocations("classpath:/static/swagger-theme/")
-            .resourceChain(false)
-            .addResolver(new PathResourceResolver());
     }
 
     @Override

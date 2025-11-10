@@ -45,8 +45,8 @@ public class ApiTests {
     }
 
     @Test
-    public void swaggerUiTest() {
-        httpRequest("/swagger-ui/index.html", String.class);
+    public void scalarTest() {
+        httpRequest("/scalar", String.class);
         // basically no-op
     }
 

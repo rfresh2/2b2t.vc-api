@@ -12,6 +12,6 @@ public class HomepageController {
 
     @RequestMapping("/")
     public String homepage(final HttpServletResponse response) {
-        return "redirect:/swagger-ui/index.html";
+        return "redirect:/scalar";
     }
 }
