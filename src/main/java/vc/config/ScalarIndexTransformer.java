@@ -20,7 +20,7 @@ public class ScalarIndexTransformer extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         var uri = request.getRequestURI();
-        if (!"/scalar".equals(uri)) {
+        if (!"/".equals(uri)) {
             chain.doFilter(request, response);
             return;
         }
