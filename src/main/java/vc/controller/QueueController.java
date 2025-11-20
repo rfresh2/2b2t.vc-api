@@ -31,7 +31,7 @@ public class QueueController {
     public record QueueLengthHistory(List<QueueData> queueData) {}
     public record QueueEtaEquation(double factor, double pow) {
         public static final QueueEtaEquation INSTANCE = new QueueEtaEquation(
-            199.0, 0.925
+            199.0, 0.87
         );
     }
 
