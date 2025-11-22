@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vc.service.QueueETAService;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -22,18 +23,16 @@ import static vc.data.dto.tables.Queuelength.QUEUELENGTH;
 @RestController
 public class QueueController {
     private final DSLContext dsl;
+    private final QueueETAService queueETAService;
 
-    public QueueController(final DSLContext dsl) {
+    public QueueController(final DSLContext dsl, final QueueETAService queueETAService) {
         this.dsl = dsl;
+        this.queueETAService = queueETAService;
     }
 
     public record QueueData(OffsetDateTime time, int prio, int regular) {}
     public record QueueLengthHistory(List<QueueData> queueData) {}
-    public record QueueEtaEquation(double factor, double pow) {
-        public static final QueueEtaEquation INSTANCE = new QueueEtaEquation(
-            199.0, 0.87
-        );
-    }
+    public record QueueEtaEquation(double factor, double pow) { }
 
     @GetMapping("/queue")
     @RateLimiter(name = "queue")
@@ -108,6 +107,6 @@ public class QueueController {
         )
     })
     public ResponseEntity<QueueEtaEquation> etaEquation() {
-        return ResponseEntity.ok(QueueEtaEquation.INSTANCE);
+        return ResponseEntity.ok(new QueueEtaEquation(queueETAService.getFactor(), queueETAService.getPow()));
     }
 }
