@@ -40,7 +40,7 @@ public class QueueController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Current queue length",
+            description = "Current queue lengths",
             content = {
                 @Content(
                     mediaType = "application/json",

@@ -37,7 +37,15 @@ public class PriorityPlayersController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Gets all players who currently have priority queue",
+            description = """
+                Gets all players who (probably) have priority queue.
+                
+                This is calculated based on the number of times a player has:
+                1. Disconnected and then connected within a brief time window.
+                2. Session time above the non-prio limit.
+                
+                Data is refreshed daily, but the heuristics search over the past 30 days.
+                """,
             content = {
                 @Content(
                     mediaType = "application/json",

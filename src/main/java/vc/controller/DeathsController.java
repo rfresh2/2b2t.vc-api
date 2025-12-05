@@ -1,6 +1,7 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -11,12 +12,10 @@ import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import vc.util.MigrateToLiveFeedResponse;
 import vc.util.PlayerLookup;
 import vc.util.Sort;
 
@@ -84,11 +83,11 @@ public class DeathsController {
     })
     public ResponseEntity<DeathsResponse> deaths(
             @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "playerName", required = false) String playerName,
+            @Parameter(description = "Resolves to current UUID") @RequestParam(value = "playerName", required = false) String playerName,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-            @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "page", required = false) Integer page) {
+            @Parameter(description = "Must be between 1-100") @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @Parameter(description = "Response page") @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
         }
@@ -166,8 +165,8 @@ public class DeathsController {
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
         @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
         @RequestParam(value = "sort", required = false) Sort sort,
-        @RequestParam(value = "pageSize", required = false) Integer pageSize,
-        @RequestParam(value = "page", required = false) Integer page
+        @Parameter(description = "Must be between 1-100") @RequestParam(value = "pageSize", required = false) Integer pageSize,
+        @Parameter(description = "Response page") @RequestParam(value = "page", required = false) Integer page
     ) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
@@ -186,7 +185,7 @@ public class DeathsController {
                     return ResponseEntity.badRequest().build();
                 }
                 if (startDate.isAfter(scraperTimeCutoff)) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/deaths"));
+//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/deaths"));
                 }
             }
             case DESC -> {
@@ -194,7 +193,7 @@ public class DeathsController {
                     return ResponseEntity.badRequest().build();
                 }
                 if (endDate.isAfter(scraperTimeCutoff)) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/deaths"));
+//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/deaths"));
                 }
             }
         }
@@ -261,11 +260,11 @@ public class DeathsController {
     })
     public ResponseEntity<KillsResponse> kills(
             @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "playerName", required = false) String playerName,
+            @Parameter(description = "Resolves to current UUID") @RequestParam(value = "playerName", required = false) String playerName,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-            @RequestParam(value = "pageSize", required = false) Integer pageSize,
-            @RequestParam(value = "page", required = false) Integer page) {
+            @Parameter(description = "Must be between 1-100") @RequestParam(value = "pageSize", required = false) Integer pageSize,
+            @Parameter(description = "Response page") @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
             return ResponseEntity.badRequest().build();
         }

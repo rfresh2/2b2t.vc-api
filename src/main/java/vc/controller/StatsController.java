@@ -1,6 +1,7 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -50,7 +51,7 @@ public class StatsController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Stats for given player",
+            description = "Player statistics",
             content = {
                 @Content(
                     mediaType = "application/json",
@@ -71,7 +72,7 @@ public class StatsController {
     })
     public ResponseEntity<PlayerStats> playerStats(
         @RequestParam(value = "uuid", required = false) UUID uuid,
-        @RequestParam(value = "playerName", required = false) String playerName
+        @Parameter(description = "Resolves to current UUID") @RequestParam(value = "playerName", required = false) String playerName
     ) {
         if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();

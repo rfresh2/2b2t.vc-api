@@ -1,6 +1,7 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -55,7 +56,7 @@ public class DataDumpController {
     })
     public ResponseEntity<String> getPlayerDataDump(
         @RequestParam(value = "uuid", required = false) UUID uuid,
-        @RequestParam(value = "playerName", required = false) String playerName
+        @Parameter(description = "Resolves to current UUID") @RequestParam(value = "playerName", required = false) String playerName
     ) {
         if (uuid == null && playerName == null)
             return ResponseEntity.badRequest().build();

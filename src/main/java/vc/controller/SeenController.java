@@ -1,6 +1,7 @@
 package vc.controller;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -61,7 +62,7 @@ public class SeenController {
     })
     public ResponseEntity<SeenResponse> seen(
             @RequestParam(value = "uuid", required = false) UUID uuid,
-            @RequestParam(value = "playerName", required = false) String playerName) {
+            @Parameter(description = "Resolves to current UUID") @RequestParam(value = "playerName", required = false) String playerName) {
         if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();
         }

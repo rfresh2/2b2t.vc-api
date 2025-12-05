@@ -36,7 +36,13 @@ public class BotController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "List of suspected bots",
+            description = """
+                List of suspected bots over the past 30 days.
+                
+                Calculated based on number of times a player has been online for at least the max non-prio session time limit.
+                
+                Data is refreshed daily, but the heuristics search over the past 30 days.
+                """,
             content = {
                 @Content(
                     mediaType = "application/json",
