@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 import vc.api.CraftheadRestClient;
+import vc.api.MCProfileRestClient;
 import vc.api.MinetoolsRestClient;
 import vc.api.MojangRestClient;
+import vc.api.model.MCProfileBedrockResponse;
 import vc.api.model.ProfileData;
 
 import java.io.UncheckedIOException;
@@ -27,26 +29,36 @@ public class PlayerLookup {
     private final MojangRestClient mojangRestClient;
     private final CraftheadRestClient craftheadRestClient;
     private final MinetoolsRestClient minetoolsRestClient;
+    private final MCProfileRestClient mcProfileRestClient;
     private final Cache<String, ProfileData> uuidCache = Caffeine.newBuilder()
         .expireAfterWrite(Duration.ofMinutes(30))
         .maximumSize(250)
         .build();
     private final Pattern validUsernamePattern = Pattern.compile("[a-zA-Z0-9_]{1,16}");
+    private final Pattern bedrockUsernamePattern = Pattern.compile("\\.[a-zA-Z0-9_]{1,16}");
 
     public PlayerLookup(
         MojangRestClient mojangRestClient,
         CraftheadRestClient craftheadRestClient,
-        MinetoolsRestClient minetoolsRestClient
+        MinetoolsRestClient minetoolsRestClient,
+        MCProfileRestClient mcProfileRestClient
     ) {
         this.mojangRestClient = mojangRestClient;
         this.craftheadRestClient = craftheadRestClient;
         this.minetoolsRestClient = minetoolsRestClient;
+        this.mcProfileRestClient = mcProfileRestClient;
     }
 
     public Optional<ProfileData> getPlayerIdentity(final String playerName) {
         final ProfileData identityFromCache = uuidCache.getIfPresent(playerName.toLowerCase().trim());
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
+        if (isBedrockUsername(playerName)) {
+            var bedrockName = playerName.substring(1); // chop off . prefix
+            var playerIdentity = lookupIdentityBedrock(bedrockName);
+            playerIdentity.ifPresent(identity -> uuidCache.put(playerName.toLowerCase().trim(), identity));
+            return playerIdentity.map(r -> (ProfileData) r);
+        }
         var playerIdentity = lookupIdentityMojang(playerName)
             .or(() -> lookupIdentityCrafthead(playerName)
                 .or(() -> lookupIdentityMinetools(playerName)));
@@ -149,6 +161,20 @@ public class PlayerLookup {
         return Optional.empty();
     }
 
+    private Optional<MCProfileBedrockResponse> lookupIdentityBedrock(final String playerName) {
+        try {
+            var response = mcProfileRestClient.getBedrockProfileFromGamertag(playerName);
+            return Optional.of(response);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from MCProfile: {}", e.getStatusCode().value(), playerName);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from MCProfile: {}", playerName);
+        } catch (final Exception e) {
+            logger.error("MCProfile unexpected error: {}", playerName, e);
+        }
+        return Optional.empty();
+    }
+
     public URL getAvatarURL(UUID uuid) {
         return getAvatarURL(uuid.toString().replace("-", ""));
     }
@@ -173,7 +199,11 @@ public class PlayerLookup {
         return getPlayerIdentity(username.trim());
     }
 
+    public boolean isBedrockUsername(final String username) {
+        return bedrockUsernamePattern.matcher(username).matches();
+    }
+
     public boolean invalidUsername(final String username) {
-        return !validUsernamePattern.matcher(username).matches();
+        return !validUsernamePattern.matcher(username).matches() && !bedrockUsernamePattern.matcher(username).matches();
     }
 }

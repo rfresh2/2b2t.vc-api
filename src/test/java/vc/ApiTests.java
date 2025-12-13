@@ -8,12 +8,14 @@ import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRe
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import vc.api.CraftheadRestClient;
+import vc.api.MCProfileRestClient;
 import vc.api.MinetoolsRestClient;
 import vc.api.MojangRestClient;
 import vc.controller.*;
 import vc.util.Sort;
 
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,6 +39,8 @@ public class ApiTests {
     private CraftheadRestClient craftheadRestClient;
     @Autowired
     private MinetoolsRestClient minetoolsRestClient;
+    @Autowired
+    private MCProfileRestClient mcProfileRestClient;
 
     @Test
     public void homepageTest() {
@@ -324,6 +328,16 @@ public class ApiTests {
         var response = craftheadRestClient.getProfile("rfresh2");
         assertNotNull(response);
         assertEquals("rfresh2", response.name());
+    }
+
+    @Test
+    public void playerLookupMCProfileBedrockGamertagTest() {
+        var response = mcProfileRestClient.getBedrockProfileFromGamertag("Dream");
+        assertNotNull(response);
+        assertEquals("Dream", response.gamertag());
+        assertEquals("Dream", response.name());
+        assertEquals(UUID.fromString("00000000-0000-0000-0009-01f2496167c9"), response.uuid());
+        assertFalse(response.linked());
     }
 
     @Test
