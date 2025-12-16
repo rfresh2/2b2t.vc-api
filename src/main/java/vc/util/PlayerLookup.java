@@ -70,6 +70,11 @@ public class PlayerLookup {
         final ProfileData identityFromCache = uuidCache.getIfPresent(uuid.toString());
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
+        if (isBedrockUUID(uuid)) {
+            var playerIdentity = lookupIdentityBedrock(uuid);
+            playerIdentity.ifPresent(identity -> uuidCache.put(uuid.toString(), identity));
+            return playerIdentity.map(r -> (ProfileData) r);
+        }
         var playerIdentity = lookupIdentityMojang(uuid)
             .or(() -> lookupIdentityCrafthead(uuid)
                 .or(() -> lookupIdentityMinetools(uuid)));
@@ -175,6 +180,20 @@ public class PlayerLookup {
         return Optional.empty();
     }
 
+    private Optional<MCProfileBedrockResponse> lookupIdentityBedrock(final UUID uuid) {
+        try {
+            var response = mcProfileRestClient.getBedrockProfileFromUUID(uuid);
+            return Optional.of(response);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from MCProfile: {}", e.getStatusCode().value(), uuid);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from MCProfile: {}", uuid);
+        } catch (final Exception e) {
+            logger.error("MCProfile unexpected error: {}", uuid, e);
+        }
+        return Optional.empty();
+    }
+
     public URL getAvatarURL(UUID uuid) {
         return getAvatarURL(uuid.toString().replace("-", ""));
     }
@@ -205,5 +224,11 @@ public class PlayerLookup {
 
     public boolean invalidUsername(final String username) {
         return !validUsernamePattern.matcher(username).matches() && !bedrockUsernamePattern.matcher(username).matches();
+    }
+
+    public boolean isBedrockUUID(UUID uuid) {
+        if (uuid.getMostSignificantBits() != 0L) return false;
+        if (uuid.getLeastSignificantBits() == 0L) return false;
+        return Long.compareUnsigned(uuid.getLeastSignificantBits(), 0x0009000000000000L) > 0;
     }
 }
