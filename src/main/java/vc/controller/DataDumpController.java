@@ -30,7 +30,7 @@ public class DataDumpController {
         this.playerLookup = playerLookup;
     }
 
-    @RateLimiter(name = "main")
+    @RateLimiter(name = "dump")
     @GetMapping("/dump/player")
     @Cacheable("playerDataDump")
     @ApiResponses(value = {
