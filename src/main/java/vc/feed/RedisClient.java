@@ -27,10 +27,10 @@ public class RedisClient implements DisposableBean {
     public RedissonClient buildRedisClient(final String redisURL, final String redisUsername, final String redisPassword) {
         Config config = new Config();
         config
-            .useSingleServer()
-            .setAddress(redisURL)
             .setUsername(redisUsername)
             .setPassword(redisPassword)
+            .useSingleServer()
+            .setAddress(redisURL)
             .setConnectionMinimumIdleSize(1);
         config.setCodec(StringCodec.INSTANCE);
         return Redisson.create(config);
