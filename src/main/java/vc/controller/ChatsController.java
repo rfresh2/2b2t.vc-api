@@ -1,5 +1,6 @@
 package vc.controller;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -52,6 +53,7 @@ public class ChatsController {
 
     @GetMapping("/chats")
     @RateLimiter(name = "main")
+    @Bulkhead(name = "chats-ddb")
     @Cacheable("chats")
     @ApiResponses(value = {
         @ApiResponse(
@@ -238,6 +240,7 @@ public class ChatsController {
 
     @GetMapping("/chats/word-count")
     @RateLimiter(name = "main")
+    @Bulkhead(name = "chats-ddb")
     @Cacheable("chats-word-count")
     @ApiResponses(value = {
         @ApiResponse(
@@ -268,6 +271,7 @@ public class ChatsController {
 
     @GetMapping("/chats/search")
     @RateLimiter(name = "main")
+    @Bulkhead(name = "chats-ddb")
     @Cacheable("chats-search")
     @ApiResponses(value = {
         @ApiResponse(
