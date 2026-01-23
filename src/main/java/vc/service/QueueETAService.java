@@ -16,7 +16,7 @@ import static vc.data.dto.tables.Queuewait.QUEUEWAIT;
 @Component
 public class QueueETAService {
     private static final Logger LOGGER = LoggerFactory.getLogger(QueueETAService.class);
-    private static final int DATA_DAY_RANGE = 3;
+    private static final int DATA_DAY_RANGE = 7;
     private static final long MIN_QUEUE_TIME_SECONDS = TimeUnit.HOURS.toSeconds(3);
     private static final int UPDATE_INTERVAL_HOURS = 6;
 
