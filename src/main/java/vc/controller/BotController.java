@@ -31,7 +31,7 @@ public class BotController {
     public record BotsMonthResponse(List<BotData> players) {}
 
     @GetMapping("/bots/month")
-    @RateLimiter(name = "main")
+    @RateLimiter(name = "cached")
     @Cacheable("botsMonth")
     @ApiResponses(value = {
         @ApiResponse(

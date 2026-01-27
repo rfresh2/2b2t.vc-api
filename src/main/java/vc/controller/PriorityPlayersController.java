@@ -32,7 +32,7 @@ public class PriorityPlayersController {
     public record PriorityPlayer(String playerName, UUID uuid) { }
 
     @GetMapping("/players/priority")
-    @RateLimiter(name = "main")
+    @RateLimiter(name = "cached")
     @Cacheable("priorityPlayers")
     @ApiResponses(value = {
         @ApiResponse(

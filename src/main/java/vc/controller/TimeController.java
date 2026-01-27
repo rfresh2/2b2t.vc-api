@@ -27,7 +27,7 @@ public class TimeController {
     public record TimeResponse(OffsetDateTime lastUpdated, int worldTime) {}
 
     @GetMapping("/time")
-    @RateLimiter(name = "main")
+    @RateLimiter(name = "cached")
     @Cacheable("worldtime")
     @ApiResponses(value = {
         @ApiResponse(

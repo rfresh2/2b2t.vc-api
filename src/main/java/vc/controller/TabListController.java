@@ -35,7 +35,7 @@ public class TabListController {
     public record TablistInfoEntry(String playerName, UUID uuid, boolean prio, boolean bot) { }
 
     @GetMapping("/tablist")
-    @RateLimiter(name = "main")
+    @RateLimiter(name = "cached")
     @Cacheable("tablist")
     @ApiResponses(value = {
         @ApiResponse(
@@ -74,7 +74,7 @@ public class TabListController {
     }
 
     @GetMapping("/tablist/info")
-    @RateLimiter(name = "main")
+    @RateLimiter(name = "cached")
     @Cacheable("tablistInfo")
     @ApiResponses(value = {
         @ApiResponse(
