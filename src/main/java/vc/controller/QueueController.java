@@ -107,6 +107,6 @@ public class QueueController {
         )
     })
     public ResponseEntity<QueueEtaEquation> etaEquation() {
-        return ResponseEntity.ok(new QueueEtaEquation(queueETAService.getFactor(), 1.04));
+        return ResponseEntity.ok(new QueueEtaEquation(queueETAService.getFactor(), 1.09));
     }
 }

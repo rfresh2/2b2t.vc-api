@@ -30,6 +30,7 @@ public class CacheConfig {
             var customCache = Caffeine.newBuilder()
                 .maximumSize(250)
                 .expireAfterWrite(ttl)
+                .recordStats()
                 .build();
             caffeineCacheManager.registerCustomCache(id, customCache);
         });
