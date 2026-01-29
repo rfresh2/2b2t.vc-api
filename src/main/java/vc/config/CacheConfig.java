@@ -1,30 +1,38 @@
 package vc.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.CaffeineSpec;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.concurrent.TimeUnit;
-
 @Configuration
 @EnableCaching
+@EnableConfigurationProperties(CacheTtlProperties.class)
 public class CacheConfig {
+    private final CacheTtlProperties cacheTtlProperties;
 
-    @Bean
-    public Caffeine<Object, Object> caffeineConfig() {
-        return Caffeine.newBuilder()
-                .expireAfterWrite(5, TimeUnit.MINUTES)
-                .initialCapacity(10)
-                .maximumSize(250);
+    public CacheConfig(final CacheTtlProperties cacheTtlProperties) {
+        this.cacheTtlProperties = cacheTtlProperties;
     }
 
+
     @Bean
-    public CacheManager cacheManager(Caffeine<Object, Object> caffeine) {
+    public CacheManager cacheManager() {
+        var defaultTtl = cacheTtlProperties.getDefaultTtl();
+        var defaultSpec = CaffeineSpec.parse("maximumSize=250,expireAfterWrite=" + defaultTtl.getSeconds() + "s");
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
-        caffeineCacheManager.setCaffeine(caffeine);
+        caffeineCacheManager.setCaffeineSpec(defaultSpec);
+        cacheTtlProperties.getOverrides().forEach((id, ttl) -> {
+            var customCache = Caffeine.newBuilder()
+                .maximumSize(250)
+                .expireAfterWrite(ttl)
+                .build();
+            caffeineCacheManager.registerCustomCache(id, customCache);
+        });
         return caffeineCacheManager;
     }
 }
