@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -105,6 +106,17 @@ public class FeedController {
     public SseEmitter connectionsFeedSSE(HttpServletResponse response) {
         response.addHeader("X-Accel-Buffering", "no");
         return connectionsFeed.addEmitter();
+    }
+
+    @Scheduled(fixedRateString = "1m")
+    public void heartbeatActiveFeeds() {
+        deathsFeed.emitters().values().forEach(emitter -> {
+            try {
+                emitter.send(SseEmitter.event().comment("heartbeat").build());
+            } catch (Exception e) {
+                // fall through
+            }
+        });
     }
 
     public void shutdownFeeds() {
