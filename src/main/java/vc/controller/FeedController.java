@@ -117,6 +117,20 @@ public class FeedController {
                 // fall through
             }
         });
+        chatFeed.emitters().values().forEach(emitter -> {
+            try {
+                emitter.send(SseEmitter.event().comment("heartbeat").build());
+            } catch (Exception e) {
+                // fall through
+            }
+        });
+        connectionsFeed.emitters().values().forEach(emitter -> {
+            try {
+                emitter.send(SseEmitter.event().comment("heartbeat").build());
+            } catch (Exception e) {
+                // fall through
+            }
+        });
     }
 
     public void shutdownFeeds() {
