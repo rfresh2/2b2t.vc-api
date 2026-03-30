@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.4</version>
+		<version>4.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>vc</groupId>
@@ -91,7 +91,7 @@
 		<dependency>
 			<groupId>org.duckdb</groupId>
 			<artifactId>duckdb_jdbc</artifactId>
-			<version>1.5.0.0</version>
+			<version>1.5.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.rfresh2.resilience4j</groupId>
