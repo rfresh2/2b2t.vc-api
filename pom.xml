@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>org.jdbi</groupId>
 			<artifactId>jdbi3-postgres</artifactId>
-			<version>3.52.0</version>
+			<version>3.52.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.duckdb</groupId>
@@ -118,7 +118,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-scalar</artifactId>
-			<version>3.0.2</version>
+			<version>3.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>me.paulschwarz</groupId>
