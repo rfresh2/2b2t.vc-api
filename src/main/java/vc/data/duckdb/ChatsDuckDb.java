@@ -71,7 +71,7 @@ public class ChatsDuckDb {
         LOGGER.info("Syncing Chats...");
         lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
-            var lastSyncTime = handle.select("SELECT coalesce(max(time), '2016-06-01 00:00:00') FROM d_chats;")
+            var lastSyncTime = handle.select("SELECT coalesce(max(time), '2011-01-01 00:00:00') FROM d_chats;")
                 .mapTo(OffsetDateTime.class)
                 .findOne()
                 .orElseThrow();
@@ -180,7 +180,7 @@ public class ChatsDuckDb {
             }
             int totalCount = handle.select(countQuery)
                 .bind("word", "%" + (word == null ? "" : word) + "%")
-                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
+                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2011-01-01T00:00:00Z"))
                 .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
                 .bind("uuid", uuid == null ? "" : uuid.toString())
                 .mapTo(Integer.class)
@@ -209,7 +209,7 @@ public class ChatsDuckDb {
                 """;
             var results = handle.select(resultQuery)
                 .bind("word", "%" + (word == null ? "" : word) + "%")
-                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2018-01-01T00:00:00Z"))
+                .bind("startDate", startDate != null ? startDate : OffsetDateTime.parse("2011-01-01T00:00:00Z"))
                 .bind("endDate", endDate != null ? endDate : OffsetDateTime.now())
                 .bind("uuid", uuid == null ? "" : uuid.toString())
                 .bind("pageSize", pageSize)
