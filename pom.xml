@@ -86,12 +86,12 @@
 		<dependency>
 			<groupId>org.jdbi</groupId>
 			<artifactId>jdbi3-postgres</artifactId>
-			<version>3.52.1</version>
+			<version>3.53.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.duckdb</groupId>
 			<artifactId>duckdb_jdbc</artifactId>
-			<version>1.5.2.0</version>
+			<version>1.5.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.rfresh2.resilience4j</groupId>
