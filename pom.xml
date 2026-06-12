@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.6</version>
+		<version>4.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>vc</groupId>
@@ -15,11 +15,9 @@
 	<description>2b2t data and stats API</description>
 	<properties>
 		<java.version>25</java.version>
-		<maven.compiler.release></maven.compiler.release>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<apiTests>false</apiTests>
-		<jooq.version>3.20.8</jooq.version>
+		<jooq.version>3.21.5</jooq.version>
 	</properties>
 
 	<dependencyManagement>
