@@ -9,6 +9,6 @@ public record DeathsFeedRecord(
     String victimPlayerName,
     UUID victimPlayerUuid,
     String killerPlayerName,
-    UUID killerPlayerUuid
-) {
-}
+    UUID killerPlayerUuid,
+    String component
+) { }
