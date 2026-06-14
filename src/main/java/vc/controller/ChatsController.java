@@ -80,6 +80,8 @@ public class ChatsController {
               
               If uuid or playerName is provided, it must be for a valid and existing account.
               
+              Either word or player must be provided.
+              
               If pageSize is provided, it must be between 1 and 100.
               
               If startDate and endDate are provided, they must be valid dates in ISO 8601 format, example: "2022-10-31".
@@ -110,6 +112,9 @@ public class ChatsController {
                 return ResponseEntity.noContent().build();
             }
             resolvedUuid = optionalResolvedUuid.get();
+        }
+        if (word == null && resolvedUuid == null) {
+            return ResponseEntity.badRequest().build();
         }
         if (sort == null) sort = Sort.DESC;
         final int size = pageSize == null ? 25 : pageSize;
