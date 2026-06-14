@@ -42,8 +42,7 @@ public class ChatsDuckDb {
     private void refreshConnection() {
         lock.writeLock().lock();
         try {
-            duckDbInstance.connection.close();
-            duckDbInstance.initializeConnection();
+            duckDbInstance.refreshConnectionPool();
         } catch (Exception e) {
             LOGGER.error("Error while refreshing connection", e);
         } finally {
