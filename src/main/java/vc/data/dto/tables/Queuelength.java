@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -129,7 +130,7 @@ public class Queuelength extends TableImpl<QueuelengthRecord> {
      */
     @Override
     public Queuelength where(Condition condition) {
-        return new Queuelength(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new Queuelength(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -196,7 +197,7 @@ public class Queuelength extends TableImpl<QueuelengthRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Queuelength whereExists(Select<?> select) {
+    public Queuelength whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -204,7 +205,7 @@ public class Queuelength extends TableImpl<QueuelengthRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Queuelength whereNotExists(Select<?> select) {
+    public Queuelength whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

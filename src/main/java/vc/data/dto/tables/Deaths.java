@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -155,7 +156,7 @@ public class Deaths extends TableImpl<DeathsRecord> {
      */
     @Override
     public Deaths where(Condition condition) {
-        return new Deaths(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new Deaths(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -222,7 +223,7 @@ public class Deaths extends TableImpl<DeathsRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Deaths whereExists(Select<?> select) {
+    public Deaths whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -230,7 +231,7 @@ public class Deaths extends TableImpl<DeathsRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Deaths whereNotExists(Select<?> select) {
+    public Deaths whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

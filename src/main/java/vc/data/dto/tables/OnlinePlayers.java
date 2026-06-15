@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -151,7 +152,7 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
      */
     @Override
     public OnlinePlayers where(Condition condition) {
-        return new OnlinePlayers(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new OnlinePlayers(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -218,7 +219,7 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public OnlinePlayers whereExists(Select<?> select) {
+    public OnlinePlayers whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -226,7 +227,7 @@ public class OnlinePlayers extends TableImpl<OnlinePlayersRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public OnlinePlayers whereNotExists(Select<?> select) {
+    public OnlinePlayers whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

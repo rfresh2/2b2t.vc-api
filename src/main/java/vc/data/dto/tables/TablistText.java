@@ -40,7 +40,7 @@ public class TablistText extends TableImpl<TablistTextRecord> {
     /**
      * The column <code>public.tablist_text.id</code>.
      */
-    public final TableField<TablistTextRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+    public final TableField<TablistTextRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).generatedAlwaysAsIdentity(), this, "");
 
     /**
      * The column <code>public.tablist_text.time</code>.
@@ -155,7 +155,7 @@ public class TablistText extends TableImpl<TablistTextRecord> {
      */
     @Override
     public TablistText where(Condition condition) {
-        return new TablistText(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new TablistText(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -222,7 +222,7 @@ public class TablistText extends TableImpl<TablistTextRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public TablistText whereExists(Select<?> select) {
+    public TablistText whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -230,7 +230,7 @@ public class TablistText extends TableImpl<TablistTextRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public TablistText whereNotExists(Select<?> select) {
+    public TablistText whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

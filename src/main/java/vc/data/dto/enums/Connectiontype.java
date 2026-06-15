@@ -7,6 +7,7 @@ package vc.data.dto.enums;
 import org.jooq.Catalog;
 import org.jooq.EnumType;
 import org.jooq.Schema;
+
 import vc.data.dto.Public;
 
 

@@ -41,7 +41,7 @@ public class Playtime extends TableImpl<PlaytimeRecord> {
     /**
      * The column <code>public.playtime.id</code>.
      */
-    public final TableField<PlaytimeRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+    public final TableField<PlaytimeRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).generatedAlwaysAsIdentity(), this, "");
 
     /**
      * The column <code>public.playtime.player_uuid</code>.
@@ -156,7 +156,7 @@ public class Playtime extends TableImpl<PlaytimeRecord> {
      */
     @Override
     public Playtime where(Condition condition) {
-        return new Playtime(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new Playtime(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -223,7 +223,7 @@ public class Playtime extends TableImpl<PlaytimeRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Playtime whereExists(Select<?> select) {
+    public Playtime whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -231,7 +231,7 @@ public class Playtime extends TableImpl<PlaytimeRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Playtime whereNotExists(Select<?> select) {
+    public Playtime whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -140,7 +141,7 @@ public class TopKillsMonthView extends TableImpl<TopKillsMonthViewRecord> {
      */
     @Override
     public TopKillsMonthView where(Condition condition) {
-        return new TopKillsMonthView(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new TopKillsMonthView(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -207,7 +208,7 @@ public class TopKillsMonthView extends TableImpl<TopKillsMonthViewRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public TopKillsMonthView whereExists(Select<?> select) {
+    public TopKillsMonthView whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -215,7 +216,7 @@ public class TopKillsMonthView extends TableImpl<TopKillsMonthViewRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public TopKillsMonthView whereNotExists(Select<?> select) {
+    public TopKillsMonthView whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

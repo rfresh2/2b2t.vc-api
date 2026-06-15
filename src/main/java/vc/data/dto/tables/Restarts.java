@@ -45,7 +45,7 @@ public class Restarts extends TableImpl<RestartsRecord> {
     /**
      * The column <code>public.restarts.id</code>.
      */
-    public final TableField<RestartsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<RestartsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     private Restarts(Name alias, Table<RestartsRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
@@ -79,11 +79,6 @@ public class Restarts extends TableImpl<RestartsRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : Public.PUBLIC;
-    }
-
-    @Override
-    public Identity<RestartsRecord, Integer> getIdentity() {
-        return (Identity<RestartsRecord, Integer>) super.getIdentity();
     }
 
     @Override
@@ -135,7 +130,7 @@ public class Restarts extends TableImpl<RestartsRecord> {
      */
     @Override
     public Restarts where(Condition condition) {
-        return new Restarts(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new Restarts(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -202,7 +197,7 @@ public class Restarts extends TableImpl<RestartsRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Restarts whereExists(Select<?> select) {
+    public Restarts whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -210,7 +205,7 @@ public class Restarts extends TableImpl<RestartsRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Restarts whereNotExists(Select<?> select) {
+    public Restarts whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

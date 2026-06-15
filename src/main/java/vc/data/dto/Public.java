@@ -37,7 +37,7 @@ public class Public extends SchemaImpl {
     public final Chats CHATS = Chats.CHATS;
 
     /**
-     * schedule a pg_cron job
+     * The table <code>public.connections</code>.
      */
     public final Connections CONNECTIONS = Connections.CONNECTIONS;
 
@@ -167,11 +167,6 @@ public class Public extends SchemaImpl {
      * The table <code>public.max_cons_month_view</code>.
      */
     public final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
-
-    /**
-     * The table <code>public.names</code>.
-     */
-    public final Names NAMES = Names.NAMES;
 
     /**
      * The table <code>public.online_players</code>.
@@ -310,7 +305,6 @@ public class Public extends SchemaImpl {
             GetUuidData.GET_UUID_DATA,
             LastSeen.LAST_SEEN,
             MaxConsMonthView.MAX_CONS_MONTH_VIEW,
-            Names.NAMES,
             OnlinePlayers.ONLINE_PLAYERS,
             PlayerStats.PLAYER_STATS,
             Playercount.PLAYERCOUNT,

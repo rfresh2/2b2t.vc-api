@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -135,7 +136,7 @@ public class Chats extends TableImpl<ChatsRecord> {
      */
     @Override
     public Chats where(Condition condition) {
-        return new Chats(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new Chats(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -202,7 +203,7 @@ public class Chats extends TableImpl<ChatsRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Chats whereExists(Select<?> select) {
+    public Chats whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -210,7 +211,7 @@ public class Chats extends TableImpl<ChatsRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Chats whereNotExists(Select<?> select) {
+    public Chats whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

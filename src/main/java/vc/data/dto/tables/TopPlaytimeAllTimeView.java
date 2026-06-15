@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -132,7 +133,7 @@ public class TopPlaytimeAllTimeView extends TableImpl<TopPlaytimeAllTimeViewReco
      */
     @Override
     public TopPlaytimeAllTimeView where(Condition condition) {
-        return new TopPlaytimeAllTimeView(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new TopPlaytimeAllTimeView(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -199,7 +200,7 @@ public class TopPlaytimeAllTimeView extends TableImpl<TopPlaytimeAllTimeViewReco
      * Create an inline derived table from this table
      */
     @Override
-    public TopPlaytimeAllTimeView whereExists(Select<?> select) {
+    public TopPlaytimeAllTimeView whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -207,7 +208,7 @@ public class TopPlaytimeAllTimeView extends TableImpl<TopPlaytimeAllTimeViewReco
      * Create an inline derived table from this table
      */
     @Override
-    public TopPlaytimeAllTimeView whereNotExists(Select<?> select) {
+    public TopPlaytimeAllTimeView whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

@@ -26,12 +26,12 @@ public class Playtime extends AbstractRoutine<Integer> {
     /**
      * The parameter <code>public.playtime.RETURN_VALUE</code>.
      */
-    public static final Parameter<Integer> RETURN_VALUE = Internal.createParameter("RETURN_VALUE", SQLDataType.INTEGER, false, false);
+    public static final Parameter<Integer> RETURN_VALUE = Internal.createParameter("RETURN_VALUE", SQLDataType.INTEGER, false);
 
     /**
      * The parameter <code>public.playtime.p_uuid</code>.
      */
-    public static final Parameter<UUID> P_UUID = Internal.createParameter("p_uuid", SQLDataType.UUID, false, false);
+    public static final Parameter<UUID> P_UUID = Internal.createParameter("p_uuid", SQLDataType.UUID, false);
 
     /**
      * Create a new routine call instance
@@ -46,8 +46,9 @@ public class Playtime extends AbstractRoutine<Integer> {
     /**
      * Set the <code>p_uuid</code> parameter IN value to the routine
      */
-    public void setPUuid(UUID value) {
+    public Playtime setPUuid(UUID value) {
         setValue(P_UUID, value);
+        return this;
     }
 
     /**

@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -39,7 +40,7 @@ public class Queuewait extends TableImpl<QueuewaitRecord> {
     /**
      * The column <code>public.queuewait.id</code>.
      */
-    public final TableField<QueuewaitRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<QueuewaitRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).generatedAlwaysAsIdentity(), this, "");
 
     /**
      * The column <code>public.queuewait.player_name</code>.
@@ -154,7 +155,7 @@ public class Queuewait extends TableImpl<QueuewaitRecord> {
      */
     @Override
     public Queuewait where(Condition condition) {
-        return new Queuewait(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new Queuewait(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -221,7 +222,7 @@ public class Queuewait extends TableImpl<QueuewaitRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Queuewait whereExists(Select<?> select) {
+    public Queuewait whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -229,7 +230,7 @@ public class Queuewait extends TableImpl<QueuewaitRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Queuewait whereNotExists(Select<?> select) {
+    public Queuewait whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

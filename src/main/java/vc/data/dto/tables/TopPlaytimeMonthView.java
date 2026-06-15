@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -131,7 +132,7 @@ public class TopPlaytimeMonthView extends TableImpl<TopPlaytimeMonthViewRecord> 
      */
     @Override
     public TopPlaytimeMonthView where(Condition condition) {
-        return new TopPlaytimeMonthView(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new TopPlaytimeMonthView(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -198,7 +199,7 @@ public class TopPlaytimeMonthView extends TableImpl<TopPlaytimeMonthViewRecord> 
      * Create an inline derived table from this table
      */
     @Override
-    public TopPlaytimeMonthView whereExists(Select<?> select) {
+    public TopPlaytimeMonthView whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -206,7 +207,7 @@ public class TopPlaytimeMonthView extends TableImpl<TopPlaytimeMonthViewRecord> 
      * Create an inline derived table from this table
      */
     @Override
-    public TopPlaytimeMonthView whereNotExists(Select<?> select) {
+    public TopPlaytimeMonthView whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }

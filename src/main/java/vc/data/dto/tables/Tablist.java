@@ -6,6 +6,7 @@ package vc.data.dto.tables;
 
 import org.jooq.*;
 import org.jooq.impl.DSL;
+import org.jooq.impl.Internal;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
 import vc.data.dto.Public;
@@ -130,7 +131,7 @@ public class Tablist extends TableImpl<TablistRecord> {
      */
     @Override
     public Tablist where(Condition condition) {
-        return new Tablist(getQualifiedName(), aliased() ? this : null, null, condition);
+        return new Tablist(getQualifiedName(), aliased() ? this : null, null, Internal.condition(this, condition));
     }
 
     /**
@@ -197,7 +198,7 @@ public class Tablist extends TableImpl<TablistRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Tablist whereExists(Select<?> select) {
+    public Tablist whereExists(TableLike<?> select) {
         return where(DSL.exists(select));
     }
 
@@ -205,7 +206,7 @@ public class Tablist extends TableImpl<TablistRecord> {
      * Create an inline derived table from this table
      */
     @Override
-    public Tablist whereNotExists(Select<?> select) {
+    public Tablist whereNotExists(TableLike<?> select) {
         return where(DSL.notExists(select));
     }
 }
