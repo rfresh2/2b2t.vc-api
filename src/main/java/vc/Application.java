@@ -29,6 +29,18 @@ import java.util.concurrent.ScheduledExecutorService;
 			2b2t Data And Statistics API
 			
 			Discord Bot Invite: https://bot.2b2t.vc
+			
+			Queue Dashboard: https://q.2b2t.vc
+			
+			Support & API Keys: https://discord.gg/nJZrSaRKtb
+		
+			Source Code:
+			
+			API: https://github.com/rfresh2/2b2t.vc-api
+			
+			Discord Bot: https://github.com/rfresh2/2b2t.vc-discord
+			
+			In-game Bots: https://github.com/rfresh2/ZenithProxy
 			""",
 		version = "1.0.0"
 	)
