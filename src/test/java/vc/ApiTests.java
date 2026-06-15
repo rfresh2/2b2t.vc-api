@@ -7,10 +7,9 @@ import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import vc.api.CraftheadRestClient;
-import vc.api.MCProfileRestClient;
-import vc.api.MinetoolsRestClient;
-import vc.api.MojangRestClient;
+import vc.api.crafthead.CraftheadRestClient;
+import vc.api.mcprofile.MCProfileRestClient;
+import vc.api.mojang.MojangRestClient;
 import vc.controller.*;
 import vc.util.Sort;
 
@@ -37,8 +36,6 @@ public class ApiTests {
     private MojangRestClient mojangRestClient;
     @Autowired
     private CraftheadRestClient craftheadRestClient;
-    @Autowired
-    private MinetoolsRestClient minetoolsRestClient;
     @Autowired
     private MCProfileRestClient mcProfileRestClient;
 
@@ -310,15 +307,15 @@ public class ApiTests {
     }
 
     @Test
-    public void playerLookupMinetoolsTest() {
-        var response = minetoolsRestClient.getProfileFromUsername("rfresh2");
+    public void playerLookupMCProfileTest() {
+        var response = mcProfileRestClient.getProfile("rfresh2");
         assertNotNull(response);
         assertEquals("rfresh2", response.name());
     }
 
     @Test
     public void playerLookupMojangTest() {
-        var response = mojangRestClient.getProfileFromUsername("rfresh2");
+        var response = mojangRestClient.getProfile("rfresh2");
         assertNotNull(response);
         assertEquals("rfresh2", response.name());
     }
@@ -332,7 +329,7 @@ public class ApiTests {
 
     @Test
     public void playerLookupMCProfileBedrockGamertagTest() {
-        var response = mcProfileRestClient.getBedrockProfileFromGamertag("Dream");
+        var response = mcProfileRestClient.getBedrockProfile("Dream");
         assertNotNull(response);
         assertEquals("Dream", response.gamertag());
         assertEquals("Dream", response.name());

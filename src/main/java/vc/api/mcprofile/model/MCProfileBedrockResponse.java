@@ -1,4 +1,6 @@
-package vc.api.model;
+package vc.api.mcprofile.model;
+
+import vc.api.model.ProfileData;
 
 import java.util.UUID;
 
@@ -14,7 +16,7 @@ public record MCProfileBedrockResponse(
 ) implements ProfileData {
     @Override
     public String name() {
-        return "." + gamertag;
+        return ("." + gamertag).replace(" ", "_");
     }
 
     @Override

@@ -1,10 +1,11 @@
-package vc.api;
+package vc.api.mcprofile;
 
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
-import vc.api.model.MCProfileBedrockResponse;
+import vc.api.mcprofile.model.MCProfileBedrockResponse;
+import vc.api.mcprofile.model.MCProfileJavaResponse;
 
 import java.util.UUID;
 
@@ -18,7 +19,7 @@ public class MCProfileRestClient {
             .build();
     }
 
-    public MCProfileBedrockResponse getBedrockProfileFromGamertag(final String gamertag) {
+    public MCProfileBedrockResponse getBedrockProfile(final String gamertag) {
         var response = restClient.get()
             .uri("/bedrock/gamertag/{gamertag}", gamertag)
             .retrieve()
@@ -30,11 +31,33 @@ public class MCProfileRestClient {
     }
 
 
-    public MCProfileBedrockResponse getBedrockProfileFromUUID(final UUID uuid) {
+    public MCProfileBedrockResponse getBedrockProfile(final UUID uuid) {
         var response = restClient.get()
             .uri("/bedrock/xuid/{xuid}", xuidFromUUID(uuid))
             .retrieve()
             .body(MCProfileBedrockResponse.class);
+        if (response == null) {
+            throw new RestClientException("Received invalid response from mcprofile.io");
+        }
+        return response;
+    }
+
+    public MCProfileJavaResponse getProfile(String username) {
+        var response = restClient.get()
+            .uri("/java/username/{username}", username)
+            .retrieve()
+            .body(MCProfileJavaResponse.class);
+        if (response == null) {
+            throw new RestClientException("Received invalid response from mcprofile.io");
+        }
+        return response;
+    }
+
+    public MCProfileJavaResponse getProfile(UUID uuid) {
+        var response = restClient.get()
+            .uri("/java/uuid/{uuid}", uuid)
+            .retrieve()
+            .body(MCProfileJavaResponse.class);
         if (response == null) {
             throw new RestClientException("Received invalid response from mcprofile.io");
         }

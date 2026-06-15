@@ -1,4 +1,6 @@
-package vc.api.model;
+package vc.api.crafthead.model;
+
+import vc.api.model.ProfileData;
 
 import java.util.List;
 import java.util.UUID;

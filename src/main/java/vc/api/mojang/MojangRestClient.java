@@ -1,10 +1,10 @@
-package vc.api;
+package vc.api.mojang;
 
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
-import vc.api.model.MojangProfileResponse;
 import vc.api.model.ProfileData;
+import vc.api.mojang.model.MojangProfileResponse;
 
 import java.util.UUID;
 
@@ -19,14 +19,14 @@ public class MojangRestClient {
             .build();
     }
 
-    public ProfileData getProfileFromUsername(final String username) {
+    public ProfileData getProfile(final String username) {
         return restClient.get()
             .uri("/minecraft/profile/lookup/name/{username}", username)
             .retrieve()
             .body(MojangProfileResponse.class);
     }
 
-    public ProfileData getProfileFromUuid(final UUID uuid) {
+    public ProfileData getProfile(final UUID uuid) {
         return restClient.get()
             .uri("/minecraft/profile/lookup/{uuid}", uuid)
             .retrieve()

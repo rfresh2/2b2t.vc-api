@@ -7,12 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
-import vc.api.CraftheadRestClient;
-import vc.api.MCProfileRestClient;
-import vc.api.MinetoolsRestClient;
-import vc.api.MojangRestClient;
-import vc.api.model.MCProfileBedrockResponse;
+import vc.api.crafthead.CraftheadRestClient;
+import vc.api.mcprofile.MCProfileRestClient;
+import vc.api.mcprofile.model.MCProfileBedrockResponse;
 import vc.api.model.ProfileData;
+import vc.api.mojang.MojangRestClient;
 
 import java.io.UncheckedIOException;
 import java.net.MalformedURLException;
@@ -28,7 +27,6 @@ public class PlayerLookup {
     private static final Logger logger = LoggerFactory.getLogger(PlayerLookup.class);
     private final MojangRestClient mojangRestClient;
     private final CraftheadRestClient craftheadRestClient;
-    private final MinetoolsRestClient minetoolsRestClient;
     private final MCProfileRestClient mcProfileRestClient;
     private final Cache<String, ProfileData> uuidCache = Caffeine.newBuilder()
         .expireAfterWrite(Duration.ofMinutes(30))
@@ -40,12 +38,10 @@ public class PlayerLookup {
     public PlayerLookup(
         MojangRestClient mojangRestClient,
         CraftheadRestClient craftheadRestClient,
-        MinetoolsRestClient minetoolsRestClient,
         MCProfileRestClient mcProfileRestClient
     ) {
         this.mojangRestClient = mojangRestClient;
         this.craftheadRestClient = craftheadRestClient;
-        this.minetoolsRestClient = minetoolsRestClient;
         this.mcProfileRestClient = mcProfileRestClient;
     }
 
@@ -62,7 +58,7 @@ public class PlayerLookup {
         }
         var playerIdentity = lookupIdentityMojang(playerName)
             .or(() -> lookupIdentityCrafthead(playerName)
-                .or(() -> lookupIdentityMinetools(playerName)));
+                .or(() -> lookupIdentityMCProfile(playerName)));
         playerIdentity.ifPresent(identity -> uuidCache.put(playerName.toLowerCase().trim(), identity));
         return playerIdentity;
     }
@@ -78,14 +74,14 @@ public class PlayerLookup {
         }
         var playerIdentity = lookupIdentityMojang(uuid)
             .or(() -> lookupIdentityCrafthead(uuid)
-                .or(() -> lookupIdentityMinetools(uuid)));
+                .or(() -> lookupIdentityMCProfile(uuid)));
         playerIdentity.ifPresent(identity -> uuidCache.put(uuid.toString(), identity));
         return playerIdentity;
     }
 
     private Optional<ProfileData> lookupIdentityMojang(final String playerName) {
         try {
-            ProfileData profile = mojangRestClient.getProfileFromUsername(playerName);
+            ProfileData profile = mojangRestClient.getProfile(playerName);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
             logger.error("{} from Mojang: {}", e.getStatusCode().value(), playerName);
@@ -99,7 +95,7 @@ public class PlayerLookup {
 
     private Optional<ProfileData> lookupIdentityMojang(final UUID uuid) {
         try {
-            ProfileData profile = mojangRestClient.getProfileFromUuid(uuid);
+            ProfileData profile = mojangRestClient.getProfile(uuid);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
             logger.error("{} from Mojang: {}", e.getStatusCode().value(), uuid);
@@ -127,7 +123,7 @@ public class PlayerLookup {
 
     private Optional<ProfileData> lookupIdentityCrafthead(final UUID uuid) {
         try {
-            ProfileData profile = craftheadRestClient.getProfileFromUuid(uuid);
+            ProfileData profile = craftheadRestClient.getProfile(uuid);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
             logger.error("{} from Crafthead: {}", e.getStatusCode().value(), uuid);
@@ -139,37 +135,37 @@ public class PlayerLookup {
         return Optional.empty();
     }
 
-    private Optional<ProfileData> lookupIdentityMinetools(final String playerName) {
+    private Optional<ProfileData> lookupIdentityMCProfile(final String playerName) {
         try {
-            ProfileData profile = minetoolsRestClient.getProfileFromUsername(playerName);
+            ProfileData profile = mcProfileRestClient.getProfile(playerName);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
-            logger.error("{} from MineTools: {}", e.getStatusCode().value(), playerName);
+            logger.error("{} from MCProfile: {}", e.getStatusCode().value(), playerName);
         } catch (final RestClientException e) {
-            logger.error("Bad status response from MineTools: {}", playerName);
+            logger.error("Bad status response from MCProfile: {}", playerName);
         } catch (final Exception e) {
-            logger.error("MineTools unexpected error: {}", playerName, e);
+            logger.error("MCProfile unexpected error: {}", playerName, e);
         }
         return Optional.empty();
     }
 
-    private Optional<ProfileData> lookupIdentityMinetools(final UUID uuid) {
+    private Optional<ProfileData> lookupIdentityMCProfile(final UUID uuid) {
         try {
-            ProfileData profile = minetoolsRestClient.getProfileFromUuid(uuid);
+            ProfileData profile = mcProfileRestClient.getProfile(uuid);
             return Optional.of(profile);
         } catch (final RestClientResponseException e) {
-            logger.error("{} from MineTools: {}", e.getStatusCode().value(), uuid);
+            logger.error("{} from MCProfile: {}", e.getStatusCode().value(), uuid);
         } catch (final RestClientException e) {
-            logger.error("Bad status response from MineTools: {}", uuid);
+            logger.error("Bad status response from MCProfile: {}", uuid);
         } catch (final Exception e) {
-            logger.error("MineTools unexpected error: {}", uuid, e);
+            logger.error("MCProfile unexpected error: {}", uuid, e);
         }
         return Optional.empty();
     }
 
     private Optional<MCProfileBedrockResponse> lookupIdentityBedrock(final String playerName) {
         try {
-            var response = mcProfileRestClient.getBedrockProfileFromGamertag(playerName);
+            var response = mcProfileRestClient.getBedrockProfile(playerName);
             return Optional.of(response);
         } catch (final RestClientResponseException e) {
             logger.error("{} from MCProfile: {}", e.getStatusCode().value(), playerName);
@@ -183,7 +179,7 @@ public class PlayerLookup {
 
     private Optional<MCProfileBedrockResponse> lookupIdentityBedrock(final UUID uuid) {
         try {
-            var response = mcProfileRestClient.getBedrockProfileFromUUID(uuid);
+            var response = mcProfileRestClient.getBedrockProfile(uuid);
             return Optional.of(response);
         } catch (final RestClientResponseException e) {
             logger.error("{} from MCProfile: {}", e.getStatusCode().value(), uuid);

@@ -1,10 +1,10 @@
-package vc.api;
+package vc.api.crafthead;
 
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
-import vc.api.model.CraftheadProfileResponse;
+import vc.api.crafthead.model.CraftheadProfileResponse;
 import vc.api.model.ProfileData;
 
 import java.util.UUID;
@@ -32,7 +32,7 @@ public class CraftheadRestClient {
         return response;
     }
 
-    public ProfileData getProfileFromUuid(final UUID uuid) {
+    public ProfileData getProfile(final UUID uuid) {
         var response = restClient.get()
             .uri("/profile/{uuid}", uuid)
             .retrieve()
