@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import vc.controller.ChatsController;
 import vc.util.Sort;
@@ -18,13 +17,11 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Component
 public class ChatsDuckDb {
     private static final Logger LOGGER = LoggerFactory.getLogger(ChatsDuckDb.class);
     private final DuckDbInstance duckDbInstance;
-    private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public ChatsDuckDb(
         final DuckDbInstance duckDbInstance,
@@ -34,33 +31,16 @@ public class ChatsDuckDb {
     ) {
         this.duckDbInstance = duckDbInstance;
         init();
-        if (duckDbSyncEnabled)
+        if (duckDbSyncEnabled) {
             scheduledExecutor.scheduleAtFixedRate(this::syncChats, 0, duckDbSyncInterval, TimeUnit.MINUTES);
-    }
-
-    @Scheduled(fixedRate = 24, initialDelay = 24, timeUnit = TimeUnit.HOURS)
-    private void refreshConnection() {
-        lock.writeLock().lock();
-        try {
-            duckDbInstance.refreshConnectionPool();
-        } catch (Exception e) {
-            LOGGER.error("Error while refreshing connection", e);
-        } finally {
-            if (lock.writeLock().isHeldByCurrentThread()) {
-                lock.writeLock().unlock();
-            }
+            LOGGER.info("ChatsDuckDb scheduled to sync every {} minutes", duckDbSyncInterval);
         }
     }
 
     private void init() {
-        lock.writeLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             handle.createUpdate("CREATE TABLE IF NOT EXISTS d_chats (time timestamptz, chat text, player_name text, player_uuid uuid)")
                 .execute();
-        } finally {
-            if (lock.writeLock().isHeldByCurrentThread()) {
-                lock.writeLock().unlock();
-            }
         }
         LOGGER.info("ChatsDuckDb initialized");
     }
@@ -68,7 +48,6 @@ public class ChatsDuckDb {
 //    @Scheduled(fixedRate = 1, initialDelay = 0, timeUnit = TimeUnit.MINUTES)
     private void syncChats() {
         LOGGER.info("Syncing Chats...");
-        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             var lastSyncTime = handle.select("SELECT coalesce(max(time), '2011-01-01 00:00:00') FROM d_chats;")
                 .mapTo(OffsetDateTime.class)
@@ -115,33 +94,25 @@ public class ChatsDuckDb {
             }
         } catch (Exception e) {
             LOGGER.error("Error syncing chats", e);
-        } finally {
-            lock.readLock().unlock();
         }
     }
 
     public int totalChatsCount() {
-        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             return handle.select("SELECT COUNT(*) FROM d_chats")
                 .mapTo(Integer.class)
                 .findOne()
                 .orElse(0);
-        } finally {
-            lock.readLock().unlock();
         }
     }
 
     public int wordCount(String word) {
-        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             return handle.select("SELECT COUNT(*) FROM d_chats WHERE chat ILIKE :word")
                 .bind("word", "%" + word + "%")
                 .mapTo(Integer.class)
                 .findOne()
                 .orElse(0);
-        } finally {
-            lock.readLock().unlock();
         }
     }
 
@@ -159,7 +130,6 @@ public class ChatsDuckDb {
         int pageSize,
         int offset
     ) {
-        lock.readLock().lock();
         try (var handle = duckDbInstance.getJdbi().open()) {
             var countQuery = """
                    SELECT COUNT(*)
@@ -223,8 +193,6 @@ public class ChatsDuckDb {
                 ))
                 .list();
             return new ChatSearchResult(totalCount, results);
-        } finally {
-            lock.readLock().unlock();
         }
     }
 }

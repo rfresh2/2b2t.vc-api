@@ -8,6 +8,10 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class DuckDbInstance implements DisposableBean {
     private static final int DEFAULT_DUCKDB_POOL_SIZE = 2;
@@ -60,18 +64,17 @@ public class DuckDbInstance implements DisposableBean {
     }
 
     private String connectionInitSql() {
-        if (!attachPostgres) {
-            return "SET memory_limit TO '1GB'";
+        List<String> statements = new ArrayList<>();
+        statements.add("SET memory_limit TO '1GB'");
+        if (attachPostgres) {
+            statements.add("ATTACH IF NOT EXISTS " + connectionString + " AS postgres_db (TYPE postgres, READ_ONLY)");
         }
-        return "SET memory_limit TO '1GB'; ATTACH IF NOT EXISTS " + connectionString + " AS postgres_db (TYPE postgres, READ_ONLY)";
+        statements.add("SET threads TO %s".formatted(Math.clamp(Runtime.getRuntime().availableProcessors() / 2, 1, 4)));
+        return statements.stream().collect(Collectors.joining(";", "", ";"));
     }
 
     public Jdbi getJdbi() {
         return jdbi;
-    }
-
-    synchronized void refreshConnectionPool() {
-        initializeConnection();
     }
 
     @Override
