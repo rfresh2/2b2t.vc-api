@@ -1,6 +1,7 @@
 name: 2b2t.vc-api Build
 
 on:
+  pull_request:
   push:
     branches:
       - "mainline"
@@ -10,32 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup JDK
         uses: actions/setup-java@v5
         with:
-          java-version: '25'
-          distribution: 'zulu'
+          java-version: 25
+          distribution: temurin
 
       - name: Elevate wrapper permissions
         run: chmod +x ./mvnw
 
       - name: Build 2b2t.vc-api
-        run: ./mvnw install
+        run: ./mvnw install spring-boot:repackage
 
-      - name: Upload Jar
-        uses: actions/upload-artifact@v5
+      - name: Upload Java Artifact
+        uses: actions/upload-artifact@v7
         with:
           name: 2b2t.vc-api
-          path: target/2b2t.vc-api-1.0.jar
-
-      - name: Release Artifact
-        uses: softprops/action-gh-release@v2
-        with:
-          prerelease: false
-          tag_name: latest
-          name: "Latest Release"
-          make_latest: true
-          files: |
-            target/2b2t.vc-api-1.0.jar
+          path: target/2b2t.vc-api-*.jar
+          if-no-files-found: error
+          archive: false
