@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
-import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,10 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import vc.util.PlayerLookup;
 import vc.util.Sort;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -62,7 +58,15 @@ public class DeathsController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Death history for given player",
+            description = """
+            Death history for given player.
+            
+            Results are sorted in descending order by default.
+            
+            startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd
+
+            Example: "2022-10-31".
+            """,
             content = {
                 @Content(
                     mediaType = "application/json",
@@ -77,7 +81,7 @@ public class DeathsController {
         ),
         @ApiResponse(
             responseCode = "400",
-            description = "Bad request. Either uuid or playerName must be provided.",
+            description = "Bad request",
             content = @Content
         )
     })
@@ -102,29 +106,35 @@ public class DeathsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
+        if (startDate == null) {
+            startDate = LocalDate.ofInstant(Instant.EPOCH, ZoneOffset.UTC);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+        if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+            return ResponseEntity.badRequest().build();
+        }
         var baseQuery = dsl
             .selectFrom(DEATHS)
-            .where(DEATHS.VICTIM_PLAYER_UUID.eq(resolvedUuid));
-        if (startDate != null) {
-            baseQuery = baseQuery.and(DEATHS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
-        if (endDate != null) {
-            baseQuery = baseQuery.and(DEATHS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
+            .where(DEATHS.VICTIM_PLAYER_UUID.eq(resolvedUuid)
+                .and(DEATHS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()))
+                .and(DEATHS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()))
+            );
         Long rowCount = dsl
             .selectCount()
             .from(baseQuery)
             .fetchOneInto(Long.class);
-        if (rowCount == null) rowCount = 0L;
+        if (rowCount == null) {
+            return ResponseEntity.noContent().build();
+        }
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        List<Death> deathsList = dsl
-            .selectFrom(DEATHS)
-                .where(DEATHS.VICTIM_PLAYER_UUID.eq(resolvedUuid))
-                .orderBy(DEATHS.TIME.sort(sort.toJooq()))
-                .limit(size)
-                .offset(offset)
-                .fetch()
-                .into(Death.class);
+        List<Death> deathsList = baseQuery
+            .orderBy(DEATHS.TIME.sort(sort.toJooq()))
+            .limit(size)
+            .offset(offset)
+            .fetch()
+            .map(d -> new Death(d.getTime(), d.getDeathMessage(), d.getVictimPlayerName(), d.getVictimPlayerUuid(), d.getKillerPlayerName(), d.getKillerPlayerUuid(), d.getWeaponName(), d.getKillerMob()));
         if (deathsList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
@@ -175,59 +185,25 @@ public class DeathsController {
         }
         if (sort == null) sort = Sort.ASC;
         final int size = pageSize == null ? 25 : pageSize;
-        if (endDate != null && startDate != null) {
-            if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
-                return ResponseEntity.badRequest().build();
-            }
+        if (startDate == null) {
+            startDate = LocalDateTime.ofInstant(Instant.EPOCH, ZoneOffset.UTC);
         }
-        var scraperTimeCutoff = LocalDateTime.now().minusHours(1);
-        switch (sort) {
-            case ASC -> {
-                if (startDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                if (startDate.isAfter(scraperTimeCutoff)) {
-//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/deaths"));
-                }
-            }
-            case DESC -> {
-                if (endDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                if (endDate.isAfter(scraperTimeCutoff)) {
-//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/deaths"));
-                }
-            }
+        if (endDate == null) {
+            endDate = LocalDateTime.now();
         }
-        Condition c = null;
-        switch (sort) {
-            case ASC -> {
-                if (startDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                c = DEATHS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC));
-                if (endDate != null)
-                    c = c.and(DEATHS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
-            }
-            case DESC -> {
-                if (endDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                c = DEATHS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC));
-                if (startDate != null)
-                    c = c.and(DEATHS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + sort);
+        if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+            return ResponseEntity.badRequest().build();
         }
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         List<Death> deathsList = dsl
             .selectFrom(DEATHS)
-            .where(c)
+            .where(DEATHS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC))
+                .and(DEATHS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC))))
             .orderBy(DEATHS.TIME.sort(sort.toJooq()))
             .limit(size)
             .offset(offset)
             .fetch()
-            .into(Death.class);
+            .map(d -> new Death(d.getTime(), d.getDeathMessage(), d.getVictimPlayerName(), d.getVictimPlayerUuid(), d.getKillerPlayerName(), d.getKillerPlayerUuid(), d.getWeaponName(), d.getKillerMob()));
         if (deathsList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
@@ -241,7 +217,15 @@ public class DeathsController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Kill history for given player",
+            description = """
+            Kill history for given player
+            
+            Results are sorted in descending order by default.
+
+            startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd
+            
+            Example: "2022-10-31".
+            """,
             content = {
                 @Content(
                     mediaType = "application/json",
@@ -281,29 +265,34 @@ public class DeathsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
+        if (startDate == null) {
+            startDate = LocalDate.ofInstant(Instant.EPOCH, ZoneOffset.UTC);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+        if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+            return ResponseEntity.badRequest().build();
+        }
         var baseQuery = dsl
             .selectFrom(DEATHS)
-            .where(DEATHS.KILLER_PLAYER_UUID.eq(resolvedUuid));
-        if (startDate != null) {
-            baseQuery = baseQuery.and(DEATHS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
-        if (endDate != null) {
-            baseQuery = baseQuery.and(DEATHS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
+            .where(DEATHS.KILLER_PLAYER_UUID.eq(resolvedUuid)
+                .and(DEATHS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()))
+                .and(DEATHS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime())));
         Long rowCount = dsl
             .selectCount()
             .from(baseQuery)
             .fetchOneInto(Long.class);
-        if (rowCount == null) rowCount = 0L;
+        if (rowCount == null) {
+            return ResponseEntity.noContent().build();
+        }
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
-        List<Death> deathsList = dsl
-            .selectFrom(DEATHS)
-                .where(DEATHS.KILLER_PLAYER_UUID.eq(resolvedUuid))
-                .orderBy(DEATHS.TIME.sort(sort.toJooq()))
-                .limit(size)
-                .offset(offset)
-                .fetch()
-                .into(Death.class);
+        List<Death> deathsList = baseQuery
+            .orderBy(DEATHS.TIME.sort(sort.toJooq()))
+            .limit(size)
+            .offset(offset)
+            .fetch()
+            .map(d -> new Death(d.getTime(), d.getDeathMessage(), d.getVictimPlayerName(), d.getVictimPlayerUuid(), d.getKillerPlayerName(), d.getKillerPlayerUuid(), d.getWeaponName(), d.getKillerMob()));
         if (deathsList.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {

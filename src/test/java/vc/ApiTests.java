@@ -91,7 +91,7 @@ public class ApiTests {
             Map.of(
                 "endDate", "2023-01-01T01:00:00"
             ));
-        assertNull(chatWindowResponse);
+        assertNotNull(chatWindowResponse);
     }
 
     @Test

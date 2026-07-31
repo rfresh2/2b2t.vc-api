@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
-import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,10 +19,7 @@ import vc.data.dto.enums.Connectiontype;
 import vc.util.PlayerLookup;
 import vc.util.Sort;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -52,7 +48,15 @@ public class ConnectionsController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Connection history for given player",
+            description = """
+            Connection history for given player.
+            
+            Results are sorted in descending order by default.
+            
+            startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd
+            
+            Example: "2022-10-31"
+            """,
             content = {
                 @Content(
                     mediaType = "application/json",
@@ -92,28 +96,35 @@ public class ConnectionsController {
         }
         final UUID resolvedUuid = optionalResolvedUuid.get();
         final int size = pageSize == null ? 25 : pageSize;
+        if (startDate == null) {
+            startDate = LocalDate.ofInstant(Instant.EPOCH, ZoneOffset.UTC);
+        }
+        if (endDate == null) {
+            endDate = LocalDate.now();
+        }
+        if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+            return ResponseEntity.badRequest().build();
+        }
         var baseQuery = dsl
-            .select(CONNECTIONS.TIME, CONNECTIONS.CONNECTION)
-            .from(CONNECTIONS)
-            .where(CONNECTIONS.PLAYER_UUID.eq(resolvedUuid));
-        if (startDate != null) {
-            baseQuery = baseQuery.and(CONNECTIONS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
-        if (endDate != null) {
-            baseQuery = baseQuery.and(CONNECTIONS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()));
-        }
+            .selectFrom(CONNECTIONS)
+            .where(CONNECTIONS.PLAYER_UUID.eq(resolvedUuid)
+                .and(CONNECTIONS.TIME.greaterOrEqual(startDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()))
+                .and(CONNECTIONS.TIME.lessOrEqual(endDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime()))
+            );
         Long rowCount = dsl
             .selectCount()
             .from(baseQuery)
             .fetchOneInto(Long.class);
-        if (rowCount == null) rowCount = 0L;
+        if (rowCount == null) {
+            return ResponseEntity.noContent().build();
+        }
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         List<Connection> connections = baseQuery
-                .orderBy(CONNECTIONS.TIME.sort(sort.toJooq()))
-                .limit(size)
-                .offset(offset)
-                .fetch()
-                .into(Connection.class);
+            .orderBy(CONNECTIONS.TIME.sort(sort.toJooq()))
+            .limit(size)
+            .offset(offset)
+            .fetch()
+            .map(c -> new Connection(c.getTime(), c.getConnection()));
         if (connections.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
@@ -128,7 +139,9 @@ public class ConnectionsController {
         @ApiResponse(
             responseCode = "200",
             description = """
-            All 2b2t connections during a window of time, starting from startDate (required) until endDate or pageSize is met
+            All 2b2t connections during a window of time, starting from startDate until endDate or pageSize is met
+            
+            Results are sorted in ascending order by default.
 
             startDate and endDate must be ISO 8601 formatted strings, in this format: yyyy-MM-dd'T'HH:mm:ss.SSSXXX
             
@@ -148,7 +161,7 @@ public class ConnectionsController {
         ),
         @ApiResponse(
             responseCode = "400",
-            description = "Bad request. startDate must be provided",
+            description = "Bad request",
             content = @Content
         )
     })
@@ -164,58 +177,24 @@ public class ConnectionsController {
         }
         if (sort == null) sort = Sort.ASC;
         final int size = pageSize == null ? 25 : pageSize;
-        if (endDate != null && startDate != null) {
-            if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
-                return ResponseEntity.badRequest().build();
-            }
+        if (startDate == null) {
+            startDate = LocalDateTime.ofInstant(Instant.EPOCH, ZoneOffset.UTC);
         }
-        var scraperTimeCutoff = LocalDateTime.now().minusHours(1);
-        switch (sort) {
-            case ASC -> {
-                if (startDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                if (startDate.isAfter(scraperTimeCutoff)) {
-//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/connections"));
-                }
-            }
-            case DESC -> {
-                if (endDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                if (endDate.isAfter(scraperTimeCutoff)) {
-//                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MigrateToLiveFeedResponse("Migrate your scraping to /feed/connections"));
-                }
-            }
+        if (endDate == null) {
+            endDate = LocalDateTime.now();
         }
-        Condition c = null;
-        switch (sort) {
-            case ASC -> {
-                if (startDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                c = CONNECTIONS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC));
-                if (endDate != null)
-                    c = c.and(CONNECTIONS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC)));
-            }
-            case DESC -> {
-                if (endDate == null) {
-                    return ResponseEntity.badRequest().build();
-                }
-                c = CONNECTIONS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC));
-                if (startDate != null)
-                    c = c.and(CONNECTIONS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC)));
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + sort);
+        if (endDate.equals(startDate) || endDate.isBefore(startDate)) {
+            return ResponseEntity.badRequest().build();
         }
         var offset = (page == null ? 0 : Math.max(0, page - 1)) * size;
         List<PlayerConnection> connections = dsl.selectFrom(CONNECTIONS)
-            .where(c)
+            .where(CONNECTIONS.TIME.greaterOrEqual(startDate.atOffset(ZoneOffset.UTC))
+                .and(CONNECTIONS.TIME.lessOrEqual(endDate.atOffset(ZoneOffset.UTC))))
             .orderBy(CONNECTIONS.TIME.sort(sort.toJooq()))
             .limit(size)
             .offset(offset)
             .fetch()
-            .into(PlayerConnection.class);
+            .map(c -> new PlayerConnection(c.getTime(), c.getConnection(), c.getPlayerName(), c.getPlayerUuid()));
         if (connections.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {
