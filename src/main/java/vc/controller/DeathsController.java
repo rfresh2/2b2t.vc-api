@@ -86,6 +86,7 @@ public class DeathsController {
             @Parameter(description = "Resolves to current UUID") @RequestParam(value = "playerName", required = false) String playerName,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam(value = "sort", required = false) Sort sort,
             @Parameter(description = "Must be between 1-100") @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @Parameter(description = "Response page") @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
@@ -94,6 +95,7 @@ public class DeathsController {
         if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();
         }
+        if (sort == null) sort = Sort.DESC;
         Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, playerName);
         if (optionalResolvedUuid.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -118,7 +120,7 @@ public class DeathsController {
         List<Death> deathsList = dsl
             .selectFrom(DEATHS)
                 .where(DEATHS.VICTIM_PLAYER_UUID.eq(resolvedUuid))
-                .orderBy(DEATHS.TIME.desc())
+                .orderBy(DEATHS.TIME.sort(sort.toJooq()))
                 .limit(size)
                 .offset(offset)
                 .fetch()
@@ -263,6 +265,7 @@ public class DeathsController {
             @Parameter(description = "Resolves to current UUID") @RequestParam(value = "playerName", required = false) String playerName,
             @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+            @RequestParam(value = "sort", required = false) Sort sort,
             @Parameter(description = "Must be between 1-100") @RequestParam(value = "pageSize", required = false) Integer pageSize,
             @Parameter(description = "Response page") @RequestParam(value = "page", required = false) Integer page) {
         if (pageSize != null && pageSize > 100) {
@@ -271,6 +274,7 @@ public class DeathsController {
         if (uuid == null && playerName == null) {
             return ResponseEntity.badRequest().build();
         }
+        if (sort == null) sort = Sort.DESC;
         Optional<UUID> optionalResolvedUuid = playerLookup.getOrResolveUuid(uuid, playerName);
         if (optionalResolvedUuid.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -295,7 +299,7 @@ public class DeathsController {
         List<Death> deathsList = dsl
             .selectFrom(DEATHS)
                 .where(DEATHS.KILLER_PLAYER_UUID.eq(resolvedUuid))
-                .orderBy(DEATHS.TIME.desc())
+                .orderBy(DEATHS.TIME.sort(sort.toJooq()))
                 .limit(size)
                 .offset(offset)
                 .fetch()
