@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClientResponseException;
 import vc.api.crafthead.CraftheadRestClient;
+import vc.api.mccompanion.MCCompanionRestClient;
+import vc.api.mccompanion.model.MCCompanionBedrockResponse;
 import vc.api.mcprofile.MCProfileRestClient;
 import vc.api.mcprofile.model.MCProfileBedrockResponse;
 import vc.api.model.ProfileData;
@@ -28,6 +30,7 @@ public class PlayerLookup {
     private final MojangRestClient mojangRestClient;
     private final CraftheadRestClient craftheadRestClient;
     private final MCProfileRestClient mcProfileRestClient;
+    private final MCCompanionRestClient mcCompanionRestClient;
     private final Cache<String, ProfileData> uuidCache = Caffeine.newBuilder()
         .expireAfterWrite(Duration.ofMinutes(30))
         .maximumSize(250)
@@ -38,11 +41,13 @@ public class PlayerLookup {
     public PlayerLookup(
         MojangRestClient mojangRestClient,
         CraftheadRestClient craftheadRestClient,
-        MCProfileRestClient mcProfileRestClient
+        MCProfileRestClient mcProfileRestClient,
+        MCCompanionRestClient mcCompanionRestClient
     ) {
         this.mojangRestClient = mojangRestClient;
         this.craftheadRestClient = craftheadRestClient;
         this.mcProfileRestClient = mcProfileRestClient;
+        this.mcCompanionRestClient = mcCompanionRestClient;
     }
 
     public Optional<ProfileData> getPlayerIdentity(final String playerName) {
@@ -52,13 +57,14 @@ public class PlayerLookup {
         if (isBedrockUsername(playerName)) {
             // https://github.com/GeyserMC/Floodgate/blob/a7729114bf00a3f5c6756cd66f9c94e2bfcb8ed0/core/src/main/java/org/geysermc/floodgate/addon/data/HandshakeDataImpl.java#L69-L77
             var bedrockName = playerName.substring(1).replace("_", " "); // chop off . prefix
-            var playerIdentity = lookupIdentityBedrock(bedrockName);
+            var playerIdentity = lookupIdentityBedrockMCCompanion(bedrockName).map(r -> (ProfileData) r)
+                .or(() -> lookupIdentityBedrockMCProfile(bedrockName).map(r -> (ProfileData) r));
             playerIdentity.ifPresent(identity -> uuidCache.put(playerName.toLowerCase().trim(), identity));
-            return playerIdentity.map(r -> (ProfileData) r);
+            return playerIdentity;
         }
         var playerIdentity = lookupIdentityMojang(playerName)
             .or(() -> lookupIdentityCrafthead(playerName)
-                .or(() -> lookupIdentityMCProfile(playerName)));
+                .or(() -> lookupIdentityMCCompanion(playerName)));
         playerIdentity.ifPresent(identity -> uuidCache.put(playerName.toLowerCase().trim(), identity));
         return playerIdentity;
     }
@@ -68,13 +74,14 @@ public class PlayerLookup {
         if (identityFromCache != null)
             return Optional.of(identityFromCache);
         if (isBedrockUUID(uuid)) {
-            var playerIdentity = lookupIdentityBedrock(uuid);
+            var playerIdentity = lookupIdentityBedrockMCCompanion(uuid).map(r -> (ProfileData) r)
+                .or(() -> lookupIdentityBedrockMCProfile(uuid).map(r -> (ProfileData) r));
             playerIdentity.ifPresent(identity -> uuidCache.put(uuid.toString(), identity));
-            return playerIdentity.map(r -> (ProfileData) r);
+            return playerIdentity;
         }
         var playerIdentity = lookupIdentityMojang(uuid)
             .or(() -> lookupIdentityCrafthead(uuid)
-                .or(() -> lookupIdentityMCProfile(uuid)));
+                .or(() -> lookupIdentityMCCompanion(uuid)));
         playerIdentity.ifPresent(identity -> uuidCache.put(uuid.toString(), identity));
         return playerIdentity;
     }
@@ -163,7 +170,35 @@ public class PlayerLookup {
         return Optional.empty();
     }
 
-    private Optional<MCProfileBedrockResponse> lookupIdentityBedrock(final String playerName) {
+    private Optional<ProfileData> lookupIdentityMCCompanion(final String playerName) {
+        try {
+            ProfileData profile = mcCompanionRestClient.getProfile(playerName);
+            return Optional.of(profile);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from MCCompanion: {}", e.getStatusCode().value(), playerName);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from MCCompanion: {}", playerName);
+        } catch (final Exception e) {
+            logger.error("MCCompanion unexpected error: {}", playerName, e);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<ProfileData> lookupIdentityMCCompanion(final UUID uuid) {
+        try {
+            ProfileData profile = mcCompanionRestClient.getProfile(uuid);
+            return Optional.of(profile);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from MCCompanion: {}", e.getStatusCode().value(), uuid);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from MCCompanion: {}", uuid);
+        } catch (final Exception e) {
+            logger.error("MCCompanion unexpected error: {}", uuid, e);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<MCProfileBedrockResponse> lookupIdentityBedrockMCProfile(final String playerName) {
         try {
             var response = mcProfileRestClient.getBedrockProfile(playerName);
             return Optional.of(response);
@@ -177,7 +212,7 @@ public class PlayerLookup {
         return Optional.empty();
     }
 
-    private Optional<MCProfileBedrockResponse> lookupIdentityBedrock(final UUID uuid) {
+    private Optional<MCProfileBedrockResponse> lookupIdentityBedrockMCProfile(final UUID uuid) {
         try {
             var response = mcProfileRestClient.getBedrockProfile(uuid);
             return Optional.of(response);
@@ -187,6 +222,34 @@ public class PlayerLookup {
             logger.error("Bad status response from MCProfile: {}", uuid);
         } catch (final Exception e) {
             logger.error("MCProfile unexpected error: {}", uuid, e);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<MCCompanionBedrockResponse> lookupIdentityBedrockMCCompanion(final String playerName) {
+        try {
+            var response = mcCompanionRestClient.getBedrockProfile(playerName);
+            return Optional.of(response);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from MCCompanion: {}", e.getStatusCode().value(), playerName);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from MCCompanion: {}", playerName);
+        } catch (final Exception e) {
+            logger.error("MCCompanion unexpected error: {}", playerName, e);
+        }
+        return Optional.empty();
+    }
+
+    private Optional<MCCompanionBedrockResponse> lookupIdentityBedrockMCCompanion(final UUID uuid) {
+        try {
+            var response = mcCompanionRestClient.getBedrockProfile(uuid);
+            return Optional.of(response);
+        } catch (final RestClientResponseException e) {
+            logger.error("{} from MCCompanion: {}", e.getStatusCode().value(), uuid);
+        } catch (final RestClientException e) {
+            logger.error("Bad status response from MCCompanion: {}", uuid);
+        } catch (final Exception e) {
+            logger.error("MCCompanion unexpected error: {}", uuid, e);
         }
         return Optional.empty();
     }

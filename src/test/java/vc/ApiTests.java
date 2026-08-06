@@ -8,6 +8,7 @@ import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRe
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import vc.api.crafthead.CraftheadRestClient;
+import vc.api.mccompanion.MCCompanionRestClient;
 import vc.api.mcprofile.MCProfileRestClient;
 import vc.api.mojang.MojangRestClient;
 import vc.controller.*;
@@ -38,6 +39,8 @@ public class ApiTests {
     private CraftheadRestClient craftheadRestClient;
     @Autowired
     private MCProfileRestClient mcProfileRestClient;
+    @Autowired
+    private MCCompanionRestClient mccompanionRestClient;
 
     @Test
     public void homepageTest() {
@@ -311,6 +314,15 @@ public class ApiTests {
         var response = mcProfileRestClient.getProfile("rfresh2");
         assertNotNull(response);
         assertEquals("rfresh2", response.name());
+        assertEquals(UUID.fromString("572e683c-888a-4a0d-bc10-5d9cfa76d892"), response.uuid());
+    }
+
+    @Test
+    public void playerLookupMCCompanionTest() {
+        var response = mccompanionRestClient.getProfile("rfresh2");
+        assertNotNull(response);
+        assertEquals("rfresh2", response.name());
+        assertEquals(UUID.fromString("572e683c-888a-4a0d-bc10-5d9cfa76d892"), response.uuid());
     }
 
     @Test
@@ -332,9 +344,18 @@ public class ApiTests {
         var response = mcProfileRestClient.getBedrockProfile("Dream");
         assertNotNull(response);
         assertEquals("Dream", response.gamertag());
-        assertEquals("Dream", response.name());
+        assertEquals(".Dream", response.name());
         assertEquals(UUID.fromString("00000000-0000-0000-0009-01f2496167c9"), response.uuid());
         assertFalse(response.linked());
+    }
+
+    @Test
+    public void playerLookupMCCompanionBedrockGamertagTest() {
+        var response = mccompanionRestClient.getBedrockProfile("Dream");
+        assertNotNull(response);
+        assertEquals("Dream", response.gamertag());
+        assertEquals(".Dream", response.name());
+        assertEquals(UUID.fromString("00000000-0000-0000-0009-01f2496167c9"), response.uuid());
     }
 
     @Test
