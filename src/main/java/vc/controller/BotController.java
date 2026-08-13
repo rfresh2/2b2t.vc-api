@@ -56,7 +56,7 @@ public class BotController {
             content = @Content
         )
     })
-    public ResponseEntity<BotsMonthResponse> onlinePlayers() {
+    public ResponseEntity<BotsMonthResponse> botsMonth() {
         List<BotData> bots = dsl
             .selectFrom(MAX_CONS_MONTH_VIEW)
             .fetch()
