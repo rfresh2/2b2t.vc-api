@@ -71,15 +71,14 @@ public class SeenController {
             return ResponseEntity.noContent().build();
         }
         final UUID resolvedUuid = optionalPlayerUUID.get();
-        var firstSeenRecord = Routines.firstSeen(dsl.configuration(), resolvedUuid);
-        if (firstSeenRecord.isEmpty()) {
+        var firstSeen = Routines.firstSeen(dsl.configuration(), resolvedUuid).getFirst().getFirstSeen();
+        if (firstSeen == null) {
             return ResponseEntity.noContent().build();
         }
-        var firstSeen = firstSeenRecord.getFirst().getFirstSeen();
         var lastSeen = firstSeen;
-        var lastSeenRecord = Routines.lastSeen(dsl.configuration(), resolvedUuid);
-        if (!lastSeenRecord.isEmpty()) {
-            lastSeen = lastSeenRecord.getFirst().getLastSeen();
+        var lastSeenRecord = Routines.lastSeen(dsl.configuration(), resolvedUuid).getFirst().getLastSeen();
+        if (lastSeenRecord != null) {
+            lastSeen = lastSeenRecord;
         }
         return ResponseEntity.ok(new SeenResponse(firstSeen, lastSeen));
     }
