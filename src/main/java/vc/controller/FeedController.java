@@ -27,6 +27,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
+import static java.util.Arrays.asList;
+
 @Tags({@Tag(name = "Feed")})
 @RestController
 public class FeedController {
@@ -108,36 +110,25 @@ public class FeedController {
         return connectionsFeed.addEmitter();
     }
 
-    @Scheduled(fixedRateString = "1m")
+    @Scheduled(fixedRateString = "15s")
     public void heartbeatActiveFeeds() {
-        deathsFeed.emitters().values().forEach(emitter -> {
-            try {
-                emitter.send(SseEmitter.event().comment("heartbeat").build());
-            } catch (Exception e) {
-                // fall through
+        var event = SseEmitter.event().comment("heartbeat").build();
+        for (var feed : asList(deathsFeed, chatFeed, connectionsFeed)) {
+            for (var emitter : feed.emitters().values()) {
+                try {
+                    emitter.send(event);
+                } catch (Exception e) {
+                    // fall through
+                }
             }
-        });
-        chatFeed.emitters().values().forEach(emitter -> {
-            try {
-                emitter.send(SseEmitter.event().comment("heartbeat").build());
-            } catch (Exception e) {
-                // fall through
-            }
-        });
-        connectionsFeed.emitters().values().forEach(emitter -> {
-            try {
-                emitter.send(SseEmitter.event().comment("heartbeat").build());
-            } catch (Exception e) {
-                // fall through
-            }
-        });
+        }
     }
 
     public void shutdownFeeds() {
         LOGGER.info("Shutting down feed emitters...");
-        chatFeed.shutdown();
-        deathsFeed.shutdown();
-        connectionsFeed.shutdown();
+        for (var feed : asList(deathsFeed, chatFeed, connectionsFeed)) {
+            feed.shutdown();
+        }
     }
 
     public record FeedHandler<MessageType>(
