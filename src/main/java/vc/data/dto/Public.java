@@ -223,9 +223,9 @@ public class Public extends SchemaImpl {
     public final Playtime PLAYTIME = Playtime.PLAYTIME;
 
     /**
-     * The table <code>public.priority_players_view</code>.
+     * The table <code>public.priority_players</code>.
      */
-    public final PriorityPlayersView PRIORITY_PLAYERS_VIEW = PriorityPlayersView.PRIORITY_PLAYERS_VIEW;
+    public final PriorityPlayers PRIORITY_PLAYERS = PriorityPlayers.PRIORITY_PLAYERS;
 
     /**
      * The table <code>public.queuelength</code>.
@@ -309,7 +309,7 @@ public class Public extends SchemaImpl {
             PlayerStats.PLAYER_STATS,
             Playercount.PLAYERCOUNT,
             Playtime.PLAYTIME,
-            PriorityPlayersView.PRIORITY_PLAYERS_VIEW,
+            PriorityPlayers.PRIORITY_PLAYERS,
             Queuelength.QUEUELENGTH,
             Queuewait.QUEUEWAIT,
             Restarts.RESTARTS,

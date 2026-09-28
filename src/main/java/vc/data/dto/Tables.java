@@ -214,9 +214,9 @@ public class Tables {
     public static final Playtime PLAYTIME = Playtime.PLAYTIME;
 
     /**
-     * The table <code>public.priority_players_view</code>.
+     * The table <code>public.priority_players</code>.
      */
-    public static final PriorityPlayersView PRIORITY_PLAYERS_VIEW = PriorityPlayersView.PRIORITY_PLAYERS_VIEW;
+    public static final PriorityPlayers PRIORITY_PLAYERS = PriorityPlayers.PRIORITY_PLAYERS;
 
     /**
      * The table <code>public.queuelength</code>.

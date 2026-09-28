@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-import static vc.data.dto.tables.PriorityPlayersView.PRIORITY_PLAYERS_VIEW;
+import static vc.data.dto.Tables.PRIORITY_PLAYERS;
 
 @Tags({@Tag(name = "PriorityPlayers")})
 @RestController
@@ -61,11 +61,11 @@ public class PriorityPlayersController {
     })
     public ResponseEntity<PriorityPlayersResponse> priorityPlayers() {
         var response = dsl
-            .selectFrom(PRIORITY_PLAYERS_VIEW)
+            .selectFrom(PRIORITY_PLAYERS)
             .fetch()
             .map(record -> new PriorityPlayer(
-                record.get(PRIORITY_PLAYERS_VIEW.PLAYER_NAME),
-                record.get(PRIORITY_PLAYERS_VIEW.PLAYER_UUID)));
+                record.get(PRIORITY_PLAYERS.PLAYER_NAME),
+                record.get(PRIORITY_PLAYERS.PLAYER_UUID)));
         if (response.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
