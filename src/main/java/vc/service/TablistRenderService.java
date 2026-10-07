@@ -12,6 +12,9 @@ import vc.controller.QueueController;
 import vc.tablist.TablistRenderer;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -62,12 +65,13 @@ public class TablistRenderService {
                 """
                 <dark_gray><player_count> players online - Queue: <queue_len> - ETA: <queue_wait></dark_gray>
                 
-                <dark_gray>2b2t.vc</dark_gray>
+                <dark_gray>2b2t.vc - <time></dark_gray>
                 """,
                 Placeholder.unparsed("queue_len", String.valueOf(queueData.regular())),
                 Placeholder.unparsed("prio_len", String.valueOf(queueData.prio())),
                 Placeholder.unparsed("queue_wait", queueEta),
-                Placeholder.unparsed("player_count", String.valueOf(players.size()))
+                Placeholder.unparsed("player_count", String.valueOf(players.size())),
+                Placeholder.unparsed("time", DateTimeFormatter.ofPattern("LLLL d yyyy hh:mm:ss z").format(ZonedDateTime.now(ZoneId.of("UTC"))))
             );
             long start = System.nanoTime();
             byte[] png = renderer.render(players, header, footer);
