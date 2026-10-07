@@ -9,10 +9,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.jooq.DSLContext;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vc.service.TablistRenderService;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,15 +29,48 @@ import static vc.data.dto.tables.Tablist.TABLIST;
 @RestController
 public class TabListController {
     private final DSLContext dsl;
+    private final TablistRenderService tablistRenderService;
 
-    public TabListController(final DSLContext dsl) {
+    public TabListController(final DSLContext dsl, final TablistRenderService tablistRenderService) {
         this.dsl = dsl;
+        this.tablistRenderService = tablistRenderService;
     }
 
     public record TablistResponse(List<TablistEntry> players, String header) { }
     public record TablistEntry(String playerName, UUID uuid) { }
     public record TablistInfoResponse(List<TablistInfoEntry> players, String header, int count, int prioCount, int nonPrioCount, int botCount) { }
     public record TablistInfoEntry(String playerName, UUID uuid, boolean prio, boolean bot) { }
+
+    @GetMapping("/tablist/render")
+    @RateLimiter(name = "cached")
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Image of the in-game tablist with all online players",
+            content = {
+                @Content(
+                    mediaType = "image/png"
+                )
+            }
+        ),
+        @ApiResponse(
+            responseCode = "204",
+            description = "Tablist has not been rendered yet",
+            content = @Content
+        )
+    })
+    public ResponseEntity<byte[]> tablistRender() {
+        var rendered = tablistRenderService.getRendered();
+        if (rendered == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok()
+            .contentType(MediaType.IMAGE_PNG)
+            .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=tablist.png")
+            .cacheControl(CacheControl.maxAge(Duration.ofMinutes(1)))
+            .lastModified(rendered.renderedAt())
+            .body(rendered.png());
+    }
 
     @GetMapping("/tablist")
     @RateLimiter(name = "cached")

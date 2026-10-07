@@ -42,4 +42,18 @@ public class CraftheadRestClient {
         }
         return response;
     }
+
+    /**
+     * @return PNG of the player's face (with hat layer) at the requested size
+     */
+    public byte[] getAvatar(final UUID uuid, final int size) {
+        var response = restClient.get()
+            .uri("/avatar/{uuid}/{size}", uuid, size)
+            .retrieve()
+            .body(byte[].class);
+        if (response == null || response.length == 0) {
+            throw new RestClientException("Received empty avatar from crafthead");
+        }
+        return response;
+    }
 }
