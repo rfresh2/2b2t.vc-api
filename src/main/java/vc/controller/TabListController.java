@@ -49,7 +49,11 @@ public class TabListController {
             description = "Image of the in-game tablist with all online players",
             content = {
                 @Content(
-                    mediaType = "image/png"
+                    mediaType = "image/png",
+                    schema = @Schema(
+                        type = "string",
+                        format = "binary"
+                    )
                 )
             }
         ),
