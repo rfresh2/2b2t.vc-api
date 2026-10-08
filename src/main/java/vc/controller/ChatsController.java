@@ -53,7 +53,9 @@ public class ChatsController {
     @ApiResponses(value = {
         @ApiResponse(
             responseCode = "200",
-            description = "Search for chat messages with optional filters",
+            description = """
+              Search for chat messages with optional filters.
+              """,
             content = {
                 @Content(
                     mediaType = "application/json",
@@ -82,7 +84,14 @@ public class ChatsController {
               If startDate and endDate are provided, they must be valid dates in ISO 8601 format, example: "2022-10-31".
               """,
             content = @Content
-        )
+        ),
+        @ApiResponse(
+            responseCode = "429",
+            description = """
+              For live data without rate limits, consider using `/feed/chats` instead
+              """,
+            content = @Content
+        ),
     })
     public ResponseEntity<ChatSearchResponse> chats(
         @Parameter(description = "Filter only chats that contain this word") @RequestParam(value = "word", required = false) String word,
@@ -162,7 +171,14 @@ public class ChatsController {
             responseCode = "400",
             description = "Bad request",
             content = @Content
-        )
+        ),
+        @ApiResponse(
+            responseCode = "429",
+            description = """
+              For live data without rate limits, consider using `/feed/chats` instead
+              """,
+            content = @Content
+        ),
     })
     public ResponseEntity chatWindow(
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,

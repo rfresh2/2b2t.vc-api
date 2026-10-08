@@ -83,7 +83,14 @@ public class DeathsController {
             responseCode = "400",
             description = "Bad request",
             content = @Content
-        )
+        ),
+        @ApiResponse(
+            responseCode = "429",
+            description = """
+              For live data without rate limits, consider using `/feed/deaths` instead
+              """,
+            content = @Content
+        ),
     })
     public ResponseEntity<DeathsResponse> deaths(
             @RequestParam(value = "uuid", required = false) UUID uuid,
@@ -171,7 +178,14 @@ public class DeathsController {
             responseCode = "400",
             description = "Bad request. startDate must be provided",
             content = @Content
-        )
+        ),
+        @ApiResponse(
+            responseCode = "429",
+            description = """
+              For live data without rate limits, consider using `/feed/connections` instead
+              """,
+            content = @Content
+        ),
     })
     public ResponseEntity deathsWindow(
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
@@ -242,7 +256,14 @@ public class DeathsController {
             responseCode = "400",
             description = "Bad request. Either uuid or playerName must be provided.",
             content = @Content
-        )
+        ),
+        @ApiResponse(
+            responseCode = "429",
+            description = """
+              For live data without rate limits, consider using `/feed/connections` instead
+              """,
+            content = @Content
+        ),
     })
     public ResponseEntity<KillsResponse> kills(
             @RequestParam(value = "uuid", required = false) UUID uuid,

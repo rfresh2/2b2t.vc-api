@@ -73,7 +73,14 @@ public class ConnectionsController {
             responseCode = "400",
             description = "Bad request. Either uuid or playerName must be provided.",
             content = @Content
-        )
+        ),
+        @ApiResponse(
+            responseCode = "429",
+            description = """
+              For live data without rate limits, consider using `/feed/connections` instead
+              """,
+            content = @Content
+        ),
     })
     public ResponseEntity<ConnectionsResponse> connections(
             @RequestParam(value = "uuid", required = false) UUID uuid,
@@ -163,7 +170,14 @@ public class ConnectionsController {
             responseCode = "400",
             description = "Bad request",
             content = @Content
-        )
+        ),
+        @ApiResponse(
+            responseCode = "429",
+            description = """
+              For live data without rate limits, consider using `/feed/connections` instead
+              """,
+            content = @Content
+        ),
     })
     public ResponseEntity connectionsWindow(
         @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,

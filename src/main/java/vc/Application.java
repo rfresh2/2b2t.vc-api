@@ -32,6 +32,8 @@ import java.util.concurrent.ScheduledExecutorService;
 			
 			Queue Dashboard: https://q.2b2t.vc
 			
+			Live Tab Render: https://tab.2b2t.vc
+			
 			Support & API Keys: https://discord.gg/nJZrSaRKtb
 		
 			Source Code:
