@@ -63,9 +63,9 @@ public class TablistRenderService {
             var queueEta = getEtaStringFromSeconds(queueETAService.getFactor() * (Math.pow(queueData.regular(), queueETAService.getPow())));
             Component footer = MiniMessage.miniMessage().deserialize(
                 """
-                <dark_gray><player_count> players online - Queue: <queue_len> - ETA: <queue_wait></dark_gray>
+                <gray><player_count> players online - Queue: <queue_len> - ETA: <queue_wait></gray>
                 
-                <dark_gray>2b2t.vc - <time></dark_gray>
+                <gray>2b2t.vc - <time></gray>
                 """,
                 Placeholder.unparsed("queue_len", String.valueOf(queueData.regular())),
                 Placeholder.unparsed("prio_len", String.valueOf(queueData.prio())),
