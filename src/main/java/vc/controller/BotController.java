@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-import static vc.data.dto.tables.MaxConsMonthView.MAX_CONS_MONTH_VIEW;
+import static vc.data.dto.tables.Bots.BOTS;
 
 @Tags({@Tag(name = "Bots")})
 @RestController
@@ -58,9 +58,9 @@ public class BotController {
     })
     public ResponseEntity<BotsMonthResponse> botsMonth() {
         List<BotData> bots = dsl
-            .selectFrom(MAX_CONS_MONTH_VIEW)
+            .selectFrom(BOTS)
             .fetch()
-            .map(r -> new BotData(r.getPName(), r.getPUuid()));
+            .map(r -> new BotData(r.getPlayerName(), r.getPlayerUuid()));
         if (bots.isEmpty()) {
             return ResponseEntity.noContent().build();
         } else {

@@ -58,6 +58,11 @@ public class PriorityPlayers extends TableImpl<PriorityPlayersRecord> {
      */
     public final TableField<PriorityPlayersRecord, Long> PRIORITY_SESSION_LENGTH_COUNT = createField(DSL.name("priority_session_length_count"), SQLDataType.BIGINT.nullable(false), this, "");
 
+    /**
+     * The column <code>public.priority_players.priority_playtime</code>.
+     */
+    public final TableField<PriorityPlayersRecord, Integer> PRIORITY_PLAYTIME = createField(DSL.name("priority_playtime"), SQLDataType.INTEGER, this, "");
+
     private PriorityPlayers(Name alias, Table<PriorityPlayersRecord> aliased) {
         this(alias, aliased, (Field<?>[]) null, null);
     }

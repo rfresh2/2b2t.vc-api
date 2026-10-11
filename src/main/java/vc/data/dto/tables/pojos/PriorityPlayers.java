@@ -20,24 +20,28 @@ public class PriorityPlayers implements Serializable {
     private final String playerName;
     private final Long priorityJoins;
     private final Long prioritySessionLengthCount;
+    private final Integer priorityPlaytime;
 
     public PriorityPlayers(PriorityPlayers value) {
         this.playerUuid = value.playerUuid;
         this.playerName = value.playerName;
         this.priorityJoins = value.priorityJoins;
         this.prioritySessionLengthCount = value.prioritySessionLengthCount;
+        this.priorityPlaytime = value.priorityPlaytime;
     }
 
     public PriorityPlayers(
         UUID playerUuid,
         String playerName,
         Long priorityJoins,
-        Long prioritySessionLengthCount
+        Long prioritySessionLengthCount,
+        Integer priorityPlaytime
     ) {
         this.playerUuid = playerUuid;
         this.playerName = playerName;
         this.priorityJoins = priorityJoins;
         this.prioritySessionLengthCount = prioritySessionLengthCount;
+        this.priorityPlaytime = priorityPlaytime;
     }
 
     /**
@@ -67,6 +71,13 @@ public class PriorityPlayers implements Serializable {
      */
     public Long getPrioritySessionLengthCount() {
         return this.prioritySessionLengthCount;
+    }
+
+    /**
+     * Getter for <code>public.priority_players.priority_playtime</code>.
+     */
+    public Integer getPriorityPlaytime() {
+        return this.priorityPlaytime;
     }
 
     @Override
@@ -102,6 +113,12 @@ public class PriorityPlayers implements Serializable {
         }
         else if (!this.prioritySessionLengthCount.equals(other.prioritySessionLengthCount))
             return false;
+        if (this.priorityPlaytime == null) {
+            if (other.priorityPlaytime != null)
+                return false;
+        }
+        else if (!this.priorityPlaytime.equals(other.priorityPlaytime))
+            return false;
         return true;
     }
 
@@ -113,6 +130,7 @@ public class PriorityPlayers implements Serializable {
         result = prime * result + ((this.playerName == null) ? 0 : this.playerName.hashCode());
         result = prime * result + ((this.priorityJoins == null) ? 0 : this.priorityJoins.hashCode());
         result = prime * result + ((this.prioritySessionLengthCount == null) ? 0 : this.prioritySessionLengthCount.hashCode());
+        result = prime * result + ((this.priorityPlaytime == null) ? 0 : this.priorityPlaytime.hashCode());
         return result;
     }
 
@@ -124,6 +142,7 @@ public class PriorityPlayers implements Serializable {
         sb.append(", ").append(playerName);
         sb.append(", ").append(priorityJoins);
         sb.append(", ").append(prioritySessionLengthCount);
+        sb.append(", ").append(priorityPlaytime);
 
         sb.append(")");
         return sb.toString();

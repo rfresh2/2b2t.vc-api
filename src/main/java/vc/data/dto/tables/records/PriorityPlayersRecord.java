@@ -80,6 +80,21 @@ public class PriorityPlayersRecord extends TableRecordImpl<PriorityPlayersRecord
         return (Long) get(3);
     }
 
+    /**
+     * Setter for <code>public.priority_players.priority_playtime</code>.
+     */
+    public PriorityPlayersRecord setPriorityPlaytime(Integer value) {
+        set(4, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>public.priority_players.priority_playtime</code>.
+     */
+    public Integer getPriorityPlaytime() {
+        return (Integer) get(4);
+    }
+
     // -------------------------------------------------------------------------
     // Constructors
     // -------------------------------------------------------------------------
@@ -94,13 +109,14 @@ public class PriorityPlayersRecord extends TableRecordImpl<PriorityPlayersRecord
     /**
      * Create a detached, initialised PriorityPlayersRecord
      */
-    public PriorityPlayersRecord(UUID playerUuid, String playerName, Long priorityJoins, Long prioritySessionLengthCount) {
+    public PriorityPlayersRecord(UUID playerUuid, String playerName, Long priorityJoins, Long prioritySessionLengthCount, Integer priorityPlaytime) {
         super(PriorityPlayers.PRIORITY_PLAYERS);
 
         setPlayerUuid(playerUuid);
         setPlayerName(playerName);
         setPriorityJoins(priorityJoins);
         setPrioritySessionLengthCount(prioritySessionLengthCount);
+        setPriorityPlaytime(priorityPlaytime);
         resetTouchedOnNotNull();
     }
 
@@ -115,6 +131,7 @@ public class PriorityPlayersRecord extends TableRecordImpl<PriorityPlayersRecord
             setPlayerName(value.getPlayerName());
             setPriorityJoins(value.getPriorityJoins());
             setPrioritySessionLengthCount(value.getPrioritySessionLengthCount());
+            setPriorityPlaytime(value.getPriorityPlaytime());
             resetTouchedOnNotNull();
         }
     }

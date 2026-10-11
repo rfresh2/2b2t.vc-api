@@ -32,6 +32,11 @@ public class Public extends SchemaImpl {
     public static final Public PUBLIC = new Public();
 
     /**
+     * The table <code>public.bots</code>.
+     */
+    public final Bots BOTS = Bots.BOTS;
+
+    /**
      * The table <code>public.chats</code>.
      */
     public final Chats CHATS = Chats.CHATS;
@@ -164,11 +169,6 @@ public class Public extends SchemaImpl {
     }
 
     /**
-     * The table <code>public.max_cons_month_view</code>.
-     */
-    public final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
-
-    /**
      * The table <code>public.online_players</code>.
      */
     public final OnlinePlayers ONLINE_PLAYERS = OnlinePlayers.ONLINE_PLAYERS;
@@ -298,13 +298,13 @@ public class Public extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Bots.BOTS,
             Chats.CHATS,
             Connections.CONNECTIONS,
             Deaths.DEATHS,
             FirstSeen.FIRST_SEEN,
             GetUuidData.GET_UUID_DATA,
             LastSeen.LAST_SEEN,
-            MaxConsMonthView.MAX_CONS_MONTH_VIEW,
             OnlinePlayers.ONLINE_PLAYERS,
             PlayerStats.PLAYER_STATS,
             Playercount.PLAYERCOUNT,

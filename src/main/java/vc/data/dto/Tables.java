@@ -23,6 +23,11 @@ import java.util.UUID;
 public class Tables {
 
     /**
+     * The table <code>public.bots</code>.
+     */
+    public static final Bots BOTS = Bots.BOTS;
+
+    /**
      * The table <code>public.chats</code>.
      */
     public static final Chats CHATS = Chats.CHATS;
@@ -153,11 +158,6 @@ public class Tables {
             pUuid
         );
     }
-
-    /**
-     * The table <code>public.max_cons_month_view</code>.
-     */
-    public static final MaxConsMonthView MAX_CONS_MONTH_VIEW = MaxConsMonthView.MAX_CONS_MONTH_VIEW;
 
     /**
      * The table <code>public.online_players</code>.

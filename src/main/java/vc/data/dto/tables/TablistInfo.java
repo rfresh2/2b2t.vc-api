@@ -70,12 +70,12 @@ public class TablistInfo extends TableImpl<TablistInfoRecord> {
                  ELSE false
              END AS prio,
              CASE
-                 WHEN (mb.p_uuid IS NOT NULL) THEN true
+                 WHEN (mb.player_uuid IS NOT NULL) THEN true
                  ELSE false
              END AS is_bot
         FROM ((tablist t
-          LEFT JOIN priority_players_view pv ON ((t.player_uuid = pv.player_uuid)))
-          LEFT JOIN max_cons_month_view mb ON ((t.player_uuid = mb.p_uuid)));
+          LEFT JOIN priority_players pv ON ((t.player_uuid = pv.player_uuid)))
+          LEFT JOIN bots mb ON ((t.player_uuid = mb.player_uuid)));
         """), where);
     }
 
