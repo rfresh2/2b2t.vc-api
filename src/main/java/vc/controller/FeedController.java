@@ -110,7 +110,7 @@ public class FeedController {
         return connectionsFeed.addEmitter();
     }
 
-    @Scheduled(fixedRateString = "15s")
+    @Scheduled(fixedRateString = "10s")
     public void heartbeatActiveFeeds() {
         var event = SseEmitter.event().comment("heartbeat").build();
         for (var feed : asList(deathsFeed, chatFeed, connectionsFeed)) {
