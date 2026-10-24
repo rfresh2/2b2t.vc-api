@@ -48,7 +48,7 @@ public class CraftheadRestClient {
      */
     public byte[] getAvatar(final UUID uuid, final int size) {
         var response = restClient.get()
-            .uri("/avatar/{uuid}/{size}", uuid, size)
+            .uri("/helm/{uuid}/{size}", uuid, size)
             .retrieve()
             .body(byte[].class);
         if (response == null || response.length == 0) {
