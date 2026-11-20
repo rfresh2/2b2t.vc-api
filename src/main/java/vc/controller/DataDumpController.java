@@ -78,4 +78,17 @@ public class DataDumpController {
                 .body(uuidData.formatCSV());
         }
     }
+
+    @GetMapping("/dump/db/2025")
+    @ApiResponses({
+        @ApiResponse(
+            responseCode = "302",
+            description = "2025 database dump download"
+        )
+    })
+    public ResponseEntity<Void> dbDump2025() {
+        return ResponseEntity.status(302)
+            .header("location", "https://cdn.2b2t.vc/vcdb-2025.zip")
+            .build();
+    }
 }
